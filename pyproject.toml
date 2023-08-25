@@ -1,0 +1,32 @@
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.3.0",
+    "pytest-asyncio>=0.21.0",
+    "pdbpp>=0.10.3",
+    "rich>=13.3.3",
+]
+
+[project]
+name = "scenario_parser"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Adam Kowalski", email = "adam.kowalski@simspace.com"},
+]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pyright]
+extraPaths = ["__pypackages__/3.11/lib/"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]

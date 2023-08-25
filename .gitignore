@@ -1,0 +1,8 @@
+scenario_parser.egg-info
+
+.pdm-python
+__pypackages__
+.pdm-build
+__pycache__
+.pytest_cache
+scenarios
