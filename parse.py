@@ -83,11 +83,18 @@ class MetaData(TypedDict):
     suggested_duration: int
 
 
+class Preconditions(TypedDict):
+    state: dict[str, str]
+    initial: dict[str, Value]
+    effects: dict[str, Value]
+
+
 class Scenario(TypedDict):
     meta_data: MetaData
     procedures: list[Procedure]
     iocs: dict[str, Value]
     spec: Value
+    preconditions: Preconditions
 
 
 def bin_op(op: ast.operator) -> Op:
@@ -354,6 +361,106 @@ def spec_default(function_def: ast.FunctionDef) -> Value:
             return spec
 
 
+Arguments = tuple[ast.Attribute, ast.List | ast.Constant, Optional[ast.Constant]]
+Keywords = list[ast.keyword]
+
+
+def preconditions_arguments(args: list[ast.expr], keywords: Keywords) -> Arguments:
+    match args, keywords:
+        case [], [preconditions, value_path]:
+            assert preconditions.arg == "preconditions"
+            assert value_path.arg == "value_path"
+            assert isinstance(preconditions.value, ast.Attribute)
+            assert isinstance(value_path.value, ast.List)
+            return preconditions.value, value_path.value, None
+        case [], [preconditions, value_path, default]:
+            assert preconditions.arg == "preconditions"
+            assert value_path.arg == "value_path"
+            assert default.arg == "default"
+            assert isinstance(preconditions.value, ast.Attribute)
+            assert isinstance(value_path.value, ast.List)
+            assert isinstance(default.value, ast.Constant)
+            return preconditions.value, value_path.value, default.value
+        case [preconditions, value_path], []:
+            assert isinstance(preconditions, ast.Attribute)
+            L, C = ast.List, ast.Constant
+            assert isinstance(value_path, L) or isinstance(value_path, C)
+            return preconditions, value_path, None
+        case [preconditions], [value_path]:
+            assert isinstance(preconditions, ast.Attribute)
+            assert value_path.arg == "value_path"
+            assert isinstance(value_path.value, ast.List)
+            return preconditions, value_path.value, None
+        case _:
+            breakpoint()
+            raise NotImplemented
+
+
+def set_precondition(function_def: ast.FunctionDef) -> Preconditions:
+    state: dict[str, str] = {}
+    initial: dict[str, Value] = {}
+    effects: dict[str, Value] = {}
+    for expr in function_def.body:
+        match expr:
+            case ast.Assign(targets, value):
+                assert len(targets) == 1
+                target = targets[0]
+                assert isinstance(target, ast.Attribute)
+                key = target.attr
+                if key == "ioc_spec":
+                    continue
+                assert isinstance(key, str)
+                name = target.value
+                assert isinstance(name, ast.Name)
+                assert name.id == "self"
+                match value:
+                    case ast.Call(func, args, keywords):
+                        assert isinstance(func, ast.Attribute)
+                        assert func.attr == "test_precondition"
+                        arguments = preconditions_arguments(args, keywords)
+                        preconditions, value_path, default = arguments
+                        transformed_path = transform_value(value_path)
+                        transformed_default = None
+                        if default is not None:
+                            transformed_default = transform_value(default)
+                        obj = {"path": transformed_path}
+                        if transformed_default is not None:
+                            obj["default"] = transformed_default
+                        match preconditions.attr:
+                            case "ioc_spec":
+                                initial[key] = obj
+                            case "preconditions":
+                                effects[key] = obj
+                            case _:
+                                breakpoint()
+                                raise NotImplemented
+                    case ast.Constant(value):
+                        assert isinstance(value, str)
+                        state[key] = value
+                    case _:
+                        breakpoint()
+                        raise NotImplemented
+            case ast.Expr(value):
+                match value:
+                    case ast.Call(func, args, keywords):
+                        assert len(args) == 0
+                        assert len(keywords) == 0
+                        assert isinstance(func, ast.Attribute)
+                        assert func.attr == "procedures_reset"
+                        name = func.value
+                        assert isinstance(name, ast.Name)
+                        assert name.id == "self"
+                    case ast.Constant(value):
+                        assert isinstance(value, str)
+                    case _:
+                        breakpoint()
+                        raise NotImplemented
+            case _:
+                breakpoint()
+                raise NotImplemented
+    return {"state": state, "initial": initial, "effects": effects}
+
+
 def file_name_no_suffix(path: pathlib.Path) -> str:
     return path.name[: -len(path.suffix)]
 
@@ -367,6 +474,7 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
     meta_data: Optional[MetaData] = None
     iocs: Optional[dict[str, Value]] = None
     spec: Optional[Value] = None
+    preconditions: Optional[Preconditions] = None
     for top_level in module.body:
         if not isinstance(top_level, ast.ClassDef):
             continue
@@ -382,15 +490,19 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
                     iocs = actor_iocs(member)
                 case "spec_default":
                     spec = spec_default(member)
+                case "set_precondition":
+                    preconditions = set_precondition(member)
     assert len(procedures) > 0
     assert meta_data is not None
     assert iocs is not None
     assert spec is not None
+    assert preconditions is not None
     return {
         "meta_data": meta_data,
         "procedures": procedures,
         "iocs": iocs,
         "spec": spec,
+        "preconditions": preconditions,
     }
 
 
