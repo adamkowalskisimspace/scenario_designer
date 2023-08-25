@@ -87,6 +87,7 @@ class Scenario(TypedDict):
     meta_data: MetaData
     procedures: list[Procedure]
     iocs: dict[str, Value]
+    spec: Value
 
 
 def bin_op(op: ast.operator) -> Op:
@@ -131,7 +132,13 @@ def transform_value(expr: ast.expr) -> Value:
             return result
         case ast.JoinedStr(values):
             template = [transform_value(value) for value in values]
-            return template[0] if len(template) == 1 else {"template": template}
+            match template:
+                case []:
+                    return ""
+                case [str(s)]:
+                    return s
+                case _:
+                    return {"template": template}
         case ast.FormattedValue(value):
             return transform_value(value)
         case ast.Subscript(value, slice):
@@ -285,6 +292,68 @@ def actor_iocs(function_def: ast.FunctionDef) -> dict[str, Value]:
     raise Exception("No return statement")
 
 
+def trim_spec(exprs: list[ast.stmt]) -> list[ast.stmt]:
+    match exprs[0]:
+        case ast.Expr():
+            return trim_spec(exprs[1:])
+        case ast.Assign(targets, value):
+            assert len(targets) == 1
+            target = targets[0]
+            match target:
+                case ast.Name(id):
+                    match id:
+                        case "scenario_name":
+                            return trim_spec(exprs[1:])
+                        case "spec":
+                            assert isinstance(value, ast.Call)
+                            func = value.func
+                            assert isinstance(func, ast.Name)
+                            assert func.id == "dict"
+                            assert len(value.args) == 0
+                            assert len(value.keywords) == 0
+                            return trim_spec(exprs[1:])
+                        case _:
+                            return exprs
+                case _:
+                    return exprs
+        case _:
+            return exprs
+
+
+def spec_default(function_def: ast.FunctionDef) -> Value:
+    match function_def.body:
+        case [return_]:
+            assert isinstance(return_, ast.Return)
+            assert return_.value is not None
+            return transform_value(return_.value)
+        case [assign, return_]:
+            assert isinstance(assign, ast.Assign)
+            assert len(assign.targets) == 1
+            name = assign.targets[0]
+            assert isinstance(name, ast.Name)
+            assert name.id == "scenario_name"
+            assert isinstance(return_, ast.Return)
+            assert return_.value is not None
+            return transform_value(return_.value)
+        case exprs:
+            *assigns, return_ = trim_spec(exprs)
+            spec: dict[str, Value] = {}
+            for assign in assigns:
+                assert isinstance(assign, ast.Assign)
+                assert len(assign.targets) == 1
+                target = assign.targets[0]
+                assert isinstance(target, ast.Subscript)
+                name = target.value
+                assert isinstance(name, ast.Name)
+                assert name.id == "spec"
+                key = target.slice
+                assert isinstance(key, ast.Constant)
+                assert isinstance(key.value, str)
+                value = transform_value(assign.value)
+                spec[key.value] = value
+            return spec
+
+
 def file_name_no_suffix(path: pathlib.Path) -> str:
     return path.name[: -len(path.suffix)]
 
@@ -297,6 +366,7 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
     procedures: list[Procedure] = []
     meta_data: Optional[MetaData] = None
     iocs: Optional[dict[str, Value]] = None
+    spec: Optional[Value] = None
     for top_level in module.body:
         if not isinstance(top_level, ast.ClassDef):
             continue
@@ -310,10 +380,18 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
                     meta_data = constructor(name, member)
                 case "actor_iocs":
                     iocs = actor_iocs(member)
+                case "spec_default":
+                    spec = spec_default(member)
     assert len(procedures) > 0
     assert meta_data is not None
     assert iocs is not None
-    return {"meta_data": meta_data, "procedures": procedures, "iocs": iocs}
+    assert spec is not None
+    return {
+        "meta_data": meta_data,
+        "procedures": procedures,
+        "iocs": iocs,
+        "spec": spec,
+    }
 
 
 def scenarios(path: pathlib.Path) -> dict[str, Scenario]:
