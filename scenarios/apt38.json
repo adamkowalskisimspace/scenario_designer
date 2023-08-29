@@ -228,15 +228,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$password = ConvertTo-SecureString '",
-                            "self.domain_admin_password",
-                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
-                            "self.domain_admin_username",
-                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
-                        ]
-                    }
+                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
                 }
             }
         },
@@ -249,15 +241,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$password = ConvertTo-SecureString '",
-                            "self.domain_admin_password",
-                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
-                            "self.domain_admin_username",
-                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
-                        ]
-                    }
+                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
                 }
             }
         },

@@ -172,13 +172,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell move-item ",
-                            "self.payload_destination",
-                            "\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
-                        ]
-                    }
+                    "command": "powershell move-item ${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
                 }
             }
         },

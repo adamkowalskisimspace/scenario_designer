@@ -97,6 +97,9 @@ class Scenario(TypedDict):
     preconditions: Preconditions
 
 
+Scenarios = dict[str, Scenario]
+
+
 def bin_op(op: ast.operator) -> Op:
     match op:
         case ast.Add():
@@ -506,7 +509,7 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
     }
 
 
-def scenarios(path: pathlib.Path) -> dict[str, Scenario]:
+def scenarios(path: pathlib.Path) -> Scenarios:
     scenario_map = {}
     for file in path.iterdir():
         if s := scenario(file):

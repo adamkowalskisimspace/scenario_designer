@@ -12,12 +12,12 @@
 			display: grid;
 			grid-template-columns: 100px 1fr;
 			grid-column: 1 / span 2;
+			gap: 0.5em;
 		}
 
 		section {
 			grid-column: 1 / span 2;
 			justify-self: end;
-			margin-top: 1em;
 		}
 	</style>
 </head>
@@ -71,8 +71,13 @@
 						<fieldset>
 							<legend>Tune</legend>
 							{% for t_key, t_value in p_value.items() %}
+							{% if t_key == "command" %}
+							<label for="{{t_key}}">{{t_key}}</label>
+							<textarea name="{{t_key}}">{{t_value}}</textarea>
+							{% else %}
 							<label for="{{t_key}}">{{t_key}}</label>
 							<input name="{{t_key}}" value="{{t_value}}" />
+							{% endif %}
 							{% endfor %}
 						</fieldset>
 						{% else %}

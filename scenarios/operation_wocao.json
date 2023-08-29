@@ -361,13 +361,7 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd /c powershell dir \\",
-                            "self.target_2_hostname",
-                            "\\IPC$; echo \"success\""
-                        ]
-                    }
+                    "command": "cmd /c powershell dir \\${self.target_2_hostname}\\IPC$; echo \"success\""
                 }
             }
         },

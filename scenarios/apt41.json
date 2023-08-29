@@ -292,12 +292,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "wevtutil clear-log system /r:",
-                            "self.target_1_hostname"
-                        ]
-                    }
+                    "command": "wevtutil clear-log system /r:${self.target_1_hostname}"
                 }
             }
         },
@@ -310,12 +305,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "wevtutil clear-log security /r:",
-                            "self.target_1_hostname"
-                        ]
-                    }
+                    "command": "wevtutil clear-log security /r:${self.target_1_hostname}"
                 }
             }
         },

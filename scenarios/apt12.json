@@ -148,13 +148,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": {
-                        "template": [
-                            "powershell &{$folder = \"c:\\users\\",
-                            "self.target_1_username",
-                            "\\Documents\"; $folder; Expand-Archive $folder\\help.zip -Force -DestinationPath $folder; start \"$folder\\help_win_x86.exe\"}"
-                        ]
-                    }
+                    "command": "powershell &{$folder = \"c:\\users\\${self.target_1_username}\\Documents\"; $folder; Expand-Archive $folder\\help.zip -Force -DestinationPath $folder; start \"$folder\\help_win_x86.exe\"}"
                 }
             }
         },
