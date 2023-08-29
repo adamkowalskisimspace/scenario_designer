@@ -1,0 +1,696 @@
+{
+    "meta_data": {
+        "name": "ubiquitousfreedom",
+        "version": "v1.0.4",
+        "title": "Ubiquitous Freedom Inspired scenario 1",
+        "description": "An automated attack that is unique and not attributed to a specific threat actor. The attack attempts to exfiltrate victim\u2019s data through C2 channels and alternative protocols. This scenario includes common discovery and lateral movement techniques, along with VM detection via LoLbin commands.",
+        "author": "Attack Content",
+        "suggested_duration": 1038
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c whoami"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c quser"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell Get-WinSystemLocale"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "tracert www.google.com"
+                }
+            }
+        },
+        {
+            "tactic": "ApplicationWindowDiscovery",
+            "technique": "Discovery",
+            "label": "applicationWindowDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ApplicationWindowDiscovery",
+            "technique": "Discovery",
+            "label": "applicationWindowDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$a = New-Object -com \"Shell.Application\"; $b = $a.windows() | select-object LocationName; echo $b; echo \" \"}"
+                }
+            }
+        },
+        {
+            "tactic": "PeripheralDeviceDiscovery",
+            "technique": "Discovery",
+            "label": "peripheralDeviceDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SystemChecks",
+            "technique": "Discovery",
+            "label": "systemChecks_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserActivityBasedChecks",
+            "technique": "Discovery",
+            "label": "userActivityBasedChecks_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserActivityBasedChecks",
+            "technique": "Discovery",
+            "label": "userActivityBasedChecks_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "TimeBasedEvasion",
+            "technique": "Discovery",
+            "label": "timeBasedEvasion_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "EmailForwardingRule",
+            "technique": "Collection",
+            "label": "emailForwardingRule_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "exfil_email": "legitimatesalvage@mars.org"
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RemoteServices_NetUse",
+            "technique": "LateralMovement",
+            "label": "remoteServices_netuse",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "RemoteFileCopy_RoboCopy",
+            "technique": "LateralMovement",
+            "label": "remoteServices_filecopy",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduled_task_execution",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "cmd /c whoami"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t2_2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "cmd /c quser"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "powershell Get-WinSystemLocale"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "tracert www.google.com"
+                }
+            }
+        },
+        {
+            "tactic": "ApplicationWindowDiscovery",
+            "technique": "Discovery",
+            "label": "applicationWindowDiscovery_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ApplicationWindowDiscovery",
+            "technique": "Discovery",
+            "label": "applicationWindowDiscovery_t2_2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "powershell &{$a = New-Object -com \"Shell.Application\"; $b = $a.windows() | select-object LocationName; echo $b; echo \" \"}"
+                }
+            }
+        },
+        {
+            "tactic": "PeripheralDeviceDiscovery",
+            "technique": "Discovery",
+            "label": "peripheralDeviceDiscovery_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "SystemChecks",
+            "technique": "Discovery",
+            "label": "systemChecks_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "UserActivityBasedChecks",
+            "technique": "Discovery",
+            "label": "userActivityBasedChecks_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "UserActivityBasedChecks",
+            "technique": "Discovery",
+            "label": "userActivityBasedChecks_t2_2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "TimeBasedEvasion",
+            "technique": "Discovery",
+            "label": "timeBasedEvasion_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "EmailForwardingRule",
+            "technique": "Collection",
+            "label": "emailForwardingRule_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "exfil_email": "legitimatesalvage@mars.org"
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "george.washington.com",
+            "abraham.lincoln.org",
+            "baseball.com",
+            "apple.pie.com",
+            "spangledbanner.net",
+            "rushmore.com",
+            "nationalforests.org",
+            "constitution.net",
+            "freebigmac.com",
+            "wideopen.spaces.com"
+        ],
+        "ip": [
+            "173.255.194.134/24",
+            "72.14.185.43/24",
+            "45.33.30.197/24",
+            "45.33.20.235/24",
+            "72.14.178.174/24",
+            "45.33.18.44/24",
+            "107.23.128.138/24",
+            "34.206.39.159/24",
+            "13.248.216.41/24",
+            "76.223.65.111/24",
+            "199.34.228.128/24",
+            "144.217.68.81/24",
+            "162.247.143.114/24"
+        ],
+        "binary": [
+            "washington.exe",
+            "apple.exe",
+            "3.14.exe",
+            "USerFlag.exe",
+            "red.exe",
+            "white.exe",
+            "blue.exe"
+        ],
+        "taskname": [
+            "{scenario_name}_{time()}"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "23",
+                "jitter": "5",
+                "ioc-ip_callback": "139.7.1.33/24",
+                "ioc-domain_callback": "ubiquitous.com",
+                "ioc-binary_payload_name": "gwashington.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "73.112.91.205/24",
+                "ioc-domain_exfil": "applepie.com",
+                "ioc-exfil_email": "jarrett.berger@internet.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "12.188.53.79/24",
+                "ioc-domain_driveby": "freedom.com"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "c:\\users\\Public",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            },
+            "2": {
+                "payload_destination": "c:\\users\\Public",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

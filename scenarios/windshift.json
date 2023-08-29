@@ -1,0 +1,597 @@
+{
+    "meta_data": {
+        "name": "windshift",
+        "version": "v1.0.0",
+        "title": "Windshift Inspired Scenario",
+        "description": "This scenario is inspired by threat group Windshift, also known as Bahamut, Ehdevel,",
+        "author": "Attack Content",
+        "suggested_duration": 665
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "ProcessDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "SoftwareDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "wmic product get name"
+                }
+            }
+        },
+        {
+            "tactic": "SecuritySoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "SecuritySoftwareDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get * /value"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "SystemInformationDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "Masquerading",
+            "technique": "DefenseEvasion",
+            "label": "Masquerading_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "pre_filename": {
+                        "template": [
+                            "self.payload_destination",
+                            "\\",
+                            "self.payload_name"
+                        ]
+                    },
+                    "post_filename": {
+                        "template": [
+                            "self.payload_destination",
+                            "\\Ministry_Addendum.docx.exe"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "HideArtifacts",
+            "technique": "DefenseEvasion",
+            "label": "HideArtifacts_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell move-item ",
+                            "self.payload_destination",
+                            "\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ShortcutModification",
+            "technique": "Persistence",
+            "label": "CreateShortcut_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "target_username": "self.target_username",
+                    "shortcut_exe": "C:\\Users\\Public\\documents\\Ministry_addendum.docx.exe",
+                    "shortcut_name": "Ministry_Addendum.lnk"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "account-googie.com",
+            "accountvalidate.com",
+            "airfitgym.com",
+            "ambicluster.com",
+            "aspnet.dyndns.info",
+            "assurecom.info",
+            "bulletinalerts.com",
+            "by4mode.com",
+            "cdn-icloud.co",
+            "celebsnightmares.com",
+            "citrusquad.com",
+            "classmunch.com",
+            "cloud-authorize.com",
+            "cocahut.com",
+            "cocoka.info",
+            "crawloofle.com",
+            "cyroonline.com",
+            "devicesupportrnicrosoft.com",
+            "domforworld.com",
+            "electrobric.com",
+            "everificationsession-load.com",
+            "flux2key.com",
+            "freepunjab2020.info",
+            "frexinq.com",
+            "gateway-yahoo.com",
+            "ghelp.co",
+            "healthclubfun.com",
+            "hypforever.com",
+            "i3mode.com",
+            "imging.site",
+            "inlineirnage.com",
+            "justsikhthings.com",
+            "kannat.ns01.us",
+            "khalistanlehar.com",
+            "leastinfo.com",
+            "leelee.dnset.com",
+            "lizacorner.com",
+            "lobertica.info",
+            "login-private.com",
+            "logon-info-gsupport.com",
+            "logstrick.com",
+            "m0-rnaiil-siina-chnreload.everificationsession-load.com",
+            "mail-incc.com",
+            "mail-king.com",
+            "mail-validation.info",
+            "mail.techsprouts.com",
+            "mailinfo-bh.com",
+            "me-yahoo.com",
+            "medieczema.com",
+            "middleeastleaks.com",
+            "mideastleaks.com",
+            "mindcraftstore.com",
+            "musicbandfiles.com",
+            "myaccount-googie.com",
+            "myappie.co",
+            "myfoodzone.net",
+            "myggl.io",
+            "o-auth.net",
+            "onlinetokenid.com",
+            "opticscold.com",
+            "opticzstore.com",
+            "optusiy.com",
+            "out-look-mail-bh.com",
+            "oyesterclub.info",
+            "passwordsaverr.com",
+            "poiusavid.com",
+            "portal549.com",
+            "privacylog.info",
+            "prontexim.com",
+            "regditogo.com",
+            "rhc-jo.com",
+            "risalaencryptor.com",
+            "rnaiill2-rnaill-slna-m0.everificationsession-load.com",
+            "rnail-appld-oathvarfiction.everificationsession-load.com",
+            "scan8t.com",
+            "secure-useraccount.com",
+            "service-authorization.com",
+            "setting-secure.com",
+            "shiaar-e-islam.com",
+            "signtabo.com",
+            "sikhforjustice.org",
+            "similerwork.net",
+            "string2me.com",
+            "sync-tokens.com",
+            "tansyroof.com",
+            "techsprouts.com",
+            "techwach.com",
+            "thegogl.com",
+            "tierradom.com",
+            "timesofarab.com",
+            "toysforislam.com",
+            "trailhinder.com",
+            "traxbin.com",
+            "treemanic.com",
+            "trioganic.com",
+            "user-privacy.com",
+            "uyghuri.51vip.biz",
+            "uyghurie.51vip.biz",
+            "uygur.5166.info",
+            "uygur.51vip.biz",
+            "uygur.eicp.net",
+            "uygur.xicp.net",
+            "vlprnaiill2-rnaill-sln"
+        ],
+        "ip": [
+            "103.220.47.104/24",
+            "103.220.47.16/24",
+            "103.234.220.152/24",
+            "103.234.220.153/24",
+            "164.160.131.174/24",
+            "167.114.194.56/24",
+            "176.103.57.2/24",
+            "176.103.62.151/24",
+            "176.103.63.195/24",
+            "178.150.0.196/24",
+            "178.150.0.247/24",
+            "178.218.213.204/24",
+            "185.122.58.133/24",
+            "185.122.58.133/24",
+            "185.15.208.64/24",
+            "185.159.128.34/24",
+            "185.161.208.121/24",
+            "185.198.57.37/24",
+            "185.20.187.38/24",
+            "185.228.232.118/24",
+            "185.228.232.220/24",
+            "185.244.150.102/24",
+            "185.244.150.119/24",
+            "185.244.150.246/24",
+            "185.5.54.107/24",
+            "185.66.13.44/24",
+            "185.66.15.53/24",
+            "193.203.50.179/24",
+            "194.36.188.88/24",
+            "194.36.189.106/24",
+            "195.123.212.82/24",
+            "195.123.225.119/24",
+            "195.123.226.249/24",
+            "202.155.223.181/24",
+            "202.155.223.183/24",
+            "213.252.247.158/24",
+            "217.147.168.29/24",
+            "217.147.169.162/24",
+            "217.29.62.120/24",
+            "217.29.62.245/24",
+            "31.13.195.168/24",
+            "31.210.96.213/24",
+            "31.210.96.220/24",
+            "31.210.96.222/24",
+            "31.28.171.133/24",
+            "45.10.88.11/24",
+            "45.128.148.27/24",
+            "45.128.149.7/24",
+            "45.153.73.25/24",
+            "51.75.156.163/24",
+            "51.77.90.253/24",
+            "63.251.21.135/24",
+            "68.68.47.153/24",
+            "80.79.122.113/24",
+            "81.176.239.92/24",
+            "81.177.181.97/24",
+            "81.177.3.119/24",
+            "82.221.100.55/24",
+            "82.221.100.74/24",
+            "85.254.144.31/24",
+            "87.120.254.170/24",
+            "87.120.37.167/24",
+            "87.120.37.208/24",
+            "87.120.37.253/24",
+            "87.120.37.66/24",
+            "87.120.37.84/24"
+        ],
+        "binary": [
+            "Confidential_Report.exe",
+            "Executive_Briefing.exe",
+            "Policy_Guidelines.exe",
+            "Financial_Statement.exe",
+            "Strategic_Plan.exe",
+            "Investment_Opportunities.exe",
+            "Government_Regulations.exe",
+            "Industry_Outlook.exe",
+            "Economic_Forecast.exe",
+            "Trade_Agreement.exe",
+            "Infrastructure_Development.exe",
+            "Foreign_Investment_Policies.exe",
+            "Digital_Transformation.exe",
+            "Energy_Sector_Analysis.exe",
+            "Market_Research.exe",
+            "Business_Partnerships.exe",
+            "Leadership_Workshop.exe",
+            "Sustainable_Development.exe",
+            "Technology_Adoption.exe",
+            "Policy_Recommendations.exe",
+            "Joint_Venture_Proposal.exe",
+            "Industry_Trends.exe",
+            "Tax_Reforms.exe",
+            "Public-Private_Partnership.exe",
+            "Executive_Summary.exe",
+            "Cybersecurity_Framework.exe",
+            "Public_Health_Initiative.exe",
+            "Investment_Strategies.exe",
+            "Trade_Mission_Report.exe",
+            "Emerging_Sectors.exe",
+            "Infrastructure_Funding.exe",
+            "International_Collaboration.exe",
+            "Government_Initiatives.exe",
+            "Industry_Competitiveness.exe",
+            "Export_Promotion.exe",
+            "Innovation_Ecosystem.exe",
+            "Economic_Reforms.exe",
+            "Investor_Guide.exe",
+            "Digital_Economy.exe",
+            "Market_Entry_Strategies.exe",
+            "Skills_Development_Program.exe",
+            "Energy_Policy.exe",
+            "Industry_Showcase.exe",
+            "Business_Environment.exe",
+            "Regulatory_Framework.exe",
+            "Entrepreneurship_Support.exe",
+            "Financial_Inclusion.exe",
+            "Corporate_Governance.exe",
+            "Investment_Climate.exe",
+            "Smart_Cities.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query-target_domain": "site.lan"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "payload_destination": {
+                "path": [
+                    "targets",
+                    "1",
+                    "payload_destination"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_username"
+                ]
+            },
+            "target_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_password"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

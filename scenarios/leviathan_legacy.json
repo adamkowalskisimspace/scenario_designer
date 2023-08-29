@@ -1,0 +1,622 @@
+{
+    "meta_data": {
+        "name": "leviathan_legacy",
+        "version": "v1.0.4",
+        "title": "Leviathan_Legacy Inspired Scenario 1",
+        "description": "Inspired by an advanced persistent threat (APT) actor with the common names APT40, MUDCARP, Kryptonite Panda, Gadolinium, BRONZE MOHAWK, TEMP.Jumper, Leviathan, and TEMP.Periscope. Implements a series of tactics, techniques, and procedures typically used by the threat actor commonly described as Leviathan. The actor infiltrates via a phishing link, moves laterally via a remote scheduled task, and exfiltrates data from that lateral host via a shared drive.",
+        "author": "Attack Content",
+        "suggested_duration": 819
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "SpearPhishingLink",
+            "technique": "InitialAccess",
+            "label": "spearPhishingLink",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "body": {
+                        "template": [
+                            "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://",
+                            "self.driveby_domain",
+                            "/",
+                            "self.payload_name",
+                            "\n    - Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ValidAccounts_LocalAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_LocalAccounts_t1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "RemoteSystemDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery_t1_elevated_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "net view"
+                }
+            }
+        },
+        {
+            "tactic": "CreateAccount_LocalAccount",
+            "technique": "Persistence",
+            "label": "createAccount_LocalAccount_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "ScheduledTaskPersistence",
+            "technique": "Persistence",
+            "label": "scheduled_task_persistence_t1_elevated",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "RemoteServices_NetUse",
+            "technique": "LateralMovement",
+            "label": "remoteServices_netuse",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "RemoteFileCopy_RoboCopy",
+            "technique": "LateralMovement",
+            "label": "remoteServices_filecopy",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduled_task_execution",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_3",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "TaintSharedContent",
+            "technique": "LateralMovement",
+            "label": "taintSharedContent_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target_1": "self.target_2",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "robocopy c:\\windows\\SysWow64\\ \\\\file\\share ",
+                            "self.payload_name"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_LocalAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_LocalAccounts_t2",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target_1": "self.target_2",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share ",
+                            "self.payload_name",
+                            " } -windowstyle Hidden"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTaskPersistence",
+            "technique": "Persistence",
+            "label": "scheduled_task_persistence_t2",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "mines.port1.org",
+            "vitaminma1n.info",
+            "airbus0cean.com",
+            "cargil1notice.com",
+            "cc1dmeekparry.info",
+            "ccvzvhjhdj.website",
+            "cd1groups.com",
+            "checkeccc.com",
+            "chemsca1ere.com",
+            "cnmzapmeta.com"
+        ],
+        "ip": [
+            "185.106.130.206/24",
+            "169.47.131.72/24",
+            "63.250.45.53/24",
+            "192.64.129.100/24",
+            "153.148.146.131/24",
+            "58.158.217.102/24",
+            "3.223.155.185/24",
+            "216.146.86.11/24",
+            "216.144.86.10/24",
+            "162.47.110.85/24"
+        ],
+        "binary": [
+            "LogiMailApp.exe",
+            "mt.exe"
+        ],
+        "taskname": [
+            {
+                "template": [
+                    "windowsUpdater",
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "randint"
+                        },
+                        "args": [
+                            1,
+                            100
+                        ]
+                    }
+                ]
+            },
+            {
+                "template": [
+                    "windowsUpdater",
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "randint"
+                        },
+                        "args": [
+                            1,
+                            100
+                        ]
+                    }
+                ]
+            },
+            {
+                "template": [
+                    "windowsUpdater",
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "randint"
+                        },
+                        "args": [
+                            1,
+                            100
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "chhengsophorsilcadho@gmail.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "Human Rights Protection Survey in Cambodia (LICADOH)",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "chhengsophorsilcadho",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "c:\\users\\Public",
+                "ioc-taskname": "windowsUpdater58"
+            },
+            "2": {
+                "payload_destination": "C:\\Windows\\SysWow64",
+                "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            },
+            "target_2_username": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-domain_admin_username"
+                ]
+            },
+            "target_2_password": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-domain_admin_password"
+                ]
+            },
+            "target_2_hostname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_hostname"
+                ]
+            },
+            "target_2_taskname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "ioc-taskname"
+                ]
+            },
+            "target_2_persist_location": {
+                "path": [
+                    "targets",
+                    "2",
+                    "persist_location"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1_elevated": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_3",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

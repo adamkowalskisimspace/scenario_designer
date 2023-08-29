@@ -14,7 +14,9 @@ description = ""
 authors = [
     {name = "Adam Kowalski", email = "adam.kowalski@simspace.com"},
 ]
-dependencies = []
+dependencies = [
+    "litestar[jinja]>=2.0.1",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
@@ -30,3 +32,6 @@ build-backend = "pdm.backend"
 testpaths = [
     "test",
 ]
+
+[tool.pdm.scripts]
+server = "litestar run --port 7272 --reload --debug"

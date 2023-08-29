@@ -1,0 +1,157 @@
+{
+    "meta_data": {
+        "name": "chimera_xs_test",
+        "version": "v1.0.2",
+        "title": "Chimera Extra Short Test",
+        "description": "Scenario Extra Short Test, designed to test internal communications.",
+        "author": "Attack Content",
+        "suggested_duration": 231
+    },
+    "procedures": [
+        {
+            "tactic": "Actuator",
+            "technique": "Infrastructure",
+            "label": "Actuator",
+            "preconditions": {
+                "tool": "self.tool_name"
+            }
+        },
+        {
+            "tactic": "AgentExit",
+            "technique": "Utility",
+            "label": "AgentExit",
+            "preconditions": {
+                "agent": "self.agent",
+                "tool": "self.tool",
+                "target": "self.target_ip",
+                "tune": {
+                    "infra": true
+                }
+            }
+        }
+    ],
+    "iocs": {
+        "domain": [
+            "chimera_xsmall.com",
+            "chimer_xsmall.com",
+            "chime_xsmall.com",
+            "chim_xsmall.com"
+        ],
+        "ip": [
+            "192.168.1.11/24",
+            "192.168.1.22/24",
+            "192.168.1.33/24",
+            "192.168.1.44/24"
+        ],
+        "binary": [
+            "kind_of_fake.exe",
+            "more_fake.exe",
+            "hundred_percent_fake.exe",
+            "hundred_one_percent_fake.exe"
+        ],
+        "taskname": [
+            "kind_of_fake",
+            "more_fake",
+            "hundred_precent_fake",
+            "hundred_one_precent_fake"
+        ]
+    },
+    "spec": {
+        "tool": {
+            "1": {
+                "name": "fakectuator_v1",
+                "beacon": "5",
+                "jitter": "5",
+                "ioc-ip_callback": "160.1.1.1/24",
+                "ioc-domain_callback": "fakectuator_callback.com",
+                "ioc-binary_payload_name": "msdce.exe",
+                "callback_port": 80,
+                "hostname": "Chimera"
+            }
+        },
+        "chimera": {
+            "api-control_ip": "10.10.200.99"
+        },
+        "exfil": {
+            "1": {
+                "ioc-ip_exfil": "160.1.1.2/24",
+                "ioc-exfil_domain": "fakectuator_exfil.com"
+            }
+        },
+        "driveby": {
+            "1": {
+                "ioc-domain_driveby": "fakectuator_driveby.com",
+                "ioc-ip_driveby": "160.1.1.3/24",
+                "callback_port": 80
+            }
+        },
+        "targets": {
+            "1": {
+                "query-exfil": [
+                    "C:\\secrets.zip"
+                ]
+            },
+            "2": {
+                "query-exfil": [
+                    "C:\\secrets.zip"
+                ],
+                "ioc-taskname": {
+                    "template": [
+                        "fakectuator_",
+                        {
+                            "kind": "call",
+                            "func": {
+                                "kind": "name",
+                                "id": "time"
+                            },
+                            "args": []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "preconditions": {
+        "state": {},
+        "initial": {
+            "tool_name": {
+                "path": [
+                    "tool",
+                    "1",
+                    "name"
+                ]
+            },
+            "tool": {
+                "path": [
+                    "tool",
+                    "1"
+                ]
+            },
+            "target_ip": {
+                "path": [
+                    "chimera",
+                    "api-control_ip"
+                ]
+            }
+        },
+        "effects": {
+            "actuator": {
+                "path": [
+                    "Actuator",
+                    "actuator",
+                    "ret",
+                    "registered_id"
+                ],
+                "default": 0
+            },
+            "agent": {
+                "path": [
+                    "initialAccess",
+                    "agent",
+                    "ret",
+                    "agent_id"
+                ]
+            }
+        }
+    }
+}

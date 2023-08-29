@@ -5,4 +5,3 @@ __pypackages__
 .pdm-build
 __pycache__
 .pytest_cache
-scenarios
