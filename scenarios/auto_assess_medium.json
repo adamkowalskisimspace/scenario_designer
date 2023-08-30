@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "SpearPhishingLink",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -82,10 +82,10 @@
                                     "left": {
                                         "kind": "bin op",
                                         "op": "add",
-                                        "left": "Hi,\n This is a very important message that you should read ",
-                                        "right": "carefully. The following presentation needs your input before I can release "
+                                        "left": "Hi,\n This is a very important message that you should read",
+                                        "right": "carefully. The following presentation needs your input before I can release"
                                     },
-                                    "right": "it to the rest of the company. Please review the following:  "
+                                    "right": "it to the rest of the company. Please review the following:"
                                 },
                                 "right": {
                                     "template": [
@@ -96,7 +96,7 @@
                                     ]
                                 }
                             },
-                            "right": "\nPlease respond with "
+                            "right": "Please respond with"
                         },
                         "right": "your feedback at your earliest convenience\nBest,\nAAM"
                     }
@@ -104,8 +104,8 @@
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -116,8 +116,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -128,8 +128,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -143,8 +143,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -154,8 +154,8 @@
             }
         },
         {
-            "tactic": "RemoteServices_NetUse",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -165,8 +165,8 @@
             }
         },
         {
-            "tactic": "RemoteFileCopy_RoboCopy",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -176,8 +176,8 @@
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -187,8 +187,8 @@
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_t1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -199,8 +199,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -210,8 +210,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -221,8 +221,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -231,8 +231,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

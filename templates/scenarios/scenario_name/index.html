@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<title>Scenario Designer</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+	<nav class="bg-gray padding flex gap">
+		<a href="/">/</a>
+		<a href="/scenarios">Scenarios</a>
+		<a href="/scenarios/{{name}}"><b>{{title}}</b></a>
+	</nav>
+	<main class="padding">
+		<ul class="flex column gap">
+			<li>
+				<a href="/scenarios/{{name}}/meta_data" class="bg-gray padding flex">
+					Meta Data
+				</a>
+			</li>
+			<li>
+				<a href="/scenarios/{{name}}/procedures" class="bg-gray padding flex">
+					Procedures
+				</a>
+			</li>
+		</ul>
+	</main>
+</body>
+
+</html>

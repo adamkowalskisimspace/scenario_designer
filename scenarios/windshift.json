@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -69,8 +69,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -81,8 +81,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -93,8 +93,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -103,8 +103,8 @@
             }
         },
         {
-            "tactic": "SoftwareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SoftwareDiscovery",
             "label": "SoftwareDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -116,8 +116,8 @@
             }
         },
         {
-            "tactic": "SecuritySoftwareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SecuritySoftwareDiscovery",
             "label": "SecuritySoftwareDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -129,8 +129,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "SystemInformationDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -139,8 +139,8 @@
             }
         },
         {
-            "tactic": "Masquerading",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "Masquerading",
             "label": "Masquerading_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -153,21 +153,21 @@
             }
         },
         {
-            "tactic": "HideArtifacts",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HideArtifacts",
             "label": "HideArtifacts_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell move-item ${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
+                    "command": "powershell move-item${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
                 }
             }
         },
         {
-            "tactic": "ShortcutModification",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "ShortcutModification",
             "label": "CreateShortcut_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -181,8 +181,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

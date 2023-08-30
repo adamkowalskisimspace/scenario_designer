@@ -113,7 +113,9 @@ def transform_value(expr: ast.expr) -> Value:
     match expr:
         case ast.Constant(value):
             match value:
-                case str() | bool() | int():
+                case str(s):
+                    return s.strip()
+                case bool() | int():
                     return value
                 case _:
                     breakpoint()
@@ -219,10 +221,10 @@ def procedure_add(call: ast.Call) -> Procedure:
     assert isinstance(arg1, ast.Call)
     func = arg1.func
     assert isinstance(func, ast.Attribute)
-    tactic = func.attr
+    technique = func.attr
     value = func.value
     assert isinstance(value, ast.Name)
-    technique = value.id
+    tactic = value.id
     return {
         "tactic": tactic,
         "technique": technique,
@@ -260,7 +262,7 @@ def constructor(name: str, function_def: ast.FunctionDef) -> MetaData:
             continue
         value = body.value
         assert isinstance(value, ast.Constant)
-        meta_data[attr] = value.value
+        meta_data[attr] = transform_value(value)
     return {
         "name": name,
         "version": meta_data["version"],

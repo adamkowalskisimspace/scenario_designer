@@ -11,8 +11,8 @@ async def get_handler() -> Template:
     for path in paths.iterdir():
         with open(path) as fp:
             scenario = json.load(fp)
-        scenarios.append(scenario)
+        scenarios.append(scenario["meta_data"])
     return Template(
-        "scenarios.html",
-        context={"scenarios": sorted(scenarios, key=lambda x: x["meta_data"]["name"])},
+        "scenarios/index.html",
+        context={"scenarios": sorted(scenarios, key=lambda x: x["name"])},
     )

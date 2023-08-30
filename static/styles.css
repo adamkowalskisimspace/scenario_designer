@@ -1,17 +1,37 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  color-scheme: light dark;
+  --white: #fff;
+  --gray: #333;
+}
+
 body {
   font-family: sans-serif;
+  line-height: 1.5;
 }
 
-fieldset {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-column: 1 / span 2;
-  gap: 0.5em;
+a {
+  text-decoration: none;
 }
 
-section {
-  grid-column: 1 / span 2;
-  justify-self: end;
+@media (prefers-color-scheme: dark) {
+  a {
+    color: var(--white);
+  }
+}
+
+.bg-gray {
+  background-color: var(--gray);
 }
 
 input,
@@ -19,4 +39,30 @@ button,
 textarea,
 select {
   font: inherit;
+  padding: 0.2rem;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.gap {
+  gap: 1rem;
+}
+
+.padding {
+  padding: 1rem;
+}
+
+.margin {
+  margin: 1rem;
 }

@@ -1,0 +1,31 @@
+<html>
+
+<head>
+	<title>Scenario Designer</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+	<nav class="bg-gray padding flex gap">
+		<a href="/">/</a>
+		<a href="/scenarios">Scenarios</a>
+		<a href="/scenarios/{{name}}">{{title}}</a>
+		<a href="/scenarios/{{name}}/procedures">Procedures</a>
+		<a href="/scenarios/{{index}}/procedures"><b>{{index}}</b></a>
+	</nav>
+	<main class="padding">
+		<ol class="flex column gap">
+			{% for procedure in procedures %}
+			<li>
+				<a href="/scenarios/{{name}}/procedures/{{loop.index - 1}}" class="bg-gray padding flex column">
+					<b>{{procedure.tactic}}</b>
+					<p>{{procedure.technique}}</p>
+				</a>
+			</li>
+			{% endfor %}
+			</li>
+		</ol>
+	</main>
+</body>
+
+</html>

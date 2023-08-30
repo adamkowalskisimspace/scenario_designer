@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -68,8 +68,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -79,8 +79,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -94,8 +94,8 @@
             }
         },
         {
-            "tactic": "DomainTrustDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainTrustDiscovery",
             "label": "domainTrustDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -107,8 +107,8 @@
             }
         },
         {
-            "tactic": "RemoteSystemDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -120,21 +120,21 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "domainAccount_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c 'net group \"Domain Admins\" /DOMAIN' "
+                    "command": "cmd /c 'net group \"Domain Admins\" /DOMAIN'"
                 }
             }
         },
         {
-            "tactic": "ValidAccounts_DomainAccounts",
-            "technique": "PrivilegeEscalation",
+            "tactic": "PrivilegeEscalation",
+            "technique": "ValidAccounts_DomainAccounts",
             "label": "validAccounts_DomainAccounts_t1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -145,8 +145,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -156,21 +156,21 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "domainAccount_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "command": "cmd /c 'net group \"enterprise admins\" /domain' "
+                    "command": "cmd /c 'net group \"enterprise admins\" /domain'"
                 }
             }
         },
         {
-            "tactic": "DomainTrustDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainTrustDiscovery",
             "label": "domainTrustDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -182,8 +182,8 @@
             }
         },
         {
-            "tactic": "RemoteSystemDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -195,8 +195,8 @@
             }
         },
         {
-            "tactic": "RemoteSystemDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -208,8 +208,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "systemTimeDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -221,8 +221,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "domainAccount_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -234,8 +234,8 @@
             }
         },
         {
-            "tactic": "RemoteServices_NetUse",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -245,8 +245,8 @@
             }
         },
         {
-            "tactic": "RemoteFileCopy_RoboCopy",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -256,8 +256,8 @@
             }
         },
         {
-            "tactic": "WindowsManagementInstrumentation",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "WindowsManagementInstrumentation",
             "label": "windowsManagementInstrumentation_t2",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -268,8 +268,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -278,8 +278,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -288,8 +288,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

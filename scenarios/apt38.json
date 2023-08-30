@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,24 +49,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
                 "payload": "self.tool_name2",
@@ -75,24 +75,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX3",
             "preconditions": {
                 "payload": "self.tool_name3",
@@ -101,24 +101,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces4",
             "preconditions": {
                 "driveby": "self.driveby4"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS4",
             "preconditions": {
                 "driveby": "self.driveby4"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX4",
             "preconditions": {
                 "payload": "self.tool_name4",
@@ -127,16 +127,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -146,8 +146,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -157,8 +157,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -171,8 +171,8 @@
             }
         },
         {
-            "tactic": "DisableOrModifyTools",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "DisableOrModifyTools",
             "label": "Disable_Defender_t1_1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -181,8 +181,8 @@
             }
         },
         {
-            "tactic": "ClipboardData",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "ClipboardData",
             "label": "Get-clipboard-data_t1_2",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -191,8 +191,8 @@
             }
         },
         {
-            "tactic": "Keylogging",
-            "technique": "Collection",
+            "tactic": "Collection",
+            "technique": "Keylogging",
             "label": "Get-keyboard-data_t1_3",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -204,8 +204,8 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "Get-kit_t1_4",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -220,8 +220,8 @@
             }
         },
         {
-            "tactic": "ProcessDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1_5",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -233,8 +233,8 @@
             }
         },
         {
-            "tactic": "FileDeletionPowershell",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_6",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -246,8 +246,8 @@
             }
         },
         {
-            "tactic": "NetworkShareDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "NetworkShareDiscovery",
             "label": "Network-share_t1_7",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -259,8 +259,8 @@
             }
         },
         {
-            "tactic": "NativeApi",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "NativeApi",
             "label": "Windows-native-api_t1_8",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -269,8 +269,8 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "Get-dll-file_t1_9",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -285,8 +285,8 @@
             }
         },
         {
-            "tactic": "Rundll32",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "Rundll32",
             "label": "Run-dll-file_t1_10",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -299,8 +299,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_11",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -312,8 +312,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_12",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -325,8 +325,8 @@
             }
         },
         {
-            "tactic": "FileAndDirectoryDiscovery",
-            "technique": "Discovery",
+            "tactic": "Discovery",
+            "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_13",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -338,8 +338,8 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "Get-Ransomware-kit_t1_14",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -354,8 +354,8 @@
             }
         },
         {
-            "tactic": "DeobfuscateDecodeFilesOrInformation",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "DeobfuscateDecodeFilesOrInformation",
             "label": "Uncompress-Hermes-Kit_t1_15",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -367,8 +367,8 @@
             }
         },
         {
-            "tactic": "FileDeletionPowershell",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_16",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -380,8 +380,8 @@
             }
         },
         {
-            "tactic": "DataEncryptedForImpact",
-            "technique": "Impact",
+            "tactic": "Impact",
+            "technique": "DataEncryptedForImpact",
             "label": "Execute_Hermes_Ransomware_t1_17",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -390,8 +390,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

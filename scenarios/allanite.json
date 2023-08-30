@@ -9,16 +9,16 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -27,8 +27,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -37,8 +37,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -49,16 +49,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -69,8 +69,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -81,8 +81,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -93,8 +93,8 @@
             }
         },
         {
-            "tactic": "ValidAccounts_DomainAccounts",
-            "technique": "PrivilegeEscalation",
+            "tactic": "PrivilegeEscalation",
+            "technique": "ValidAccounts_DomainAccounts",
             "label": "validAccounts_DomainAccounts_1_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -107,8 +107,8 @@
             }
         },
         {
-            "tactic": "WindowsService",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "WindowsService",
             "label": "Enable_Modify_RDP_Service_1_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -120,8 +120,8 @@
             }
         },
         {
-            "tactic": "WindowsService",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "WindowsService",
             "label": "Enable_Modify_RDP_Service_2_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -133,8 +133,8 @@
             }
         },
         {
-            "tactic": "WindowsService",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "WindowsService",
             "label": "Enable_Modify_RDP_Service_3_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -146,8 +146,8 @@
             }
         },
         {
-            "tactic": "WindowsService",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "WindowsService",
             "label": "Enable_Modify_RDP_Service_4_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -159,8 +159,8 @@
             }
         },
         {
-            "tactic": "WindowsService",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "WindowsService",
             "label": "Enable_Modify_RDP_Service_5_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -172,8 +172,8 @@
             }
         },
         {
-            "tactic": "CreateAccount_LocalAccount",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "CreateAccount_LocalAccount",
             "label": "Create_Modify_Backdoor_Account_1_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -185,8 +185,8 @@
             }
         },
         {
-            "tactic": "AccountManipulation",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "AccountManipulation",
             "label": "Create_Modify_Backdoor_Account_2_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -198,8 +198,8 @@
             }
         },
         {
-            "tactic": "AccountManipulation",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "AccountManipulation",
             "label": "Create_Modify_Backdoor_Account_3_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -211,8 +211,8 @@
             }
         },
         {
-            "tactic": "HiddenUsers",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HiddenUsers",
             "label": "Hide_Backdoor_Account_1_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -224,8 +224,8 @@
             }
         },
         {
-            "tactic": "HiddenUsers",
-            "technique": "DefenseEvasion",
+            "tactic": "DefenseEvasion",
+            "technique": "HiddenUsers",
             "label": "Hide_Backdoor_Account_2_t1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
@@ -237,8 +237,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",

