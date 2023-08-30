@@ -75,3 +75,7 @@ ol {
 .margin {
   margin: 1rem;
 }
+
+.no-border {
+  border: none;
+}

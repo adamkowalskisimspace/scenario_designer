@@ -4,16 +4,21 @@ from litestar import get
 from litestar.response import Template
 
 
-@get("/scenarios/{scenario_name:str}/procedures/{procedure_index:int}/preconditions")
+@get("/scenarios/{scenario_name:str}/procedures/{procedure_index:int}")
 async def get_handler(scenario_name: str, procedure_index: int) -> Template:
     path = Path(".") / "scenarios" / f"{scenario_name}.json"
     with open(path) as fp:
         scenario = json.load(fp)
+    procedure = scenario["procedures"][procedure_index]
+    preconditions = procedure["preconditions"]
+    if "tune" in preconditions:
+        procedure["tune"] = preconditions["tune"]
+        del preconditions["tune"]
     return Template(
-        "scenarios/scenario_name/procedures/procedure_index/preconditions.html",
+        "scenarios/scenario_name/procedures/procedure_index.html",
         context={
             **scenario["meta_data"],
             "index": procedure_index,
-            "preconditions": scenario["procedures"][procedure_index]["preconditions"],
+            "procedure": procedure,
         },
     )

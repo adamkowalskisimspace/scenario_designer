@@ -9,7 +9,6 @@ from routes import scenarios
 from routes.scenarios import scenario_name
 from routes.scenarios.scenario_name import meta_data, procedures
 from routes.scenarios.scenario_name.procedures import procedure_index
-from routes.scenarios.scenario_name.procedures.procedure_index import preconditions
 
 
 app = Litestar(
@@ -20,7 +19,6 @@ app = Litestar(
         meta_data.get_handler,
         procedures.get_handler,
         procedure_index.get_handler,
-        preconditions.get_handler,
     ],
     template_config=TemplateConfig(
         directory=Path("templates"),
