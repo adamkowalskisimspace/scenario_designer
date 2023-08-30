@@ -16,13 +16,32 @@
 		<ol class="flex column gap">
 			{% for procedure in procedures %}
 			<li>
-				<a href="/scenarios/{{name}}/procedures/{{loop.index - 1}}" class="bg-gray padding flex column">
-					<b>{{procedure.tactic}}</b>
-					<p>{{procedure.technique}}</p>
+				<a href="/scenarios/{{name}}/procedures/{{loop.index}}" class="bg-gray padding flex wrap gap-2">
+					<section>
+						<b>Index</b>
+						<p>{{loop.index}}</p>
+					</section>
+					<section>
+						<b>Tactic</b>
+						<p>{{procedure.tactic}}</p>
+					</section>
+					<section>
+						<b>Technique</b>
+						<p>{{procedure.technique}}</p>
+					</section>
+					<section>
+						<b>Label</b>
+						<p>{{procedure.label}}</p>
+					</section>
+					{% for target in procedure.targets %}
+					<section>
+						<b>{{target.name}}</b>
+						<p>{{target.value}}</p>
+					</section>
+					{% endfor %}
 				</a>
 			</li>
 			{% endfor %}
-			</li>
 		</ol>
 	</main>
 </body>

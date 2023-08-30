@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<title>Scenario Designer</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+	<nav class="bg-gray padding flex gap">
+		<a href="/">/</a>
+		<a href="/scenarios">Scenarios</a>
+		<a href="/scenarios/{{name}}">{{title}}</a>
+		<a href="/scenarios/{{name}}/procedures">Procedures</a>
+		<a href="/scenarios/{{name}}/procedures/{{index}}">{{index}}</a>
+		<a href="/scenarios/{{name}}/procedures/{{index}}/preconditions"><b>Preconditions</b></a>
+	</nav>
+	<main class="padding">
+		<form class="flex column bg-gray gap padding">
+			{% for name, value in preconditions.items() %}
+			<section class="flex column">
+				<label for="{{name}}">{{name}}</label>
+				<input name="{{name}}" value="{{value}}" />
+			</section>
+			{% endfor %}
+			<button>Save</button>
+		</form>
+	</main>
+</body>
+
+</html>

@@ -13,6 +13,7 @@
   color-scheme: light dark;
   --white: #fff;
   --gray: #333;
+  --light-gray: #ccc;
 }
 
 body {
@@ -51,12 +52,20 @@ ol {
   display: flex;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 .column {
   flex-direction: column;
 }
 
 .gap {
   gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
 }
 
 .padding {
