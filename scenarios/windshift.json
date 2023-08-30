@@ -147,19 +147,8 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "pre_filename": {
-                        "template": [
-                            "self.payload_destination",
-                            "\\",
-                            "self.payload_name"
-                        ]
-                    },
-                    "post_filename": {
-                        "template": [
-                            "self.payload_destination",
-                            "\\Ministry_Addendum.docx.exe"
-                        ]
-                    }
+                    "pre_filename": "self.payload_destination${\\}self.payload_name",
+                    "post_filename": "self.payload_destination${\\Ministry_Addendum.docx.exe}"
                 }
             }
         },

@@ -1,0 +1,22 @@
+body {
+  font-family: sans-serif;
+}
+
+fieldset {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-column: 1 / span 2;
+  gap: 0.5em;
+}
+
+section {
+  grid-column: 1 / span 2;
+  justify-self: end;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}

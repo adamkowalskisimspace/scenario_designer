@@ -204,15 +204,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "Check out our discount code!\nhttp://",
-                            "self.driveby_domain2",
-                            "/",
-                            "self.tool_name2",
-                            "\nBing Shopping"
-                        ]
-                    }
+                    "body": "Check out our discount code!\nhttp://${self.driveby_domain2}/${self.tool_name2}\nBing Shopping"
                 }
             }
         },
@@ -289,13 +281,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "tune": {
-                    "steg_filepath": {
-                        "template": [
-                            "self.temp_dir_name",
-                            "\\",
-                            "self.tool_name3"
-                        ]
-                    },
+                    "steg_filepath": "self.temp_dir_name${\\}self.tool_name3",
                     "success_override": true,
                     "kill": false
                 }

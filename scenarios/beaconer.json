@@ -67,15 +67,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "We need your PC processing power to help save the world.  Place open the link and donate some of your pc processing to the cause!\nhttp://",
-                            "self.driveby_domain",
-                            "/",
-                            "self.payload_name",
-                            "\nLisa"
-                        ]
-                    }
+                    "body": "We need your PC processing power to help save the world.  Place open the link and donate some of your pc processing to the cause!\nhttp://${self.driveby_domain}/${self.payload_name}\nLisa"
                 }
             }
         },

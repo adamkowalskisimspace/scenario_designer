@@ -104,15 +104,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "Save 20% on your next order!\nhttp://",
-                            "self.driveby_domain",
-                            "/",
-                            "self.payload_name",
-                            "\nSuperShoppers"
-                        ]
-                    }
+                    "body": "Save 20% on your next order!\nhttp://${self.driveby_domain}/${self.payload_name}\nSuperShoppers"
                 }
             }
         },

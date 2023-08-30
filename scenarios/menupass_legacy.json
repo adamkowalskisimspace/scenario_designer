@@ -67,15 +67,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "Please find the ASME Letter of Invitation Request at the following link: http://",
-                            "self.driveby_domain",
-                            "/",
-                            "self.payload_name",
-                            " . You must submit this letter in a timely manner to obtainthe visa documents required to attend the conference.\n\nPlease do not reply to this email, the mailbox is not monitored.\n\nThank you!\nASME"
-                        ]
-                    }
+                    "body": "Please find the ASME Letter of Invitation Request at the following link: http://${self.driveby_domain}/${self.payload_name} . You must submit this letter in a timely manner to obtainthe visa documents required to attend the conference.\n\nPlease do not reply to this email, the mailbox is not monitored.\n\nThank you!\nASME"
                 }
             }
         },

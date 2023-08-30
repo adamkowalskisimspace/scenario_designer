@@ -2,100 +2,89 @@
 
 <head>
 	<title>{{scenario.meta_data.title}}</title>
-
-	<style>
-		body {
-			font-family: sans-serif;
-		}
-
-		fieldset {
-			display: grid;
-			grid-template-columns: 100px 1fr;
-			grid-column: 1 / span 2;
-			gap: 0.5em;
-		}
-
-		section {
-			grid-column: 1 / span 2;
-			justify-self: end;
-		}
-	</style>
+	<link rel="stylesheet" href="/static/styles.css" />
 </head>
 
 <body>
-	<h1><a href="/">Scenario Designer</a> / <a href="/scenarios">Scenarios</a> / {{scenario.meta_data.title}}</h1>
+	<nav>
+		<h1><a href="/">Scenario Designer</a> / <a href="/scenarios">Scenarios</a> / {{scenario.meta_data.title}}</h1>
+	</nav>
 
-	<form>
-		<fieldset>
-			<legend>MetaData</legend>
-			<label for="name">Name</label>
-			<input name="name" value="{{scenario.meta_data.name}}" />
-			<label for="version">Version</label>
-			<input name="version" value="{{scenario.meta_data.version}}" />
-			<label for="title">Title</label>
-			<input name="title" value="{{scenario.meta_data.title}}" />
-			<label for="description">Description</label>
-			<textarea name="description">{{scenario.meta_data.description}}</textarea>
-			<label for="author">Author</label>
-			<input name="author" value="{{scenario.meta_data.author}}" />
-			<label for="suggested_duration">Duration</label>
-			<input type="number" name="suggested_duration" value="{{scenario.meta_data.suggested_duration}}" />
-			<section>
-				<button>Save</button>
-				<button>Run</button>
-			</section>
-		</fieldset>
-	</form>
+	<header>
+		<form>
+			<fieldset>
+				<legend>MetaData</legend>
+				<label for="name">Name</label>
+				<input name="name" value="{{scenario.meta_data.name}}" />
+				<label for="version">Version</label>
+				<input name="version" value="{{scenario.meta_data.version}}" />
+				<label for="title">Title</label>
+				<input name="title" value="{{scenario.meta_data.title}}" />
+				<label for="description">Description</label>
+				<textarea name="description">{{scenario.meta_data.description}}</textarea>
+				<label for="author">Author</label>
+				<input name="author" value="{{scenario.meta_data.author}}" />
+				<label for="suggested_duration">Duration</label>
+				<input type="number" name="suggested_duration" value="{{scenario.meta_data.suggested_duration}}" />
+				<section>
+					<button>Save</button>
+					<button>Run</button>
+				</section>
+			</fieldset>
+		</form>
+	</header>
 
-	<h2>Procedures</h2>
-	<ol>
-		{% for procedure in scenario.procedures %}
-		<li>
-			<form>
-				<fieldset>
-					<legend>Procedure</legend>
-					<label for="tactic">Tactic</label>
-					<select name="tactic">
-						<option>{{procedure.tactic}}</option>
-					</select>
-					<label for="technique">Technique</label>
-					<select name="technique">
-						<option>{{procedure.technique}}</option>
-					</select>
-					<label for="label">Label</label>
-					<input name="label" value="{{procedure.label}}" />
+	<main>
+		<h2>Procedures</h2>
+		<ol>
+			{% for procedure in scenario.procedures %}
+			<li>
+				<form>
 					<fieldset>
-						<legend>Preconditions</legend>
-						{% for p_key, p_value in procedure.preconditions.items() %}
-						{% if p_key == "tune" %}
+						<legend>Procedure</legend>
+						<label for="tactic">Tactic</label>
+						<select name="tactic">
+							<option>{{procedure.tactic}}</option>
+						</select>
+						<label for="technique">Technique</label>
+						<select name="technique">
+							<option>{{procedure.technique}}</option>
+						</select>
+						<label for="label">Label</label>
+						<input name="label" value="{{procedure.label}}" />
 						<fieldset>
-							<legend>Tune</legend>
-							{% for t_key, t_value in p_value.items() %}
-							{% if t_key == "command" %}
-							<label for="{{t_key}}">{{t_key}}</label>
-							<textarea name="{{t_key}}">{{t_value}}</textarea>
+							<legend>Preconditions</legend>
+							{% for p_key, p_value in procedure.preconditions.items() %}
+							{% if p_key == "tune" %}
+							<fieldset>
+								<legend>Tune</legend>
+								{% for t_key, t_value in p_value.items() %}
+								{% if t_key == "command" %}
+								<label for="{{t_key}}">{{t_key}}</label>
+								<textarea name="{{t_key}}">{{t_value}}</textarea>
+								{% else %}
+								<label for="{{t_key}}">{{t_key}}</label>
+								<input name="{{t_key}}" value="{{t_value}}" />
+								{% endif %}
+								{% endfor %}
+							</fieldset>
 							{% else %}
-							<label for="{{t_key}}">{{t_key}}</label>
-							<input name="{{t_key}}" value="{{t_value}}" />
+							<label for="{{p_key}}">{{p_key}}</label>
+							<input name="{{p_key}}" value="{{p_value}}" />
 							{% endif %}
 							{% endfor %}
 						</fieldset>
-						{% else %}
-						<label for="{{p_key}}">{{p_key}}</label>
-						<input name="{{p_key}}" value="{{p_value}}" />
-						{% endif %}
-						{% endfor %}
+						<section>
+							<button>Save</button>
+							<button>Run</button>
+						</section>
 					</fieldset>
-					<section>
-						<button>Save</button>
-						<button>Run</button>
-					</section>
-				</fieldset>
-			</form>
-		</li>
-		{% endfor %}
-		</li>
-	</ol>
+				</form>
+			</li>
+			{% endfor %}
+			</li>
+		</ol>
+	</main>
 </body>
 
 </html>

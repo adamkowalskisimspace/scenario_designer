@@ -2,36 +2,30 @@ from typing import cast
 from compiler.parse import Scenarios, Scenario, Procedure, Value
 
 
-def template(t: Value):
-    assert isinstance(t, list)
+def template(t: list[Value]) -> Value:
     for piece in t:
         if not isinstance(piece, str):
             return {"template": t}
     result = ""
     for i, piece in enumerate(t):
+        assert isinstance(piece, str)
         result += piece if i % 2 == 0 else f"${{{piece}}}"
     return result
 
 
-def command(c: Value) -> Value:
+def simplify(c: Value) -> Value:
     match c:
-        case str(s):
-            return s
-        case {"template": t}:
+        case {"template": list(t)}:
             return template(t)
         case _:
-            raise ValueError(f"Invalid command: {c}")
+            return c
 
 
 def tune(t: Value) -> Value:
     assert isinstance(t, dict)
     result: dict[str, Value] = {}
     for key, value in t.items():
-        value = cast(Value, value)
-        if key == "command":
-            result[key] = command(value)
-        else:
-            result[key] = value
+        result[key] = simplify(cast(Value, value))
     return result
 
 

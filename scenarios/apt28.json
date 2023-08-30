@@ -93,15 +93,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "Your credit card has been stolen on the dark web. Click below for more information:\nhttp://",
-                            "self.driveby_domain",
-                            "/",
-                            "self.payload_name",
-                            "\nChase Card Services"
-                        ]
-                    }
+                    "body": "Your credit card has been stolen on the dark web. Click below for more information:\nhttp://${self.driveby_domain}/${self.payload_name}\nChase Card Services"
                 }
             }
         },
@@ -274,12 +266,7 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "tune": {
-                    "src_file": {
-                        "template": [
-                            "self.exfil_dir",
-                            "self.exfil_file"
-                        ]
-                    },
+                    "src_file": "self.exfil_dir${self.exfil_file}",
                     "dst_dir": "C:\\Users\\Public\\Downloads"
                 }
             }
@@ -320,12 +307,7 @@
                 "target": "self.target_1_elevated",
                 "exfil": "self.exfil",
                 "tune": {
-                    "exfil_file": {
-                        "template": [
-                            "C:\\Users\\Public\\Downloads\\",
-                            "self.exfil_file"
-                        ]
-                    }
+                    "exfil_file": "C:\\Users\\Public\\Downloads\\${self.exfil_file}"
                 }
             }
         },

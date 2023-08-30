@@ -67,15 +67,7 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "tune": {
-                    "body": {
-                        "template": [
-                            "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://",
-                            "self.driveby_domain",
-                            "/",
-                            "self.payload_name",
-                            "\n    - Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
-                        ]
-                    }
+                    "body": "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://${self.driveby_domain}/${self.payload_name}\n    - Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
                 }
             }
         },
