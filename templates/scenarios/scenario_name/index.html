@@ -1,34 +1,28 @@
-<html>
-  <head>
-    <title>Scenario Designer</title>
-    <link rel="stylesheet" href="/static/styles.css" />
-  </head>
+{% extends "base.html" %} {% block content %}
+<nav class="bg-gray padding flex gap">
+  <a href="/">/</a>
+  <a href="/scenarios">Scenarios</a>
+  <b>{{title}}</b>
+</nav>
 
-  <body>
-    <nav class="bg-gray padding flex gap">
-      <a href="/">/</a>
-      <a href="/scenarios">Scenarios</a>
-      <b>{{title}}</b>
-    </nav>
-    <main class="padding">
-      <ul class="flex column gap">
-        <li>
-          <a
-            href="/scenarios/{{name}}/meta_data"
-            class="bg-gray hover-bg-light-gray padding flex"
-          >
-            Meta Data
-          </a>
-        </li>
-        <li>
-          <a
-            href="/scenarios/{{name}}/procedures"
-            class="bg-gray hover-bg-light-gray padding flex"
-          >
-            Procedures
-          </a>
-        </li>
-      </ul>
-    </main>
-  </body>
-</html>
+<main class="padding">
+  <ul class="flex column gap">
+    <li>
+      <a
+        href="/scenarios/{{name}}/meta_data"
+        class="bg-gray hover-bg-light-gray padding flex"
+      >
+        Meta Data
+      </a>
+    </li>
+    <li>
+      <a
+        href="/scenarios/{{name}}/procedures"
+        class="bg-gray hover-bg-light-gray padding flex"
+      >
+        Procedures
+      </a>
+    </li>
+  </ul>
+</main>
+{% endblock %}

@@ -1,17 +1,11 @@
-<html>
+{% extends "base.html" %} {% block content %}
+<nav class="bg-gray padding">
+  <b>/</b>
+</nav>
 
-<head>
-	<title>Scenario Designer</title>
-	<link rel="stylesheet" href="/static/styles.css" />
-</head>
-
-<body>
-	<nav class="bg-gray padding">
-		<b>/</b>
-	</nav>
-	<main class="padding">
-		<a href="/scenarios" class="bg-gray hover-bg-light-gray padding flex">Scenarios</a>
-	</main>
-</body>
-
-</html>
+<main class="padding">
+  <a href="/scenarios" class="bg-gray hover-bg-light-gray padding flex">
+    Scenarios
+  </a>
+</main>
+{% endblock %}
