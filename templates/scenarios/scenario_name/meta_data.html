@@ -6,39 +6,41 @@
 </head>
 
 <body>
-	<nav class="bg-gray padding flex gap">
-		<a href="/">/</a>
-		<a href="/scenarios">Scenarios</a>
-		<a href="/scenarios/{{name}}">{{title}}</a>
-		<a href="/scenarios/{{name}}/meta_data"><b>Meta Data</b></a>
+	<nav class="bg-gray padding flex gap align-items-center">
+		<a href="/scenarios/{{name}}">{% include 'icons/back.html' %}</a>
+		<b>Meta Data</b>
 	</nav>
 	<main class="padding">
-		<form class="flex column bg-gray gap padding">
-			<section class="flex column">
-				<label for="name">Name</label>
-				<input name="name" value="{{name}}" />
-			</section>
-			<section class="flex column">
-				<label for="version">Version</label>
-				<input name="version" value="{{version}}" />
-			</section>
-			<section class="flex column">
-				<label for="title">Title</label>
-				<input name="title" value="{{title}}" />
-			</section>
-			<section class="flex column">
-				<label for="description">Description</label>
-				<textarea name="description">{{description}}</textarea>
-			</section>
-			<section class="flex column">
-				<label for="author">Author</label>
-				<input name="author" value="{{author}}" />
-			</section>
-			<section class="flex column">
-				<label for="suggested_duration">Duration</label>
-				<input type="number" name="suggested_duration" value="{{suggested_duration}}" />
-			</section>
-			<button>Save</button>
+		<form class="flex column gap">
+			<fieldset class="flex column bg-gray gap padding no-border">
+				<section class="flex column">
+					<label for="name">Name</label>
+					<input name="name" value="{{name}}" />
+				</section>
+				<section class="flex column">
+					<label for="version">Version</label>
+					<input name="version" value="{{version}}" />
+				</section>
+				<section class="flex column">
+					<label for="title">Title</label>
+					<input name="title" value="{{title}}" />
+				</section>
+				<section class="flex column">
+					<label for="description">Description</label>
+					<textarea name="description">{{description}}</textarea>
+				</section>
+				<section class="flex column">
+					<label for="author">Author</label>
+					<input name="author" value="{{author}}" />
+				</section>
+				<section class="flex column">
+					<label for="suggested_duration">Duration</label>
+					<input type="number" name="suggested_duration" value="{{suggested_duration}}" />
+				</section>
+			</fieldset>
+			<button class="bg-gray hover-bg-light-gray no-border pointer">
+				Save
+			</button>
 		</form>
 	</main>
 </body>

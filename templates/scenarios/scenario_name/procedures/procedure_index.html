@@ -1,63 +1,66 @@
 <html>
-  <head>
-    <title>Scenario Designer</title>
-    <link rel="stylesheet" href="/static/styles.css" />
-  </head>
 
-  <body>
-    <nav class="bg-gray padding flex gap">
-      <a href="/">/</a>
-      <a href="/scenarios">Scenarios</a>
-      <a href="/scenarios/{{name}}">{{title}}</a>
-      <a href="/scenarios/{{name}}/procedures">Procedures</a>
-      <a href="/scenarios/{{name}}/procedures/{{index}}"><b>{{index}}</b></a>
-    </nav>
-    <main class="padding">
-      <form class="flex column gap">
-        <fieldset class="flex column bg-gray gap padding no-border">
-          <section class="flex column">
-            <label for="tactic">Tactic</label>
-            <select name="tactic">
-              <option>{{procedure.tactic}}</option>
-            </select>
-          </section>
-          <section class="flex column">
-            <label for="technique">Technique</label>
-            <select name="technique">
-              <option>{{procedure.technique}}</option>
-            </select>
-          </section>
-          <section class="flex column">
-            <label for="label">Label</label>
-            <input name="label" value="{{procedure.label}}" />
-          </section>
-        </fieldset>
+<head>
+	<title>Scenario Designer</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
 
-        <fieldset class="flex column bg-gray gap padding no-border">
-          <b>Preconditions</b>
-          {% for name, value in procedure.preconditions.items() %}
-          <section class="flex column">
-            <label for="{{name}}">{{name}}</label>
-            <input name="{{name}}" value="{{value}}" />
-          </section>
-          {% endfor %}
-        </fieldset>
+<body>
+	<nav class="bg-gray padding flex gap align-items-center">
+		<a href="/scenarios/{{name}}/procedures">{% include 'icons/back.html' %}</a>
+		<b>Procedure {{index}}</b>
+	</nav>
+	<main class="padding">
+		<form class="flex column gap">
+			<fieldset class="flex column bg-gray gap padding no-border">
+				<section class="flex column">
+					<label for="tactic">Tactic</label>
+					<select name="tactic">
+						<option>{{procedure.tactic}}</option>
+					</select>
+				</section>
+				<section class="flex column">
+					<label for="technique">Technique</label>
+					<select name="technique">
+						<option>{{procedure.technique}}</option>
+					</select>
+				</section>
+				<section class="flex column">
+					<label for="label">Label</label>
+					<input name="label" value="{{procedure.label}}" />
+				</section>
+			</fieldset>
 
-        <fieldset class="flex column bg-gray gap padding no-border">
-          <b>Tune</b>
-          {% for name, value in procedure.tune.items() %}
-          <section class="flex column">
-            <label for="{{name}}">{{name}}</label>
-            {% if name == "command" %}
-            <textarea name="{{name}}">{{value}}</textarea>
-            {% else %}
-            <input name="{{name}}" value="{{value}}" />
-            {% endif %}
-          </section>
-          {% endfor %}
-        </fieldset>
-        <button>Save</button>
-      </form>
-    </main>
-  </body>
+			<fieldset class="flex column bg-gray gap padding no-border">
+				<b>Preconditions</b>
+				{% for name, value in procedure.preconditions.items() %}
+				<section class="flex column">
+					<label for="{{name}}">{{name}}</label>
+					<input name="{{name}}" value="{{value}}" />
+				</section>
+				{% endfor %}
+			</fieldset>
+
+			{% if procedure.tune %}
+			<fieldset class="flex column bg-gray gap padding no-border">
+				<b>Tune</b>
+				{% for name, value in procedure.tune.items() %}
+				<section class="flex column">
+					<label for="{{name}}">{{name}}</label>
+					{% if name == "command" %}
+					<textarea name="{{name}}">{{value}}</textarea>
+					{% else %}
+					<input name="{{name}}" value="{{value}}" />
+					{% endif %}
+				</section>
+				{% endfor %}
+			</fieldset>
+			{% endif %}
+			<button class="bg-gray hover-bg-light-gray no-border pointer">
+				Save
+			</button>
+		</form>
+	</main>
+</body>
+
 </html>

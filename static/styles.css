@@ -13,7 +13,8 @@
   color-scheme: light dark;
   --white: #fff;
   --gray: #333;
-  --light-gray: #ccc;
+  --light-gray: #555;
+  --dark-gray: #1e1e1e;
 }
 
 body {
@@ -33,6 +34,10 @@ a {
 
 .bg-gray {
   background-color: var(--gray);
+}
+
+.hover-bg-light-gray:hover {
+  background-color: var(--light-gray);
 }
 
 input,
@@ -78,4 +83,12 @@ ol {
 
 .no-border {
   border: none;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.pointer {
+  cursor: pointer;
 }

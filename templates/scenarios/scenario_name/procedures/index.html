@@ -6,17 +6,16 @@
 </head>
 
 <body>
-	<nav class="bg-gray padding flex gap">
-		<a href="/">/</a>
-		<a href="/scenarios">Scenarios</a>
-		<a href="/scenarios/{{name}}">{{title}}</a>
-		<a href="/scenarios/{{name}}/procedures"><b>Procedures</b></a>
+	<nav class="bg-gray padding flex gap align-items-center">
+		<a href="/scenarios/{{name}}">{% include 'icons/back.html' %}</a>
+		<b>Procedures</b>
 	</nav>
 	<main class="padding">
 		<ol class="flex column gap">
 			{% for procedure in procedures %}
 			<li>
-				<a href="/scenarios/{{name}}/procedures/{{loop.index}}" class="bg-gray padding flex wrap gap-2">
+				<a href="/scenarios/{{name}}/procedures/{{loop.index}}"
+					class="bg-gray hover-bg-light-gray padding flex wrap gap-2">
 					<section>
 						<b>Index</b>
 						<p>{{loop.index}}</p>

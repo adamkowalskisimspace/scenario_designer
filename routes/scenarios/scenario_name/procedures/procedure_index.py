@@ -10,10 +10,7 @@ async def get_handler(scenario_name: str, procedure_index: int) -> Template:
     with open(path) as fp:
         scenario = json.load(fp)
     procedure = scenario["procedures"][procedure_index]
-    preconditions = procedure["preconditions"]
-    if "tune" in preconditions:
-        procedure["tune"] = preconditions["tune"]
-        del preconditions["tune"]
+    procedure["tune"] = procedure["preconditions"].pop("tune", None)
     return Template(
         "scenarios/scenario_name/procedures/procedure_index.html",
         context={
