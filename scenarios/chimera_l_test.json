@@ -14,8 +14,7 @@
             "label": "Actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Utility",

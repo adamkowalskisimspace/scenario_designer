@@ -14,8 +14,7 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -25,8 +24,7 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -36,8 +34,7 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -49,8 +46,7 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -58,8 +54,7 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -67,8 +62,7 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -76,8 +70,7 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -87,8 +80,7 @@
                 "payload": "self.tool_name2",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "InitialAccess",
@@ -100,8 +92,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Execution",
@@ -113,8 +104,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "c2",
@@ -126,8 +116,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Collection",
@@ -150,8 +139,7 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "LateralMovement",
@@ -176,8 +164,7 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "LateralMovement",
@@ -218,8 +205,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "DefenseEvasion",
@@ -229,8 +215,7 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Discovery",
@@ -253,8 +238,7 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Discovery",
@@ -264,8 +248,7 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "c2",
@@ -305,8 +288,7 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Utility",
@@ -316,202 +298,13 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         }
     ],
     "iocs": {
-        "domain": {
-            "kind": "comprehension",
-            "element": {
-                "kind": "bin op",
-                "op": "add",
-                "left": {
-                    "kind": "bin op",
-                    "op": "add",
-                    "left": {
-                        "kind": "bin op",
-                        "op": "add",
-                        "left": {
-                            "kind": "bin op",
-                            "op": "add",
-                            "left": "dev-domain-",
-                            "right": {
-                                "kind": "name",
-                                "id": "prefix"
-                            }
-                        },
-                        "right": "_"
-                    },
-                    "right": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "str"
-                        },
-                        "args": [
-                            {
-                                "kind": "name",
-                                "id": "x"
-                            }
-                        ]
-                    }
-                },
-                "right": ".com"
-            },
-            "generators": [
-                {
-                    "iter": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "range"
-                        },
-                        "args": [
-                            500000
-                        ]
-                    },
-                    "target": {
-                        "kind": "name",
-                        "id": "x"
-                    }
-                }
-            ]
-        },
-        "ip": {
-            "kind": "comprehension",
-            "element": {
-                "kind": "bin op",
-                "op": "add",
-                "left": {
-                    "kind": "bin op",
-                    "op": "add",
-                    "left": {
-                        "kind": "bin op",
-                        "op": "add",
-                        "left": {
-                            "kind": "bin op",
-                            "op": "add",
-                            "left": "75.",
-                            "right": {
-                                "kind": "call",
-                                "func": {
-                                    "kind": "name",
-                                    "id": "str"
-                                },
-                                "args": [
-                                    {
-                                        "kind": "name",
-                                        "id": "x"
-                                    }
-                                ]
-                            }
-                        },
-                        "right": "."
-                    },
-                    "right": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "str"
-                        },
-                        "args": [
-                            {
-                                "kind": "name",
-                                "id": "y"
-                            }
-                        ]
-                    }
-                },
-                "right": ".1/24"
-            },
-            "generators": [
-                {
-                    "iter": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "range"
-                        },
-                        "args": [
-                            256
-                        ]
-                    },
-                    "target": {
-                        "kind": "name",
-                        "id": "x"
-                    }
-                },
-                {
-                    "iter": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "range"
-                        },
-                        "args": [
-                            256
-                        ]
-                    },
-                    "target": {
-                        "kind": "name",
-                        "id": "y"
-                    }
-                }
-            ]
-        },
-        "binary": {
-            "kind": "comprehension",
-            "element": {
-                "kind": "bin op",
-                "op": "add",
-                "left": {
-                    "kind": "bin op",
-                    "op": "add",
-                    "left": {
-                        "kind": "bin op",
-                        "op": "add",
-                        "left": {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "str"
-                            },
-                            "args": [
-                                {
-                                    "kind": "name",
-                                    "id": "x"
-                                }
-                            ]
-                        },
-                        "right": "_"
-                    },
-                    "right": {
-                        "kind": "name",
-                        "id": "prefix"
-                    }
-                },
-                "right": "_CR_Payload.exe"
-            },
-            "generators": [
-                {
-                    "iter": {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "range"
-                        },
-                        "args": [
-                            500000
-                        ]
-                    },
-                    "target": {
-                        "kind": "name",
-                        "id": "x"
-                    }
-                }
-            ]
-        }
+        "domain": "dev-domain-sandworm_242190.com",
+        "ip": "75.145.110.1/24",
+        "binary": "47684_sandworm_CR_Payload.exe"
     },
     "spec": {
         "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",

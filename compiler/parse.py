@@ -1,6 +1,7 @@
 import pathlib
 import ast
-from typing import Literal, TypedDict, Optional, cast
+from typing import Literal, TypedDict, Optional
+from random import randint
 
 
 class Name(TypedDict):
@@ -67,12 +68,12 @@ Value = (
 )
 
 
-class Procedure(TypedDict):
+class Procedure(TypedDict, total=False):
     tactic: str
     technique: str
     label: str
-    preconditions: dict[str, Value]
-    tune: Value | None
+    preconditions: Value
+    tune: Value
 
 
 class MetaData(TypedDict):
@@ -86,14 +87,14 @@ class MetaData(TypedDict):
 
 class Preconditions(TypedDict):
     state: dict[str, str]
-    initial: dict[str, Value]
-    effects: dict[str, Value]
+    initial: Value
+    effects: Value
 
 
 class Scenario(TypedDict):
     meta_data: MetaData
     procedures: list[Procedure]
-    iocs: dict[str, Value]
+    iocs: Value
     spec: Value
     preconditions: Preconditions
 
@@ -214,31 +215,66 @@ def preconditions(call: ast.Call) -> dict[str, Value]:
     return precondition_map
 
 
-def template(t: list[Value]) -> Value:
-    for piece in t:
-        if not isinstance(piece, str):
-            return {"template": t}
-    result = ""
-    for i, piece in enumerate(t):
-        assert isinstance(piece, str)
-        result += piece if i % 2 == 0 else f"${{{piece}}}"
-    return result
 
-
-def simplify(c: Value) -> Value:
+def simplify(c: Value, context: dict[str, Value]) -> Value:
     match c:
         case {"template": list(t)}:
-            return template(t)
-        case _:
+            for piece in t:
+                if not isinstance(piece, str):
+                    return {"template": t}
+            result = ""
+            for i, piece in enumerate(t):
+                assert isinstance(piece, str)
+                result += piece if i % 2 == 0 else f"${{{simplify(piece, context)}}}"
+            return result
+        case {"kind": "call", "func": f, "args": list(args)}:
+            match f:
+                case {"kind": "name", "id": "range"}:
+                    assert len(args) == 1
+                    stop = args[0]
+                    assert isinstance(stop, int)
+                    return randint(0, stop)
+                case {"kind": "name", "id": "str"}:
+                    assert len(args) == 1
+                    return str(simplify(args[0], context))
+                case _:
+                    breakpoint()
+                    raise NotImplementedError
+        case {"kind": "comprehension", "element": e, "generators": list(gs)}:
+            additional_variables = {}
+            for g in gs:
+                match g:
+                    case {
+                        "iter": i,
+                        "target": {"kind": "name", "id": str(name)}
+                    }:
+                        additional_variables[name] = simplify(i, context)
+                    case _:
+                        breakpoint()
+                        raise NotImplementedError
+            return simplify(e, {**context, **additional_variables})
+        case {"kind": "bin op", "op": "add", "left": left, "right": right}:
+            match (simplify(left, context), simplify(right, context)):
+                case (str(l), str(r)):
+                    return l + r
+                case _:
+                    breakpoint()
+                    raise NotImplementedError
+        case {"kind": "name", "id": str(id)}:
+            return context[id]
+        case dict(d):
+            result: Value = {}
+            for key, value in d.items():
+                assert isinstance(key, str)
+                result[key] = simplify(value, context)
+            return result
+        case list(l):
+            return [simplify(e, context) for e in l]
+        case str() | bool() | int():
             return c
-
-
-def tune(t: Value) -> Value:
-    assert isinstance(t, dict)
-    result: dict[str, Value] = {}
-    for key, value in t.items():
-        result[key] = simplify(cast(Value, value))
-    return result
+        case _:
+            breakpoint()
+            raise NotImplemented
 
 
 def procedure_add(call: ast.Call) -> Procedure:
@@ -254,14 +290,15 @@ def procedure_add(call: ast.Call) -> Procedure:
     assert isinstance(value, ast.Name)
     tactic = value.id
     precondition_map = preconditions(arg1)
-    tune_map = precondition_map.pop("tune", None)
-    return {
+    procedure: Procedure = {
         "tactic": tactic,
         "technique": technique,
         "label": arg0.value,
         "preconditions": precondition_map,
-        "tune": tune(tune_map) if tune_map is not None else None,
     }
+    if tune := precondition_map.pop("tune", None):
+        procedure["tune"] = simplify(tune, {})
+    return procedure
 
 
 def get_plan(function_def: ast.FunctionDef) -> list[Procedure]:
@@ -304,7 +341,7 @@ def constructor(name: str, function_def: ast.FunctionDef) -> MetaData:
     }
 
 
-def actor_iocs(function_def: ast.FunctionDef) -> dict[str, Value]:
+def actor_iocs(function_def: ast.FunctionDef) -> Value:
     iocs: dict[str, Value] = {}
     for body in function_def.body:
         match body:
@@ -331,7 +368,7 @@ def actor_iocs(function_def: ast.FunctionDef) -> dict[str, Value]:
                     id = transformed_value["id"]
                     assert isinstance(id, str)
                     result[transformed_key] = iocs[id]
-                return result
+                return simplify(result, iocs)
     raise Exception("No return statement")
 
 
@@ -508,7 +545,7 @@ def scenario(file: pathlib.Path) -> Optional[Scenario]:
     module = ast.parse(file.read_text())
     procedures: list[Procedure] = []
     meta_data: Optional[MetaData] = None
-    iocs: Optional[dict[str, Value]] = None
+    iocs: Optional[Value] = None
     spec: Optional[Value] = None
     preconditions: Optional[Preconditions] = None
     for top_level in module.body:

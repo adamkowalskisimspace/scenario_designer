@@ -14,8 +14,7 @@
             "label": "Actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -25,8 +24,7 @@
                 "self.tool_name": "self.tool",
                 "payload": "self.payload_name",
                 "driveby": "self.driveby"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Utility",

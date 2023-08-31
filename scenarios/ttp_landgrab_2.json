@@ -14,8 +14,7 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -25,8 +24,7 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -36,8 +34,7 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -49,8 +46,7 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -58,8 +54,7 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -67,8 +62,7 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -78,8 +72,7 @@
                 "payload": "about.js",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Infrastructure",
@@ -87,8 +80,7 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "InitialAccess",
@@ -99,8 +91,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Execution",
@@ -111,8 +102,7 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "c2",
@@ -241,8 +231,7 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         },
         {
             "tactic": "Utility",
@@ -252,8 +241,7 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            },
-            "tune": null
+            }
         }
     ],
     "iocs": {
