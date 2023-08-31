@@ -23,6 +23,7 @@ license = {text = "MIT"}
 
 [tool.pyright]
 extraPaths = ["__pypackages__/3.11/lib/"]
+ignore = ["**/__pypackages__/**", "scenarios/"]
 
 [build-system]
 requires = ["pdm-backend"]

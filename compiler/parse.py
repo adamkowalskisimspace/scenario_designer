@@ -1,6 +1,6 @@
 import pathlib
 import ast
-from typing import Literal, TypedDict, Optional
+from typing import Literal, TypedDict, Optional, cast
 
 
 class Name(TypedDict):
@@ -72,6 +72,7 @@ class Procedure(TypedDict):
     technique: str
     label: str
     preconditions: dict[str, Value]
+    tune: Value | None
 
 
 class MetaData(TypedDict):
@@ -213,6 +214,33 @@ def preconditions(call: ast.Call) -> dict[str, Value]:
     return precondition_map
 
 
+def template(t: list[Value]) -> Value:
+    for piece in t:
+        if not isinstance(piece, str):
+            return {"template": t}
+    result = ""
+    for i, piece in enumerate(t):
+        assert isinstance(piece, str)
+        result += piece if i % 2 == 0 else f"${{{piece}}}"
+    return result
+
+
+def simplify(c: Value) -> Value:
+    match c:
+        case {"template": list(t)}:
+            return template(t)
+        case _:
+            return c
+
+
+def tune(t: Value) -> Value:
+    assert isinstance(t, dict)
+    result: dict[str, Value] = {}
+    for key, value in t.items():
+        result[key] = simplify(cast(Value, value))
+    return result
+
+
 def procedure_add(call: ast.Call) -> Procedure:
     assert len(call.args) == 2
     arg0, arg1 = call.args
@@ -225,11 +253,14 @@ def procedure_add(call: ast.Call) -> Procedure:
     value = func.value
     assert isinstance(value, ast.Name)
     tactic = value.id
+    precondition_map = preconditions(arg1)
+    tune_map = precondition_map.pop("tune", None)
     return {
         "tactic": tactic,
         "technique": technique,
         "label": arg0.value,
-        "preconditions": preconditions(arg1),
+        "preconditions": precondition_map,
+        "tune": tune(tune_map) if tune_map is not None else None,
     }
 
 

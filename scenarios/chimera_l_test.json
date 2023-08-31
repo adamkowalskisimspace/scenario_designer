@@ -14,7 +14,8 @@
             "label": "Actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -23,10 +24,10 @@
             "preconditions": {
                 "agent": "self.agent",
                 "tool": "self.tool",
-                "target": "self.target_ip",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_ip"
+            },
+            "tune": {
+                "infra": true
             }
         }
     ],

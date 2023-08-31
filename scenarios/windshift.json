@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -66,7 +71,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -78,7 +84,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -90,7 +97,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -100,7 +108,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -109,10 +118,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wmic product get name"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wmic product get name"
             }
         },
         {
@@ -122,10 +131,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get * /value"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get * /value"
             }
         },
         {
@@ -136,7 +145,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -145,11 +155,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "pre_filename": "self.payload_destination${\\}self.payload_name",
-                    "post_filename": "self.payload_destination${\\Ministry_Addendum.docx.exe}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "pre_filename": "self.payload_destination${\\}self.payload_name",
+                "post_filename": "self.payload_destination${\\Ministry_Addendum.docx.exe}"
             }
         },
         {
@@ -159,10 +169,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell move-item${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell move-item${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
             }
         },
         {
@@ -172,12 +182,12 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "target_username": "self.target_username",
-                    "shortcut_exe": "C:\\Users\\Public\\documents\\Ministry_addendum.docx.exe",
-                    "shortcut_name": "Ministry_Addendum.lnk"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "target_username": "self.target_username",
+                "shortcut_exe": "C:\\Users\\Public\\documents\\Ministry_addendum.docx.exe",
+                "shortcut_name": "Ministry_Addendum.lnk"
             }
         },
         {
@@ -188,7 +198,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

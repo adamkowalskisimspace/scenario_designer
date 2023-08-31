@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -66,7 +71,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -78,7 +84,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -89,10 +96,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -102,10 +109,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net view"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net view"
             }
         },
         {
@@ -116,7 +123,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -125,10 +133,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net share"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net share"
             }
         },
         {
@@ -138,10 +146,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{wmic path CIM_LogicalDevice where \"Description like 'USB%'\" get /value}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{wmic path CIM_LogicalDevice where \"Description like 'USB%'\" get /value}"
             }
         },
         {
@@ -151,10 +159,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{wmic logicaldisk where drivetype=2 get /value; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{wmic logicaldisk where drivetype=2 get /value; echo \" \"}"
             }
         },
         {
@@ -164,10 +172,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net group /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net group /domain"
             }
         },
         {
@@ -177,10 +185,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net localgroup"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup"
             }
         },
         {
@@ -190,10 +198,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "tasklist"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "tasklist"
             }
         },
         {
@@ -203,10 +211,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "reg query HKCU\\\\Software\\\\Microsoft\\\\windows\\\\currentversion\\\\Run"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "reg query HKCU\\\\Software\\\\Microsoft\\\\windows\\\\currentversion\\\\Run"
             }
         },
         {
@@ -216,10 +224,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -229,10 +237,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -242,10 +250,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -255,10 +263,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -268,10 +276,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "sc query"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "sc query"
             }
         },
         {
@@ -281,10 +289,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c time /t"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c time /t"
             }
         },
         {
@@ -294,10 +302,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c date /t"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c date /t"
             }
         },
         {
@@ -308,7 +316,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -318,7 +327,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

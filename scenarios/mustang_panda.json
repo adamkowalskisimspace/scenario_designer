@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -102,7 +109,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -113,7 +121,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -122,10 +131,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -135,10 +144,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -148,10 +157,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -161,10 +170,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -174,10 +183,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c tasklist"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c tasklist"
             }
         },
         {
@@ -188,7 +197,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -198,7 +208,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Collection",
@@ -207,10 +218,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "reg.exe save hklm\\system /y C:\\windows\\temp\\system.tmp"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "reg.exe save hklm\\system /y C:\\windows\\temp\\system.tmp"
             }
         },
         {
@@ -222,7 +233,8 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -233,7 +245,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -244,7 +257,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -255,7 +269,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -266,7 +281,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -278,7 +294,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -289,7 +306,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -299,7 +317,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -309,7 +328,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -319,7 +339,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

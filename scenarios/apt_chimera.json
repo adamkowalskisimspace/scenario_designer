@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -99,10 +106,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c tasklist"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c tasklist"
             }
         },
         {
@@ -112,10 +119,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c systeminfo"
             }
         },
         {
@@ -125,10 +132,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c fsutil volume list"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c fsutil volume list"
             }
         },
         {
@@ -138,10 +145,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c vssadmin list shadows"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c vssadmin list shadows"
             }
         },
         {
@@ -151,10 +158,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c quser"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c quser"
             }
         },
         {
@@ -164,10 +171,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c time /t"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c time /t"
             }
         },
         {
@@ -177,10 +184,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net time /dom"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net time /dom"
             }
         },
         {
@@ -190,10 +197,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -204,7 +211,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -213,10 +221,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net user /dom"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net user /dom"
             }
         },
         {
@@ -226,10 +234,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net user Administrator"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net user Administrator"
             }
         },
         {
@@ -239,10 +247,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net localgroup administrators"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup administrators"
             }
         },
         {
@@ -252,10 +260,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net start"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net start"
             }
         },
         {
@@ -265,10 +273,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net use"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net use"
             }
         },
         {
@@ -279,7 +287,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -288,10 +297,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c nltest /domain_trusts"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c nltest /domain_trusts"
             }
         },
         {
@@ -302,7 +311,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -312,7 +322,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -322,7 +333,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -331,10 +343,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c net view"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c net view"
             }
         },
         {
@@ -344,10 +356,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -357,10 +369,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -370,10 +382,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net group /DOMAIN"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net group /DOMAIN"
             }
         },
         {
@@ -384,10 +396,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
-                "exfil": "self.exfil",
-                "tune": {
-                    "exfil_file": "C:\\users\\public\\outlook.ost"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "exfil_file": "C:\\users\\public\\outlook.ost"
             }
         },
         {
@@ -399,7 +411,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -409,7 +422,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -418,10 +432,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file": "C:\\users\\public\\*.ost"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file": "C:\\users\\public\\*.ost"
             }
         },
         {
@@ -433,7 +447,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -444,7 +459,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -455,7 +471,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -467,7 +484,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -478,7 +496,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -487,10 +506,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c tasklist"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c tasklist"
             }
         },
         {
@@ -500,10 +519,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c systeminfo"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c systeminfo"
             }
         },
         {
@@ -513,10 +532,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c fsutil volume list"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c fsutil volume list"
             }
         },
         {
@@ -526,10 +545,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c vssadmin list shadows"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c vssadmin list shadows"
             }
         },
         {
@@ -539,10 +558,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net users"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net users"
             }
         },
         {
@@ -552,10 +571,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c time /t"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c time /t"
             }
         },
         {
@@ -565,10 +584,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net time /dom"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net time /dom"
             }
         },
         {
@@ -578,10 +597,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -592,7 +611,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -601,10 +621,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net user /dom"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net user /dom"
             }
         },
         {
@@ -614,10 +634,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net user Administrator"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net user Administrator"
             }
         },
         {
@@ -627,10 +647,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net localgroup administrators"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup administrators"
             }
         },
         {
@@ -640,10 +660,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net start"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net start"
             }
         },
         {
@@ -653,10 +673,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net use"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net use"
             }
         },
         {
@@ -667,7 +687,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -676,10 +697,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c nltest /domain_trusts"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c nltest /domain_trusts"
             }
         },
         {
@@ -690,7 +711,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -700,7 +722,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -710,7 +733,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -719,10 +743,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c net view"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c net view"
             }
         },
         {
@@ -732,10 +756,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -745,10 +769,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -758,10 +782,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "net group /DOMAIN"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "net group /DOMAIN"
             }
         },
         {
@@ -772,10 +796,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2",
-                "exfil": "self.exfil",
-                "tune": {
-                    "exfil_file": "C:\\users\\public\\*.ost"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "exfil_file": "C:\\users\\public\\*.ost"
             }
         },
         {
@@ -787,7 +811,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -797,7 +822,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -806,10 +832,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "file": "C:\\users\\public\\*.ost"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "file": "C:\\users\\public\\*.ost"
             }
         },
         {
@@ -820,10 +846,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_3",
-                "tune": {
-                    "command": "net use \\\\${self.target_3_hostname}/User:${self.target_3_username}@${self.domain}${self.target_3_password}"
-                }
+                "target_2": "self.target_3"
+            },
+            "tune": {
+                "command": "net use \\\\${self.target_3_hostname}/User:${self.target_3_username}@${self.domain}${self.target_3_password}"
             }
         },
         {
@@ -835,7 +861,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_2",
                 "target_2": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -846,10 +873,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_3",
-                "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_3_taskname}/TR${self.target_3_file_location}\\${self.payload_name}/RL Highest /U${self.target_3_username}@${self.domain}/P${self.target_3_password}/RU${self.target_3_username}@${self.domain}/RP${self.target_3_password}/S${self.target_3_hostname}"
-                }
+                "target_2": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_3_taskname}/TR${self.target_3_file_location}\\${self.payload_name}/RL Highest /U${self.target_3_username}@${self.domain}/P${self.target_3_password}/RU${self.target_3_username}@${self.domain}/RP${self.target_3_password}/S${self.target_3_hostname}"
             }
         },
         {
@@ -861,10 +888,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_3",
-                "tune": {
-                    "command": "cmd.exe /c schtasks.exe /run /tn${self.target_3_taskname}/U${self.target_3_username}@${self.domain}/P${self.target_3_password}/S${self.target_3_hostname}"
-                }
+                "target_2": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd.exe /c schtasks.exe /run /tn${self.target_3_taskname}/U${self.target_3_username}@${self.domain}/P${self.target_3_password}/S${self.target_3_hostname}"
             }
         },
         {
@@ -876,7 +903,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -885,10 +913,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c tasklist"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c tasklist"
             }
         },
         {
@@ -898,10 +926,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c systeminfo"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c systeminfo"
             }
         },
         {
@@ -911,10 +939,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c fsutil volume list"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c fsutil volume list"
             }
         },
         {
@@ -924,10 +952,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c vssadmin list shadows"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c vssadmin list shadows"
             }
         },
         {
@@ -937,10 +965,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c quser"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c quser"
             }
         },
         {
@@ -950,10 +978,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c time /t"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c time /t"
             }
         },
         {
@@ -963,10 +991,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net time /dom"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net time /dom"
             }
         },
         {
@@ -976,10 +1004,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -990,7 +1018,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -999,10 +1028,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net user /dom"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net user /dom"
             }
         },
         {
@@ -1012,10 +1041,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net user Administrator"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net user Administrator"
             }
         },
         {
@@ -1025,10 +1054,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net localgroup administrators"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net localgroup administrators"
             }
         },
         {
@@ -1038,10 +1067,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net start"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net start"
             }
         },
         {
@@ -1051,10 +1080,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net use"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net use"
             }
         },
         {
@@ -1065,7 +1094,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -1074,10 +1104,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c nltest /domain_trusts"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c nltest /domain_trusts"
             }
         },
         {
@@ -1088,7 +1118,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -1098,7 +1129,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -1108,7 +1140,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -1117,10 +1150,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "cmd /c net view"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "cmd /c net view"
             }
         },
         {
@@ -1130,10 +1163,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -1143,10 +1176,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -1156,10 +1189,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "command": "net group /DOMAIN"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "command": "net group /DOMAIN"
             }
         },
         {
@@ -1170,10 +1203,10 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3",
-                "exfil": "self.exfil",
-                "tune": {
-                    "exfil_file": "C:\\users\\public\\*.ost"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "exfil_file": "C:\\users\\public\\*.ost"
             }
         },
         {
@@ -1185,7 +1218,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -1195,7 +1229,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -1204,10 +1239,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
-                "target": "self.target_3",
-                "tune": {
-                    "file": "C:\\users\\public\\*.ost"
-                }
+                "target": "self.target_3"
+            },
+            "tune": {
+                "file": "C:\\users\\public\\*.ost"
             }
         },
         {
@@ -1218,7 +1253,8 @@
                 "agent": "self.agent_tgt3",
                 "tool": "self.tool",
                 "target": "self.target_3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -1228,7 +1264,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -1238,7 +1275,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

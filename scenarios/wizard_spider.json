@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -87,10 +94,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -100,10 +107,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "nltest /domain_trusts /all_trusts"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "nltest /domain_trusts /all_trusts"
             }
         },
         {
@@ -113,10 +120,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "nltest /dclist:%USERDOMAIN%"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "nltest /dclist:%USERDOMAIN%"
             }
         },
         {
@@ -126,10 +133,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c 'net group \"Domain Admins\" /DOMAIN'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c 'net group \"Domain Admins\" /DOMAIN'"
             }
         },
         {
@@ -142,7 +149,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -153,7 +161,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -162,10 +171,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "cmd /c 'net group \"enterprise admins\" /domain'"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "cmd /c 'net group \"enterprise admins\" /domain'"
             }
         },
         {
@@ -175,10 +184,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "nltest /domain_trusts /all_trusts"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "nltest /domain_trusts /all_trusts"
             }
         },
         {
@@ -188,10 +197,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "nltest /dclist:\"%USERDOMAIN%\""
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "nltest /dclist:\"%USERDOMAIN%\""
             }
         },
         {
@@ -201,10 +210,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "powershell &{[System.Directoryservices.Activedirectory.Domain]::GetCurrentDomain() | ForEach-Object {$_.DomainControllers} {ping $_.Name};echo \" \"}"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "powershell &{[System.Directoryservices.Activedirectory.Domain]::GetCurrentDomain() | ForEach-Object {$_.DomainControllers} {ping $_.Name};echo \" \"}"
             }
         },
         {
@@ -214,10 +223,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "cmd.exe /C time /t\""
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "cmd.exe /C time /t\""
             }
         },
         {
@@ -227,10 +236,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "cmd /c net user administrator /domain"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "cmd /c net user administrator /domain"
             }
         },
         {
@@ -242,7 +251,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -253,7 +263,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -265,7 +276,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -275,7 +287,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -285,7 +298,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -295,7 +309,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

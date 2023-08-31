@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,10 +70,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://${self.driveby_domain}/${self.payload_name}- Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://${self.driveby_domain}/${self.payload_name}- Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
             }
         },
         {
@@ -81,7 +86,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -93,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -105,7 +112,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "PrivilegeEscalation",
@@ -117,7 +125,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -128,7 +137,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -137,10 +147,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "tune": {
-                    "command": "net view"
-                }
+                "target": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "net view"
             }
         },
         {
@@ -151,7 +161,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -162,7 +173,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -173,7 +185,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -184,7 +197,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -195,7 +209,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -207,7 +222,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1_elevated",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -218,7 +234,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "LateralMovement",
@@ -228,10 +245,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "robocopy c:\\windows\\SysWow64\\ \\\\file\\share${self.payload_name}"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "robocopy c:\\windows\\SysWow64\\ \\\\file\\share${self.payload_name}"
             }
         },
         {
@@ -243,10 +260,10 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target_1": "self.target_2",
-                "target_2": "self.target_2",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share${self.payload_name}} -windowstyle Hidden"
-                }
+                "target_2": "self.target_2"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share${self.payload_name}} -windowstyle Hidden"
             }
         },
         {
@@ -258,7 +275,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -269,7 +287,8 @@
                 "tool": "self.tool",
                 "target": "self.target_2",
                 "exfil": "self.exfil"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -279,7 +298,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -289,7 +309,8 @@
                 "agent": "self.agent_tgt1_elevated",
                 "tool": "self.tool",
                 "target": "self.target_1_elevated"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -299,7 +320,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

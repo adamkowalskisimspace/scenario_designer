@@ -1,7 +1,7 @@
 import pathlib
 import json
 
-import compiler
+from compiler import parse
 
 input_path = pathlib.Path.home() / "code" / "chimera" / "Chimera-Content" / "scenarios"
 
@@ -16,7 +16,7 @@ def delete_existing_scenarios() -> None:
     output_path.rmdir()
 
 
-def write_scenarios(scenarios: compiler.parse.Scenarios) -> None:
+def write_scenarios(scenarios: parse.Scenarios) -> None:
     for name, scenario in scenarios.items():
         with open(output_path / f"{name}.json", "w") as f:
             json.dump(scenario, f, indent=4)
@@ -25,6 +25,5 @@ def write_scenarios(scenarios: compiler.parse.Scenarios) -> None:
 def test_parse_scenarios():
     delete_existing_scenarios()
     output_path.mkdir()
-    scenarios = compiler.parse.scenarios(input_path)
-    scenarios = compiler.simplify_tune_parameters.scenarios(scenarios)
+    scenarios = parse.scenarios(input_path)
     write_scenarios(scenarios)

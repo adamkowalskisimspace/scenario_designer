@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,10 +70,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "body": "We need your PC processing power to help save the world.  Place open the link and donate some of your pc processing to the cause!\nhttp://${self.driveby_domain}/${self.payload_name}Lisa"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "body": "We need your PC processing power to help save the world.  Place open the link and donate some of your pc processing to the cause!\nhttp://${self.driveby_domain}/${self.payload_name}Lisa"
             }
         },
         {
@@ -81,7 +86,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -93,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -104,10 +111,10 @@
                 "phishing": "self.phish_1",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -117,10 +124,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "systeminfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "systeminfo"
             }
         },
         {
@@ -130,10 +137,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net config workstation"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net config workstation"
             }
         },
         {
@@ -143,10 +150,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c dir"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c dir"
             }
         },
         {
@@ -156,10 +163,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "wmic cpu get caption, deviceid, name, numberofcores, maxclockspeed, status"
             }
         },
         {
@@ -169,10 +176,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "driverquery -v"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "driverquery -v"
             }
         },
         {
@@ -182,10 +189,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "chkdsk"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "chkdsk"
             }
         },
         {
@@ -195,10 +202,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c set"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c set"
             }
         },
         {
@@ -208,10 +215,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c ver"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c ver"
             }
         },
         {
@@ -221,10 +228,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "route print"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "route print"
             }
         },
         {
@@ -234,10 +241,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "tasklist -v"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "tasklist -v"
             }
         },
         {
@@ -247,10 +254,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -260,10 +267,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c path"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c path"
             }
         },
         {
@@ -273,10 +280,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "ipconfig /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "ipconfig /all"
             }
         },
         {
@@ -286,10 +293,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netsh advfirewall show allprofiles"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netsh advfirewall show allprofiles"
             }
         },
         {
@@ -299,10 +306,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -312,10 +319,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net localgroup administrators"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net localgroup administrators"
             }
         },
         {
@@ -325,10 +332,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user"
             }
         },
         {
@@ -338,10 +345,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "whoami /all /fo list"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "whoami /all /fo list"
             }
         },
         {
@@ -351,10 +358,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net view /all"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net view /all"
             }
         },
         {
@@ -364,10 +371,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net view /all /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net view /all /domain"
             }
         },
         {
@@ -377,10 +384,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net user /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net user /domain"
             }
         },
         {
@@ -390,10 +397,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Computers' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Computers' /domain"
             }
         },
         {
@@ -403,10 +410,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Controllers' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Controllers' /domain"
             }
         },
         {
@@ -416,10 +423,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell net groups 'Domain Admins' /domain"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell net groups 'Domain Admins' /domain"
             }
         },
         {
@@ -429,10 +436,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "netstat -ano"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "netstat -ano"
             }
         },
         {
@@ -443,7 +450,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

