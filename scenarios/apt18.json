@@ -305,23 +305,7 @@
                 "payload_destination": "C:\\Users\\Public"
             },
             "2": {
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "apt18_72"
             }
         }
     },

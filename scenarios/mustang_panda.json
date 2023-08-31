@@ -421,43 +421,11 @@
                     "C:\\windows\\temp\\system.tmp"
                 ],
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "mustang_panda_58"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "mustang_panda_65"
             }
         }
     },

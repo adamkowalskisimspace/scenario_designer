@@ -95,19 +95,7 @@
                 "query-exfil": [
                     "C:\\secrets.zip"
                 ],
-                "ioc-taskname": {
-                    "template": [
-                        "fakectuator_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "fakectuator_3"
             }
         }
     },

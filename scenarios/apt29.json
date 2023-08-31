@@ -138,23 +138,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": {
-                    "template": [
-                        "powershell &{netsh advfirewall firewall add rule name=\"",
-                        {
-                            "kind": "slice",
-                            "slice": 0,
-                            "value": "self.firewall_rule_name"
-                        },
-                        "\" protocol=UDP dir=out localport=137 action=block; netsh advfirewall firewall add rule name=\"",
-                        {
-                            "kind": "slice",
-                            "slice": 1,
-                            "value": "self.firewall_rule_name"
-                        },
-                        "\" protocol=UDP dir=out localport=53 action=block}"
-                    ]
-                }
+                "command": "powershell &{netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'self.firewall_rule_name'}}\" protocol=UDP dir=out localport=137 action=block; netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'self.firewall_rule_name'}}\" protocol=UDP dir=out localport=53 action=block}"
             }
         },
         {
@@ -322,23 +306,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": {
-                    "template": [
-                        "powershell &{netsh advfirewall firewall delete rule name=\"",
-                        {
-                            "kind": "slice",
-                            "slice": 0,
-                            "value": "self.firewall_rule_name"
-                        },
-                        "\"; netsh advfirewall firewall delete rule name=\"",
-                        {
-                            "kind": "slice",
-                            "slice": 1,
-                            "value": "self.firewall_rule_name"
-                        },
-                        "\"}"
-                    ]
-                }
+                "command": "powershell &{netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'self.firewall_rule_name'}}\"; netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'self.firewall_rule_name'}}\"}"
             }
         },
         {
@@ -398,71 +366,7 @@
             "KerRep.exe"
         ],
         "temp_dir": [
-            {
-                "template": [
-                    {
-                        "kind": "call",
-                        "func": {
-                            "kind": "attribute",
-                            "attr": "join",
-                            "value": ""
-                        },
-                        "args": [
-                            {
-                                "kind": "comprehension",
-                                "element": {
-                                    "kind": "call",
-                                    "func": {
-                                        "kind": "name",
-                                        "id": "choice"
-                                    },
-                                    "args": [
-                                        {
-                                            "kind": "bin op",
-                                            "op": "add",
-                                            "left": {
-                                                "kind": "attribute",
-                                                "attr": "ascii_uppercase",
-                                                "value": {
-                                                    "kind": "name",
-                                                    "id": "string"
-                                                }
-                                            },
-                                            "right": {
-                                                "kind": "attribute",
-                                                "attr": "digits",
-                                                "value": {
-                                                    "kind": "name",
-                                                    "id": "string"
-                                                }
-                                            }
-                                        }
-                                    ]
-                                },
-                                "generators": [
-                                    {
-                                        "iter": {
-                                            "kind": "call",
-                                            "func": {
-                                                "kind": "name",
-                                                "id": "range"
-                                            },
-                                            "args": [
-                                                8
-                                            ]
-                                        },
-                                        "target": {
-                                            "kind": "name",
-                                            "id": "_"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    ".tmp"
-                ]
-            }
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.tmp"
         ]
     },
     "spec": {

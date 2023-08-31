@@ -492,43 +492,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "oilrig_67"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "oilrig_12"
             }
         }
     },

@@ -583,23 +583,7 @@
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "montezuma_2"
             }
         }
     },

@@ -538,72 +538,7 @@
             "Agent.exe"
         ],
         "temp_file": [
-            {
-                "template": [
-                    "c:\\microsoft\\windows\\",
-                    {
-                        "kind": "call",
-                        "func": {
-                            "kind": "attribute",
-                            "attr": "join",
-                            "value": ""
-                        },
-                        "args": [
-                            {
-                                "kind": "comprehension",
-                                "element": {
-                                    "kind": "call",
-                                    "func": {
-                                        "kind": "name",
-                                        "id": "choice"
-                                    },
-                                    "args": [
-                                        {
-                                            "kind": "bin op",
-                                            "op": "add",
-                                            "left": {
-                                                "kind": "attribute",
-                                                "attr": "ascii_uppercase",
-                                                "value": {
-                                                    "kind": "name",
-                                                    "id": "string"
-                                                }
-                                            },
-                                            "right": {
-                                                "kind": "attribute",
-                                                "attr": "digits",
-                                                "value": {
-                                                    "kind": "name",
-                                                    "id": "string"
-                                                }
-                                            }
-                                        }
-                                    ]
-                                },
-                                "generators": [
-                                    {
-                                        "iter": {
-                                            "kind": "call",
-                                            "func": {
-                                                "kind": "name",
-                                                "id": "range"
-                                            },
-                                            "args": [
-                                                10
-                                            ]
-                                        },
-                                        "target": {
-                                            "kind": "name",
-                                            "id": "_"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    ".tmp"
-                ]
-            }
+            "c:\\microsoft\\windows\\ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.tmp"
         ]
     },
     "spec": {

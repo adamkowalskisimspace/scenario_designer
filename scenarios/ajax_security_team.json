@@ -144,7 +144,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": "self.temp_dir${\\}self.tool_name${.exe}"
+                "command": "self.temp_dir\\self.tool_name.exe"
             }
         },
         {
@@ -215,7 +215,7 @@
             "ke3.exe",
             "moviestar.exe"
         ],
-        "temp_dir": "C:\\Users\\Public\\Library_2"
+        "temp_dir": "C:\\Users\\Public\\Library_8"
     },
     "spec": {
         "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",

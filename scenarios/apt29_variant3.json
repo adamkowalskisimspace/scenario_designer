@@ -282,7 +282,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "steg_filepath": "self.temp_dir_name${\\}self.tool_name3",
+                "steg_filepath": "self.temp_dir_name\\self.tool_name3",
                 "success_override": true,
                 "kill": false
             }

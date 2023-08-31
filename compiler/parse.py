@@ -1,7 +1,8 @@
 import pathlib
 import ast
-from typing import Literal, TypedDict, Optional
-from random import randint
+from typing import Literal, TypedDict, Optional, cast
+from random import randint, choice
+import string
 
 
 class Name(TypedDict):
@@ -215,18 +216,36 @@ def preconditions(call: ast.Call) -> dict[str, Value]:
     return precondition_map
 
 
-
 def simplify(c: Value, context: dict[str, Value]) -> Value:
     match c:
         case {"template": list(t)}:
-            for piece in t:
-                if not isinstance(piece, str):
-                    return {"template": t}
-            result = ""
+            final = ""
             for i, piece in enumerate(t):
-                assert isinstance(piece, str)
-                result += piece if i % 2 == 0 else f"${{{simplify(piece, context)}}}"
-            return result
+                needs_interpolation = i % 2 == 1
+                simplified = simplify(piece, context)
+                match simplified:
+                    case str(s) if s.startswith("self.") and needs_interpolation:
+                        final += f"${{{s}}}"
+                    case str() | int() | float() | bool():
+                        final += str(simplified)
+                    case _ if needs_interpolation:
+                        final += f"${{{simplified}}}"
+                    case _:
+                        breakpoint()
+                        raise NotImplemented
+            return final
+        case {
+            "kind": "attribute",
+            "attr": "ascii_uppercase",
+            "value": {"kind": "name", "id": "string"},
+        }:
+            return string.ascii_uppercase
+        case {
+            "kind": "attribute",
+            "attr": "digits",
+            "value": {"kind": "name", "id": "string"},
+        }:
+            return string.digits
         case {"kind": "call", "func": f, "args": list(args)}:
             match f:
                 case {"kind": "name", "id": "range"}:
@@ -237,17 +256,33 @@ def simplify(c: Value, context: dict[str, Value]) -> Value:
                 case {"kind": "name", "id": "str"}:
                     assert len(args) == 1
                     return str(simplify(args[0], context))
+                case {"kind": "name", "id": "time"}:
+                    assert len(args) == 0
+                    return randint(0, 100)
+                case {"kind": "name", "id": "randint"}:
+                    assert len(args) == 2
+                    start, stop = args
+                    assert isinstance(start, int) and isinstance(stop, int)
+                    return randint(start, stop)
+                case {"kind": "attribute", "attr": "join", "value": ""}:
+                    simplified = simplify(args, context)
+                    assert isinstance(simplified, list)
+                    for arg in simplified:
+                        assert isinstance(arg, str)
+                    return "".join(cast(list[str], simplified))
+                case {"kind": "name", "id": "choice"}:
+                    simplified = simplify(args, context)
+                    assert isinstance(simplified, list)
+                    for arg in simplified:
+                        assert isinstance(arg, str)
+                    return choice(cast(list[str], simplified))
                 case _:
-                    breakpoint()
-                    raise NotImplementedError
+                    return c
         case {"kind": "comprehension", "element": e, "generators": list(gs)}:
             additional_variables = {}
             for g in gs:
                 match g:
-                    case {
-                        "iter": i,
-                        "target": {"kind": "name", "id": str(name)}
-                    }:
+                    case {"iter": i, "target": {"kind": "name", "id": str(name)}}:
                         additional_variables[name] = simplify(i, context)
                     case _:
                         breakpoint()
@@ -261,7 +296,10 @@ def simplify(c: Value, context: dict[str, Value]) -> Value:
                     breakpoint()
                     raise NotImplementedError
         case {"kind": "name", "id": str(id)}:
-            return context[id]
+            if entry := context.get(id, None):
+                return entry
+            breakpoint()
+            raise NotImplementedError
         case dict(d):
             result: Value = {}
             for key, value in d.items():
@@ -372,10 +410,10 @@ def actor_iocs(function_def: ast.FunctionDef) -> Value:
     raise Exception("No return statement")
 
 
-def trim_spec(exprs: list[ast.stmt]) -> list[ast.stmt]:
+def trim_spec(exprs: list[ast.stmt], context: dict[str, Value]) -> list[ast.stmt]:
     match exprs[0]:
         case ast.Expr():
-            return trim_spec(exprs[1:])
+            return trim_spec(exprs[1:], context)
         case ast.Assign(targets, value):
             assert len(targets) == 1
             target = targets[0]
@@ -383,7 +421,10 @@ def trim_spec(exprs: list[ast.stmt]) -> list[ast.stmt]:
                 case ast.Name(id):
                     match id:
                         case "scenario_name":
-                            return trim_spec(exprs[1:])
+                            assert isinstance(value, ast.Constant)
+                            assert isinstance(value.value, str)
+                            context["scenario_name"] = value.value
+                            return trim_spec(exprs[1:], context)
                         case "spec":
                             assert isinstance(value, ast.Call)
                             func = value.func
@@ -391,7 +432,7 @@ def trim_spec(exprs: list[ast.stmt]) -> list[ast.stmt]:
                             assert func.id == "dict"
                             assert len(value.args) == 0
                             assert len(value.keywords) == 0
-                            return trim_spec(exprs[1:])
+                            return trim_spec(exprs[1:], context)
                         case _:
                             return exprs
                 case _:
@@ -405,18 +446,23 @@ def spec_default(function_def: ast.FunctionDef) -> Value:
         case [return_]:
             assert isinstance(return_, ast.Return)
             assert return_.value is not None
-            return transform_value(return_.value)
+            return simplify(transform_value(return_.value), {})
         case [assign, return_]:
             assert isinstance(assign, ast.Assign)
             assert len(assign.targets) == 1
             name = assign.targets[0]
             assert isinstance(name, ast.Name)
             assert name.id == "scenario_name"
+            constant = assign.value
+            assert isinstance(constant, ast.Constant)
+            assert isinstance(constant.value, str)
             assert isinstance(return_, ast.Return)
             assert return_.value is not None
-            return transform_value(return_.value)
+            context: dict[str, Value] = {"scenario_name": constant.value}
+            return simplify(transform_value(return_.value), context)
         case exprs:
-            *assigns, return_ = trim_spec(exprs)
+            context = {}
+            *assigns, return_ = trim_spec(exprs, context)
             spec: dict[str, Value] = {}
             for assign in assigns:
                 assert isinstance(assign, ast.Assign)
@@ -431,7 +477,7 @@ def spec_default(function_def: ast.FunctionDef) -> Value:
                 assert isinstance(key.value, str)
                 value = transform_value(assign.value)
                 spec[key.value] = value
-            return spec
+            return simplify(spec, context)
 
 
 Arguments = tuple[ast.Attribute, ast.List | ast.Constant, Optional[ast.Constant]]

@@ -718,22 +718,7 @@
             "peterpaulmary.exe"
         ],
         "taskname": [
-            {
-                "template": [
-                    "windowsUpdater",
-                    {
-                        "kind": "call",
-                        "func": {
-                            "kind": "name",
-                            "id": "randint"
-                        },
-                        "args": [
-                            1,
-                            100
-                        ]
-                    }
-                ]
-            }
+            "windowsUpdater11"
         ]
     },
     "spec": {
@@ -789,23 +774,7 @@
                 ],
                 "payload_destination": "C:\\Windows\\SysWow64",
                 "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "apt3_legacy_100"
             }
         }
     },

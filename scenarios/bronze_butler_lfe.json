@@ -671,35 +671,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        "jusaheck_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "jusaheck_63"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        "jusaheck_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "jusaheck_6"
             }
         }
     },

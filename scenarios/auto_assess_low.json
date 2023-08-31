@@ -113,16 +113,7 @@
                 "target": "self.target_1"
             },
             "tune": {
-                "command": {
-                    "template": [
-                        "powershell &{$target =",
-                        [
-                            "self.target_2",
-                            "query-target_hostname"
-                        ],
-                        "; while ($true) {start-job -argumentList $target -scriptblock {Param($target); for ($s=1; $s -le 1024; $s=$s+1) {start-job -argumentList $target -scriptblock {Param($target); $requestCallback = $state = $null; $client = New-Object System.Net.Sockets.TcpClient; $beginConnect = $client.BeginConnect(\"$target\",$s,$requestCallback,$state)}| out-null}}| out-null}}"
-                    ]
-                }
+                "command": "powershell &{$target =${['self.target_2', 'query-target_hostname']}; while ($true) {start-job -argumentList $target -scriptblock {Param($target); for ($s=1; $s -le 1024; $s=$s+1) {start-job -argumentList $target -scriptblock {Param($target); $requestCallback = $state = $null; $client = New-Object System.Net.Sockets.TcpClient; $beginConnect = $client.BeginConnect(\"$target\",$s,$requestCallback,$state)}| out-null}}| out-null}}"
             }
         },
         {
@@ -281,43 +272,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\\\",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "auto_assess_low_63"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": {
-                    "template": [
-                        {
-                            "kind": "name",
-                            "id": "scenario_name"
-                        },
-                        "_",
-                        {
-                            "kind": "call",
-                            "func": {
-                                "kind": "name",
-                                "id": "time"
-                            },
-                            "args": []
-                        }
-                    ]
-                }
+                "ioc-taskname": "auto_assess_low_80"
             }
         }
     },
