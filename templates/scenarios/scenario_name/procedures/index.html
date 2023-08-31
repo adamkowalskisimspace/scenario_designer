@@ -14,11 +14,11 @@
 		<ol class="flex column gap">
 			{% for procedure in procedures %}
 			<li>
-				<a href="/scenarios/{{name}}/procedures/{{loop.index}}"
+				<a href="/scenarios/{{name}}/procedures/{{loop.index - 1}}"
 					class="bg-gray hover-bg-light-gray padding flex wrap gap-2">
 					<section>
 						<b>Index</b>
-						<p>{{loop.index}}</p>
+						<p>{{loop.index - 1}}</p>
 					</section>
 					<section>
 						<b>Tactic</b>
