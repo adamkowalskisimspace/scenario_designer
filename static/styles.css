@@ -15,6 +15,7 @@
   --gray: #333;
   --light-gray: #555;
   --dark-gray: #1e1e1e;
+  --blue: #007bff;
 }
 
 body {
@@ -38,6 +39,10 @@ a {
 
 .hover-bg-light-gray:hover {
   background-color: var(--light-gray);
+}
+
+.bg-blue {
+  background-color: var(--blue);
 }
 
 input,
@@ -65,6 +70,28 @@ ol {
   flex-direction: column;
 }
 
+@media (min-width: 768px) {
+  .row-md {
+    flex-direction: row;
+  }
+
+  .wrap-md {
+    flex-wrap: wrap;
+  }
+
+  .gap-md {
+    gap: 1rem;
+  }
+
+  .align-items-center-md {
+    align-items: center;
+  }
+}
+
+.gap-0_5 {
+  gap: 0.5rem;
+}
+
 .gap {
   gap: 1rem;
 }
@@ -73,12 +100,24 @@ ol {
   gap: 2rem;
 }
 
+.padding-0_5 {
+  padding: 0.5rem;
+}
+
 .padding {
   padding: 1rem;
 }
 
 .margin {
   margin: 1rem;
+}
+
+.margin-left {
+  margin-left: 1rem;
+}
+
+.margin-top {
+  margin-top: 1rem;
 }
 
 .no-border {
@@ -91,4 +130,8 @@ ol {
 
 .pointer {
   cursor: pointer;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
