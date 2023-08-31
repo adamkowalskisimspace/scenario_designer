@@ -1,36 +1,38 @@
 <html>
+  <head>
+    <title>Scenario Designer</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
 
-<head>
-	<title>Scenario Designer</title>
-	<link rel="stylesheet" href="/static/styles.css" />
-</head>
-
-<body>
-	<nav class="bg-gray padding flex gap align-items-center">
-		<a href="/scenarios/{{name}}">{% include 'icons/back.html' %}</a>
-		<b>Procedures</b>
-	</nav>
-	<main class="padding">
-		<ol class="flex column gap">
-			{% for procedure in procedures %}
-			<li>
-				<a href="/scenarios/{{name}}/procedures/{{loop.index - 1}}"
-					class="bg-gray hover-bg-light-gray padding flex column row-md justify-content-between-md align-items-center-md">
-					<section>
-						<b>{{procedure.tactic}}</b>
-						<b>{{procedure.technique}}</b>
-						<i>{{procedure.label}}</i>
-					</section>
-					<section class="flex gap-0_5">
-						{% for target in procedure.targets %}
-						<p class="bg-blue padding-0_5 rounded">{{target.value}}</p>
-						{% endfor %}
-					</section>
-				</a>
-			</li>
-			{% endfor %}
-		</ol>
-	</main>
-</body>
-
+  <body>
+    <nav class="bg-gray padding flex gap align-items-center">
+      <a href="/">/</a>
+      <a href="/scenarios">Scenarios</a>
+      <a href="/scenarios/{{name}}">{{title}}</a>
+      <b>Procedures</b>
+    </nav>
+    <main class="padding">
+      <ol class="flex column gap">
+        {% for procedure in procedures %}
+        <li>
+          <a
+            href="/scenarios/{{name}}/procedures/{{loop.index - 1}}"
+            class="bg-gray hover-bg-light-gray padding flex column row-md justify-content-between-md align-items-center-md"
+          >
+            <section>
+              <b>{{procedure.tactic}}</b>
+              <b>{{procedure.technique}}</b>
+              <i>{{procedure.label}}</i>
+            </section>
+            <section class="flex gap-0_5">
+              {% for target in procedure.targets %}
+              <p class="bg-blue padding-0_5 rounded">{{target.value}}</p>
+              {% endfor %}
+            </section>
+          </a>
+        </li>
+        {% endfor %}
+      </ol>
+    </main>
+  </body>
 </html>
