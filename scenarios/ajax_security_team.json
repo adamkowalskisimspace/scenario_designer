@@ -215,7 +215,9 @@
             "ke3.exe",
             "moviestar.exe"
         ],
-        "temp_dir": "C:\\Users\\Public\\Library_8"
+        "temp_dir": [
+            "C:\\Users\\Public\\Library_10"
+        ]
     },
     "spec": {
         "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",

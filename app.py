@@ -7,8 +7,13 @@ from litestar.template.config import TemplateConfig
 import routes
 from routes import scenarios
 from routes.scenarios import scenario_name
-from routes.scenarios.scenario_name import meta_data, procedures
+from routes.scenarios.scenario_name import (
+    meta_data,
+    procedures,
+    indicators_of_compromise,
+)
 from routes.scenarios.scenario_name.procedures import procedure_index
+from routes.scenarios.scenario_name.indicators_of_compromise import indicator
 
 
 app = Litestar(
@@ -19,6 +24,8 @@ app = Litestar(
         meta_data.get_handler,
         procedures.get_handler,
         procedure_index.get_handler,
+        indicators_of_compromise.get_handler,
+        indicator.get_handler,
     ],
     template_config=TemplateConfig(
         directory=Path("templates"),

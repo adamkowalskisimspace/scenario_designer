@@ -302,9 +302,15 @@
         }
     ],
     "iocs": {
-        "domain": "dev-domain-sandworm_320008.com",
-        "ip": "75.151.114.1/24",
-        "binary": "245901_sandworm_CR_Payload.exe"
+        "domain": [
+            "dev-domain-sandworm_479824.com"
+        ],
+        "ip": [
+            "75.252.108.1/24"
+        ],
+        "binary": [
+            "243710_sandworm_CR_Payload.exe"
+        ]
     },
     "spec": {
         "emaillist": "@('Janice Durham <janice.durham@site.com>', 'Darryl Richmond <darryl.richmond@site.com>', 'Nelda Rios <nelda.rios@site.com>', 'Joanna Wilkerson <joanna.wilkerson@site.com>')",

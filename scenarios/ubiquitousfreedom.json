@@ -561,11 +561,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "ubiquitousfreedom_45"
+                "ioc-taskname": "ubiquitousfreedom_3"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "ubiquitousfreedom_36"
+                "ioc-taskname": "ubiquitousfreedom_71"
             }
         }
     },

@@ -272,11 +272,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\\\",
-                "ioc-taskname": "auto_assess_low_63"
+                "ioc-taskname": "auto_assess_low_55"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "auto_assess_low_80"
+                "ioc-taskname": "auto_assess_low_41"
             }
         }
     },

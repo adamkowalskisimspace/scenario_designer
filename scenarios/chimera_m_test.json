@@ -95,7 +95,7 @@
                 "query-exfil": [
                     "C:\\secrets.zip"
                 ],
-                "ioc-taskname": "fakectuator_3"
+                "ioc-taskname": "fakectuator_25"
             }
         }
     },

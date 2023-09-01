@@ -736,11 +736,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "operation_wocao_87"
+                "ioc-taskname": "operation_wocao_17"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "operation_wocao_23"
+                "ioc-taskname": "operation_wocao_62"
             }
         }
     },

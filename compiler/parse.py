@@ -406,7 +406,22 @@ def actor_iocs(function_def: ast.FunctionDef) -> Value:
                     id = transformed_value["id"]
                     assert isinstance(id, str)
                     result[transformed_key] = iocs[id]
-                return simplify(result, iocs)
+                simplified = simplify(result, iocs)
+                assert isinstance(simplified, dict)
+                result: dict[str, Value] = {}
+                for name, value in simplified.items():
+                    assert isinstance(name, str)
+                    match value:
+                        case list(l):
+                            for e in l:
+                                assert isinstance(e, str)
+                            result[name] = l
+                        case str(s):
+                            result[name] = [s]
+                        case _:
+                            breakpoint()
+                            raise NotImplemented
+                return result
     raise Exception("No return statement")
 
 

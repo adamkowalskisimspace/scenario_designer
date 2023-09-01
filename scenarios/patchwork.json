@@ -561,11 +561,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "patchwork_23"
+                "ioc-taskname": "patchwork_20"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "patchwork_48"
+                "ioc-taskname": "patchwork_20"
             }
         }
     },

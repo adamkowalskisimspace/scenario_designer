@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<nav class="bg-gray padding flex gap align-items-center">
+	<a href="/">/</a>
+	<a href="/scenarios">Scenarios</a>
+	<a href="/scenarios/{{name}}">{{title}}</a>
+	<a href="/scenarios/{{name}}/indicators_of_compromise">Indicators Of Compromise</a>
+	<b>{{indicator}}</b>
+</nav>
+
+<main class="padding">
+	<form class="flex column gap">
+		<fieldset class="flex column bg-gray gap padding no-border">
+			{% for value in data %}
+			<input name="{{loop.index}}" value="{{value}}" />
+			{% endfor %}
+		</fieldset>
+		<button class="bg-gray hover-bg-light-gray no-border pointer">Save</button>
+	</form>
+</main>
+{% endblock %}

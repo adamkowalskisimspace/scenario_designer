@@ -1372,16 +1372,16 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_20"
+                "ioc-taskname": "chimera_50"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_55"
+                "ioc-taskname": "chimera_90"
             },
             "3": {
                 "query-target_control_ip": "10.10.0.17",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_7",
+                "ioc-taskname": "chimera_43",
                 "query": {
                     "tag": {
                         "domain_controller": "true"

@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+<nav class="bg-gray padding flex gap align-items-center">
+	<a href="/">/</a>
+	<a href="/scenarios">Scenarios</a>
+	<a href="/scenarios/{{name}}">{{title}}</a>
+	<b>Indicators Of Compromise</b>
+</nav>
+
+<main class="padding">
+	<ul class="flex column gap">
+		{% for indicator in indicators %}
+		<li>
+			<a href="/scenarios/{{name}}/indicators_of_compromise/{{indicator}}"
+				class="bg-gray hover-bg-light-gray padding flex">
+				{{indicator}}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</main>
+{% endblock %}

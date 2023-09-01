@@ -718,7 +718,7 @@
             "peterpaulmary.exe"
         ],
         "taskname": [
-            "windowsUpdater11"
+            "windowsUpdater21"
         ]
     },
     "spec": {
@@ -774,7 +774,7 @@
                 ],
                 "payload_destination": "C:\\Windows\\SysWow64",
                 "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
-                "ioc-taskname": "apt3_legacy_100"
+                "ioc-taskname": "apt3_legacy_84"
             }
         }
     },
