@@ -1,4 +1,14 @@
 {% extends "base.html" %} {% block content %}
+<style>
+.scrollable {
+	max-height: 200px;
+	overflow-y: scroll;
+	margin-bottom: 1rem;
+
+}
+</style>
+
+
 <nav class="bg-gray padding flex gap align-items-center">
   <a href="/">/</a>
   <a href="/scenarios">Scenarios</a>
@@ -8,20 +18,31 @@
 </nav>
 
 <main class="padding">
+	<section class="scrollable">
+	  <form class="flex column gap bg-blue">
+		  <button>{{selected_tactic}}</button>
+	  </form>
+	  {% for tactic in tactics %}
+		  <form class="flex column gap hover-bg-light-gray">
+			  <button>{{tactic}}</button>
+		  </form>
+	  {% endfor %}
+	</section>
+
+		<b>Technique</b>
+	<section class="scrollable">
+	  <form class="flex column gap bg-blue">
+		  <button>{{selected_technique}}</button>
+	  </form>
+	  {% for technique in techniques %}
+		  <form class="flex column gap hover-bg-light-gray">
+			  <button>{{technique}}</button>
+		  </form>
+	  {% endfor %}
+	</section>
+
   <form class="flex column gap">
     <fieldset class="flex column bg-gray gap padding no-border">
-      <section class="flex column">
-        <label for="tactic">Tactic</label>
-        <select name="tactic">
-          <option>{{procedure.tactic}}</option>
-        </select>
-      </section>
-      <section class="flex column">
-        <label for="technique">Technique</label>
-        <select name="technique">
-          <option>{{procedure.technique}}</option>
-        </select>
-      </section>
       <section class="flex column">
         <label for="label">Label</label>
         <input name="label" value="{{procedure.label}}" />

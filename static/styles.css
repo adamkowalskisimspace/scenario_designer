@@ -159,3 +159,7 @@ ol {
 .align-items-center {
   align-items: center;
 }
+
+button {
+  cursor: pointer;
+}

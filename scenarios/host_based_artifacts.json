@@ -455,7 +455,7 @@
             "gtmp.exe"
         ],
         "taskname": [
-            "windowsUpdater72"
+            "windowsUpdater82"
         ]
     },
     "spec": {
@@ -506,7 +506,7 @@
                 "query-target_ip": "172.16.5.101",
                 "query-target_hostname": "dev-win10-1",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "host_based_artifacts_62",
+                "ioc-taskname": "host_based_artifacts_74",
                 "persistence_directory": "C:\\Users\\%Username%\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup",
                 "query-target_username": "",
                 "query-target_password": "",
@@ -522,7 +522,7 @@
                     "C:\\users\\public\\secret2.file"
                 ],
                 "payload_destination": "C:\\users\\public",
-                "ioc-taskname": "host_based_artifacts_85",
+                "ioc-taskname": "host_based_artifacts_18",
                 "query-target_username": "",
                 "query-target_password": "",
                 "query-domain_admin_username": "administrator",

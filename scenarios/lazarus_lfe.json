@@ -523,7 +523,7 @@
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "JMTCrashReporter_24"
+                "ioc-taskname": "JMTCrashReporter_48"
             }
         }
     },

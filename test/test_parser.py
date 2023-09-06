@@ -27,3 +27,34 @@ def test_parse_scenarios():
     output_path.mkdir()
     scenarios = parse.scenarios(input_path)
     write_scenarios(scenarios)
+
+
+Precondition = str
+Technique = str
+Tactic = str
+Catalog = dict[Tactic, dict[Technique, list[Precondition]]]
+
+
+def test_catalog():
+    scenarios = parse.scenarios(input_path)
+    catalog: Catalog = {}
+    for scenario in scenarios.values():
+        for procedure in scenario["procedures"]:
+            assert "tactic" in procedure
+            tactic_name = procedure["tactic"]
+            if tactic_name not in catalog:
+                catalog[tactic_name] = {}
+            tactic = catalog[tactic_name]
+            assert "technique" in procedure
+            technique_name = procedure["technique"]
+            if technique_name not in tactic:
+                tactic[technique_name] = []
+            assert "preconditions" in procedure
+            preconditions = procedure["preconditions"]
+            assert isinstance(preconditions, dict)
+            technique = tactic[technique_name]
+            for name in preconditions.keys():
+                if name not in technique:
+                    technique.append(name)
+    with open("catalog.json", "w") as f:
+        json.dump(catalog, f, indent=4)

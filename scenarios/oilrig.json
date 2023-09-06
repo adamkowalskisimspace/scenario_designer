@@ -492,11 +492,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "oilrig_48"
+                "ioc-taskname": "oilrig_81"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "oilrig_2"
+                "ioc-taskname": "oilrig_53"
             }
         }
     },

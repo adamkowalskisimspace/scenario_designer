@@ -332,9 +332,9 @@
             "mt.exe"
         ],
         "taskname": [
-            "windowsUpdater63",
-            "windowsUpdater5",
-            "windowsUpdater89"
+            "windowsUpdater58",
+            "windowsUpdater53",
+            "windowsUpdater42"
         ]
     },
     "spec": {
@@ -387,7 +387,7 @@
             "2": {
                 "payload_destination": "C:\\Windows\\SysWow64",
                 "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
-                "ioc-taskname": "leviathan_legacy_49"
+                "ioc-taskname": "leviathan_legacy_37"
             }
         }
     },

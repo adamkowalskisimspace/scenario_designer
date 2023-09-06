@@ -1,0 +1,629 @@
+{
+    "Infrastructure": {
+        "Actuator": [
+            "tool"
+        ],
+        "Interfaces": [
+            "tool",
+            "exfil",
+            "driveby"
+        ],
+        "DNS": [
+            "tool",
+            "exfil",
+            "driveby"
+        ],
+        "NGINX": [
+            "self.tool_name",
+            "payload",
+            "exfiltration",
+            "driveby",
+            "driveby_ctl"
+        ],
+        "PayloadCheapride": [
+            "tool"
+        ],
+        "PayloadSloppyJalopy": [
+            "tool"
+        ],
+        "PayloadPupy": [
+            "tool",
+            "actuator"
+        ]
+    },
+    "InitialAccess": {
+        "SpearPhishingLink": [
+            "actuator",
+            "phishing",
+            "tool",
+            "driveby",
+            "target"
+        ],
+        "DriveByCompromise": [
+            "actuator",
+            "phishing",
+            "tool",
+            "driveby",
+            "target"
+        ],
+        "SpearPhishingAttachment": [
+            "actuator",
+            "phishing",
+            "tool",
+            "driveby",
+            "target",
+            "body"
+        ]
+    },
+    "Execution": {
+        "UserExecution": [
+            "actuator_id",
+            "phishing",
+            "tool",
+            "driveby",
+            "target"
+        ],
+        "ScheduledTaskExecution": [
+            "actuator",
+            "agent",
+            "tool",
+            "target_1",
+            "target_2",
+            "target"
+        ],
+        "WindowsManagementInstrumentation": [
+            "actuator",
+            "agent",
+            "tool",
+            "target_1",
+            "target_2",
+            "target"
+        ],
+        "ServiceExecution": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "UserExecution_DownloadAttachment": [
+            "agent",
+            "tool",
+            "phishing",
+            "target"
+        ],
+        "NativeApi": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "VisualBasic": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "MaliciousFile": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "c2": {
+        "WebProtocols": [
+            "actuator_id",
+            "phishing",
+            "tool",
+            "driveby",
+            "target"
+        ],
+        "IngressToolTransfer": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "RemoteAccessSoftware": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "Steganography": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "Discovery": {
+        "ProcessDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemInformationDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemOwnerUserDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemNetworkConfigurationDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemTimeDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SecuritySoftwareDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemNetworkConnectionsDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "LocalGroups": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "RemoteSystemDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DomainAccount": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "LocalAccount": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemServiceDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "BrowserBookmarkDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DomainTrustDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "NetworkShareDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DomainGroups": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "FileAndDirectoryDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "QueryRegistry": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ApplicationWindowDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "PeripheralDeviceDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SoftwareDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemChecks": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "UserActivityBasedChecks": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "TimeBasedEvasion": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "PermissionGroupsDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "PasswordPolicyDiscovery": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "Exfiltration": {
+        "ExfiltrationOverWebService": [
+            "agent",
+            "tool",
+            "target",
+            "exfil"
+        ],
+        "ExfiltrationOverUnencryptedObfuscatedNonC2Protocol": [
+            "agent",
+            "tool",
+            "exfil",
+            "target"
+        ],
+        "ScheduledTransfer": [
+            "agent",
+            "tool",
+            "target",
+            "exfil"
+        ],
+        "ExfiltrationOverC2Channel": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "LateralMovement": {
+        "RemoteServices_NetUse": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "RemoteFileCopy_RoboCopy": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "ScheduledTask": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2",
+            "actuator"
+        ],
+        "TaintSharedContent": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "InternalSpearphishing": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "SmbWindowsAdminShares": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "RemoteFileCopy_PowerShellWebClient": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "WindowsRemoteManagement": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "Utility": {
+        "AgentExit": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "PrivilegeEscalation": {
+        "ValidAccounts_LocalAccounts": [
+            "actuator",
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "ValidAccounts_DomainAccounts": [
+            "actuator",
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "EventTriggeredExecution_WindowsManagementInstrumentationEventSubscription": [
+            "actuator",
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ]
+    },
+    "Persistence": {
+        "CreateAccount_LocalAccount": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "AccountManipulation": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "RegistryRunKeysStartupFolder": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "WindowsService": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ScheduledTaskPersistence": [
+            "actuator",
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ShortcutModification": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "BitsJobs": [
+            "actuator",
+            "agent",
+            "tool",
+            "src_dir",
+            "target"
+        ],
+        "LogonScriptWindows": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "Collection": {
+        "LocalDataStaging": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ArchiveViaUtility": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "LocalEmailCollection": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ScreenCapture": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "Keylogging": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DataFromLocalSystem": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ArchiveCollectedData": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ClipboardData": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DataStaged": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "EmailForwardingRule": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "AutomatedCollection": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "RemoteEmailCollection": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "DefenseEvasion": {
+        "ScheduledTaskDelete": [
+            "agent",
+            "tool",
+            "target_1",
+            "target_2"
+        ],
+        "TimeStomp": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ClearWindowsEventLogs": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "FileDeletion": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DisableOrModifySystemFirewall": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ModifyRegistry": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DeobfuscateDecodeFilesOrInformation": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "FileDeletionPowershell": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "HideArtifacts": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DisableWindowsEventLogging": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "HiddenUsers": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "HiddenFilesAndDirectories": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "Masquerading": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "VirtualizationSandboxEvasion": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "NtfsFileAttributes": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ObfuscatedFilesOrInformation": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "MatchLegitimateNameOrLocation": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SoftwarePacking": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "Rundll32": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DisableOrModifyTools": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "MasqueradeTaskOrService": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "Mshta": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "Impact": {
+        "ServiceStop": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "ResourceHijacking": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "InternalDefacement": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "SystemShutdownReboot": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "DataEncryptedForImpact": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    },
+    "CredentialAccess": {
+        "Ntds": [
+            "agent",
+            "tool",
+            "target"
+        ],
+        "StealWebSessionCookie": [
+            "agent",
+            "tool",
+            "target"
+        ]
+    }
+}

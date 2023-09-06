@@ -303,13 +303,13 @@
     ],
     "iocs": {
         "domain": [
-            "dev-domain-sandworm_479824.com"
+            "dev-domain-sandworm_70346.com"
         ],
         "ip": [
-            "75.252.108.1/24"
+            "75.132.68.1/24"
         ],
         "binary": [
-            "243710_sandworm_CR_Payload.exe"
+            "449983_sandworm_CR_Payload.exe"
         ]
     },
     "spec": {

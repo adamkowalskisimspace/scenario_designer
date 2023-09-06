@@ -671,11 +671,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "bronze_butler_50"
+                "ioc-taskname": "bronze_butler_14"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "bronze_butler_71"
+                "ioc-taskname": "bronze_butler_93"
             }
         }
     },

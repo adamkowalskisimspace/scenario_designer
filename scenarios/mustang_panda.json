@@ -421,11 +421,11 @@
                     "C:\\windows\\temp\\system.tmp"
                 ],
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "mustang_panda_42"
+                "ioc-taskname": "mustang_panda_80"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "mustang_panda_32"
+                "ioc-taskname": "mustang_panda_26"
             }
         }
     },

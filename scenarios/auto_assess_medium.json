@@ -292,11 +292,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "auto_assess_medium_94"
+                "ioc-taskname": "auto_assess_medium_69"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "auto_assess_medium_67"
+                "ioc-taskname": "auto_assess_medium_69"
             }
         }
     },

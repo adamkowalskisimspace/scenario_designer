@@ -671,11 +671,11 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "jusaheck_19"
+                "ioc-taskname": "jusaheck_56"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "jusaheck_31"
+                "ioc-taskname": "jusaheck_9"
             }
         }
     },
