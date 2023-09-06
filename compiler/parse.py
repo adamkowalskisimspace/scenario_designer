@@ -131,7 +131,7 @@ def transform_value(expr: ast.expr) -> Value:
                     if kind == "name":
                         if id := transformed.get("id"):
                             if id == "self":
-                                return f"self.{attr}"
+                                return f"state.{attr}"
             return {
                 "kind": "attribute",
                 "attr": attr,
@@ -224,7 +224,7 @@ def simplify(c: Value, context: dict[str, Value]) -> Value:
                 needs_interpolation = i % 2 == 1
                 simplified = simplify(piece, context)
                 match simplified:
-                    case str(s) if s.startswith("self.") and needs_interpolation:
+                    case str(s) if s.startswith("state.") and needs_interpolation:
                         final += f"${{{s}}}"
                     case str() | int() | float() | bool():
                         final += str(simplified)
@@ -308,7 +308,12 @@ def simplify(c: Value, context: dict[str, Value]) -> Value:
             return result
         case list(l):
             return [simplify(e, context) for e in l]
-        case str() | bool() | int():
+        case str(s):
+            if "{self." in s:
+                replaced = s.replace("{self.", "${state.")
+                return replaced
+            return s
+        case bool() | int():
             return c
         case _:
             breakpoint()

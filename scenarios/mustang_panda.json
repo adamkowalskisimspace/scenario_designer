@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,10 +64,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -72,10 +75,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -83,13 +86,16 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -97,11 +103,11 @@
             "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target_1": "self.target_1",
-                "target_2": "self.target_1_elevated"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target_1": "state.target_1",
+                "target_2": "state.target_1_elevated"
             }
         },
         {
@@ -109,10 +115,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1_elevated",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_elevated"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_elevated"
+            },
+            "set_state": {
+                "agent_tgt1_elevated": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -120,9 +129,9 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_elevated_1",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "systeminfo"
@@ -133,9 +142,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_elevated_1",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "route print"
@@ -146,9 +155,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_elevated_2",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "ipconfig /all"
@@ -159,9 +168,9 @@
             "technique": "SystemNetworkConnectionsDiscovery",
             "label": "systemNetworkConnectionsDiscovery_t1_elevated_2",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "netstat -ano"
@@ -172,9 +181,9 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "cmd /c tasklist"
@@ -185,9 +194,9 @@
             "technique": "FileAndDirectoryDiscovery",
             "label": "fileAndDirectoryDiscovery_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -195,9 +204,9 @@
             "technique": "SoftwareDiscovery",
             "label": "softwareDiscovery_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -205,9 +214,9 @@
             "technique": "LocalDataStaging",
             "label": "localDataStaging_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             },
             "tune": {
                 "command": "reg.exe save hklm\\system /y C:\\windows\\temp\\system.tmp"
@@ -218,10 +227,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_elevated",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated",
+                "exfil": "state.exfil"
             }
         },
         {
@@ -229,10 +238,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_elevated_1",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -240,10 +249,10 @@
             "technique": "RemoteServices_NetUse",
             "label": "remoteServices_netuse",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -251,10 +260,10 @@
             "technique": "RemoteFileCopy_RoboCopy",
             "label": "remoteServices_filecopy",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -262,10 +271,10 @@
             "technique": "ScheduledTask",
             "label": "scheduled_task",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -273,11 +282,11 @@
             "technique": "ScheduledTaskExecution",
             "label": "scheduled_task_execution",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target_1": "self.target_1_elevated",
-                "target_2": "self.target_2"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target_1": "state.target_1_elevated",
+                "target_2": "state.target_2"
             }
         },
         {
@@ -285,10 +294,13 @@
             "technique": "WebProtocols",
             "label": "webProtocols_2",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_2"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_2"
+            },
+            "set_state": {
+                "agent_tgt2": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -296,9 +308,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt2",
-                "tool": "self.tool",
-                "target": "self.target_2"
+                "agent": "state.agent_tgt2",
+                "tool": "state.tool",
+                "target": "state.target_2"
             }
         },
         {
@@ -306,9 +318,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -316,9 +328,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -421,119 +433,24 @@
                     "C:\\windows\\temp\\system.tmp"
                 ],
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "mustang_panda_80"
+                "ioc-taskname": "mustang_panda_11"
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "mustang_panda_26"
+                "ioc-taskname": "mustang_panda_10"
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_elevated": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt1_elevated": {
-                "path": [
-                    "webProtocols_1_elevated",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt2": {
-                "path": [
-                    "webProtocols_2",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "target_1": "spec.targets.1",
+        "target_1_elevated": "spec.targets.1",
+        "target_2": "spec.targets.2"
     }
 }

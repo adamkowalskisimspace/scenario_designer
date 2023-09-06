@@ -13,7 +13,10 @@
             "technique": "Actuator",
             "label": "Actuator",
             "preconditions": {
-                "tool": "self.tool_name"
+                "tool": "state.tool_name"
+            },
+            "set_state": {
+                "actuator": "postconditions.actuator.ret.registered_id"
             }
         },
         {
@@ -21,9 +24,9 @@
             "technique": "NGINX",
             "label": "NGINX",
             "preconditions": {
-                "self.tool_name": "self.tool",
-                "payload": "self.payload_name",
-                "driveby": "self.driveby"
+                "state.tool_name": "state.tool",
+                "payload": "state.payload_name",
+                "driveby": "state.driveby"
             }
         },
         {
@@ -31,9 +34,9 @@
             "technique": "AgentExit",
             "label": "AgentExit",
             "preconditions": {
-                "agent": "self.agent",
-                "tool": "self.tool",
-                "target": "self.target_ip"
+                "agent": "state.agent",
+                "tool": "state.tool",
+                "target": "state.target_ip"
             },
             "tune": {
                 "infra": true
@@ -105,64 +108,15 @@
                 "query-exfil": [
                     "C:\\secrets.zip"
                 ],
-                "ioc-taskname": "fakectuator_24"
+                "ioc-taskname": "fakectuator_52"
             }
         }
     },
-    "preconditions": {
-        "state": {},
-        "initial": {
-            "driveby": {
-                "path": [
-                    "driveby",
-                    "1"
-                ]
-            },
-            "payload_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "ioc-binary_payload_name"
-                ]
-            },
-            "tool_name": {
-                "path": [
-                    "tool",
-                    "1",
-                    "name"
-                ]
-            },
-            "tool": {
-                "path": [
-                    "tool",
-                    "1"
-                ]
-            },
-            "target_ip": {
-                "path": [
-                    "chimera",
-                    "api-control_ip"
-                ]
-            }
-        },
-        "effects": {
-            "actuator": {
-                "path": [
-                    "Actuator",
-                    "actuator",
-                    "ret",
-                    "registered_id"
-                ],
-                "default": 0
-            },
-            "agent": {
-                "path": [
-                    "initialAccess",
-                    "agent",
-                    "ret",
-                    "agent_id"
-                ]
-            }
-        }
+    "state": {
+        "driveby": "spec.driveby.1",
+        "payload_name": "spec.tool.1.ioc-binary_payload_name",
+        "tool_name": "spec.tool.1.name",
+        "tool": "spec.tool.1",
+        "target_ip": "spec.chimera.api-control_ip"
     }
 }
