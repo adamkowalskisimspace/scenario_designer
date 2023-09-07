@@ -350,10 +350,40 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-temp_dir": "c:\\users\\Public"
+                "ioc-temp_dir": "c:\\users\\Public",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
-                "payload_destination": "C:\\PerfLogs"
+                "payload_destination": "C:\\PerfLogs",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

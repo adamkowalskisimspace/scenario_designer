@@ -271,14 +271,39 @@
             "1": {
                 "payload_destination": "C:\\Users\\Public",
                 "query": {
-                    "filter": {
-                        "hostname": "dev-win10-4"
-                    }
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
                 }
             },
             "2": {
                 "payload_destination": "C:\\PerfLogs",
-                "ioc-temp_dir": "c:\\users\\public\\freedomville1775"
+                "ioc-temp_dir": "c:\\users\\public\\freedomville1775",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

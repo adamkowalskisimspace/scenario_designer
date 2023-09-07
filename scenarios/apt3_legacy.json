@@ -730,7 +730,7 @@
             "peterpaulmary.exe"
         ],
         "taskname": [
-            "windowsUpdater44"
+            "windowsUpdater28"
         ]
     },
     "spec": {
@@ -777,7 +777,22 @@
         },
         "targets": {
             "1": {
-                "payload_destination": "c:\\users\\Public"
+                "payload_destination": "c:\\users\\Public",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "query-exfil_files": [
@@ -786,7 +801,22 @@
                 ],
                 "payload_destination": "C:\\Windows\\SysWow64",
                 "persist_location": "C:\\Windows\\SysWow64\\atasagent.exe",
-                "ioc-taskname": "apt3_legacy_46"
+                "ioc-taskname": "apt3_legacy_71",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

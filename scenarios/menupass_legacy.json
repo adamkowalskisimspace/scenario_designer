@@ -742,7 +742,22 @@
         },
         "targets": {
             "1": {
-                "payload_destination": "c:\\users\\Public"
+                "payload_destination": "c:\\users\\Public",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "query-exfil_files": [
@@ -751,7 +766,22 @@
                 ],
                 "payload_destination": "C:\\Windows\\vss",
                 "persist_location": "C:\\Windows\\vss\\vixDiskMountServer.exe",
-                "ioc-taskname": "CorWrTool"
+                "ioc-taskname": "CorWrTool",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

@@ -334,11 +334,41 @@
             "1": {
                 "payload_destination": "c:\\Users\\Public",
                 "ioc-temp_dir": "c:\\Users\\Public",
-                "ioc-subnet": "172.16.5.0/24"
+                "ioc-subnet": "172.16.5.0/24",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "query": {
                 "filter": {
                     "hostname": "dev-win10-4"
+                },
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
                 }
             }
         }

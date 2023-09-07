@@ -312,13 +312,13 @@
     ],
     "iocs": {
         "domain": [
-            "dev-domain-sandworm_250380.com"
+            "dev-domain-sandworm_54621.com"
         ],
         "ip": [
-            "75.218.166.1/24"
+            "75.204.35.1/24"
         ],
         "binary": [
-            "125251_sandworm_CR_Payload.exe"
+            "51595_sandworm_CR_Payload.exe"
         ]
     },
     "spec": {
@@ -361,9 +361,19 @@
         "targets": {
             "1": {
                 "query": {
-                    "filter": {
-                        "hostname": "dev-win10-1"
-                    }
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
                 },
                 "query-target_control_ip": "10.10.5.101",
                 "query-target_ip": "172.16.5.101",
@@ -376,7 +386,13 @@
             },
             "2": {
                 "query": {
-                    "tag": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip"
+                    ],
+                    "$tag": {
                         "domain_controller": "true"
                     }
                 },

@@ -745,11 +745,41 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "operation_wocao_68"
+                "ioc-taskname": "operation_wocao_31",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "operation_wocao_11"
+                "ioc-taskname": "operation_wocao_37",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

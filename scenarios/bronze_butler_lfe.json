@@ -680,11 +680,41 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "jusaheck_42"
+                "ioc-taskname": "jusaheck_25",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "jusaheck_38"
+                "ioc-taskname": "jusaheck_41",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

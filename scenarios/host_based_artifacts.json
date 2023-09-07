@@ -467,7 +467,7 @@
             "gtmp.exe"
         ],
         "taskname": [
-            "windowsUpdater132"
+            "windowsUpdater106"
         ]
     },
     "spec": {
@@ -518,13 +518,28 @@
                 "query-target_ip": "172.16.5.101",
                 "query-target_hostname": "dev-win10-1",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "host_based_artifacts_23",
+                "ioc-taskname": "host_based_artifacts_72",
                 "persistence_directory": "C:\\Users\\%Username%\\AppData\\Roaming\\Microsoft\\Windows\\STARTM~1\\Programs\\Startup",
                 "query-target_username": "",
                 "query-target_password": "",
                 "query-target_email": "Madelyn.Luna@site.com",
                 "query-domain_admin_username": "administrator",
-                "query-domain_admin_password": "Simspace1!Simspace1!"
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "query-target_ip": "172.16.6.101",
@@ -534,11 +549,26 @@
                     "C:\\users\\public\\secret2.file"
                 ],
                 "payload_destination": "C:\\users\\public",
-                "ioc-taskname": "host_based_artifacts_4",
+                "ioc-taskname": "host_based_artifacts_67",
                 "query-target_username": "",
                 "query-target_password": "",
                 "query-domain_admin_username": "administrator",
-                "query-domain_admin_password": "Simspace1!Simspace1!"
+                "query-domain_admin_password": "Simspace1!Simspace1!",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             }
         }
     },

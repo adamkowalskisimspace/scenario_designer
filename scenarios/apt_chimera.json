@@ -1384,18 +1384,54 @@
         "targets": {
             "1": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_18"
+                "ioc-taskname": "chimera_33",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "2": {
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_44"
+                "ioc-taskname": "chimera_30",
+                "query": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
+                }
             },
             "3": {
                 "query-target_control_ip": "10.10.0.17",
                 "payload_destination": "c:\\users\\Public",
-                "ioc-taskname": "chimera_82",
+                "ioc-taskname": "chimera_23",
                 "query": {
-                    "tag": {
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip"
+                    ],
+                    "$tag": {
                         "domain_controller": "true"
                     }
                 }

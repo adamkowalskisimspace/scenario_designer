@@ -43,14 +43,7 @@ def test_catalog():
         json.dump(catalog, f, indent=4)
 
 
-def test_state():
-    if not output_path.exists():
-        return
-    for file in output_path.iterdir():
-        file.unlink()
-    output_path.rmdir()
-    output_path.mkdir()
-    scenarios = parse.scenarios(input_path)
+def transform_state(scenarios):
     for name, scenario in scenarios.items():
         preconditions = scenario["preconditions"]
         state = preconditions["state"]
@@ -90,6 +83,52 @@ def test_state():
             procedure["set_state"] = {name: ".".join(full_path)}
         del scenario["preconditions"]
         scenario["state"] = state
+    return scenarios
+
+
+def transform_targets(scenarios):
+    for scenario in scenarios.values():
+        for target in scenario["spec"]["targets"].values():
+            match target:
+                case {"query": {"tag": {"domain_controller": "true"}}}:
+                    target["query"] = {
+                        "#projection": [
+                            "$hostname",
+                            "$os_version",
+                            "$in_game_ip",
+                            "$control_ip",
+                        ],
+                        "$tag": {"domain_controller": "true"},
+                    }
+                case _:
+                    target["query"] = {
+                        "#projection": [
+                            "$hostname",
+                            "$os_version",
+                            "$in_game_ip",
+                            "$control_ip",
+                            "$username",
+                            "$password",
+                            "$email",
+                            "$domain_name",
+                            "$domain_admin_name",
+                            "$domain_admin_password",
+                        ],
+                        "$tier": "4",
+                    }
+    return scenarios
+
+
+def test_end_to_end():
+    if not output_path.exists():
+        return
+    for file in output_path.iterdir():
+        file.unlink()
+    output_path.rmdir()
+    output_path.mkdir()
+    scenarios = parse.scenarios(input_path)
+    scenarios = transform_state(scenarios)
+    scenarios = transform_targets(scenarios)
     for name, scenario in scenarios.items():
         with open(output_path / f"{name}.json", "w") as f:
             json.dump(scenario, f, indent=4)

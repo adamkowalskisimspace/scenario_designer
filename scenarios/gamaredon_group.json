@@ -492,9 +492,19 @@
                 "payload_destination": "C:\\Windows\\Temp",
                 "ioc-temp_dir": "C:\\Windows\\debug\\WIA",
                 "query": {
-                    "filter": {
-                        "hostname": "dev-win10-3"
-                    }
+                    "#projection": [
+                        "$hostname",
+                        "$os_version",
+                        "$in_game_ip",
+                        "$control_ip",
+                        "$username",
+                        "$password",
+                        "$email",
+                        "$domain_name",
+                        "$domain_admin_name",
+                        "$domain_admin_password"
+                    ],
+                    "$tier": "4"
                 }
             }
         }
